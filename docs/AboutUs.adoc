@@ -11,8 +11,9 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Cheng Lit Yaw
-image::harrychengly.png[width="150", align="left"]
-{empty}[https://github.com/harrychengly[github]] 
+
+image::harrychengly.png[width="150",align="left"]
+{empty}[https://github.com/harrychengly[github]]
 
 Role: Team Lead + 
 Responsibilities: Scheduling and Tracking, Integration
@@ -20,8 +21,9 @@ Responsibilities: Scheduling and Tracking, Integration
 '''
 
 === Raivat Bhupesh Shah
-image::raivatshah.png[width="150", align="left"]
-{empty}[http://github.com/raivatshah[github]] 
+
+image::raivatshah.png[width="150",align="left"]
+{empty}[http://github.com/raivatshah[github]]
 
 Role: Developer +
 Responsibilities: Dev Ops, UI
@@ -29,8 +31,9 @@ Responsibilities: Dev Ops, UI
 '''
 
 === Mah Cai Jun, Terence
-image::terencemah.png[width="150", align="left"]
-{empty}[http://github.com/terencemah[github]] 
+
+image::terencemah.png[width="150",align="left"]
+{empty}[http://github.com/terencemah[github]]
 
 Role: Developer +
 Responsibilities: Documentation, Code Quality
@@ -38,8 +41,9 @@ Responsibilities: Documentation, Code Quality
 '''
 
 === Ernest Lian Qi Quan
-image::l2ejected.png[width="150", align="left"]
-{empty}[http://github.com/l2ejected[github]] 
+
+image::l2ejected.png[width="150",align="left"]
+{empty}[http://github.com/l2ejected[github]]
 
 Role: Developer +
 Responsibilities: Deliverables and Deadlines, Testing
