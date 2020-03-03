@@ -170,6 +170,33 @@ Returns an activity to do.
 * `suggest person` +
 Returns a person to hangout with.
 
+=== Insights: `show`
+
+Lists insights about the user's interactions with a particular friend or group,
+in the form of a pie chart. These include places visited, time spent, and/or
+activities done with the friend or group.
+Format: `show INSIGHT_PARAMETER`
+
+****
+* Insight parameters include `places`, `time`, `activities`, or `all`
+* CoderLifeInsights will list, with frequencies in the form of a pie chart:
+** All or any one of the following:
+*** Places user has visited with friend/group
+*** Activities user has done with friend/group
+*** Time spent with friend/group
+
+Examples:
+
+* `show places` +
+Returns a pie chart of the places user has visited with friend.
+* `show time` +
+Returns a graph of time spent with friend each day over the past month.
+* `show activities` +
+Returns a pie chart of the activities user has done with friend.
+* `show all`
+Returns the output of 'show places', 'show time', and 'show activities',
+in that order.
+
 // tag::delete[]
 === Deleting a person : `delete`
 
@@ -235,5 +262,7 @@ e.g. `import /data/life.json`
 e.g. `export life.json`
 * *Suggest* : `suggest SUGGESTION_PARAMETER` +
 e.g. `suggest place`
+* *Insight* : `show INSIGHT_PARAMETER` +
+e.g. `show activities`
 * *List* : `list`
 * *Help* : `help`
