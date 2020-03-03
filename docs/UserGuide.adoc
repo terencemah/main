@@ -135,7 +135,7 @@ Imports your Life from `/data/life.json`
 
 === Export Life CSV: `export`
 
-Exports your existing Life into a CSV file. +¡
+Exports your existing Life into a CSV file. +
 Format: `export FILE_NAME`
 
 ****
@@ -229,5 +229,11 @@ e.g. `delete 3`
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
+* *Import* : `import FILE_PATH` +
+e.g. `import /data/life.json`
+* *Export* : `export FILE_NAME` +
+e.g. `export life.json`
+* *Suggest* : `suggest SUGGESTION_PARAMETER` +
+e.g. `suggest place`
 * *List* : `list`
 * *Help* : `help`
