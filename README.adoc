@@ -1,5 +1,5 @@
 = CoderLifeInsights
-ifdef::env-github,env-browser[:relfileprefix: docs/
+ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/AY1920S2-CS2103-W14-4/main[image:https://travis-ci.org/AY1920S2-CS2103-W14-4/main.svg?branch=master[Build Status]]
 https://ci.appveyor.com/project/harrychengly/main/branch/master[image:https://ci.appveyor.com/api/projects/status/jfbm08f7kf5r999b/branch/master?svg=true[Build status]]
