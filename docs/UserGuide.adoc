@@ -1,4 +1,4 @@
-= AddressBook Level 3 - User Guide
+= CoderLifeInsights - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,33 +12,34 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level3
+:repoURL: https://github.com/AY1920S2-CS2103-W14-4/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team CoderLifeInsights`      Since: `Mar 2020`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 3 (AB3) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB3 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+CoderLifeInsights (CLI) is a desktop application that provides you insights and suggestions to your social life as a programmer using a CLI (Command Line Interface)
 
 == Quick Start
 
-.  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+. Ensure you have Java `11` or above installed in your Computer.
+. Download the latest `coderlifeinsights.jar` link:{repoURL}/releases[here].
+. Copy the file to the folder you want to use as the home folder for your CoderLifeInsights.
+. Double-click the file to start the app.
+The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
+. Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+. Some example commands you can try:
 
 * *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to your Life.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
-.  Refer to <<Features>> for details of each command.
+. Refer to <<Features>> for details of each command.
 
 [[Features]]
 == Features
@@ -80,7 +81,9 @@ Edits an existing person in the address book. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the person at the specified `INDEX`.
+The index refers to the index number shown in the displayed person list.
+The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -113,6 +116,59 @@ Examples:
 Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
+
+=== Import Life CSV: `import`
+
+Imports your existing Life CSV into the application +
+Format: `import FILE_PATH`
+
+****
+* Imports your existing Life contacts into the application.
+* An existing CSV file exported from CoderLifeInsights must exist before import.
+* FILE_PATH must match your existing file path.
+****
+
+Examples:
+
+* `import /data/life.json` +
+Imports your Life from `/data/life.json`
+
+=== Export Life CSV: `export`
+
+Exports your existing Life into a CSV file. +
+Format: `export FILE_NAME`
+
+****
+* Exports your existing Life contacts into a CSV file.
+* Specify the file name you want to export.
+****
+
+Examples:
+
+* `export life.json` +
+Exports your Life to `life.json`
+
+=== Suggestions: `suggest`
+
+Suggests a place / activity or person to hang out with +
+Format: `suggest SUGGESTION_PARAMETER`
+
+****
+* Suggestion parameters includes `place`, `activity` or `person`
+* CoderLifeInsights will suggest:
+** A place to go to.
+** An activity to do.
+** A person to hangout with.
+****
+
+Examples:
+
+* `suggest place` +
+Returns a place to go to.
+* `suggest activity` +
+Returns an activity to do.
+* `suggest person` +
+Returns a person to hangout with.
 
 // tag::delete[]
 === Deleting a person : `delete`
@@ -173,5 +229,11 @@ e.g. `delete 3`
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
+* *Import* : `import FILE_PATH` +
+e.g. `import /data/life.json`
+* *Export* : `export FILE_NAME` +
+e.g. `export life.json`
+* *Suggest* : `suggest SUGGESTION_PARAMETER` +
+e.g. `suggest place`
 * *List* : `list`
 * *Help* : `help`
