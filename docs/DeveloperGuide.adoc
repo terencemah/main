@@ -300,59 +300,59 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |add a new person |
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |user |delete a person |remove entries that I no longer need.
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list.
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident.
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`*` |user with many persons in the address book |sort persons by name |locate a person easily.
 
-|`* * *` |user | add time spent with a person |track and analyse how much time has been spent with that person or the social group they belong to
+|`* * *` |user | add time spent with a person |track and analyse how much time has been spent with that person or the social group they belong to.
 
 |`* * *` |user | places I have been with a person |track and analyse the different places the user has been with along the person.
 
-|`* * *` |user | add activity done with a person |track and analyse types of activities done with that person or the social group they belong to
+|`* * *` |user | add activity done with a person |track and analyse types of activities done with that person or the social group they belong to.
 
-|`* * *` |user | import csv contacts | build upon my existing contacts directory and not start from scratch
+|`* * *` |user | import csv contacts | build upon my existing contacts directory and not start from scratch.
 
-|`* * *` |user | export csv contacts | take backup of my progress
+|`* * *` |user | export csv contacts | take backup of my progress.
 
-|`* * *` |user | create a new social group | track a cluster of people together, e.g. secondary school friends, JC friends, family, university friends etc
+|`* * *` |user | create a new social group | track a cluster of people together, e.g. secondary school friends, JC friends, family, university friends etc.
 
-|`* * *` |user | assign group(s) to a person | track people I know from multiple places (Eg workplace and school both)
+|`* * *` |user | assign group(s) to a person | track people I know from multiple places (Eg workplace and school both).
 
-|`* * *` |user | delete group | remove social circles that are no longer needed
+|`* * *` |user | delete group | remove social circles that are no longer needed.
 
-|`* * *` |user | list all groups | get a glimpse of all social circles
+|`* * *` |user | list all groups | get a glimpse of all social circles.
 
-|`* *` |user | list specific group places | know which places the group has been to
+|`* *` |user | list specific group places | know which places the group has been to.
 
-|`* *` |user | list specific group activities | know which activites the group has been doing
+|`* *` |user | list specific group activities | know which activites the group has been doing.
 
-|`* *` |user | list specific group time spent | know how much time has been spent with this group
+|`* *` |user | list specific group time spent | know how much time has been spent with this group.
 
-|`* *` |user | randomly select person | get a person to hangout with
+|`* *` |user | randomly select person | get a person to hangout with.
 
-|`* *` |user | get suggestions on an activity to do with a person | to know which activity is best to with that specific person
+|`* *` |user | get suggestions on an activity to do with a person | to know which activity is best to with that specific person.
 
-|`* *` |user | get suggestions on an activity based on my recent activities | to know which activity to do
+|`* *` |user | get suggestions on an activity based on my recent activities | to know which activity to do.
 
-|`* *` |user | get suggestions on a place to go based on a person | know which place is best to with person specified
+|`* *` |user | get suggestions on a place to go based on a person | know which place is best to with person specified.
 
-|`* *` |user | get suggestions on a place based on my recent places visited | know which place to go to
+|`* *` |user | get suggestions on a place based on my recent places visited | know which place to go to.
 
-|`* *` |user | get suggestions on a person based on group time spent | know which person to hang out with from a specific group
+|`* *` |user | get suggestions on a person based on group time spent | know which person to hang out with from a specific group.
 
-|`* *` |user | get insights on places I have been to (pie chart) | get a glimpse of all the places I have been to
+|`* *` |user | get insights on places I have been to (pie chart) | get a glimpse of all the places I have been to.
 
-|`* *` |user | get insights on time spent with a specific group  | know time spent distribution within a group
+|`* *` |user | get insights on time spent with a specific group  | know time spent distribution within a group.
 
-|`* *` |user | get insights on all activities done (pie chart)  | know which activities I have done and their frequency
+|`* *` |user | get insights on all activities done (pie chart)  | know which activities I have done and their frequency.
 
-|`* *` |user | get insights on time spent with different groups (pie chart)  | know the spread of time with respect to different social groups
+|`* *` |user | get insights on time spent with different groups (pie chart)  | know the spread of time with respect to different social groups.
 
-|`* *` |user | get the last 5 events that happened  | get a glimpse of what I did the last 5 events. 
+|`* *` |user | get the last 5 events that happened  | get a glimpse of what I did the last 5 events.
 
 |=======================================================================
 
