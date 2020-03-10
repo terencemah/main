@@ -70,10 +70,26 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-=== Listing all persons : `list`
+=== Listing saved data : `list`
 
-Shows a list of all persons in the address book. +
-Format: `list`
+Shows a list of recorded information in CoderLifeInsights. +
+Format: `list LIST_PARAMETER`
+
+****
+* LIST_PARAMETER include `people`, `activities`, `groups` and `places`.
+* CoderLifeInsights will display an indexed list of the saved `LIST_PARAMS`.
+****
+
+Examples:
+
+* `list people` +
+Returns a list of the saved persons in CoderLifeInsights.
+* `list activities` +
+Returns a list of the saved activities in CoderLifeInsights.
+* `list groups` +
+Returns a list of the saved groups in CoderLifeInsights.
+* `list places`
+Returns a list of the saved places in CoderLifeInsights.
 
 === Editing a person : `edit`
 
@@ -291,5 +307,6 @@ e.g. `export life.json`
 e.g. `suggest place`
 * *Insight* : `show INSIGHT_PARAMETER` +
 e.g. `show activities`
-* *List* : `list`
+* *List* : `list LIST_PARAMETER` +
+e.g. `list people`
 * *Help* : `help`
