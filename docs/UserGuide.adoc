@@ -70,10 +70,26 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-=== Listing all persons : `list`
+=== Listing saved data : `list`
 
-Shows a list of all persons in the address book. +
-Format: `list`
+Shows a list of recorded information in CoderLifeInsights. +
+Format: `list LIST_PARAMETER`
+
+****
+* LIST_PARAMETER include `people`, `activities`, `groups` and `places`.
+* CoderLifeInsights will display an indexed list of the saved `LIST_PARAMS`.
+****
+
+Examples:
+
+* `list people` +
+Returns a list of the saved persons in CoderLifeInsights.
+* `list activities` +
+Returns a list of the saved activities in CoderLifeInsights.
+* `list groups` +
+Returns a list of the saved groups in CoderLifeInsights.
+* `list places`
+Returns a list of the saved places in CoderLifeInsights.
 
 === Editing a person : `edit`
 
@@ -96,6 +112,28 @@ Examples:
 Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+=== Deleting a person : `delete`
+
+Deletes a person from the address book. +
+Format: `delete INDEX`
+
+****
+* Deletes the person at the specified `INDEX`.
+The index refers to the index number shown in the displayed person list.
+The index *must be a positive integer* 1, 2, 3, ...
+Remarks: Address book uses 1-indexing.
+****
+
+Examples:
+
+* `list` +
+`delete 2` +
+Deletes the 2nd person in the address book.
+* `find Betsy` +
+`delete 1` +
+Deletes the 1st person in the results of the `find` command.
+
 
 === Locating persons by name: `find`
 
@@ -170,6 +208,21 @@ Returns an activity to do.
 * `suggest person` +
 Returns a person to hangout with.
 
+=== Getting a random person: `random`
+
+Finds a random person from contacts saved in address book. +
+Format: `random`
+
+****
+* No additional parameters required.
+* CoderLifeInsights will return the name of a random contact that is saved in CoderLifeInsights.
+* Selection of contact is completely random with no parameters used for selection.
+****
+
+Example:
+* `random`
+Returns the name of a random person saved in CoderLifeInsights.
+
 === Insights: `show`
 
 Lists insights about the user's interactions with a particular friend or group,
@@ -198,25 +251,19 @@ Returns the output of 'show places', 'show time', and 'show activities',
 in that order.
 
 // tag::delete[]
-=== Deleting a person : `delete`
+//=== Deleting a person : `delete`
 
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
+//Deletes the specified person from the address book. +
+//Format: `delete INDEX`
 
-****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
+//****
+//* Deletes the person at the specified `INDEX`.
+//* The index refers to the index number shown in the displayed person list.
+//* The index *must be a positive integer* 1, 2, 3, ...
+//****
 
-Examples:
+//Examples:
 
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
 
 // end::delete[]
 === Clearing all entries : `clear`
@@ -264,5 +311,7 @@ e.g. `export life.json`
 e.g. `suggest place`
 * *Insight* : `show INSIGHT_PARAMETER` +
 e.g. `show activities`
-* *List* : `list`
+* *List* : `list LIST_PARAMETER` +
+e.g. `list people`
 * *Help* : `help`
+* *Random* : `random`
