@@ -97,6 +97,28 @@ Edits the phone number and email address of the 1st person to be `91234567` and 
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+=== Deleting a person : `delete`
+
+Deletes a person from the address book. +
+Format: `delete INDEX`
+
+****
+* Deletes the person at the specified `INDEX`.
+The index refers to the index number shown in the displayed person list.
+The index *must be a positive integer* 1, 2, 3, ...
+Remarks: Address book uses 1-indexing.
+****
+
+Examples:
+
+* `list` +
+`delete 2` +
+Deletes the 2nd person in the address book.
+* `find Betsy` +
+`delete 1` +
+Deletes the 1st person in the results of the `find` command.
+
+
 === Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords. +
@@ -197,26 +219,31 @@ Returns a pie chart of the activities user has done with friend.
 Returns the output of 'show places', 'show time', and 'show activities',
 in that order.
 
+=== Getting a random person: `random`
+
+Finds a random person from contacts saved in address book. +
+Format: `random`
+
+****
+* No additional parameters required.
+* CoderLifeInsights will return the name of a random contact that is saved in the address book.
+* Selection of contact is completely random with no parameters used for selection.
+****
+
 // tag::delete[]
-=== Deleting a person : `delete`
+//=== Deleting a person : `delete`
 
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
+//Deletes the specified person from the address book. +
+//Format: `delete INDEX`
 
-****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
+//****
+//* Deletes the person at the specified `INDEX`.
+//* The index refers to the index number shown in the displayed person list.
+//* The index *must be a positive integer* 1, 2, 3, ...
+//****
 
-Examples:
+//Examples:
 
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
 
 // end::delete[]
 === Clearing all entries : `clear`
