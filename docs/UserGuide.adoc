@@ -208,6 +208,21 @@ Returns an activity to do.
 * `suggest person` +
 Returns a person to hangout with.
 
+=== Getting a random person: `random`
+
+Finds a random person from contacts saved in address book. +
+Format: `random`
+
+****
+* No additional parameters required.
+* CoderLifeInsights will return the name of a random contact that is saved in CoderLifeInsights.
+* Selection of contact is completely random with no parameters used for selection.
+****
+
+Example:
+* `random`
+Returns the name of a random person saved in CoderLifeInsights.
+
 === Insights: `show`
 
 Lists insights about the user's interactions with a particular friend or group,
@@ -234,17 +249,6 @@ Returns a pie chart of the activities user has done with friend.
 * `show all`
 Returns the output of 'show places', 'show time', and 'show activities',
 in that order.
-
-=== Getting a random person: `random`
-
-Finds a random person from contacts saved in address book. +
-Format: `random`
-
-****
-* No additional parameters required.
-* CoderLifeInsights will return the name of a random contact that is saved in the address book.
-* Selection of contact is completely random with no parameters used for selection.
-****
 
 // tag::delete[]
 //=== Deleting a person : `delete`
@@ -310,3 +314,4 @@ e.g. `show activities`
 * *List* : `list LIST_PARAMETER` +
 e.g. `list people`
 * *Help* : `help`
+* *Random* : `random`
