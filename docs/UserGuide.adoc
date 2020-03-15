@@ -113,10 +113,12 @@ Edits the phone number and email address of the 1st person to be `91234567` and 
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-=== Deleting a person : `delete`
+=== Deleting an object : `delete`
 
-Deletes a person from the address book. +
-Format: `delete INDEX`
+Deletes an entity, such as Person, Group, or Event from the CoderLifeInsights +
+Format: `delete person ID` (for person) +
+        `delete group ID` (for group) +
+        `delete event ID` (for event)
 
 ****
 * Deletes the person at the specified `INDEX`.
@@ -220,8 +222,34 @@ Format: `random`
 ****
 
 Example:
-* `random`
+
+* `random` +
 Returns the name of a random person saved in CoderLifeInsights.
+
+=== Social Group: `group`
+
+Creates an empty social group with given name. +
+Format: `group <name>`
+
+****
+* Only one parameter: group name
+* CoderLifeInsights will create a new group and show a uniquely generated Group ID for the same
+****
+
+Example:
+
+* `group SoC Friends` +
+Creates a group named `SoC Friends` and assigns a group ID, which is shown to the user.
+
+=== Assign Group: `assign`
+
+Assigns a given person id with a given group id +
+Format: `assign <person-id> <group id>`
+
+****
+* CoderLifeInsight will add person with given id to the Group with given group id
+* CoderLifeInsight will add the group name as a string to the list of groups for the person
+****
 
 === Insights: `show`
 
