@@ -17,7 +17,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
  * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
  * as to ensure that the person with exactly the same fields will be removed.
- *
+ * <p>
  * Supports a minimal set of list operations.
  *
  * @see Person#isSamePerson(Person)
@@ -37,6 +37,21 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains an equivalent personList as the given argument.
+     */
+    public boolean containsPersons(List<Person> toCheck) {
+        requireNonNull(toCheck);
+        boolean personExists;
+        for (Person onePerson : toCheck) {
+            personExists = internalList.stream().anyMatch(onePerson::isSamePerson);
+            if (personExists) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -46,6 +61,18 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Adds all person to the list.
+     * The person in to add list must not already exist in the list.
+     */
+    public void addAll(List<Person> toAdd) {
+        requireNonNull(toAdd);
+        if (containsPersons(toAdd)) {
+            throw new DuplicatePersonException();
+        }
+        internalList.addAll(toAdd);
     }
 
     /**
@@ -113,7 +140,7 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniquePersonList // instanceof handles nulls
-                        && internalList.equals(((UniquePersonList) other).internalList));
+                && internalList.equals(((UniquePersonList) other).internalList));
     }
 
     @Override

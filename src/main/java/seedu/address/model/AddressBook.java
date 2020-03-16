@@ -27,7 +27,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -67,11 +68,23 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with the same identity as {@code personList} exists in the address book.
+     */
+    public boolean hasPersons(List<Person> personList) {
+        requireNonNull(personList);
+        return persons.containsPersons(personList);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
         persons.add(p);
+    }
+
+    public void addPersons(List<Person> p) {
+        persons.addAll(p);
     }
 
     /**
