@@ -23,7 +23,7 @@ import seedu.address.testutil.PersonBuilder;
 public class UniquePersonListTest {
 
     private final UniquePersonList uniquePersonList = new UniquePersonList();
-    private final List<Person> PersonList = new ArrayList<>();
+    private final List<Person> personList = new ArrayList<Person>();
 
     @Test
     public void contains_nullPerson_throwsNullPointerException() {
@@ -37,7 +37,7 @@ public class UniquePersonListTest {
 
     @Test
     public void containsPersons_personNotInList_returnsFalse() {
-        assertFalse(uniquePersonList.containsPersons(PersonList));
+        assertFalse(uniquePersonList.containsPersons(personList));
     }
 
     @Test
@@ -49,8 +49,8 @@ public class UniquePersonListTest {
     @Test
     public void containsPersons_personInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        PersonList.add(ALICE);
-        assertTrue(uniquePersonList.containsPersons(PersonList));
+        personList.add(ALICE);
+        assertTrue(uniquePersonList.containsPersons(personList));
     }
 
     @Test
@@ -66,8 +66,8 @@ public class UniquePersonListTest {
         uniquePersonList.add(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        PersonList.add(editedAlice);
-        assertTrue(uniquePersonList.containsPersons(PersonList));
+        personList.add(editedAlice);
+        assertTrue(uniquePersonList.containsPersons(personList));
     }
 
     @Test
@@ -77,10 +77,10 @@ public class UniquePersonListTest {
 
     @Test
     public void addAll_nullPerson_throwsNullPointerException() {
-        PersonList.add(null);
-        PersonList.add(null);
-        PersonList.add(null);
-        assertThrows(NullPointerException.class, () -> uniquePersonList.addAll(PersonList));
+        personList.add(null);
+        personList.add(null);
+        personList.add(null);
+        assertThrows(NullPointerException.class, () -> uniquePersonList.addAll(personList));
     }
 
     @Test
@@ -92,8 +92,8 @@ public class UniquePersonListTest {
     @Test
     public void addAll_duplicatePerson_throwsDuplicatePersonException() {
         uniquePersonList.add(ALICE);
-        PersonList.add(ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.addAll(PersonList));
+        personList.add(ALICE);
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.addAll(personList));
     }
 
     @Test
@@ -202,7 +202,7 @@ public class UniquePersonListTest {
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, ()
-                -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () ->
+                uniquePersonList.asUnmodifiableObservableList().remove(0));
     }
 }
