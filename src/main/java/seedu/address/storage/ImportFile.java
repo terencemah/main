@@ -27,7 +27,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Converts CSV files to be added to current Life.
  */
-public class CsvFile {
+public class ImportFile {
 
     /**
      * Reads a CSV File and returns a list of person to be added to the current address book.
@@ -52,7 +52,7 @@ public class CsvFile {
                 String oneEmail = onePerson.get("email");
                 String oneAddress = onePerson.get("address");
                 String oneTagged = onePerson.get("tagged").strip();
-                String[] tags = oneTagged.split(",");
+                String[] tags = oneTagged.split(";");
 
                 Set<Tag> tag;
                 if (oneTagged.isEmpty()) {
