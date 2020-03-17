@@ -23,6 +23,8 @@ public class Group {
         this.name = name;
         this.members = new ArrayList<>();
         this.totalTime = 0;
+        this.groupId = groups;
+        groups += 1;
     }
 
     public void addPerson(int id) {
@@ -49,6 +51,14 @@ public class Group {
         return this.members;
     }
 
+    public String printMemberList() {
+        String build = "";
+        for(int i = 0; i < members.size(); i++) {
+            build += members.get(i) + " ";
+        }
+        return build;
+    }
+
     public int getGroups() {
         return groups;
     }
@@ -72,5 +82,15 @@ public class Group {
 
         return (new HashSet<Integer>(this.getMembers())).equals(new HashSet<Integer>(g.getMembers()));
 
+    }
+
+    @Override
+    public String toString() {
+        if (this.members.isEmpty()) {
+            return "group ID: " + this.groupId + ". Name: " + this.name;
+        } else {
+            return "group ID: " + this.groupId + ". Name: " + this.name + ". With members: \n"
+                    + printMemberList();
+        }
     }
 }
