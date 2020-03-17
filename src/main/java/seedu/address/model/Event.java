@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import seedu.address.model.person.Person;
+import seedu.address.model.group.Group;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -11,19 +12,22 @@ public class Event {
     private Person person;
     private int timeSpent;
     private Place place;
+    private Activity activity;
 
     /**
      * Constructor for a new Event object
      * @param name
      * @param grpName
      * @param place
+     * @param activity
      * @param timeSpent
      * returns an event with a group.
      */
-    public Event(String name, Group grpName, Place place, int timeSpent) {
+    public Event(String name, Group grpName, Place place, Activity activity, int timeSpent) {
         this.name = name;
         this.grpName = grpName;
         this.place = place;
+        this.activity = activity;
         this.timeSpent = timeSpent;
     }
 
@@ -32,13 +36,15 @@ public class Event {
      * @param name
      * @param person
      * @param place
+     * @param activity
      * @param timeSpent
      * returns an event with a person.
      */
-    public Event(String name, Person person, Place place, int timeSpent) {
+    public Event(String name, Person person, Place place, Activity activity, int timeSpent) {
         this.name = name;
         this.person = person;
         this.place = place;
+        this.activity = activity;
         this.timeSpent = timeSpent;
     }
 
