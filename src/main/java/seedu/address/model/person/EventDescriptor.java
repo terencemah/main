@@ -2,30 +2,45 @@ package seedu.address.model.person;
 
 import java.util.Comparator;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class EventDescriptor {
-    private String name;
-    private int frequency;
+
+    private final StringProperty name;
+    private final IntegerProperty frequency;
 
     public EventDescriptor(String name) {
-        this.name = name;
-        frequency = 1;
+        this.name = new SimpleStringProperty(name);
+        frequency = new SimpleIntegerProperty(1);
     }
 
-    public EventDescriptor(String name, int frequency) {
-        this.name = name;
-        this.frequency = frequency;
+    public EventDescriptor(String name, Integer frequency) {
+        this.name = new SimpleStringProperty(name);
+        this.frequency = new SimpleIntegerProperty(frequency);
     }
 
     public String getName() {
-        return name;
+        return name.get();
     }
 
-    public int getFrequency() {
-        return frequency;
+    public Integer getFrequency() {
+        return frequency.get();
     }
 
     public void increment() {
-        frequency++;
+        frequency.setValue(frequency.get() + 1);
+    }
+
+    public StringProperty nameProperty() {
+        return name;
+    }
+
+    public StringProperty frequencyProperty() {
+        return new SimpleStringProperty(Integer.toString(frequency.get()));
     }
 
     @Override
@@ -40,18 +55,4 @@ public class EventDescriptor {
                 && ((EventDescriptor) o).getFrequency() == this.getFrequency();
     }
 }
-
-class DescriptorComparator implements Comparator<EventDescriptor> {
-    public int compare(EventDescriptor d1, EventDescriptor d2) {
-        if (d1.getFrequency() < d2.getFrequency()) {
-            return 1;
-        } else if (d1.getFrequency() == d2.getFrequency()
-                && d1.getName().compareTo(d2.getName()) < 0) {
-            return 1;
-        } else {
-            return -1;
-        }
-    }
-}
-
 

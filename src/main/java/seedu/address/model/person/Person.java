@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,8 +25,8 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
-    private FrequencyList placeList;
-    private FrequencyList activityList;
+    private final FrequencyList placeList;
+    private final FrequencyList activityList;
     private float totalTimeSpent;
 
     /**
@@ -130,5 +131,21 @@ public class Person {
 
     public void addActivity(String name) {
         activityList.add(name);
+    }
+
+    public void addTime(float time) {
+        totalTimeSpent += time;
+    }
+
+    public ObservableList<EventDescriptor> getPlaceList() {
+        return placeList.getFrequencyList();
+    }
+
+    public ObservableList<EventDescriptor> getActivityList() {
+        return activityList.getFrequencyList();
+    }
+
+    public float getTotalTimeSpent() {
+        return totalTimeSpent;
     }
 }

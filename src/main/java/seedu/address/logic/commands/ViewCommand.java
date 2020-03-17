@@ -25,8 +25,10 @@ public class ViewCommand extends Command {
             + "], or [" + KEYWORD_TIME + ".\n"
             + "Example: " + COMMAND_WORD + " 1 " + KEYWORD_PLACE;
 
-    public static final String MESSAGE_SUCCESS = "Displayed places visited with ";
-    public static final String MESSAGE_INVALID_PARAMETER = "The entered parameter is invalid.";
+    public static final String MESSAGE_PLACE = "Displaying places visited with ";
+    public static final String MESSAGE_ACTIVITY = "Displaying activities done with ";
+    public static final String MESSAGE_TIME = "Displaying time spent with ";
+    public static final String MESSAGE_INVALID_PARAMETER = "The entered parameter is invalid.\n";
 
     private final Index index;
     private final String parameter;
@@ -49,6 +51,28 @@ public class ViewCommand extends Command {
         }
 
         Person personToView = lastShownList.get(index.getZeroBased());
-        return new CommandResult(String.format(MESSAGE_SUCCESS, personToView));
+        ViewType vt;
+        String message;
+
+        switch (parameter) {
+
+        case KEYWORD_PLACE:
+            model.showPlaceList(personToView);
+            message = MESSAGE_PLACE + personToView.getName() + ".";
+            vt = ViewType.EVENTS; break;
+
+        case KEYWORD_ACTIVITY:
+            model.showActivityList(personToView);
+            message = MESSAGE_ACTIVITY + personToView.getName() + ".";
+            vt = ViewType.EVENTS; break;
+
+        default:
+            message = MESSAGE_TIME + personToView.getName() + ".\nTotal individual time spent: "
+                    + personToView.getTotalTimeSpent() + " hours.";
+            vt = ViewType.NORMAL;
+        }
+
+
+        return new CommandResult(message, vt);
     }
 }

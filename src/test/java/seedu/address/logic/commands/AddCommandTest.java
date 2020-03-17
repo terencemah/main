@@ -21,6 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -158,6 +159,23 @@ public class AddCommandTest {
         public void importCsvToAddressBook(List<Person> importedPeople) throws CommandException {
 
         }
+
+        @Override
+        public void showPlaceList(Person target) {
+
+        }
+
+        @Override
+        public void showActivityList(Person target) {
+
+        }
+
+        @Override
+        public ObservableList<EventDescriptor> getFrequencyList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
     }
 
     /**
