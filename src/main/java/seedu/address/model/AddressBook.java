@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -15,7 +17,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-
+    private final UniqueGroupList groups;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -25,6 +27,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        groups = new UniqueGroupList();
     }
 
     public AddressBook() {
@@ -73,6 +76,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPersons(List<Person> personList) {
         requireNonNull(personList);
         return persons.containsPersons(personList);
+    }
+
+    /**
+     * Returns true if a group with the same identity as {@code group} exists in the address book.
+     */
+    public boolean hasGroup(Group group){
+        requireNonNull(group);
+        return groups.contains(group);
+    }
+
+    public void addGroup(Group group) {
+        requireNonNull(group);
+        groups.addGroup(group);
     }
 
     /**
