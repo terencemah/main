@@ -24,6 +24,10 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    private FrequencyList placeList;
+    private FrequencyList activityList;
+    private float totalTimeSpent;
+
     /**
      * Every field must be present and not null.
      */
@@ -34,6 +38,9 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        placeList = new FrequencyList();
+        activityList = new FrequencyList();
+        totalTimeSpent = 0;
     }
 
     public Name getName() {
@@ -117,4 +124,11 @@ public class Person {
         return builder.toString();
     }
 
+    public void addPlace(String name) {
+        placeList.add(name);
+    }
+
+    public void addActivity(String name) {
+        activityList.add(name);
+    }
 }
