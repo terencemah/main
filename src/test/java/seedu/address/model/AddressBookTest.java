@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -60,8 +61,20 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasPersons_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasPersons(null));
+    }
+
+    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(addressBook.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasPersons_personsNotInAddressBook_returnsFalse() {
+        List<Person> personList = new ArrayList<>();
+        personList.add(ALICE);
+        assertFalse(addressBook.hasPersons(personList));
     }
 
     @Test
@@ -71,11 +84,30 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasPersons_personInAddressBook_returnsTrue() {
+        List<Person> personList = new ArrayList<>();
+        personList.add(ALICE);
+        addressBook.addPerson(ALICE);
+        assertTrue(addressBook.hasPersons(personList));
+    }
+
+    @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
+    }
+
+
+    @Test
+    public void hasPersons_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        List<Person> personList = new ArrayList<>();
+        addressBook.addPerson(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        personList.add(editedAlice);
+        assertTrue(addressBook.hasPersons(personList));
     }
 
     @Test

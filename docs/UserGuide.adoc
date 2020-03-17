@@ -253,9 +253,8 @@ Format: `assign <person-id> <group id>`
 
 === Insights: `show`
 
-Lists insights about the user's interactions with a particular friend or group,
-in the form of a pie chart. These include places visited, time spent, and/or
-activities done with the friend or group.
+Lists insights about the user's interactions with a particular friend or group, in the form of a pie chart.
+These include places visited, time spent, and/or activities done with the friend or group.
 Format: `show INSIGHT_PARAMETER`
 
 ****
@@ -275,24 +274,28 @@ Returns a graph of time spent with friend each day over the past month.
 * `show activities` +
 Returns a pie chart of the activities user has done with friend.
 * `show all`
-Returns the output of 'show places', 'show time', and 'show activities',
-in that order.
+Returns the output of 'show places', 'show time', and 'show activities', in that order.
+****
 
-// tag::delete[]
-//=== Deleting a person : `delete`
+=== Deleting a person : `delete`
 
-//Deletes the specified person from the address book. +
-//Format: `delete INDEX`
+Deletes the specified person from the address book. +
+Format: `delete INDEX`
 
-//****
-//* Deletes the person at the specified `INDEX`.
-//* The index refers to the index number shown in the displayed person list.
-//* The index *must be a positive integer* 1, 2, 3, ...
-//****
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* 1, 2, 3, ...
 
-//Examples:
+****
+Examples:
 
-
+* `list` +
+`delete 2` +
+Deletes the 2nd person in the address book.
+* `find Betsy` +
+`delete 1` +
+Deletes the 1st person in the results of the `find` command.
+****
 // end::delete[]
 === Clearing all entries : `clear`
 
@@ -315,12 +318,12 @@ There is no need to save manually.
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
-== FAQ
+=== FAQ
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
-== Command Summary
+=== Command Summary
 
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
