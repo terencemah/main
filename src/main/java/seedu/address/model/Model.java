@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -65,6 +66,8 @@ public interface Model {
 
     boolean hasPersons(List<Person> people);
 
+    boolean hasGroup(Group group);
+
 
     /**
      * Deletes the given person.
@@ -77,6 +80,8 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    void addGroup(Group group);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

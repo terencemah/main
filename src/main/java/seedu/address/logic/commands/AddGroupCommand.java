@@ -22,7 +22,7 @@ public class AddGroupCommand extends Command {
             + PREFIX_MEMBER + "3"
             + PREFIX_MEMBER + "7";
 
-    public static final String MESSAGE_SUCCESS = "New group added: %1$";
+    public static final String MESSAGE_SUCCESS = "New group added: %1$s";
     public static final String MESSAGE_DUPLICATE_GROUP = "Group with given name already exists. " +
             "Please try again with another name";
 
