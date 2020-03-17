@@ -53,12 +53,8 @@ public class ImportFile {
                 String oneEmail = onePerson.get("email");
                 String oneAddress = onePerson.get("address");
                 String oneTagged = onePerson.get("tagged").strip();
-<<<<<<< HEAD:src/main/java/seedu/address/storage/CsvFile.java
                 String[] tags = oneTagged.split(",");
                 String oneTimeSpent = onePerson.get("timeSpent");
-=======
-                String[] tags = oneTagged.split(";");
->>>>>>> 4bc922c639c24c622f1cf6010ce8152d448c306c:src/main/java/seedu/address/storage/ImportFile.java
 
                 Set<Tag> tag;
                 if (oneTagged.isEmpty()) {

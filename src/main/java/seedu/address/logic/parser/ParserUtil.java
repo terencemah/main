@@ -145,7 +145,6 @@ public class ParserUtil {
     }
 
     /**
-<<<<<<< HEAD
      * Parses {@code int timeSpent} into a {@code Time}
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -157,13 +156,14 @@ public class ParserUtil {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
         return new Time(timeSpent);
+    }
 
-=======
-     * Parses {@code String path} into a trimmed path if file does not exist.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if {@code file} exist.
-     */
+    /**
+    * Parses {@code String path} into a trimmed path if file does not exist.
+    * Leading and trailing whitespaces will be trimmed.
+    *
+    * @throws ParseException if {@code file} exist.
+    */
     public static String parseExportPath(String path) throws ParseException, IOException {
         requireNonNull(path);
         String trimmedPath = path.strip();
@@ -174,7 +174,6 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_FILE_ALREADY_EXIST);
         }
         return trimmedPath;
->>>>>>> 4bc922c639c24c622f1cf6010ce8152d448c306c
     }
 
 }

@@ -40,13 +40,10 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-<<<<<<< HEAD
         this.timeSpent = timeSpent;
-=======
         placeList = new FrequencyList();
         activityList = new FrequencyList();
         totalTimeSpent = 0;
->>>>>>> 4bc922c639c24c622f1cf6010ce8152d448c306c
     }
 
     public Name getName() {
