@@ -15,6 +15,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -144,11 +145,25 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String path} into a trimmed path if file does not exist.
+     * Parses {@code int timeSpent} into a {@code Time}
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if {@code file} exist.
+     * @throws ParseException if int timeSpent less than 0.
      */
+    public static Time parseTimeSpent(int timeSpent) throws ParseException {
+        requireNonNull(timeSpent);
+        if (timeSpent < 0) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+        }
+        return new Time(timeSpent);
+    }
+
+    /**
+    * Parses {@code String path} into a trimmed path if file does not exist.
+    * Leading and trailing whitespaces will be trimmed.
+    *
+    * @throws ParseException if {@code file} exist.
+    */
     public static String parseExportPath(String path) throws ParseException, IOException {
         requireNonNull(path);
         String trimmedPath = path.strip();

@@ -22,6 +22,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -52,7 +53,8 @@ public class ImportFile {
                 String oneEmail = onePerson.get("email");
                 String oneAddress = onePerson.get("address");
                 String oneTagged = onePerson.get("tagged").strip();
-                String[] tags = oneTagged.split(";");
+                String[] tags = oneTagged.split(",");
+                String oneTimeSpent = onePerson.get("timeSpent");
 
                 Set<Tag> tag;
                 if (oneTagged.isEmpty()) {
@@ -64,8 +66,9 @@ public class ImportFile {
                 Phone phone = ParserUtil.parsePhone(onePhone);
                 Email email = ParserUtil.parseEmail(oneEmail);
                 Address address = ParserUtil.parseAddress(oneAddress);
+                Time timeSpent = ParserUtil.parseTimeSpent(Integer.parseInt(oneTimeSpent));
 
-                Person person = new Person(name, phone, email, address, tag);
+                Person person = new Person(name, phone, email, address, tag, timeSpent);
                 people.add(person);
             }
             return people;
