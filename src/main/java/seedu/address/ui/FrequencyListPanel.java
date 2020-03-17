@@ -11,6 +11,10 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.EventDescriptor;
 
+/**
+ * Panel showing the list of places or activities,
+ * and their frequencies in descending order.
+ */
 public class FrequencyListPanel extends UiPart<Region> {
     private static final String FXML = "FrequencyListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(FrequencyListPanel.class);
