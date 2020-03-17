@@ -2,6 +2,7 @@ package seedu.address.model.group;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Objects;
 
 /**
  * Represents the Social Group that a person is part of and spends time with.
@@ -50,6 +51,11 @@ public class Group {
 
     public int getGroups() {
         return groups;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.name, this.members);
     }
 
     @Override
