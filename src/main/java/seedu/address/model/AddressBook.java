@@ -11,21 +11,20 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the address-book level Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueGroupList groups;
-    /*
+
+     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         persons = new UniquePersonList();
         groups = new UniqueGroupList();
     }
@@ -44,8 +43,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the person list with {@code persons}. {@code persons} must not contain
+     * duplicate persons.
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
@@ -71,7 +70,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a person with the same identity as {@code personList} exists in the address book.
+     * Returns true if a person with the same identity as {@code personList} exists in the address
+     * book.
      */
     public boolean hasPersons(List<Person> personList) {
         requireNonNull(personList);
@@ -81,19 +81,23 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a group with the same identity as {@code group} exists in the address book.
      */
-    public boolean hasGroup(Group group){
+    public boolean hasGroup(Group group) {
         requireNonNull(group);
         return groups.contains(group);
     }
 
+    /**
+     * Adds given group to the groups list.
+     *
+     * @param group given group
+     */
     public void addGroup(Group group) {
         requireNonNull(group);
         groups.addGroup(group);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a person to the address book. The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
         persons.add(p);
@@ -104,9 +108,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given person {@code target} in the list with {@code editedPerson}. {@code target}
+     * must exist in the address book. The person identity of {@code editedPerson} must not be the
+     * same as another existing person in the address book.
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
@@ -115,8 +119,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
         persons.remove(key);

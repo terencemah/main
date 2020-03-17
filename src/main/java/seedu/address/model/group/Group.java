@@ -51,9 +51,14 @@ public class Group {
         return this.members;
     }
 
+    /**
+     * Returns a String output with all the names in a single line separated by whitespace.
+     *
+     * @return
+     */
     public String printMemberList() {
         String build = "";
-        for(int i = 0; i < members.size(); i++) {
+        for (int i = 0; i < members.size(); i++) {
             build += members.get(i) + " ";
         }
         return build;
@@ -81,7 +86,6 @@ public class Group {
         Group g = (Group) o;
 
         return (new HashSet<Integer>(this.getMembers())).equals(new HashSet<Integer>(g.getMembers()));
-
     }
 
     @Override
@@ -89,7 +93,11 @@ public class Group {
         if (this.members.isEmpty()) {
             return "group ID: " + this.groupId + ". Name: " + this.name;
         } else {
-            return "group ID: " + this.groupId + ". Name: " + this.name + ". With members: \n"
+            return "group ID: "
+                    + this.groupId
+                    + ". Name: "
+                    + this.name
+                    + ". With members: \n"
                     + printMemberList();
         }
     }

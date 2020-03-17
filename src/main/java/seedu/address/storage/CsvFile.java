@@ -41,9 +41,8 @@ public class CsvFile {
             File csvFile = new File(fileName);
             CsvMapper mapper = new CsvMapper();
             CsvSchema schema = CsvSchema.emptySchema().withHeader();
-            MappingIterator<Map<String, String>> it = mapper.readerFor(Map.class)
-                    .with(schema)
-                    .readValues(csvFile);
+            MappingIterator<Map<String, String>> it =
+                    mapper.readerFor(Map.class).with(schema).readValues(csvFile);
             List<Person> people = new ArrayList<>();
             while (it.hasNext()) {
                 Map<String, String> onePerson = it.next();
@@ -70,8 +69,7 @@ public class CsvFile {
             }
             return people;
         } catch (IOException | ParseException ioe) {
-            throw new CommandException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT));
+            throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT));
         }
     }
 }
