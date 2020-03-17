@@ -32,7 +32,7 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final int VALID_TIME_SPENT = BENSON.getTimeSpent().getTimeSpent();
+    private static final String VALID_TIME_SPENT = BENSON.getTimeSpent().toString();
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {

@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -16,7 +18,7 @@ import seedu.address.model.person.Time;
  */
 public class TimeCommand extends Command {
 
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Time: %d";
+    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Time: %2$d";
 
     public static final String COMMAND_WORD = "time";
 
@@ -26,7 +28,7 @@ public class TimeCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "time/ [TIME]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "time/ 130";
+            + PREFIX_TIME + " 130";
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Time command not implemented yet";
 
@@ -57,15 +59,19 @@ public class TimeCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), new Time(personToEdit.getTimeSpent().getTimeSpent()
-                + time.getTimeSpent()));
+                personToEdit.getAddress(), personToEdit.getTags(), new Time(personToEdit.getTimeSpent().value
+                + time.value));
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
+    /**
+     * Generates a command execution success message based on whether the time is added to
+     * {@code personToEdit}
+     */
     private String generateSuccessMessage(Person personToEdit) {
         String message = MESSAGE_TIME_SPENT_ADDED_SUCCESS;
         return String.format(message, personToEdit);

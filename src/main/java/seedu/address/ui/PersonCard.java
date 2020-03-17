@@ -54,7 +54,7 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        //timeSpent.setText(Integer.toString(person.getTimeSpent().getTimeSpent()));
+        //timeSpent.setText(Integer.toString(person.getTimeSpent().value));
     }
 
     @Override

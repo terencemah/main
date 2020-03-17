@@ -66,7 +66,7 @@ public class ImportFile {
                 Phone phone = ParserUtil.parsePhone(onePhone);
                 Email email = ParserUtil.parseEmail(oneEmail);
                 Address address = ParserUtil.parseAddress(oneAddress);
-                Time timeSpent = ParserUtil.parseTimeSpent(Integer.parseInt(oneTimeSpent));
+                Time timeSpent = ParserUtil.parseTimeSpent(oneTimeSpent);
 
                 Person person = new Person(name, phone, email, address, tag, timeSpent);
                 people.add(person);

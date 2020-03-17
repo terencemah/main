@@ -21,7 +21,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final int DEFAULT_TIME_SPENT = 130;
+    public static final int DEFAULT_TIME_SPENT = 0;
 
     private Name name;
     private Phone phone;
@@ -94,8 +94,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Time} of the {@code Person} that we are building.
      */
-    public PersonBuilder withTime(int timeSpent) {
-        this.timeSpent = new Time(timeSpent);
+    public PersonBuilder withTime(String timeSpent) {
+        this.timeSpent = new Time(Integer.parseInt(timeSpent));
         return this;
     }
 

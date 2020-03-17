@@ -150,12 +150,13 @@ public class ParserUtil {
      *
      * @throws ParseException if int timeSpent less than 0.
      */
-    public static Time parseTimeSpent(int timeSpent) throws ParseException {
+    public static Time parseTimeSpent(String timeSpent) throws ParseException {
         requireNonNull(timeSpent);
-        if (timeSpent < 0) {
+        int time = Integer.parseInt(timeSpent);
+        if (time < 0) {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
-        return new Time(timeSpent);
+        return new Time(time);
     }
 
     /**

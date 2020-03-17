@@ -29,7 +29,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final int timeSpent;
+    private final String timeSpent;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -39,7 +39,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-            @JsonProperty("timeSpent") int timeSpent) {
+            @JsonProperty("timeSpent") String timeSpent) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -61,7 +61,7 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        timeSpent = source.getTimeSpent().getTimeSpent();
+        timeSpent = Integer.toString(source.getTimeSpent().value);
     }
 
     /**
@@ -109,7 +109,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final Time modelTime = new Time(timeSpent);
+        final Time modelTime = new Time(Integer.parseInt(timeSpent));
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTime);
     }
