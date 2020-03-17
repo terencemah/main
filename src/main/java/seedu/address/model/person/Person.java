@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,6 +26,10 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final Time timeSpent;
 
+    private final FrequencyList placeList;
+    private final FrequencyList activityList;
+    private float totalTimeSpent;
+
     /**
      * Every field must be present and not null.
      */
@@ -35,7 +40,13 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+<<<<<<< HEAD
         this.timeSpent = timeSpent;
+=======
+        placeList = new FrequencyList();
+        activityList = new FrequencyList();
+        totalTimeSpent = 0;
+>>>>>>> 4bc922c639c24c622f1cf6010ce8152d448c306c
     }
 
     public Name getName() {
@@ -122,4 +133,27 @@ public class Person {
         return builder.toString();
     }
 
+    public void addPlace(String name) {
+        placeList.add(name);
+    }
+
+    public void addActivity(String name) {
+        activityList.add(name);
+    }
+
+    public void addTime(float time) {
+        totalTimeSpent += time;
+    }
+
+    public ObservableList<EventDescriptor> getPlaceList() {
+        return placeList.getFrequencyList();
+    }
+
+    public ObservableList<EventDescriptor> getActivityList() {
+        return activityList.getFrequencyList();
+    }
+
+    public float getTotalTimeSpent() {
+        return totalTimeSpent;
+    }
 }

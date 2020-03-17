@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +25,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_PATH = "Path provided must exist.";
+    public static final String MESSAGE_FILE_ALREADY_EXIST = "File already exist. Please specify another name.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -143,6 +145,7 @@ public class ParserUtil {
     }
 
     /**
+<<<<<<< HEAD
      * Parses {@code int timeSpent} into a {@code Time}
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -155,6 +158,23 @@ public class ParserUtil {
         }
         return new Time(timeSpent);
 
+=======
+     * Parses {@code String path} into a trimmed path if file does not exist.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if {@code file} exist.
+     */
+    public static String parseExportPath(String path) throws ParseException, IOException {
+        requireNonNull(path);
+        String trimmedPath = path.strip();
+        File file = new File(trimmedPath);
+        if (!file.exists()) {
+            file.createNewFile();
+        } else {
+            throw new ParseException(MESSAGE_FILE_ALREADY_EXIST);
+        }
+        return trimmedPath;
+>>>>>>> 4bc922c639c24c622f1cf6010ce8152d448c306c
     }
 
 }
