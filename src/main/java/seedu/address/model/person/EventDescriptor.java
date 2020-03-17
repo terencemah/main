@@ -1,13 +1,15 @@
 package seedu.address.model.person;
 
-import java.util.Comparator;
-
-import javafx.beans.InvalidationListener;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * This class is used to encompass Places and Activities,
+ * both of which are characterised by a unique name,
+ * and a frequency particular to a person in the AddressBook.
+ */
 public class EventDescriptor {
 
     private final StringProperty name;
