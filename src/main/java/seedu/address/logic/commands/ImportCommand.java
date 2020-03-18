@@ -7,7 +7,7 @@ import java.util.List;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.storage.CsvFile;
+import seedu.address.storage.ImportFile;
 
 /**
  * Imports application csv to the CoderLifeInsights.
@@ -39,7 +39,7 @@ public class ImportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> importedPeople = new CsvFile().importCsv(filePath);
+        List<Person> importedPeople = new ImportFile().importCsv(filePath);
         if (model.hasPersons(importedPeople)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
@@ -47,10 +47,10 @@ public class ImportCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, filePath));
     }
 
-    //    @Override
-    //    public boolean equals(Object other) {
-    //        return other == this // short circuit if same object
-    //                || (other instanceof AddCommand // instanceof handles nulls
-    //                && toAdd.equals(((AddCommand) other).toAdd));
-    //    }
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ImportCommand // instanceof handles nulls
+                && filePath.equals(((ImportCommand) other).filePath));
+    }
 }

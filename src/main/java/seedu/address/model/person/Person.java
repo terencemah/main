@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,17 +24,26 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Time timeSpent;
+
+    private final FrequencyList placeList;
+    private final FrequencyList activityList;
+    private float totalTimeSpent;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Time timeSpent) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.timeSpent = timeSpent;
+        placeList = new FrequencyList();
+        activityList = new FrequencyList();
+        totalTimeSpent = 0;
     }
 
     public Name getName() {
@@ -52,6 +62,9 @@ public class Person {
         return address;
     }
 
+    public Time getTimeSpent() {
+        return timeSpent;
+    }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException} if
      * modification is attempted.
@@ -116,5 +129,29 @@ public class Person {
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    public void addPlace(String name) {
+        placeList.add(name);
+    }
+
+    public void addActivity(String name) {
+        activityList.add(name);
+    }
+
+    public void addTime(float time) {
+        totalTimeSpent += time;
+    }
+
+    public ObservableList<EventDescriptor> getPlaceList() {
+        return placeList.getFrequencyList();
+    }
+
+    public ObservableList<EventDescriptor> getActivityList() {
+        return activityList.getFrequencyList();
+    }
+
+    public float getTotalTimeSpent() {
+        return totalTimeSpent;
     }
 }

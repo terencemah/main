@@ -8,11 +8,13 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
@@ -25,6 +27,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ObservableList<EventDescriptor> frequencyList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,6 +41,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        frequencyList = FXCollections.observableArrayList();
     }
 
     public ModelManager() {
@@ -133,8 +137,7 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    // =========== Filtered Person List Accessors
-    // =============================================================
+    // =========== Filtered Person List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
@@ -175,5 +178,24 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
+    }
+
+    public void showPlaceList(Person target) {
+        copyList(target.getPlaceList());
+    }
+
+    public void showActivityList(Person target) {
+        copyList(target.getActivityList());
+    }
+
+    private void copyList(ObservableList<EventDescriptor> list) {
+        for (EventDescriptor eventDescriptor : list) {
+            frequencyList.add(eventDescriptor);
+        }
+    }
+
+    @Override
+    public ObservableList<EventDescriptor> getFrequencyList() {
+        return frequencyList;
     }
 }
