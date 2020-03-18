@@ -16,13 +16,16 @@ public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports application csv to the CoderLifeInsights. "
-            + "Parameters: "
-            + "FILE_PATH";
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD
+                    + ": Imports application csv to the CoderLifeInsights. "
+                    + "Parameters: "
+                    + "FILE_PATH";
 
     public static final String MESSAGE_SUCCESS = "CSV Imported: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "Person already exists in the address book. "
-            + "Please delete duplicate in your import file/current address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON =
+            "Person already exists in the address book. "
+                    + "Please delete duplicate in your import file/current address book.";
     private final String filePath;
 
     /**
