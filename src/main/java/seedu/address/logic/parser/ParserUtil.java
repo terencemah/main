@@ -28,8 +28,8 @@ public class ParserUtil {
     public static final String MESSAGE_FILE_ALREADY_EXIST = "File already exist. Please specify another name.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing
+     * whitespaces will be trimmed.
      *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
@@ -42,8 +42,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String name} into a {@code Name}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
@@ -57,8 +57,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String phone} into a {@code Phone}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
@@ -72,8 +72,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String address} into an {@code Address}. Leading and trailing whitespaces will
+     * be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
@@ -87,8 +87,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String email} into an {@code Email}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
@@ -102,8 +102,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String tag} into a {@code Tag}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
@@ -129,8 +129,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String path} into a trimmed path if file exists.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses {@code String path} into a trimmed path if file exists. Leading and trailing whitespaces
+     * will be trimmed.
      *
      * @throws ParseException if {@code file} does not exist.
      */
