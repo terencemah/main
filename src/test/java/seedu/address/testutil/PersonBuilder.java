@@ -12,7 +12,9 @@ import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
-/** A utility class to help with building Person objects. */
+/**
+ * A utility class to help with building Person objects.
+ */
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
@@ -60,7 +62,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
