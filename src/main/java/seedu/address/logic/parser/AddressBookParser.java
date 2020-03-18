@@ -74,9 +74,9 @@ public class AddressBookParser {
 
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(arguments);
-                
+
         case AddGroupCommand.COMMAND_WORD:
-                return new AddGroupCommandParser().parse(arguments);
+            return new AddGroupCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
