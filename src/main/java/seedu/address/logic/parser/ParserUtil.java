@@ -15,7 +15,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -142,21 +141,6 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_PATH);
         }
         return trimmedPath;
-    }
-
-    /**
-     * Parses {@code int timeSpent} into a {@code Time}
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if int timeSpent less than 0.
-     */
-    public static Time parseTimeSpent(String timeSpent) throws ParseException {
-        requireNonNull(timeSpent);
-        int time = Integer.parseInt(timeSpent);
-        if (time < 0) {
-            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
-        }
-        return new Time(time);
     }
 
     /**
