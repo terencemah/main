@@ -8,7 +8,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -21,13 +20,11 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final int DEFAULT_TIME_SPENT = 130;
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
-    private Time timeSpent;
     private Set<Tag> tags;
 
     public PersonBuilder() {
@@ -35,7 +32,6 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        timeSpent = new Time(DEFAULT_TIME_SPENT);
         tags = new HashSet<>();
     }
 
@@ -47,7 +43,6 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        timeSpent = personToCopy.getTimeSpent();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -91,16 +86,8 @@ public class PersonBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Time} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withTime(int timeSpent) {
-        this.timeSpent = new Time(timeSpent);
-        return this;
-    }
-
     public Person build() {
-        return new Person(name, phone, email, address, tags, timeSpent);
+        return new Person(name, phone, email, address, tags);
     }
 
 }

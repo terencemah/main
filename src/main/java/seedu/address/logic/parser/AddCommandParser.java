@@ -17,7 +17,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,9 +46,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Time timeSpent = new Time(0); //no time is spent with a person straight away
 
-        Person person = new Person(name, phone, email, address, tagList, timeSpent);
+        Person person = new Person(name, phone, email, address, tagList);
 
         return new AddCommand(person);
     }

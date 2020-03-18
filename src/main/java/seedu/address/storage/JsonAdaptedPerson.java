@@ -15,7 +15,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,7 +28,6 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final int timeSpent;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -38,13 +36,11 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-            @JsonProperty("timeSpent") int timeSpent) {
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.timeSpent = timeSpent;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -61,7 +57,6 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        timeSpent = source.getTimeSpent().getTimeSpent();
     }
 
     /**
@@ -114,8 +109,6 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final Time modelTime = new Time(timeSpent);
-
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTime);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 }
