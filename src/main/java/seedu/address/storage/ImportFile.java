@@ -52,7 +52,7 @@ public class ImportFile {
                 String oneEmail = onePerson.get("email");
                 String oneAddress = onePerson.get("address");
                 String oneTagged = onePerson.get("tagged").strip();
-                String[] tags = oneTagged.split(",");
+                String[] tags = oneTagged.split(";");
                 String oneTimeSpent = onePerson.get("timeSpent");
 
                 Set<Tag> tag;
@@ -66,6 +66,7 @@ public class ImportFile {
                 Email email = ParserUtil.parseEmail(oneEmail);
                 Address address = ParserUtil.parseAddress(oneAddress);
                 Time timeSpent = ParserUtil.parseTimeSpent(Integer.parseInt(oneTimeSpent));
+                System.out.println(timeSpent);
 
                 Person person = new Person(name, phone, email, address, tag, timeSpent);
                 people.add(person);
