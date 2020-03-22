@@ -51,7 +51,7 @@ public class AddEventCommandTest {
     }
 
     @Test
-    public void execute_invalidPersonIndexUnilteredList_failure() {
+    public void execute_invalidPersonIndexUnfilteredList_failure() {
         final String activity = "test";
         final String place = "anywhere";
         final Time time = new Time(30, 0);
