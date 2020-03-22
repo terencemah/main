@@ -57,6 +57,7 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        //time = source.getTime().getValue();
     }
 
     /**

@@ -10,6 +10,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.util.Time;
 
 /**
  * A utility class to help with building Person objects.
@@ -20,12 +21,15 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final int DEFAULT_MINS = 59;
+    public static final int DEFAULT_HOURS = 1;
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Time time;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -33,6 +37,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        time = new Time(DEFAULT_MINS, DEFAULT_HOURS);
     }
 
     /**
@@ -44,6 +49,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        time = personToCopy.getTime();
     }
 
     /**

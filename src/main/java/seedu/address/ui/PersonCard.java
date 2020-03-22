@@ -40,6 +40,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label time;
 
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
@@ -54,6 +56,7 @@ public class PersonCard extends UiPart<Region> {
                 .stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        time.setText("Time spent together: " + person.getTime().toString());
     }
 
     @Override
