@@ -9,7 +9,7 @@ public class Time {
     public static final String HOURS_RANGE_ERROR = "Hours must be 0 or more";
     private int minutes;
     private int hours;
-    private final String value;
+    //private final String value;
 
     public Time(int minutes, int hours) throws IllegalArgumentException {
         if (!(minutes <= 59 && minutes >= 0)) {
@@ -19,7 +19,7 @@ public class Time {
         } else {
             this.minutes = minutes;
             this.hours = hours;
-            value = Integer.toString(hours) + (minutes);
+            //value = Integer.toString(hours) + (minutes);
         }
     }
 
@@ -47,9 +47,9 @@ public class Time {
         }
     }
 
-    public String getValue() {
-        return this.value;
-    }
+    //public String getValue() {
+        //return this.value;
+    //}
 
     @Override
     public String toString() {
@@ -70,8 +70,8 @@ public class Time {
 
         // state check
         Time t = (Time) other;
-        return minutes == (t.getMinutes())
-                && hours == (t.getHours());
+        return (this.minutes == (t.getMinutes())
+                && this.hours == (t.getHours()));
     }
 
 }
