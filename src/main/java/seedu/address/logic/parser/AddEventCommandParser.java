@@ -47,3 +47,4 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         return new AddEventCommand(activity, index, place, new Time(Integer.parseInt(mins), Integer.parseInt(hours)));
     }
 }
+

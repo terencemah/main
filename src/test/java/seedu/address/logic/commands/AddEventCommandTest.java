@@ -3,12 +3,9 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static seedu.address.logic.commands.AddEventCommand.MESSAGE_ARGUMENTS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -35,7 +32,7 @@ public class AddEventCommandTest {
     public void execute_addEventUnfilteredList_success() {
         final String activity = "test";
         final String place = "anywhere";
-        final Time time = new Time(30,0);
+        final Time time = new Time(30, 0);
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
@@ -57,7 +54,7 @@ public class AddEventCommandTest {
     public void execute_invalidPersonIndexUnilteredList_failure() {
         final String activity = "test";
         final String place = "anywhere";
-        final Time time = new Time(30,0);
+        final Time time = new Time(30, 0);
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
 
         AddEventCommand addEventCommand = new AddEventCommand(activity, outOfBoundIndex.getOneBased(), place, time);
@@ -74,7 +71,7 @@ public class AddEventCommandTest {
 
         final AddEventCommand standardCommand = new AddEventCommand(activity, index, place, time);
 
-        AddEventCommand commandWithSameValues = new AddEventCommand("test",1, "anywhere",
+        AddEventCommand commandWithSameValues = new AddEventCommand("test", 1, "anywhere",
                 new Time(30, 0));
 
         //same values -> returns true

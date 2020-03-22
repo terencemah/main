@@ -1,11 +1,8 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLACE;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
@@ -29,18 +26,18 @@ public class AddEventCommandParserTest {
                 + PREFIX_PLACE + place + " "
                 + PREFIX_TIME + time;
         AddEventCommand expectedCommand = new AddEventCommand(activity, Integer.parseInt(targetIndex), place,
-                new Time(11,11));
+                new Time(11, 11));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-//    @Test
-//    public void parse_missingCompulsoryField_failure() {
-//        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE);
-//
-//        // no parameters
-//        assertParseFailure(parser, AddEventCommand.COMMAND_WORD, expectedMessage);
-//
-//        // no index
-//        assertParseFailure(parser, AddEventCommand.COMMAND_WORD + " " + nonEmptyEvent, expectedMessage);
-//    }
+    //    @Test
+    //    public void parse_missingCompulsoryField_failure() {
+    //        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE);
+    //
+    //        // no parameters
+    //        assertParseFailure(parser, AddEventCommand.COMMAND_WORD, expectedMessage);
+    //
+    //        // no index
+    //        assertParseFailure(parser, AddEventCommand.COMMAND_WORD + " " + nonEmptyEvent, expectedMessage);
+    //    }
 }
