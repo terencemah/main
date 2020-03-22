@@ -51,7 +51,7 @@ public class ImportFile {
                 String oneEmail = onePerson.get("email");
                 String oneAddress = onePerson.get("address");
                 String oneTagged = onePerson.get("tagged").strip();
-                String[] tags = oneTagged.split(",");
+                String[] tags = oneTagged.split(";");
 
                 Set<Tag> tag;
                 if (oneTagged.isEmpty()) {
