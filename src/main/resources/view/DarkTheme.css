@@ -134,7 +134,7 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#3F51B5, 20%);
+     -fx-background-color: derive(#37474F, 20%);
 }
 
 .pane-with-border {
@@ -144,7 +144,7 @@
 }
 
 .status-bar {
-    -fx-background-color: derive(#1A237E, 30%);
+    -fx-background-color: derive(#455A64, 30%);
 }
 
 .result-display {
@@ -186,7 +186,7 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#9FA8DA, 50%);
+    -fx-background-color: derive(#455A64, 50%);
 }
 
 .context-menu .label {
@@ -194,7 +194,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#283593, 20%);
+    -fx-background-color: derive(#455A64, 20%);
 }
 
 .menu-bar .label {
@@ -283,11 +283,11 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#9FA8DA, 20%);
+    -fx-background-color: derive(#263238, 20%);
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#283593, 50%);
+    -fx-background-color: derive(#455A64, 50%);
     -fx-background-insets: 3;
 }
 
@@ -334,7 +334,7 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #5C6BC0, transparent, #5C6BC0;
+    -fx-background-color: transparent, #78909C, transparent, #78909C;
     -fx-background-radius: 0;
 }
 
