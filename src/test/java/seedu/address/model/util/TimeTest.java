@@ -22,7 +22,7 @@ public class TimeTest {
 
     @Test void timeToString() {
         Time time = new Time(59, 2);
-        Assertions.assertEquals("2:59", time.getHours());
+        Assertions.assertEquals("2:59", time.toString());
     }
 
 }
