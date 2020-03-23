@@ -62,6 +62,10 @@ public class PersonTest {
         editedAlice =
                 new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
+
+        // same name, same phone, different time -> returns true
+        editedAlice = new PersonBuilder(ALICE).withTime("2359").build();
+        assertTrue(ALICE.isSamePerson(editedAlice));
     }
 
     @Test
@@ -100,6 +104,10 @@ public class PersonTest {
 
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different time -> returns false
+        editedAlice = new PersonBuilder(ALICE).withTime("30").build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }
