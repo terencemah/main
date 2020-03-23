@@ -18,6 +18,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -221,5 +222,12 @@ public class ParserUtilTest {
         String pathWithWhitespace = WHITESPACE + VALID_PATH + WHITESPACE;
         String expectedPath = VALID_PATH;
         assertEquals(expectedPath, ParserUtil.parsePath(pathWithWhitespace));
+    }
+
+    @Test
+    public void parseTime_emptyString_success() throws Exception {
+        String input = "";
+        Time expectedTime = new Time(0, 0);
+        assertEquals(expectedTime, ParserUtil.parseTime(input));
     }
 }
