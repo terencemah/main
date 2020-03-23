@@ -142,9 +142,9 @@ public class Person {
         activityList.add(name);
     }
 
-    public void addTime(float time) {
+    /*public void addTime(float time) {
         totalTimeSpent += time;
-    }
+    }*/
 
     public ObservableList<EventDescriptor> getPlaceList() {
         return placeList.getFrequencyList();
