@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import seedu.address.model.person.Name;
-import seedu.address.model.util.Time;
+import seedu.address.model.person.Time;
 
 /**
  * Represents the Social Group that a person is part of and spends time with.
