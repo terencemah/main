@@ -58,7 +58,7 @@ public class AddEventCommandParserTest {
                 + PREFIX_PLACE + place + " "
                 + PREFIX_TIME + time;
         assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddEventCommand.MESSAGE_ARGUMENTS));
+                AddEventCommand.MESSAGE_INVALID_TIME_INPUT));
     }
 
     @Test
@@ -75,17 +75,59 @@ public class AddEventCommandParserTest {
                 new Time(11, 0));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-    //    @Test
-    //    public void parse_missingCompulsoryField_failure() {
-    //        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE);
 
-    //        // no parameters
-    //        assertParseFailure(parser, AddEventCommand.COMMAND_WORD, expectedMessage);
+    @Test
+    public void parse_emptyActivity_failure() {
+        String targetIndex = "1";
+        String activity = "";
+        String place = "";
+        String time = "15";
+        String userInput = activity + " "
+                + PREFIX_GROUP + targetIndex + " "
+                + PREFIX_PLACE + place + " "
+                + PREFIX_TIME + time;
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddEventCommand.MESSAGE_USAGE));
+    }
 
-    //        // no activity
-    //        assertParseFailure(parser, AddEventCommand.COMMAND_WORD + " "
-    //                + PREFIX_MEMBER + "1 "
-    //              + PREFIX_TIME + "1111 "
-    //                + PREFIX_PLACE + "anywhere", expectedMessage);
-    //    }
+    @Test
+    public void parse_emptyTime_failure() {
+        String targetIndex = "1";
+        String activity = "Some activity";
+        String place = "Some place";
+        String time = "1";
+        String userInput = activity + " "
+                + PREFIX_GROUP + targetIndex + " "
+                + PREFIX_PLACE + place + " "
+                + PREFIX_TIME + time;
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddEventCommand.MESSAGE_INVALID_TIME_INPUT));
+    }
+
+    @Test
+    public void parse_emptyPlace_failure() {
+        String targetIndex = "1";
+        String activity = "Some activity";
+        String place = "";
+        String time = "15";
+        String userInput = activity + " "
+                + PREFIX_GROUP + targetIndex + " "
+                + PREFIX_PLACE + place + " "
+                + PREFIX_TIME + time;
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddEventCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyIndex_failure() {
+        String targetIndex = "";
+        String activity = "Some activity";
+        String place = "Some place";
+        String time = "5";
+        String userInput = activity + " "
+                + PREFIX_GROUP + targetIndex + " "
+                + PREFIX_PLACE + place + " "
+                + PREFIX_TIME + time;
+        assertParseFailure(parser, userInput, "Index is not a non-zero unsigned integer.");
+    }
 }

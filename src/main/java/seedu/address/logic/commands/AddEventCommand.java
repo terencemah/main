@@ -22,13 +22,21 @@ public class AddEventCommand extends Command {
 
     public static final String COMMAND_WORD = "add_event";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an event with a group(g/) or an individual(m/)"
-            + "that adds a [activity], [place] and [time] to a group or a person. \n"
-            + "[time] has to be at least 2 digits. For example: \n"
-            + "5 minutes is 05 \n"
-            + "1 Hour and 30 Minutes is 130 \n"
-            + "10 Hours and 1 Minute is 1001 \n"
-            + "Example usage: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an event with a group or an individual"
+            + "that adds an activity, place and time to the subject. \n"
+            + "Parameters: [ACTIVITY] "
+            + "["
+            + PREFIX_PLACE
+            + "PLACE] "
+            + "["
+            + PREFIX_MEMBER
+            + "/"
+            + PREFIX_GROUP
+            + "INDEX] "
+            + "["
+            + PREFIX_TIME
+            + "TIME] \n"
+            + "Example: "
             + COMMAND_WORD
             + " Dancing "
             + PREFIX_MEMBER
@@ -36,16 +44,13 @@ public class AddEventCommand extends Command {
             + PREFIX_PLACE
             + "SCAPE "
             + PREFIX_TIME
-            + "300 \n"
-            + COMMAND_WORD
-            + " Dancing "
-            + PREFIX_GROUP
-            + "1 "
-            + PREFIX_PLACE
-            + "SCAPE "
-            + PREFIX_TIME
             + "300";
 
+    public static final String MESSAGE_INVALID_TIME_INPUT = "Time parameter needs to be at least 2 digits.\n"
+            + "For example: "
+            + "[5 minutes = 05]; "
+            + "[1 hour = 100]; "
+            + "[10 hours and 30 minutes = 1030]";
     public static final String MESSAGE_SUCCESS = "New event successfully added.";
 
     public static final String MESSAGE_ARGUMENTS = "Activity: %1$s, Index: %2$d, Place: %3$s, Time: %4$s";

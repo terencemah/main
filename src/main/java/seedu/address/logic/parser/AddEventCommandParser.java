@@ -26,11 +26,21 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MEMBER, PREFIX_GROUP, PREFIX_TIME,
                 PREFIX_PLACE);
+
+        String activity = argMultimap.getPreamble();
+        if (activity.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
+        }
+
+        String place = argMultimap.getValue(PREFIX_PLACE).get();
+        if (place.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
+        }
+
         Index index;
         if (argMultimap.getValue(PREFIX_MEMBER).isEmpty() && argMultimap.getValue(PREFIX_GROUP).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
-        }
-        else if (argMultimap.getValue(PREFIX_MEMBER).isEmpty()) {
+        } else if (argMultimap.getValue(PREFIX_MEMBER).isEmpty()) {
             index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_GROUP).get());
         } else {
             index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER).get());
@@ -46,7 +56,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
             char[] time = argMultimap.getValue(PREFIX_TIME).get().toCharArray();
             if (time.length < 2) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddEventCommand.MESSAGE_ARGUMENTS));
+                        AddEventCommand.MESSAGE_INVALID_TIME_INPUT));
             } else {
                 int marker = time.length - 2;
                 for (int i = marker; i < time.length; i++) {
@@ -60,15 +70,6 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
                 }
             }
         }
-        String activity = argMultimap.getPreamble();
-        if (activity.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
-        }
-        String place = argMultimap.getValue(PREFIX_PLACE).get();
-        if (place.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
-        }
-
 
         return new AddEventCommand(activity, idx, place, new Time(Integer.parseInt(mins), Integer.parseInt(hours)));
     }
