@@ -17,6 +17,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.group.Group;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
@@ -112,6 +114,16 @@ public class ModelManagerTest {
         modelManager.addPerson(ALICE);
         modelManager.addPerson(BENSON);
         assertTrue(modelManager.hasPersons(personList));
+    }
+
+    @Test
+    public void hasGroupTest_returnsTrue() {
+        Group g1 = new Group(new Name("SoC Friends"));
+        Group g2 = new Group(new Name("RC Friends"));
+        modelManager.addGroup(g1);
+        modelManager.addGroup(g2);
+        assertTrue(modelManager.hasGroup(g1));
+        assertTrue(modelManager.hasGroup(g2));
     }
 
     @Test
