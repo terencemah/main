@@ -1,13 +1,13 @@
 package seedu.address.model.group;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.Iterator;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicateGroupException;
 import seedu.address.model.person.exceptions.GroupNotFoundException;
-
-import static java.util.Objects.requireNonNull;
-
-import java.util.Iterator;
 
 /**
  * Represents a unique list of all groups currently in CoderLifeInsights
@@ -15,7 +15,8 @@ import java.util.Iterator;
 public class UniqueGroupList implements Iterable<Group> {
 
     private final ObservableList<Group> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Group> internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Group> internalUnmodifiableList =
+            FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Checks whether the list contains a given group.

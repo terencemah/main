@@ -26,6 +26,9 @@ public class GroupListPanel extends UiPart<Region> {
         groupListView.setCellFactory(listView -> new GroupListViewCell());
     }
 
+    /**
+     * Represents a cell to view the Group in a list.
+     */
     class GroupListViewCell extends ListCell<Group> {
         @Override
         protected void updateItem(Group group, boolean empty) {

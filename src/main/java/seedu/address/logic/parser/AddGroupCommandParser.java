@@ -33,7 +33,7 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        Group group = new Group( new Name(argMultimap.getValue(PREFIX_NAME).get()));
+        Group group = new Group(new Name(argMultimap.getValue(PREFIX_NAME).get()));
         if (arePrefixesPresent(argMultimap, PREFIX_MEMBER)) {
             List<String> members = argMultimap.getAllValues(PREFIX_MEMBER);
             for (int i = 0; i < members.size(); i++) {

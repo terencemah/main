@@ -88,7 +88,7 @@ public class Group {
 
         Group g = (Group) o;
 
-        return (this.getName().equals(g.getName()) && this.getGroupId() == g.getGroupId());
+        return (this.getName().equals(g.getName()));
     }
 
     @Override
