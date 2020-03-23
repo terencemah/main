@@ -21,8 +21,8 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final int DEFAULT_MINS = 59;
-    public static final int DEFAULT_HOURS = 1;
+    public static final int DEFAULT_MINS = 0;
+    public static final int DEFAULT_HOURS = 0;
 
     private Name name;
     private Phone phone;
@@ -92,8 +92,26 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Time} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTime(String time) {
+        char[] timeArr = time.toCharArray();
+        String mins = "";
+        String hrs = "";
+        int marker = timeArr.length - 2;
+        for (int i = marker; i < timeArr.length; i++) {
+            mins += timeArr[i];
+        }
+        for (int i = 0; i < marker; i++) {
+            hrs += timeArr[i];
+        }
+        this.time = new Time(Integer.parseInt(mins), Integer.parseInt(hrs));
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, tags, time);
     }
 
 }

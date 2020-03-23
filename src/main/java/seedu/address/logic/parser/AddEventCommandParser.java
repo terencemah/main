@@ -41,6 +41,9 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         for (int i = 0; i < marker; i++) {
             hours += time[i];
         }
+        if (hours.equals("")) {
+            hours += "0";
+        }
         String activity = argMultimap.getPreamble();
         String place = argMultimap.getValue(PREFIX_PLACE).get();
 

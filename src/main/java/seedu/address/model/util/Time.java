@@ -7,6 +7,7 @@ public class Time {
 
     public static final String MINUTES_RANGE_ERROR = "Minutes must be within 0-59 (inclusive).";
     public static final String HOURS_RANGE_ERROR = "Hours must be 0 or more";
+    public final String value;
     private int minutes;
     private int hours;
 
@@ -18,6 +19,7 @@ public class Time {
         } else {
             this.minutes = minutes;
             this.hours = hours;
+            value = Integer.toString(hours) + minutes;
         }
     }
 
@@ -64,8 +66,11 @@ public class Time {
 
         // state check
         Time t = (Time) other;
-        return (this.minutes == (t.getMinutes())
-                && this.hours == (t.getHours()));
+        return this.value.equals(t.value);
     }
 
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
 }

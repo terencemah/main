@@ -23,6 +23,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.Time;
 
 /**
  * Converts CSV files to be added to current Life.
@@ -52,6 +53,7 @@ public class ImportFile {
                 String oneAddress = onePerson.get("address");
                 String oneTagged = onePerson.get("tagged").strip();
                 String[] tags = oneTagged.split(";");
+                String oneTime = onePerson.get("time");
 
                 Set<Tag> tag;
                 if (oneTagged.isEmpty()) {
@@ -63,8 +65,9 @@ public class ImportFile {
                 Phone phone = ParserUtil.parsePhone(onePhone);
                 Email email = ParserUtil.parseEmail(oneEmail);
                 Address address = ParserUtil.parseAddress(oneAddress);
+                Time time = ParserUtil.parseTime(oneTime);
 
-                Person person = new Person(name, phone, email, address, tag);
+                Person person = new Person(name, phone, email, address, tag, time);
                 people.add(person);
             }
             return people;

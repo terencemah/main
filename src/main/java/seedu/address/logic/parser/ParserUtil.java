@@ -16,6 +16,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.Time;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -159,6 +160,31 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_FILE_ALREADY_EXIST);
         }
         return trimmedPath;
+    }
+
+    /**
+     * Parses {@code String time} into a {@code Time}
+     */
+    public static Time parseTime(String time) {
+        char[] timeArr = time.toCharArray();
+        String mins = "";
+        String hrs = "";
+        int marker = timeArr.length - 2;
+        if (time.length() > 2) {
+            for (int i = marker; i < timeArr.length; i++) {
+                mins += timeArr[i];
+            }
+            for (int i = 0; i < marker; i++) {
+                hrs += timeArr[i];
+            }
+        } else {
+            hrs += "0";
+            mins += time;
+            if (mins.equals("")) {
+                mins += 0;
+            }
+        }
+        return new Time(Integer.parseInt(mins), Integer.parseInt(hrs));
     }
 
 }
