@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private FrequencyListPanel frequencyListPanel;
     private PersonListPanel personListPanel;
+    private GroupListPanel groupListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -175,6 +176,12 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(frequencyListPanel.getRoot());
     }
 
+    private void handleGroup() {
+        groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+    }
+
     private void handleNormal() {
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
@@ -182,6 +189,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    public GroupListPanel getGroupListPanel() {
+        return groupListPanel;
     }
 
     /**
@@ -192,9 +203,7 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
             switch (commandResult.getViewType()) {
 
             case HELP:
@@ -205,6 +214,9 @@ public class MainWindow extends UiPart<Stage> {
                 break;
             case EVENTS:
                 handleView();
+                break;
+            case GROUPS:
+                handleGroup();
                 break;
             default:
                 handleNormal();
