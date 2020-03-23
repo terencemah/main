@@ -37,7 +37,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         String hours = "";
         if (time.length < 2) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_ARGUMENTS));
         } else {
             int marker = time.length - 2;
             for (int i = marker; i < time.length; i++) {
