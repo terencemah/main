@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.Time;
 
 /**
  * Represents a Person in the address book. Guarantees: details are present and not null, field
@@ -24,6 +25,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Time time;
 
     private final FrequencyList placeList;
     private final FrequencyList activityList;
@@ -32,13 +34,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Time time) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.time = time;
         placeList = new FrequencyList();
         activityList = new FrequencyList();
         totalTimeSpent = 0;
@@ -58,6 +61,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Time getTime() {
+        return time;
     }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException} if
@@ -100,7 +107,8 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getTime().equals(getTime());
     }
 
     @Override
@@ -122,6 +130,8 @@ public class Person {
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append(" Time spent together: ")
+                .append(getTime());
         return builder.toString();
     }
 
