@@ -1,22 +1,21 @@
 package seedu.address.model.group;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.person.exceptions.DuplicateGroupException;
+import seedu.address.model.person.exceptions.GroupNotFoundException;
+
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * Represents a unique list of all groups currently in CoderLifeInsights
  */
-public class UniqueGroupList {
+public class UniqueGroupList implements Iterable<Group> {
 
-    private HashSet<Group> groups;
-
-    /**
-     * Constructor for UniqueGroupList.
-     */
-    public UniqueGroupList() {
-        this.groups = new HashSet<>();
-    }
+    private final ObservableList<Group> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Group> internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Checks whether the list contains a given group.
@@ -26,7 +25,7 @@ public class UniqueGroupList {
      */
     public boolean contains(Group toCheck) {
         requireNonNull(toCheck);
-        return this.groups.contains(toCheck);
+        return internalList.stream().anyMatch(toCheck::equals);
     }
 
     /**
@@ -36,7 +35,10 @@ public class UniqueGroupList {
      */
     public void addGroup(Group toAdd) {
         requireNonNull(toAdd);
-        this.groups.add(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicateGroupException();
+        }
+        internalList.add(toAdd);
     }
 
     /**
@@ -46,6 +48,32 @@ public class UniqueGroupList {
      */
     public void removeGroup(Group toRemove) {
         requireNonNull(toRemove);
-        this.groups.remove(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new GroupNotFoundException();
+        }
+    }
+
+    /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Group> asUnmodifiableObservableList() {
+        return internalUnmodifiableList;
+    }
+
+    @Override
+    public Iterator<Group> iterator() {
+        return internalList.iterator();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof UniqueGroupList // instanceof handles nulls
+                && internalList.equals(((UniqueGroupList) other).internalList));
+    }
+
+    @Override
+    public int hashCode() {
+        return internalList.hashCode();
     }
 }
