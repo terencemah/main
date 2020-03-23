@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Time;
@@ -25,36 +26,51 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MEMBER, PREFIX_GROUP, PREFIX_TIME,
                 PREFIX_PLACE);
-        int index;
-        if (argMultimap.getValue(PREFIX_MEMBER).isEmpty()) {
-            index = Integer.parseInt(argMultimap.getValue(PREFIX_GROUP).get());
-        } else {
-            index = Integer.parseInt(argMultimap.getValue(PREFIX_MEMBER).get());
+        Index index;
+        if (argMultimap.getValue(PREFIX_MEMBER).isEmpty() && argMultimap.getValue(PREFIX_GROUP).isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
+        else if (argMultimap.getValue(PREFIX_MEMBER).isEmpty()) {
+            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_GROUP).get());
+        } else {
+            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER).get());
+        }
+        int idx = index.getOneBased();
 
-        char[] time = argMultimap.getValue(PREFIX_TIME).get().toCharArray();
+        String input = argMultimap.getValue(PREFIX_TIME).get();
         String mins = "";
         String hours = "";
-        if (time.length < 2) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_ARGUMENTS));
+        if (input.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         } else {
-            int marker = time.length - 2;
-            for (int i = marker; i < time.length; i++) {
-                mins += time[i];
-            }
-            for (int i = 0; i < marker; i++) {
-                hours += time[i];
-            }
-            if (hours.equals("")) {
-                hours += "0";
+            char[] time = argMultimap.getValue(PREFIX_TIME).get().toCharArray();
+            if (time.length < 2) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddEventCommand.MESSAGE_ARGUMENTS));
+            } else {
+                int marker = time.length - 2;
+                for (int i = marker; i < time.length; i++) {
+                    mins += time[i];
+                }
+                for (int i = 0; i < marker; i++) {
+                    hours += time[i];
+                }
+                if (hours.equals("")) {
+                    hours += "0";
+                }
             }
         }
         String activity = argMultimap.getPreamble();
+        if (activity.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
+        }
         String place = argMultimap.getValue(PREFIX_PLACE).get();
+        if (place.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
+        }
 
 
-        return new AddEventCommand(activity, index, place, new Time(Integer.parseInt(mins), Integer.parseInt(hours)));
+        return new AddEventCommand(activity, idx, place, new Time(Integer.parseInt(mins), Integer.parseInt(hours)));
     }
 }
 

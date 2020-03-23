@@ -75,14 +75,17 @@ public class AddEventCommandParserTest {
                 new Time(11, 0));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-        //@Test
-        //public void parse_missingCompulsoryField_failure() {
-        //    String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE);
+    //    @Test
+    //    public void parse_missingCompulsoryField_failure() {
+    //        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE);
 
-        //    // no parameters
-        //    assertParseFailure(parser, AddEventCommand.COMMAND_WORD, expectedMessage);
+    //        // no parameters
+    //        assertParseFailure(parser, AddEventCommand.COMMAND_WORD, expectedMessage);
 
-        //    // no index
-        //    assertParseFailure(parser, AddEventCommand.COMMAND_WORD + " " + nonEmptyEvent, expectedMessage);
-        //}
+    //        // no activity
+    //        assertParseFailure(parser, AddEventCommand.COMMAND_WORD + " "
+    //                + PREFIX_MEMBER + "1 "
+    //              + PREFIX_TIME + "1111 "
+    //                + PREFIX_PLACE + "anywhere", expectedMessage);
+    //    }
 }
