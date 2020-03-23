@@ -26,7 +26,6 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class AddEventCommandTest {
 
-    private static final String TIME_STUB = "059";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -95,6 +94,31 @@ public class AddEventCommandTest {
         AddEventCommand addEventCommand = new AddEventCommand(activity, outOfBoundIndex.getOneBased(), place, time);
 
         assertCommandFailure(addEventCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_addEventOfMoreThan1HourUnfilteredList_success() {
+        final String activity = "test";
+        final String place = "anywhere";
+        final Time time = new Time(1, 01);
+
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
+                .withName(firstPerson.getName().fullName).withTime("030").build();
+
+        AddEventCommand addEventCommand = new AddEventCommand(activity, INDEX_FIRST_PERSON.getOneBased(), place, time);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
+                .withName(firstPerson.getName().fullName).withTime("101").build();
+        String expectedMessage = String.format(AddEventCommand.MESSAGE_SUCCESS, editedPerson);
+
+        expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(addEventCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
