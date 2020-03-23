@@ -211,4 +211,22 @@ public class ModelManager implements Model {
     public ObservableList<EventDescriptor> getFrequencyList() {
         return frequencyList;
     }
+
+    //    @Override
+    //    public String toString() {
+    //        String finalContent = "";
+    //
+    //        // NOTE: VersionedAddressBook does not have a toString() method, so you will need to manually
+    //        // implement VersionedAddressBook#toString() to see its content!
+    //        finalContent += "versioned addressbook: " + addressBook.toString();
+    //
+    //        finalContent += ", filtered person list: [";
+    //        for (Person p : filteredPersons) {
+    //            finalContent += p.toString() + ",";
+    //        }
+    //        finalContent += "]";
+    //
+    //        return finalContent;
+    //}
 }
+
