@@ -1,5 +1,7 @@
 package seedu.address.model.group;
 
+import seedu.address.model.person.Name;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
@@ -14,17 +16,25 @@ public class Group {
      */
     private static int groups = 0;
 
-    private String name;
+    private Name name;
     private int groupId;
     private ArrayList<Integer> members;
     private float totalTime;
 
-    public Group(String name) {
+    public Group(Name name) {
         this.name = name;
         this.members = new ArrayList<>();
         this.totalTime = 0;
         this.groupId = groups;
         groups += 1;
+    }
+
+    public Name getName() {
+        return this.name;
+    }
+
+    public int getGroupId() {
+        return this.groupId;
     }
 
     public void addPerson(int id) {
