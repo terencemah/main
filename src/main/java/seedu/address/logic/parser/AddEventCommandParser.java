@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLACE;
@@ -8,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.util.Time;
+import seedu.address.model.person.Time;
 
 /**
  * Parses input arguments and creates a new {@code AddEventCommand object}
@@ -32,20 +33,26 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         }
 
         char[] time = argMultimap.getValue(PREFIX_TIME).get().toCharArray();
-        int marker = time.length - 2;
         String mins = "";
-        for (int i = marker; i < time.length; i++) {
-            mins += time[i];
-        }
         String hours = "";
-        for (int i = 0; i < marker; i++) {
-            hours += time[i];
-        }
-        if (hours.equals("")) {
-            hours += "0";
+        if (time.length < 2) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
+        } else {
+            int marker = time.length - 2;
+            for (int i = marker; i < time.length; i++) {
+                mins += time[i];
+            }
+            for (int i = 0; i < marker; i++) {
+                hours += time[i];
+            }
+            if (hours.equals("")) {
+                hours += "0";
+            }
         }
         String activity = argMultimap.getPreamble();
         String place = argMultimap.getValue(PREFIX_PLACE).get();
+
 
         return new AddEventCommand(activity, index, place, new Time(Integer.parseInt(mins), Integer.parseInt(hours)));
     }

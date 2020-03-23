@@ -1,6 +1,11 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PLACE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -8,7 +13,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.util.Time;
+import seedu.address.model.person.Time;
 
 /**
  * Represents the command to add a new event to CoderLifeInsights.
@@ -18,7 +23,28 @@ public class AddEventCommand extends Command {
     public static final String COMMAND_WORD = "add_event";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an event with a group(g/) or an individual(m/)"
-            + "that adds a [activity], [place] and [time] to a group or a person";
+            + "that adds a [activity], [place] and [time] to a group or a person. \n"
+            + "[time] has to be at least 2 digits. For example: \n"
+            + "5 minutes is 05 \n"
+            + "1 Hour and 30 Minutes is 130 \n"
+            + "10 Hours and 1 Minute is 1001 \n"
+            + "Example usage: "
+            + COMMAND_WORD
+            + " Dancing "
+            + PREFIX_MEMBER
+            + "1 "
+            + PREFIX_PLACE
+            + "SCAPE "
+            + PREFIX_TIME
+            + "300 \n"
+            + COMMAND_WORD
+            + " Dancing "
+            + PREFIX_GROUP
+            + "1 "
+            + PREFIX_PLACE
+            + "SCAPE "
+            + PREFIX_TIME
+            + "300";
 
     public static final String MESSAGE_SUCCESS = "New event successfully added.";
 
@@ -63,10 +89,12 @@ public class AddEventCommand extends Command {
             newMins = (current.getMinutes() + time.getMinutes());
             newHours = (current.getHours() + time.getHours());
         }
-        personToEdit.getTime().setMinutes(newMins);
-        personToEdit.getTime().setHours(newHours);
-        personToEdit.addActivity(activity);
-        personToEdit.addPlace(place);
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getTags(), new Time(newMins, newHours));
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        editedPerson.addActivity(activity);
+        editedPerson.addPlace(place);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, personToEdit));
     }
