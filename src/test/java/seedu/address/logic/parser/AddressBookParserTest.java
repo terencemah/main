@@ -123,8 +123,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add_group() throws Exception {
-        assertTrue(parser.parseCommand(AddGroupCommand.COMMAND_WORD) instanceof AddGroupCommand);
-        assertTrue(parser.parseCommand(AddGroupCommand.COMMAND_WORD + "3") instanceof AddGroupCommand);
+        assertTrue(parser.parseCommand(AddGroupCommand.COMMAND_WORD + " n/SoCFriends")
+                instanceof AddGroupCommand);
     }
 
     @Test
