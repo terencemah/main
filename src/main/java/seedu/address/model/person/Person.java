@@ -25,7 +25,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private Time time;
+    private final Time time;
 
     private final FrequencyList placeList;
     private final FrequencyList activityList;

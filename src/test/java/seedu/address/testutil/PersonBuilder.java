@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -96,17 +97,7 @@ public class PersonBuilder {
      * Sets the {@code Time} of the {@code Person} that we are building.
      */
     public PersonBuilder withTime(String time) {
-        char[] timeArr = time.toCharArray();
-        String mins = "";
-        String hrs = "";
-        int marker = timeArr.length - 2;
-        for (int i = marker; i < timeArr.length; i++) {
-            mins += timeArr[i];
-        }
-        for (int i = 0; i < marker; i++) {
-            hrs += timeArr[i];
-        }
-        this.time = new Time(Integer.parseInt(mins), Integer.parseInt(hrs));
+        this.time = ParserUtil.parseTime(time);
         return this;
     }
 
