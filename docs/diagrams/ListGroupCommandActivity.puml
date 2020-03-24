@@ -1,0 +1,10 @@
+@startuml
+(*)  --> "check input"
+If "input is incorrect" then
+--> [Yes] "show error message"
+-->(*)
+else
+--> "show list of groups"
+Endif
+-->(*)
+@enduml

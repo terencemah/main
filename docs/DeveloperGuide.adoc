@@ -265,7 +265,8 @@ The following activity diagram depicts the step-by-step scenario when a user exe
 5. The `ListGroupCommand` returns the `CommandResult` to AddressBookParser
 6. The `AddressBookParser` returns the `CommandResult` to `LogicManager`.
 
-
+[#ListGroupCommandActivity,align="center"]
+image::ListGroupCommandActivity.png[pdfwidth="50%", width="50%"]
 
 === [Proposed] Undo/Redo feature
 ==== Proposed Implementation
