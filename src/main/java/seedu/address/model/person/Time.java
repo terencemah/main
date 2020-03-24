@@ -1,4 +1,4 @@
-package seedu.address.model.util;
+package seedu.address.model.person;
 
 /**
  * Represents the time object that tracks the time spent for the user.
@@ -19,8 +19,8 @@ public class Time {
         } else {
             this.minutes = minutes;
             this.hours = hours;
-            value = Integer.toString(hours) + minutes;
         }
+        value = "" + hours + minutes;
     }
 
     public int getMinutes() {

@@ -3,6 +3,8 @@ package seedu.address.model.util;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Time;
+
 public class TimeTest {
 
     public static final String MINUTES_RANGE_ERROR = "Minutes must be within 0-59 (inclusive).";

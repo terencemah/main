@@ -9,7 +9,6 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.Time;
 
 /**
  * Represents a Person in the address book. Guarantees: details are present and not null, field
@@ -143,9 +142,9 @@ public class Person {
         activityList.add(name);
     }
 
-    public void addTime(float time) {
+    /*public void addTime(float time) {
         totalTimeSpent += time;
-    }
+    }*/
 
     public ObservableList<EventDescriptor> getPlaceList() {
         return placeList.getFrequencyList();
