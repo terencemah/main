@@ -235,6 +235,29 @@ The following class diagram illustrates the summary of the ExportFile class.
 [#ExportFileClassDiagram,align="center"]
 image::ExportFileClassDiagram.png[][pdfwidth="60%",width="60%"]
 
+=== Add Group Feature
+==== Implementation
+
+The add group features allows users to add a new social group to Coder Life Insights.
+
+Here below is a sequence diagram showcasing how the add group command works.
+
+
+=== Delete Group Feature
+==== Implementation
+
+=== List Group Feature
+==== Implementation
+
+The list feature allows users to view all the social groups currently in Coder Life Insights.
+
+Here below is a sequence diagram showcasing how the command works.
+
+[#ListGroupSequenceDiagram, align="center"]
+image::ListGroupSequenceDiagram.png[]
+
+
+
 
 === [Proposed] Undo/Redo feature
 ==== Proposed Implementation
