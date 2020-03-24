@@ -1,0 +1,13 @@
+@startuml
+start
+:User executes import command;
+
+if () then ([valid csv])
+    :parse rows in CSV file;
+    :Creates a valid list of person to be imported;
+    :read from valid list of person;
+    :add list of person to current address book;
+else ([invalid csv])
+endif
+stop
+@enduml

@@ -1,0 +1,61 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "i:ImportCommand" as ImportCommand LOGIC_COLOR
+participant "importedPeople:ImportFile" as ImportFile LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+end box
+[-> LogicManager : execute(import life.csv)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(import life.csv)
+activate AddressBookParser
+
+create ImportCommand
+AddressBookParser -> ImportCommand
+activate ImportCommand
+
+ImportCommand --> AddressBookParser
+deactivate ImportCommand
+
+AddressBookParser --> LogicManager : i
+deactivate AddressBookParser
+
+create ImportFile
+LogicManager -> ImportFile : execute()
+activate ImportFile
+
+ImportFile -> ImportFile:importCsv(life.csv)
+ImportFile --> LogicManager
+deactivate ImportFile
+
+LogicManager -> Model : importCsvToAddressBook(importedPeople)
+activate Model
+
+Model -> VersionedAddressBook : addPersons(importedPeople)
+activate VersionedAddressBook
+
+VersionedAddressBook -> VersionedAddressBook :addAll(importedPeople)
+VersionedAddressBook --> Model :
+deactivate VersionedAddressBook
+
+Model --> ImportCommand
+deactivate Model
+activate ImportCommand
+
+ImportCommand --> LogicManager : result
+deactivate ImportCommand
+
+ImportCommand -[hidden]-> LogicManager : result
+destroy ImportCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
