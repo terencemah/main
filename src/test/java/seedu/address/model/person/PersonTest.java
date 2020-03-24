@@ -109,9 +109,5 @@ public class PersonTest {
         // different time -> returns false
         editedAlice = new PersonBuilder(ALICE).withTime("30").build();
         assertFalse(ALICE.equals(editedAlice));
-
-        // same time -> return true
-        editedAlice = new PersonBuilder(ALICE).withTime("00").build();
-        assertTrue(ALICE.equals(editedAlice));
     }
 }
