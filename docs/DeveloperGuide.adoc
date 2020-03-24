@@ -158,7 +158,7 @@ This section describes some noteworthy details on how certain features are imple
 ==== Implementation
 
 The import feature allows users to import data from a comma-separated values (CSV) file.
-It allows users to bulk import their contacts from a previously exported data from CoderLifeInsights application. 
+It allows users to bulk import their contacts from a previously exported data from CoderLifeInsights application.
 
 Given below is the sequence diagram shows how the import operation works with the command `import life.csv`:
 
@@ -168,12 +168,12 @@ image::ImportFileSequenceDiagram.png[]
 
 The following is a brief explanation of <<ImportFileSequenceDiagram>> :
 
-1. User enters `import life.csv`
+1. User enters `import life.csv`.
 2. `AddressBookParser#parseCommand()` is being called by `LogicManager`.
 3. This would create `ImportCommand` and checks if the input is valid.
 4. Feedback would be returned to `AddressBookParser` and then to `LogicManager`.
-5. `LogicManager` would then call `execute()` and creates `ImportFile`. 
-6. `ImportFile` would then call `importCsv()` to return a `List<Person>`. 
+5. `LogicManager` would then call `execute()` and creates `ImportFile`.
+6. `ImportFile` would then call `importCsv()` to return a `List<Person>`.
 7. `Model#importCsvToAddressBook(importedPeople)` is then being called by `LogicManager`
 passing on `List<Person>` to call `VersionedAddressBook#addPersons(importedPeople)`
 8. `VersionedAddressBook` would call the method `addAll` and populate the data accordingly.
@@ -197,7 +197,6 @@ The following class diagram illustrates the summary of the ImportFile class.
 .Import feature class diagram.
 [#ImportFileClassDiagram,align="center"]
 image::ImportFileClassDiagram.png[][pdfwidth="60%",width="60%"]
-                                   
 === Export feature
 ==== Implementation
 
@@ -226,7 +225,7 @@ The following is an activity diagram when a user executes the export command:
 [#ExportFileActivityDiagram,align="center"]
 image::ExportFileActivityDiagram.png[][pdfwidth="60%",width="60%"]
 
-When a user executes `export` command, a parser would check if the CSV file name is valid. 
+When a user executes `export` command, a parser would check if the CSV file name is valid.
 
 If valid, it would then proceed to export the current JSON data to the CSV file name provided.
 
