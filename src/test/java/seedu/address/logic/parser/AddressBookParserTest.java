@@ -21,6 +21,7 @@ import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -125,6 +126,12 @@ public class AddressBookParserTest {
     public void parseCommand_add_group() throws Exception {
         assertTrue(parser.parseCommand(AddGroupCommand.COMMAND_WORD + " n/SoCFriends")
                 instanceof AddGroupCommand);
+    }
+
+    @Test
+    public void parseCommand_delete_group() throws Exception {
+        assertTrue(parser.parseCommand(DeleteGroupCommand.COMMAND_WORD + " 2")
+                instanceof DeleteGroupCommand);
     }
 
     @Test
