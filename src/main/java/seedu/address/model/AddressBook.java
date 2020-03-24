@@ -125,6 +125,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    public void removeGroup(Group key) {
+        groups.removeGroup(key);
+    }
+
     //// util methods
 
     @Override
