@@ -127,6 +127,14 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasGroup_groupNotInAddressBook_returnsFalse() {
+        Group g1 = new Group(new Name("SoC Friends"));
+        Group g2 = new Group(new Name("RC Friends"));
+        assertFalse(modelManager.hasGroup(g1));
+        assertFalse(modelManager.hasGroup(g2));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(
                 UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
