@@ -196,7 +196,7 @@ The following class diagram illustrates the summary of the ImportFile class.
 
 .Import feature class diagram.
 [#ImportFileClassDiagram,align="center"]
-image::ImportFileClassDiagram.png[][pdfwidth="60%",width="60%"]
+image::ImportFileClassDiagram.png[][pdfwidth="30%",width="30%"]
 === Export feature
 ==== Implementation
 
@@ -233,7 +233,7 @@ The following class diagram illustrates the summary of the ExportFile class.
 
 .Export feature class diagram.
 [#ExportFileClassDiagram,align="center"]
-image::ExportFileClassDiagram.png[][pdfwidth="60%",width="60%"]
+image::ExportFileClassDiagram.png[][pdfwidth="30%",width="30%"]
 
 
 === [Proposed] Undo/Redo feature
