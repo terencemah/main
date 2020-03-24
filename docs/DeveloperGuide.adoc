@@ -256,6 +256,14 @@ Here below is a sequence diagram showcasing how the command works.
 [#ListGroupSequenceDiagram, align="center"]
 image::ListGroupSequenceDiagram.png[]
 
+The following activity diagram depicts the step-by-step scenario when a user executes the `list_groups` command:
+
+1. User enters `list_groups` into the command prompt
+2. The `LogicManager` calls `AddressBookParser#parseCommand()`
+3. The method `AddressBookParser#parseCommand()` creates a `ListGroupCommand` and checks if the input is valid.
+4. The `ListGroupCommand` calls the `updateFilteredGroupList` method of `Model` to update the GUI.
+5. The `ListGroupCommand` returns the `CommandResult` to AddressBookParser
+6. The `AddressBookParser` returns the `CommandResult` to `LogicManager`.
 
 
 
