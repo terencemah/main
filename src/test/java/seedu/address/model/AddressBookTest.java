@@ -23,6 +23,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.GroupNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
 
@@ -132,6 +133,11 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void removeGroup_test_returnFalse() {
+        assertThrows(GroupNotFoundException.class, () -> addressBook.removeGroup((new Group(new Name("SoC Friend")))));
     }
 
     /**
