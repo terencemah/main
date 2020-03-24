@@ -14,7 +14,7 @@ public class Group {
     /**
      * Represents the groupID for the next created group.
      */
-    private static int groups = 0;
+    private static int groups = 1;
 
     private Name name;
     private int groupId;
