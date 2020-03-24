@@ -69,6 +69,11 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasGroup_nullGroup_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasGroup(null));
+    }
+
+    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(addressBook.hasPerson(ALICE));
     }
@@ -78,6 +83,12 @@ public class AddressBookTest {
         List<Person> personList = new ArrayList<>();
         personList.add(ALICE);
         assertFalse(addressBook.hasPersons(personList));
+    }
+
+    @Test
+    public void hasGroup_groupNotInAddressBook_returnsFalse() {
+        Group g1 = new Group(new Name("SoC Friends"));
+        assertFalse(addressBook.hasGroup(g1));
     }
 
     @Test
