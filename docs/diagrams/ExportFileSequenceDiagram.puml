@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "e:ExportCommand" as ExportCommand LOGIC_COLOR
+participant ":ExportFile" as ExportFile LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute(export life.csv)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(export life.csv)
+activate AddressBookParser
+
+create ExportCommand
+AddressBookParser -> ExportCommand
+activate ExportCommand
+
+ExportCommand --> AddressBookParser
+deactivate ExportCommand
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+create ExportFile
+LogicManager -> ExportFile : execute()
+activate ExportFile
+ExportFile -> Model : getAddressBookFilePath()
+activate Model
+Model --> ExportFile
+deactivate Model
+ExportFile -> ExportFile:exportCsv(fileToExport,life.csv)
+ExportFile --> ExportCommand
+deactivate ExportFile
+activate ExportCommand
+
+ExportCommand --> LogicManager : result
+deactivate ExportCommand
+
+ExportCommand -[hidden]-> LogicManager : result
+destroy ExportCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

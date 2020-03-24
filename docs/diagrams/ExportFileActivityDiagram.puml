@@ -1,0 +1,10 @@
+@startuml
+start
+:User executes export command;
+
+if () then ([valid csv file name])
+    :Exports JSON data to CSV File;
+else ([invalid csv file name])
+endif
+stop
+@enduml

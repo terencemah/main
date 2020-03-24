@@ -154,11 +154,95 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 // tag::undoredo[]
+=== Import feature
+==== Implementation
+
+The import feature allows users to import data from a comma-separated values (CSV) file.
+It allows users to bulk import their contacts from a previously exported data from CoderLifeInsights application. 
+
+Given below is the sequence diagram shows how the import operation works with the command `import life.csv`:
+
+.Interaction for `import` Command operation between Logic Component and Model Component.
+[#ImportFileSequenceDiagram,align="center"]
+image::ImportFileSequenceDiagram.png[]
+
+The following is a brief explanation of <<ImportFileSequenceDiagram>> :
+
+1. User enters `import life.csv`
+2. `AddressBookParser#parseCommand()` is being called by `LogicManager`.
+3. This would create `ImportCommand` and checks if the input is valid.
+4. Feedback would be returned to `AddressBookParser` and then to `LogicManager`.
+5. `LogicManager` would then call `execute()` and creates `ImportFile`. 
+6. `ImportFile` would then call `importCsv()` to return a `List<Person>`. 
+7. `Model#importCsvToAddressBook(importedPeople)` is then being called by `LogicManager`
+passing on `List<Person>` to call `VersionedAddressBook#addPersons(importedPeople)`
+8. `VersionedAddressBook` would call the method `addAll` and populate the data accordingly.
+9. On successful import with no duplicates of person, it would return a success message to `LogicManager`
+
+The following is an activity diagram when a user executes the import command:
+
+.Import feature activity diagram.
+[#ImportFileActivityDiagram,align="center"]
+image::ImportFileActivityDiagram.png[]
+
+When a user executes the `import` command, a parser would check if the CSV is valid or not.
+
+If valid, the rows in the CSV file would then parsed and then creates a list of person to be imported.
+
+Following that, the list would then update the current address book and saves into the CoderLifeInsights
+address book.
+
+The following class diagram illustrates the summary of the ImportFile class.
+
+.Import feature class diagram.
+[#ImportFileClassDiagram,align="center"]
+image::ImportFileClassDiagram.png[][pdfwidth="60%",width="60%"]
+                                   
+=== Export feature
+==== Implementation
+
+The export feature allows users to export their current data into a comma-separated value file with file name specified.
+
+Given below is the sequence diagram illustrates how the export operation works with the command `export life.csv`:
+.Interaction for `export` Command operation between Logic Component and Model Component.
+[#ExportFileSequenceDiagram,align="center"]
+image::ExportFileSequenceDiagram.png[]
+
+The following is an activity diagram when a user executes the export command:
+
+1. User enters `export life.csv`
+2. `AddressBookParser#parseCommand()` is being called by `LogicManager`.
+3. This would create `ExportCommand` and checks if the input is valid.
+4. Feedback would be returned to `AddressBookParser` and then to `LogicManager`.
+5. `LogicManager` would then call `execute()` and creates `ExportFile`.
+6. `ExportFile` would then call `exportCsv()` with `Model#getAddressBookFilePath()` to return the current address
+book's file path.
+7. On successful export, it would return a success message to `LogicManager`.
+
+
+The following is an activity diagram when a user executes the export command:
+
+.Export feature activity diagram.
+[#ExportFileActivityDiagram,align="center"]
+image::ExportFileActivityDiagram.png[][pdfwidth="60%",width="60%"]
+
+When a user executes `export` command, a parser would check if the CSV file name is valid. 
+
+If valid, it would then proceed to export the current JSON data to the CSV file name provided.
+
+The following class diagram illustrates the summary of the ExportFile class.
+
+.Export feature class diagram.
+[#ExportFileClassDiagram,align="center"]
+image::ExportFileClassDiagram.png[][pdfwidth="60%",width="60%"]
+
+
 === [Proposed] Undo/Redo feature
 ==== Proposed Implementation
 
 The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
+It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and
+`currentStatePointer`.
 Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` -- Saves the current address book state in its history.
