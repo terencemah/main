@@ -235,6 +235,38 @@ The following class diagram illustrates the summary of the ExportFile class.
 [#ExportFileClassDiagram,align="center"]
 image::ExportFileClassDiagram.png[][pdfwidth="30%",width="30%"]
 
+=== Add Group Feature
+==== Implementation
+
+The add group features allows users to add a new social group to Coder Life Insights.
+
+Here below is a sequence diagram showcasing how the add group command works.
+
+
+=== Delete Group Feature
+==== Implementation
+
+=== List Group Feature
+==== Implementation
+
+The list feature allows users to view all the social groups currently in Coder Life Insights.
+
+Here below is a sequence diagram showcasing how the command works.
+
+[#ListGroupSequenceDiagram, align="center"]
+image::ListGroupSequenceDiagram.png[]
+
+The following activity diagram depicts the step-by-step scenario when a user executes the `list_groups` command:
+
+1. User enters `list_groups` into the command prompt
+2. The `LogicManager` calls `AddressBookParser#parseCommand()`
+3. The method `AddressBookParser#parseCommand()` creates a `ListGroupCommand` and checks if the input is valid.
+4. The `ListGroupCommand` calls the `updateFilteredGroupList` method of `Model` to update the GUI.
+5. The `ListGroupCommand` returns the `CommandResult` to AddressBookParser
+6. The `AddressBookParser` returns the `CommandResult` to `LogicManager`.
+
+[#ListGroupCommandActivity,align="center"]
+image::ListGroupCommandActivity.png[pdfwidth="50%", width="50%"]
 
 === [Proposed] Undo/Redo feature
 ==== Proposed Implementation
