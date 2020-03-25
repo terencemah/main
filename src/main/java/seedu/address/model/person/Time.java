@@ -51,7 +51,8 @@ public class Time {
      * Adds the input mins and hrs to the current Time
      */
     public Time addTime(int mins, int hrs) {
-        int newMins, newHrs;
+        int newMins;
+        int newHrs;
         if (mins + this.getMinutes() >= 60) {
             newMins = (mins + this.getMinutes()) - 60;
             newHrs = (hrs + this.getHours()) + 1;
