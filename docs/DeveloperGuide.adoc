@@ -287,8 +287,9 @@ The command above will add the following to the Person whose index is `1` on the
 * Place `Gardens by the Bay` into the Person's place list.
 * Time `230` which equals 2 hours and 30 minutes, will be added to the Person's time.
 
-The sequence diagram below showcases how the command works:
-//image::addEventSequence.png[pdfwidth="100%", width="75%"]
+The sequence diagram below showcases how the command works with a valid input:
+
+image::addEventSequence.png[pdfwidth="100%", width="92.5%"]
 
 The following activity diagram depicts the following scenario:
 
