@@ -313,6 +313,17 @@ image::addEventActivity.png[pdfwidth="100%", width="75%"]
 
 
 
+=======
+=== Insights feature
+==== Implementation
+
+The Insights feature is facilitated by `FrequencyList`, which contains an `ObservableList`
+backed by an `ArrayList`, and uses a `HashMap` to ensure the uniqueness of each list.
+Each `Person` object contains two `FrequencyList` objects, a `placeList` and an `activityList`.
+At the same time, the `model` also has its own `FrequencyList`. When the View Command is
+activated, the `model` updates its own `FrequencyList` with the contents of the selected
+Person's `placeList` or `activityList`. The View Command then switches the application
+display to show the model's `FrequencyList`.
 
 === [Proposed] Undo/Redo feature
 ==== Proposed Implementation
