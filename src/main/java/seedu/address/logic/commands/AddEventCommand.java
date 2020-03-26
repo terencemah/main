@@ -82,20 +82,11 @@ public class AddEventCommand extends Command {
         if (index - 1 >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
         Person personToEdit = lastShownList.get(index - 1);
         Time current = personToEdit.getTime();
-        int newMins = 0;
-        int newHours = 0;
-        if (current.getMinutes() + time.getMinutes() >= 60) {
-            newMins = (current.getMinutes() + time.getMinutes()) - 60;
-            newHours = (current.getHours() + time.getHours()) + 1;
-        } else {
-            newMins = (current.getMinutes() + time.getMinutes());
-            newHours = (current.getHours() + time.getHours());
-        }
+        Time newTime = current.addTime(time.getMinutes(), time.getHours());
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), new Time(newMins, newHours));
+                personToEdit.getAddress(), personToEdit.getTags(), newTime);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         editedPerson.addActivity(activity);
