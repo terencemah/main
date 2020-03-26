@@ -47,6 +47,22 @@ public class Time {
         }
     }
 
+    /**
+     * Adds the input mins and hrs to the current Time
+     */
+    public Time addTime(int mins, int hrs) {
+        int newMins;
+        int newHrs;
+        if (mins + this.getMinutes() >= 60) {
+            newMins = (mins + this.getMinutes()) - 60;
+            newHrs = (hrs + this.getHours()) + 1;
+        } else {
+            newMins = mins + this.getMinutes();
+            newHrs = hrs + this.getHours();
+        }
+        return new Time(newMins, newHrs);
+    }
+
     @Override
     public String toString() {
         return String.format("%s:%s", this.hours, this.minutes);

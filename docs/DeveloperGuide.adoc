@@ -268,6 +268,64 @@ The following activity diagram depicts the step-by-step scenario when a user exe
 [#ListGroupCommandActivity,align="center"]
 image::ListGroupCommandActivity.png[pdfwidth="50%", width="50%"]
 
+=== Add Event Feature
+The add event feature allows users to add an event to a saved contact or group in CoderLifeInsights specified using the member `m/` tag or the group `g/` tag.
+
+==== Implementation
+Command: `add_event [ACTIVITY] m/[INDEX] time/[TIME] place/[PLACE]`
+
+Remarks:
+
+* [TIME] is the variable used to store the time the user has spent with a saved contact or group.
+* [TIME] parameter must contain at least 2 digits. For example: A time of 1 hour and 30 minutes will be input as `130`.
+
+Example usage: `add_event date night m/1 time/230 place/Gardens by the Bay`
+
+The command above will add the following to the Person whose index is `1` on the filtered or unfiltered list:
+
+* Activity `date night` into the Person's activity list.
+* Place `Gardens by the Bay` into the Person's place list.
+* Time `230` which equals 2 hours and 30 minutes, will be added to the Person's time.
+
+The sequence diagram below showcases how the command works with a valid input:
+
+image::addEventSequence.png[pdfwidth="100%", width="92.5%"]
+
+The following activity diagram depicts the following scenario:
+
+1. User enters `add_event date night m/1 time/230 place/Gardens by the Bay` into the command prompt.
+2. The `LogicManager` calls `AddressBookParser#parseCommand()`.
+3. The method `AddressBookParser#parseCommand()` creates a `AddEventCommandParser` and calls the `AddEventCommandParser#parse()` method.
+4. `AddEventCommandParser#parse()` checks if input is valid.
+5. `AddEventCommandParser#parse()` then creates a new instance of `AddEventCommand`.
+6. `AddEventCommand` calls the `AddEventCommand#execute()` method.
+7. `AddEventCommand#execute()` retrieves the filtered list with the call to `model#getFilteredPersonList()`.
+8. `AddEventCommand#execute()` then retrieves the Person object to be edited with the call to `model#getFilteredPersonList()#get()`.
+9. `AddEventCommand#execute()` then computes the new Time by retrieving the Person's current Time with the call to `person#getTime()` ,then adding it to the input Time.
+10. `AddEventCommand#execute()` then creates a new Person object with all the same attributes except for the Time which is replaced by the new Time computed, with the call to the Person constructor.
+11. `AddEventCommand#execute()` then replaces the existing Person object with the new Person object with the call to `model#setPerson()`.
+12. `AddEventCommand#execute()` then updates the filtered list with the call to `model#updateFilteredPersonList()`.
+13. `AddEventCommand#execute()` then calls the new Person object and adds `date night` into its frequencyList with the call to `person#addActivity`.
+14. `AddEventCommand#execute()` then calls the new Person object and adds `Gardens by the Bay` into its frequencyList with the call to `person#addPlace`.
+15. `AddEventCommand` returns the `CommandResult` to `AddressBookParser`.
+16. `AddressBookParser` returns the `CommandResult` to `LogicManager`.
+
+image::addEventActivity.png[pdfwidth="100%", width="75%"]
+
+
+
+=======
+=== Insights feature
+==== Implementation
+
+The Insights feature is facilitated by `FrequencyList`, which contains an `ObservableList`
+backed by an `ArrayList`, and uses a `HashMap` to ensure the uniqueness of each list.
+Each `Person` object contains two `FrequencyList` objects, a `placeList` and an `activityList`.
+At the same time, the `model` also has its own `FrequencyList`. When the View Command is
+activated, the `model` updates its own `FrequencyList` with the contents of the selected
+Person's `placeList` or `activityList`. The View Command then switches the application
+display to show the model's `FrequencyList`.
+
 === [Proposed] Undo/Redo feature
 ==== Proposed Implementation
 
