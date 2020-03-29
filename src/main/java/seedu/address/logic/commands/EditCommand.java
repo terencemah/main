@@ -19,13 +19,16 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Edits the details of an existing person in the address book.
@@ -118,8 +121,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Time updatedTime = editPersonDescriptor.getTime().orElse(personToEdit.getTime());
+        PlaceList updatedPlaceList = editPersonDescriptor.getPlaceList().orElse(personToEdit.getPlaceList2());
+        ActivityList updatedActivityList = editPersonDescriptor.getActivityList().orElse(personToEdit.getActivityList2());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedTime);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedTime, updatedPlaceList, updatedActivityList);
     }
 
     @Override
@@ -150,6 +155,8 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Time time;
+        private PlaceList placeList;
+        private ActivityList activityList;
 
         public EditPersonDescriptor() {
         }
@@ -164,6 +171,8 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setTime(toCopy.time);
+            setPlaceList(toCopy.placeList);
+            setActivityList(toCopy.activityList);
         }
 
         /**
@@ -211,6 +220,22 @@ public class EditCommand extends Command {
 
         public Optional<Time> getTime() {
             return Optional.ofNullable(time);
+        }
+
+        public void setPlaceList(PlaceList placeList) {
+            this.placeList = placeList;
+        }
+
+        public Optional<PlaceList> getPlaceList() {
+            return (placeList != null) ? Optional.ofNullable(placeList) : Optional.empty();
+        }
+
+        public void setActivityList(ActivityList activityList) {
+            this.activityList = activityList;
+        }
+
+        public Optional<ActivityList> getActivityList() {
+            return (activityList != null) ? Optional.ofNullable(activityList) : Optional.empty();
         }
 
         /**

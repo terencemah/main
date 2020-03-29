@@ -12,7 +12,9 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
 
 /**
@@ -85,12 +87,14 @@ public class AddEventCommand extends Command {
         Person personToEdit = lastShownList.get(index - 1);
         Time current = personToEdit.getTime();
         Time newTime = current.addTime(time.getMinutes(), time.getHours());
+        PlaceList currentPL = personToEdit.getPlaceList2();
+        currentPL.addPlace(place);
+        ActivityList currentAL = personToEdit.getActivityList2();
+        currentAL.addActivity(activity);
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), newTime);
+                personToEdit.getAddress(), personToEdit.getTags(), newTime, currentPL, currentAL);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        editedPerson.addActivity(activity);
-        editedPerson.addPlace(place);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, personToEdit));
     }

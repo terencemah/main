@@ -17,11 +17,13 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 
@@ -54,6 +56,10 @@ public class ImportFile {
                 String oneTagged = onePerson.get("tagged").strip();
                 String[] tags = oneTagged.split(";");
                 String oneTime = onePerson.get("time");
+                String onePlaceList = onePerson.get("places");
+                String[] places = onePlaceList.split(";");
+                String oneActivityList = onePerson.get("activities");
+                String[] activities = oneActivityList.split(";");
 
                 Set<Tag> tag;
                 if (oneTagged.isEmpty()) {
@@ -66,8 +72,28 @@ public class ImportFile {
                 Email email = ParserUtil.parseEmail(oneEmail);
                 Address address = ParserUtil.parseAddress(oneAddress);
                 Time time = ParserUtil.parseTime(oneTime);
+                PlaceList placeList;
+                if (onePlaceList.isEmpty()) {
+                    placeList = new PlaceList(new ArrayList<String>());
+                } else {
+                    List<String> xs = new ArrayList<>();
+                    for (String s : places) {
+                        xs.add(s);
+                    }
+                    placeList = new PlaceList(xs);
+                }
+                ActivityList activityList;
+                if (oneActivityList.isEmpty()) {
+                    activityList = new ActivityList(new ArrayList<String>());
+                } else {
+                    List<String> xs = new ArrayList<>();
+                    for (String s : places) {
+                        xs.add(s);
+                    }
+                    activityList = new ActivityList(xs);
+                }
 
-                Person person = new Person(name, phone, email, address, tag, time);
+                Person person = new Person(name, phone, email, address, tag, time, placeList, activityList);
                 people.add(person);
             }
             return people;

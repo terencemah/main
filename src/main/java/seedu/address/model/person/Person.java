@@ -26,14 +26,16 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final Time time;
 
-    private final FrequencyList placeList;
-    private final FrequencyList activityList;
+    private final ActivityList activityList;
+    private final FrequencyList placeList2;
+    private final FrequencyList activityList2;
+    private final PlaceList placeList;
     private float totalTimeSpent;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Time time) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Time time, PlaceList placeList, ActivityList activityList) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -41,8 +43,10 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.time = time;
-        placeList = new FrequencyList();
-        activityList = new FrequencyList();
+        this.placeList = placeList;
+        this.activityList = activityList;
+        placeList2 = new FrequencyList();
+        activityList2 = new FrequencyList();
         totalTimeSpent = 0;
     }
 
@@ -64,6 +68,14 @@ public class Person {
 
     public Time getTime() {
         return time;
+    }
+
+    public PlaceList getPlaceList2() {
+        return placeList;
+    }
+
+    public ActivityList getActivityList2() {
+        return activityList;
     }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException} if
@@ -107,7 +119,9 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getTime().equals(getTime());
+                && otherPerson.getTime().equals(getTime())
+                && otherPerson.getPlaceList2().equals(getPlaceList2())
+                && otherPerson.getActivityList2().equals(getActivityList2());
     }
 
     @Override
@@ -131,15 +145,19 @@ public class Person {
         getTags().forEach(builder::append);
         builder.append(" Time spent together: ")
                 .append(getTime());
+        builder.append(" Places been together: ")
+                .append(getPlaceList2().toString());
+        builder.append(" Activities done together: ")
+                .append(getActivityList2().toString());
         return builder.toString();
     }
 
     public void addPlace(String name) {
-        placeList.add(name);
+        placeList.addPlace(name);
     }
 
     public void addActivity(String name) {
-        activityList.add(name);
+        activityList.addActivity(name);
     }
 
     /*public void addTime(float time) {
@@ -147,11 +165,11 @@ public class Person {
     }*/
 
     public ObservableList<EventDescriptor> getPlaceList() {
-        return placeList.getFrequencyList();
+        return placeList2.getFrequencyList();
     }
 
     public ObservableList<EventDescriptor> getActivityList() {
-        return activityList.getFrequencyList();
+        return activityList2.getFrequencyList();
     }
 
     public float getTotalTimeSpent() {
