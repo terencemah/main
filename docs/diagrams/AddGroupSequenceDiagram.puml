@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddGroupCommandParser" as AddGroupCommandParser LOGIC_COLOR
+participant ":AddGroupCommand" as AddGroupCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(add_group n/group_name)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(add_group n/group_name)
+activate AddressBookParser
+
+create AddGroupCommandParser
+AddressBookParser -> AddGroupCommandParser
+activate AddGroupCommandParser
+create AddGroupCommand
+AddGroupCommandParser -> AddGroupCommand
+activate AddGroupCommand
+
+
+AddGroupCommand --> AddressBookParser : CommandResult
+deactivate AddGroupCommand
+AddressBookParser --> LogicManager : CommandResult
+
+LogicManager -> AddGroupCommand : execute(model)
+activate AddGroupCommand
+AddGroupCommand -> Model : hasGroup
+activate Model
+Model -> AddGroupCommand
+deactivate
+AddGroupCommand -> Model : addGroup
+activate Model
+Model -> AddGroupCommand
+deactivate
+AddGroupCommand -> LogicManager : CommandResult
+deactivate
+
+
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

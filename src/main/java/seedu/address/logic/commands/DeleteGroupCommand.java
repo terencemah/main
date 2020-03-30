@@ -43,7 +43,7 @@ public class DeleteGroupCommand extends Command {
 
         Group groupToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteGroup(groupToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, groupToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, groupToDelete), ViewType.GROUPS);
     }
 
     @Override
