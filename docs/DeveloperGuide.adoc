@@ -241,6 +241,9 @@ image::ExportFileClassDiagram.png[][pdfwidth="30%",width="30%"]
 The add group features allows users to add a new social group to Coder Life Insights.
 
 Here below is a sequence diagram showcasing how the add group command works.
+[#AddGroupSequenceDiagam,align="center"]
+image::AddGroupSequenceDiagram.png[]
+
 
 
 === Delete Group Feature

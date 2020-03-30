@@ -25,6 +25,7 @@ public class Group {
     public Group(Name name) {
         this.name = name;
         this.memberIDs = new ArrayList<>();
+        this.eventIDs = new ArrayList<>();
         this.timeSpent = new Time(0, 0);
         this.groupId = groups;
         groups += 1;
@@ -57,6 +58,15 @@ public class Group {
     public ArrayList<Integer> getMembers() {
         return this.memberIDs;
     }
+
+    public void setMemberIDs(ArrayList<Integer> members) {
+        this.memberIDs = members;
+    }
+
+    public ArrayList<Integer> getEvents() {
+        return this.eventIDs;
+    }
+
 
     /**
      * Returns a String output with all the names in a single line separated by whitespace.
