@@ -85,14 +85,18 @@ public class AddEventCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = lastShownList.get(index - 1);
+
         Time current = personToEdit.getTime();
         Time newTime = current.addTime(time.getMinutes(), time.getHours());
-        PlaceList currentPL = personToEdit.getPlaceList2();
-        currentPL.addPlace(place);
-        ActivityList currentAL = personToEdit.getActivityList2();
-        currentAL.addActivity(activity);
+
+        PlaceList currentPlaceList = personToEdit.getPlaceList2();
+        PlaceList newPlaceList = currentPlaceList.addPlace(place);;
+
+        ActivityList currentActivityList = personToEdit.getActivityList2();
+        ActivityList newActivityList = currentActivityList.addActivity(activity);
+
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), newTime, currentPL, currentAL);
+                personToEdit.getAddress(), personToEdit.getTags(), newTime, newPlaceList, newActivityList);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 

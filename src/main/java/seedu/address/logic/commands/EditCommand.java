@@ -122,9 +122,11 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Time updatedTime = editPersonDescriptor.getTime().orElse(personToEdit.getTime());
         PlaceList updatedPlaceList = editPersonDescriptor.getPlaceList().orElse(personToEdit.getPlaceList2());
-        ActivityList updatedActivityList = editPersonDescriptor.getActivityList().orElse(personToEdit.getActivityList2());
+        ActivityList updatedActivityList = editPersonDescriptor.getActivityList().orElse(personToEdit
+                .getActivityList2());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedTime, updatedPlaceList, updatedActivityList);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedTime,
+                updatedPlaceList, updatedActivityList);
     }
 
     @Override
@@ -179,7 +181,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, time);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, time, placeList, activityList);
         }
 
         public void setName(Name name) {
@@ -274,7 +276,9 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
-                    && getTime().equals(e.getTime());
+                    && getTime().equals(e.getTime())
+                    && getPlaceList().equals(e.getPlaceList())
+                    && getActivityList().equals(e.getActivityList());
         }
     }
 }

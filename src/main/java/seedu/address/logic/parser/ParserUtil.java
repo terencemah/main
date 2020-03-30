@@ -192,19 +192,25 @@ public class ParserUtil {
         return new Time(Integer.parseInt(mins), Integer.parseInt(hrs));
     }
 
+    /**
+     * Parses {@code String input} into {@code PlaceList}
+     */
     public static PlaceList parsePlaces(String input) {
         List<String> toAdd = new ArrayList<>();
         String [] process = input.split(", ");
-        for(String s : process) {
+        for (String s : process) {
             toAdd.add(s);
         }
         return new PlaceList(toAdd);
     }
 
+    /**
+     * Parses {@code String input} into {@code ActivityList}
+     */
     public static ActivityList parseActivities(String input) {
         List<String> toAdd = new ArrayList<>();
         String [] process = input.split(", ");
-        for(String s : process) {
+        for (String s : process) {
             toAdd.add(s);
         }
         return new ActivityList(toAdd);

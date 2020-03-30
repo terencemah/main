@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -23,19 +24,20 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Tag> tags = new HashSet<Tag>();
     private final Time time;
 
-    private final ActivityList activityList;
+    private final ActivityList activityList = new ActivityList(new ArrayList<String>());
     private final FrequencyList placeList2;
     private final FrequencyList activityList2;
-    private final PlaceList placeList;
+    private final PlaceList placeList = new PlaceList(new ArrayList<String>());
     private float totalTimeSpent;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Time time, PlaceList placeList, ActivityList activityList) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Time time, PlaceList placeList,
+                  ActivityList activityList) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -43,8 +45,8 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.time = time;
-        this.placeList = placeList;
-        this.activityList = activityList;
+        this.placeList.addPlaceList(placeList.getPlaceList());
+        this.activityList.addActivityList(activityList.getActivityList());
         placeList2 = new FrequencyList();
         activityList2 = new FrequencyList();
         totalTimeSpent = 0;
@@ -159,10 +161,6 @@ public class Person {
     public void addActivity(String name) {
         activityList.addActivity(name);
     }
-
-    /*public void addTime(float time) {
-        totalTimeSpent += time;
-    }*/
 
     public ObservableList<EventDescriptor> getPlaceList() {
         return placeList2.getFrequencyList();

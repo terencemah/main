@@ -87,7 +87,7 @@ public class ImportFile {
                     activityList = new ActivityList(new ArrayList<String>());
                 } else {
                     List<String> xs = new ArrayList<>();
-                    for (String s : places) {
+                    for (String s : activities) {
                         xs.add(s);
                     }
                     activityList = new ActivityList(xs);

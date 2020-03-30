@@ -36,7 +36,8 @@ public class AddEventCommandTest {
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withName(firstPerson.getName().fullName).withTime("030").build();
+                .withName(firstPerson.getName().fullName).withTime("030").withActivityList("test")
+                .withPlaceList("anywhere").build();
 
         AddEventCommand addEventCommand = new AddEventCommand(activity, INDEX_FIRST_PERSON.getOneBased(), place, time);
 
@@ -58,7 +59,8 @@ public class AddEventCommandTest {
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withName(firstPerson.getName().fullName).withTime("030").build();
+                .withName(firstPerson.getName().fullName).withTime("030").withActivityList("test")
+                .withPlaceList("anywhere").build();
 
         AddEventCommand addEventCommand = new AddEventCommand(activity, INDEX_FIRST_PERSON.getOneBased(), place, time);
 
@@ -104,19 +106,21 @@ public class AddEventCommandTest {
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withName(firstPerson.getName().fullName).withTime("030").build();
+                .withName(firstPerson.getName().fullName).withTime("101").withActivityList("test")
+                .withPlaceList("anywhere").build();
 
         AddEventCommand addEventCommand = new AddEventCommand(activity, INDEX_FIRST_PERSON.getOneBased(), place, time);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withName(firstPerson.getName().fullName).withTime("101").build();
+        /*editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
+                .withName(firstPerson.getName().fullName).withTime("101").withActivityList("test, test")
+                .withPlaceList("anywhere, anywhere").build();*/
         String expectedMessage = String.format(AddEventCommand.MESSAGE_SUCCESS, editedPerson);
 
-        expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
+        /*expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);*/
 
         assertCommandSuccess(addEventCommand, model, expectedMessage, expectedModel);
     }

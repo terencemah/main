@@ -1,22 +1,39 @@
 package seedu.address.model.person;
 
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A list of places
+ */
 public class PlaceList {
-    public ArrayList<String> placeList = new ArrayList<>();
-    public final List<String> value;
+    public final List<String> placeList;
 
     public PlaceList(List<String> places) {
-        this.value = places;
+        this.placeList = places;
     }
 
-    public ArrayList getPlaceList() {
+    public List getPlaceList() {
         return this.placeList;
     }
 
-    public void addPlace(String place) {
-        this.value.add(place);
+    /**
+     * Adds a place to the current placeList
+     * @return new PlaceList
+     */
+    public PlaceList addPlace(String place) {
+        List<String> toEdit = this.placeList;
+        toEdit.add(place);
+        return new PlaceList(toEdit);
+    }
+
+    /**
+     * Adds a place to the current placeList
+     * @return new PlaceList
+     */
+    public PlaceList addPlaceList(List<String> xs) {
+        List<String> toEdit = this.placeList;
+        toEdit.addAll(xs);
+        return new PlaceList(toEdit);
     }
 
     @Override
@@ -39,7 +56,7 @@ public class PlaceList {
             return true;
         }
 
-        if(!(other instanceof  PlaceList)) {
+        if (!(other instanceof PlaceList)) {
             return false;
         }
 

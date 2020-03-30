@@ -34,8 +34,8 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String time;
-    private final List<String> places;
-    private final List<String> activities;
+    private final List<String> places = new ArrayList<>();
+    private final List<String> activities = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -53,8 +53,12 @@ class JsonAdaptedPerson {
             this.tagged.addAll(tagged);
         }
         this.time = time;
-        this.places = places;
-        this.activities = activities;
+        if (!places.isEmpty()) {
+            this.places.addAll(places);
+        }
+        if (!activities.isEmpty()) {
+            this.activities.addAll(activities);
+        }
     }
 
     /**
@@ -69,8 +73,8 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         time = source.getTime().value;
-        places = source.getPlaceList2().value;
-        activities = source.getActivityList2().value;
+        places.addAll(source.getPlaceList2().placeList);
+        activities.addAll(source.getActivityList2().activityList);
     }
 
     /**
@@ -129,6 +133,7 @@ class JsonAdaptedPerson {
 
         final ActivityList modelActivityList = new ActivityList(activities);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTime, modelPlaceList, modelActivityList);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTime, modelPlaceList,
+                modelActivityList);
     }
 }
