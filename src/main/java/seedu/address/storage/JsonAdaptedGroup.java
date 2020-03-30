@@ -78,7 +78,7 @@ public class JsonAdaptedGroup {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
 
-       //%TODO: Add more checks as group class and info evolve
+        //%TODO: Add more checks as group class and info evolve
 
         Group group = new Group(new Name(name));
         String[] times = timeSpent.split(":");
@@ -93,8 +93,10 @@ public class JsonAdaptedGroup {
 
         ArrayList<Integer> events = new ArrayList<>();
         for (int i = 0; i < eventIDs.size(); i++) {
-            members.add(Integer.valueOf(eventIDs.get(i)));
+            events.add(Integer.valueOf(eventIDs.get(i)));
         }
+
+        group.setEventIDs(events);
 
         return group;
     }

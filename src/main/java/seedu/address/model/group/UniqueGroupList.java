@@ -3,10 +3,13 @@ package seedu.address.model.group;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicateGroupException;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.GroupNotFoundException;
 
 /**
@@ -40,6 +43,19 @@ public class UniqueGroupList implements Iterable<Group> {
             throw new DuplicateGroupException();
         }
         internalList.add(toAdd);
+    }
+
+    public void setGroups(List<Group> groups) {
+        requireNonNull(groups);
+        if (!groupsAreUnique(groups)) {
+            throw new DuplicateGroupException();
+        }
+        internalList.setAll(groups);
+    }
+
+    public void setGroups(UniqueGroupList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
     }
 
     /**
@@ -76,5 +92,19 @@ public class UniqueGroupList implements Iterable<Group> {
     @Override
     public int hashCode() {
         return internalList.hashCode();
+    }
+
+    /**
+     * Returns true if {@code groups} contains only unique persons.
+     */
+    private boolean groupsAreUnique(List<Group> groups) {
+        for (int i = 0; i < groups.size() - 1; i++) {
+            for (int j = i + 1; j < groups.size(); j++) {
+                if (groups.get(i).equals(groups.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

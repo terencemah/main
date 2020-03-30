@@ -67,6 +67,10 @@ public class Group {
         return this.eventIDs;
     }
 
+    public void setEventIDs(ArrayList<Integer> events) {
+        this.eventIDs = events;
+    }
+
 
     /**
      * Returns a String output with all the names in a single line separated by whitespace.
