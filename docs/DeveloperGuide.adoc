@@ -1,4 +1,4 @@
-= AddressBook Level 3 - Developer Guide
+= CoderLifeInsights - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -12,7 +12,7 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level3/tree/master
+:repoURL: https://github.com/AY1920S2-CS2103-W14-4/main
 
 By: `CoderLifeInsights`      Since: `March 2020`      Licence: `MIT`
 
@@ -534,7 +534,7 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `CoderLifeInsights` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
 === Use case: Delete person
@@ -542,9 +542,9 @@ _{More to be added}_
 *MSS*
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  CoderLifeInsights shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  CoderLifeInsights deletes the person
 +
 Use case ends.
 
@@ -555,7 +555,7 @@ Use case ends.
 *MSS*
 
 1.  User requests to add person
-2.  AddressBook adds the person and displays their details
+2.  CoderLifeInsights adds the person and displays their details
 +
 Use case ends.
 
@@ -564,7 +564,7 @@ Use case ends.
 * 3a. No details of the person provided as arguments.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. CoderLifeInsights shows an error message.
 +
 Use case resumes at step 2.
 
@@ -573,7 +573,7 @@ Use case resumes at step 2.
 *MSS*
 
 1.  User requests to search a person with specified keyword
-2.  AddressBook displays a list of people matching the keyword specified
+2.  CoderLifeInsights displays a list of people matching the keyword specified
 +
 Use case ends.
 
@@ -582,7 +582,7 @@ Use case ends.
 * 3a. No details of the person provided as arguments.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. CoderLifeInsights shows an error message.
 +
 Use case resumes at step 2.
 
@@ -594,7 +594,7 @@ _{More to be added}_
 *MSS*
 
 1.  User requests to add person
-2.  AddressBook adds the person and displays their details
+2.  CoderLifeInsights adds the person and displays their details
 +
 Use case ends.
 
@@ -603,7 +603,7 @@ Use case ends.
 * 3a. No details of the person provided as arguments.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. CoderLifeInsights shows an error message.
 +
 Use case resumes at step 2.
 
