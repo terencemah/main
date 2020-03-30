@@ -50,5 +50,23 @@
     "tagged" : [ ],
     "time" : "0"
   } ],
-  "groups" : []
+  "groups" : [ {
+    "name" : "soc friends",
+    "groupId" : "1",
+    "timeSpent" : "0:0",
+    "memberIDs" : [ ],
+    "eventIDs" : [ ]
+  }, {
+    "name" : "rc people",
+    "groupId" : "2",
+    "timeSpent" : "0:0",
+    "memberIDs" : [1, 2, 3],
+    "eventIDs" : [ ]
+  }, {
+    "name" : "NS friends",
+    "groupId" : "2",
+    "timeSpent" : "0:0",
+    "memberIDs" : [5, 6, 7],
+    "eventIDs" : [ ]
+  } ]
 }
