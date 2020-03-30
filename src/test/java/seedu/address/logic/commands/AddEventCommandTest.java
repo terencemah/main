@@ -36,8 +36,8 @@ public class AddEventCommandTest {
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withName(firstPerson.getName().fullName).withTime("030").withActivityList("test, test")
-                .withPlaceList("anywhere, anywhere").build();
+                .withName(firstPerson.getName().fullName).withTime("030").withActivityList("test, test, test")
+                .withPlaceList("anywhere, anywhere, anywhere").build();
 
         AddEventCommand addEventCommand = new AddEventCommand(activity, INDEX_FIRST_PERSON.getOneBased(), place, time);
 
