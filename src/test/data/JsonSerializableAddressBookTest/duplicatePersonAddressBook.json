@@ -16,5 +16,6 @@
     "time": "0",
     "places" : [ ],
     "activities" : [ ]
-  } ]
+  } ],
+  "groups" : []
 }

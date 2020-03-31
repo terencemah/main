@@ -56,6 +56,6 @@ public class AddGroupCommand extends Command {
         }
 
         model.addGroup(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), ViewType.GROUPS);
     }
 }
