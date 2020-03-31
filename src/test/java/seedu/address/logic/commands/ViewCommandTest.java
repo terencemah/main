@@ -10,8 +10,8 @@ public class ViewCommandTest {
 
     @Test
     public void equals() {
-        ViewCommand firstViewCommand = new ViewCommand(INDEX_FIRST_PERSON,"places");
-        ViewCommand secondViewCommand = new ViewCommand(INDEX_FIRST_PERSON,"recent");
+        ViewCommand firstViewCommand = new ViewCommand(INDEX_FIRST_PERSON, "places");
+        ViewCommand secondViewCommand = new ViewCommand(INDEX_FIRST_PERSON, "recent");
 
         // same object -> returns true
         assertTrue(firstViewCommand.equals(firstViewCommand));
