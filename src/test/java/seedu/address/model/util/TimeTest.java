@@ -51,4 +51,19 @@ public class TimeTest {
         });
     }
 
+    @Test
+    public void setMinutesSuccessfully() {
+        Time time = new Time(1, 0);
+        time.setMinutes(2);
+        Assertions.assertEquals(2, time.getMinutes());
+    }
+
+    @Test
+    public void setHoursRangeError() {
+        Time time = new Time(30, 0);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            time.setHours(-1);
+        });
+    }
+
 }
