@@ -24,6 +24,10 @@ public class GroupCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label timeSpent;
+    @FXML
+    private Label members;
+    @FXML
+    private Label events;
 
     public GroupCard(Group group, int displayedIndex) {
         super(FXML);
@@ -32,6 +36,8 @@ public class GroupCard extends UiPart<Region> {
         name.setText(group.getName().fullName);
         String text = group.getTimeSpent().toString();
         timeSpent.setText("Total Time Spent:" + text);
+        members.setText(group.printMemberList());
+        events.setText(group.printEventIds());
     }
 
     @Override
