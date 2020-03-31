@@ -27,7 +27,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_PATH = "testing.csv";
+    private static final String INVALID_PATH = "testing123.csv";
     private static final String INVALID_SUGGEST = "invalid parameter";
 
     private static final String VALID_NAME = "Rachel Walker";

@@ -137,12 +137,6 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_export() throws Exception {
-        assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD + " l/testing.csv")
-                instanceof ExportCommand);
-    }
-
-    @Test
     public void parseCommand_add_group() throws Exception {
         assertTrue(parser.parseCommand(AddGroupCommand.COMMAND_WORD + " n/SoCFriends")
                 instanceof AddGroupCommand);
