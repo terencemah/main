@@ -4,7 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.ModelManager;
 import seedu.address.model.group.Group;
+
+import java.util.logging.Logger;
 
 /**
  * A UI component that displaces information of a {@code Group}
@@ -21,12 +25,16 @@ public class GroupCard extends UiPart<Region> {
     private Label name;
     @FXML
     private Label id;
+    @FXML
+    private Label timeSpent;
 
     public GroupCard(Group group, int displayedIndex) {
         super(FXML);
         this.group = group;
         id.setText(displayedIndex + ". ");
         name.setText(group.getName().fullName);
+        String text = group.getTimeSpent().toString();
+        timeSpent.setText("Total Time Spent:" + text);
     }
 
     @Override
