@@ -186,7 +186,8 @@ The following is an activity diagram when a user executes the import command:
 image::ImportFileActivityDiagram.png[]
 
 When a user executes the `import` command, a parser would check if the CSV is valid or not. That means it would check
-if the CSV file exists within the specified file path and whether the CSV file is
+if the CSV file exists within the specified file path and whether the CSV file is valid for import in the application's
+directory.
 
 If valid, the rows in the CSV file would then parsed and then creates a list of person to be imported.
 
@@ -197,6 +198,9 @@ The following class diagram illustrates the summary of the ImportFile class.
 .Import feature class diagram.
 [#ImportFileClassDiagram,align="center"]
 image::ImportFileClassDiagram.png[][pdfwidth="30%",width="30%"]
+==== Csv file format and constraints
+In order for data to be imported into CoderLifeInsights, the CSV file provided must be in the exact format.
+There are 9 columns specified for `name`, `phone`, `email`, `address`, `tagged`, `time`, `places` , `activities` and 
 === Export feature
 ==== Implementation
 
@@ -227,7 +231,8 @@ image::ExportFileActivityDiagram.png[][pdfwidth="60%",width="60%"]
 
 When a user executes `export` command, a parser would check if the CSV file name is valid.
 
-If valid, it would then proceed to export the current JSON data to the CSV file name provided.
+If valid, it would then proceed to export the current JSON data to the application's directory with the
+CSV file name provided.
 
 The following class diagram illustrates the summary of the ExportFile class.
 

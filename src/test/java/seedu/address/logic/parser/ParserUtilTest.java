@@ -237,7 +237,6 @@ public class ParserUtilTest {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseSuggest(null));
     }
 
-
     @Test
     public void parseSuggest_emptyString_throwsNullPointerException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseSuggest(""));

@@ -43,12 +43,23 @@ public class SuggestCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (suggestParameter.equals("person")) {
+        switch (suggestParameter) {
+
+        case KEYWORD_PERSON:
             model.suggestPerson();
-        } else {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, suggestParameter));
+
+        case KEYWORD_ACTIVITY:
+            model.suggestActivity();
+            return new CommandResult(String.format(MESSAGE_SUCCESS, suggestParameter));
+
+        case KEYWORD_PLACE:
+            model.suggestPlace();
+            return new CommandResult(String.format(MESSAGE_SUCCESS, suggestParameter));
+
+        default:
             throw new CommandException(MESSAGE_INVALID_PARAMETER);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, suggestParameter));
     }
 
     @Override

@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.Person;
@@ -70,6 +69,8 @@ public interface Model {
 
     boolean hasGroup(Group group);
 
+    boolean hasGroups(List<Group> groups);
+
     /**
      * Deletes the given person. The person must exist in the address book.
      */
@@ -107,13 +108,19 @@ public interface Model {
 
     void updateFilteredGroupList(Predicate<Group> predicate);
 
-    void importCsvToAddressBook(List<Person> importedPeople) throws CommandException;
+    void importCsvToAddressBook(List<Person> importedPeople);
+
+    void importCsvGroupsToAddressBook(List<Group> importedGroup);
 
     void showPlaceList(Person target);
 
     void showActivityList(Person target);
 
     void suggestPerson();
+
+    void suggestPlace();
+
+    void suggestActivity();
 
     ObservableList<EventDescriptor> getFrequencyList();
 }

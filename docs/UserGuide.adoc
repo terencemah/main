@@ -59,7 +59,7 @@ Format: `help`
 
 === Adding a person: `add`
 
-Adds a person to the address book +
+Adds a person to the CoderLifeInsights +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
 [TIP]
@@ -94,7 +94,7 @@ Returns a list of the saved groups in CoderLifeInsights.
 
 === Editing a person : `edit`
 
-Edits an existing person in the address book. +
+Edits an existing person in the CoderLifeInsights. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 ****
@@ -125,14 +125,14 @@ Format: `delete person ID` (for person) +
 * Deletes the person at the specified `INDEX`.
 The index refers to the index number shown in the displayed person list.
 The index *must be a positive integer* 1, 2, 3, ...
-Remarks: Address book uses 1-indexing.
+Remarks: CoderLifeInsights uses 1-indexing.
 ****
 
 Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
+Deletes the 2nd person in the CoderLifeInsights.
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
@@ -160,33 +160,119 @@ Returns any person having names `Betsy`, `Tim`, or `John`
 === Import Life CSV: `import`
 
 Imports your existing Life CSV into the application +
-Format: `import FILE_PATH`
+Format: `import l/LIFE_FILE_PATH g/GROUP_FILE_PATH`
 
 ****
 * Imports your existing Life contacts into the application.
 * An existing CSV file exported from CoderLifeInsights must exist before import.
-* FILE_PATH must match your existing file path.
+* LIFE_FILE_PATH and GROUP_FILE_PATH must match your existing file path.
 ****
 
 Examples:
 
-* `import life.csv` +
-Imports your Life from `life.csv`
+* `import l/life.csv g/groups.csv` +
+Imports your Life from `life.csv` +
+Imports your group data from `groups.csv`
+
+* `import l/C:\Users\User\Documents\life.csv` +
+Imports your Life from `C:\Users\Harry\Desktop\Documents\life.csv`
+
+* `import l/./Desktop/life.csv` +
+Imports your Life from `C:\Users\Harry\Desktop\Documents\life.csv`
+
+==== Retrieving File Path 
+
+For Windows:
+
+* Navigate to the file where you saved CoderLifeInsights data files.
+* Click on the address bar of File Explorer window.
+* Refer to the diagram below for reference.
+
+.File path finding in Windows
+[#RetrievingFilePath, align="center"]
+image::windowsPathFinding.png[]
+
+[pdfwidth="50%",width="50%"]
+For Mac:
+* Navigate to the file where you saved CoderLifeInsights data files.
+* Right-click on the CSV File and select `Get info`.
+* Refer to the diagram below for reference.
+
+.File path finding in MacOS
+[#RetrievingFilePath, align="center"]
+image::macPathFinding.png[pdfwidth="50%",width="50%"]
+
+==== CSV File Constraints
+
+For `Life.csv`:
+
+Before using the `import` command on `Life.csv`, please ensure the following headers are present.
+
+* `name`
+* `phone`
+* `email`
+* `address`
+* `tagged`
+* `time`
+* `places`
+* `activities`
+
+Refer to image below for reference:
+
+.Example Life.csv format
+[#CSVFileConstraints, align="center"]
+image::lifeCSVFormat.png[pdfwidth="70%",width="70%"]
+
+====
+`Tags`, `Places` and `Activities` should be separated by a semi-colon.
+
+Example:
+
+* `friends;school-mate`
+* `Orchard;NUS`
+* `Gym;Rock-Climbing`
+====
+
+For `Groups.csv`:
+
+Before using the `import` command on `Life.csv`, please ensure the following headers are present.
+
+* `name`
+* `groupId`
+* `timeSpent`
+* `memberIDs`
+* `eventIDs`
+
+.Example Groups.csv format
+[#CSVFileConstraints, align="center"]
+image::groupCSVFormat.png[pdfwidth="70%",width="70%"]
+
+====
+`memberIDs`, `eventIDs` should be separated by a semi-colon.
+
+Example:
+
+* `1;2;3`
+* `5;6`
+====
+
+
 
 === Export Life CSV: `export`
 
 Exports your existing Life into a CSV file. +
-Format: `export FILE_NAME`
+Format: `export l/LIFE_FILE_NAME g/GROUP_FILE_NAME`
 
 ****
-* Exports your existing Life contacts into a CSV file.
-* Specify the file name you want to export.
+* Exports your existing Life contacts and/or group data into a CSV file.
+* Specify the file name you want to export for life and group data.
 ****
 
 Examples:
 
-* `export life.csv` +
+* `export l/life.csv g/groups.csv` +
 Exports your Life to `life.csv`
+Exports your group data to `group.csv`
 
 === Suggestions: `suggest`
 
@@ -210,9 +296,9 @@ Returns an activity to do.
 * `suggest person` +
 Returns a person to hangout with.
 
-=== Getting a random person: `random`
+=== Getting a random person: `random` `[coming in v1.4]`
 
-Finds a random person from contacts saved in address book. +
+Finds a random person from contacts saved in CoderLifeInsights. +
 Format: `random`
 
 ****
@@ -279,7 +365,7 @@ Returns the output of 'view places', 'view time', and 'view activities', in that
 
 === Deleting a person : `delete`
 
-Deletes the specified person from the address book. +
+Deletes the specified person from the CoderLifeInsights. +
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
@@ -291,7 +377,7 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
+Deletes the 2nd person in the CoderLifeInsights.
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
@@ -299,7 +385,7 @@ Deletes the 1st person in the results of the `find` command.
 // end::delete[]
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Clears all entries from the CoderLifeInsights. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -309,7 +395,7 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+CoderLifeInsights data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -321,7 +407,7 @@ _{explain how the user can enable/disable data encryption}_
 === FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CoderLifeInsights folder.
 
 === Command Summary
 

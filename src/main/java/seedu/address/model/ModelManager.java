@@ -14,7 +14,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.NameContainsFullNamePredicate;
@@ -120,6 +119,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasGroups(List<Group> groups) {
+        requireNonNull(groups);
+        return addressBook.hasGroups(groups);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -175,9 +180,16 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void importCsvToAddressBook(List<Person> importedPeople) throws CommandException {
+    public void importCsvToAddressBook(List<Person> importedPeople) {
         requireNonNull(importedPeople);
         addressBook.addPersons(importedPeople);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void importCsvGroupsToAddressBook(List<Group> importedGroup) {
+        requireNonNull(importedGroup);
+        addressBook.addGroups(importedGroup);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -244,6 +256,13 @@ public class ModelManager implements Model {
         } else {
             updateFilteredPersonList(predicate);
         }
+
+    }
+
+    public void suggestPlace() {
+    }
+
+    public void suggestActivity() {
 
     }
 

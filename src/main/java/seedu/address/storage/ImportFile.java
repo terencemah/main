@@ -17,6 +17,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -97,6 +98,59 @@ public class ImportFile {
                 people.add(person);
             }
             return people;
+        } catch (IOException | ParseException ioe) {
+            throw new CommandException(String.format(MESSAGE_INVALID_PATH));
+        }
+    }
+
+    /**
+     * Reads a CSV File and returns a list of groups to be added to the current address book.
+     *
+     * @param fileName path of CSV file to be imported.
+     * @return List of groups to be imported.
+     * @throws CommandException if person in CSV file does not conform to format.
+     */
+    public List<Group> importGroupCsv(String fileName) throws CommandException {
+        try {
+            File csvFile = new File(fileName);
+            CsvMapper mapper = new CsvMapper();
+            CsvSchema schema = CsvSchema.emptySchema().withHeader();
+            MappingIterator<Map<String, String>> it =
+                    mapper.readerFor(Map.class).with(schema).readValues(csvFile);
+
+            List<Group> groups = new ArrayList<>();
+            while (it.hasNext()) {
+                Map<String, String> oneGroup = it.next();
+                String oneName = oneGroup.get("name");
+                String oneGroupId = oneGroup.get("groupId");
+                String oneTimeSpent = oneGroup.get("timeSpent");
+                String oneMemberIds = oneGroup.get("memberIDs").strip();
+                String[] memberIds = oneMemberIds.split(";");
+                String oneEventIds = oneGroup.get("eventIDs").strip();
+                String[] eventIds = oneEventIds.split(";");
+
+                ArrayList<Integer> members = new ArrayList<>();
+                if (!oneMemberIds.isEmpty()) {
+                    for (int i = 0; i < memberIds.length; i++) {
+                        members.add(Integer.parseInt(memberIds[i]));
+                    }
+                }
+                ArrayList<Integer> events = new ArrayList<>();
+                if (!oneEventIds.isEmpty()) {
+                    for (int i = 0; i < eventIds.length; i++) {
+                        events.add(Integer.parseInt(eventIds[i]));
+                    }
+                }
+                Name name = ParserUtil.parseName(oneName);
+                Time time = ParserUtil.parseTime(oneTimeSpent);
+
+                Group group = new Group(name);
+                group.setTimeSpent(time);
+                group.setMemberIDs(members);
+                group.setEventIDs(events);
+                groups.add(group);
+            }
+            return groups;
         } catch (IOException | ParseException ioe) {
             throw new CommandException(String.format(MESSAGE_INVALID_PATH));
         }
