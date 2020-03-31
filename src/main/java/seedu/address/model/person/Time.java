@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import java.util.Objects;
+
 /**
  * Represents the time object that tracks the time spent for the user.
  */
@@ -7,7 +9,6 @@ public class Time {
 
     public static final String MINUTES_RANGE_ERROR = "Minutes must be within 0-59 (inclusive).";
     public static final String HOURS_RANGE_ERROR = "Hours must be 0 or more";
-    public final String value;
     private int minutes;
     private int hours;
 
@@ -19,11 +20,6 @@ public class Time {
         } else {
             this.minutes = minutes;
             this.hours = hours;
-        }
-        if (minutes < 10) {
-            value = hours + "0" + minutes;
-        } else {
-            value = "" + hours + minutes;
         }
     }
 
@@ -69,7 +65,7 @@ public class Time {
 
     @Override
     public String toString() {
-        return String.format("%s:%s", this.hours, this.minutes);
+        return String.format("%s h %s m", this.hours, this.minutes);
     }
 
     @Override
@@ -86,11 +82,11 @@ public class Time {
 
         // state check
         Time t = (Time) other;
-        return this.value.equals(t.value);
+        return this.getHours() == t.getHours() && this.getMinutes() == t.getMinutes();
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return Objects.hash(this.hours, this.minutes);
     }
 }

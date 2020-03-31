@@ -23,4 +23,5 @@ public class DeleteGroupCommandTest {
         // different groups -> returns false
         assertFalse(deleteGroupCommand1.equals(deleteGroupCommand2));
     }
+
 }

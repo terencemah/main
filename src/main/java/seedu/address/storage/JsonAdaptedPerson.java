@@ -72,7 +72,7 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        time = source.getTime().value;
+        time = source.getTime().toString();
         places.addAll(source.getPlaceList2().placeList);
         activities.addAll(source.getActivityList2().activityList);
     }

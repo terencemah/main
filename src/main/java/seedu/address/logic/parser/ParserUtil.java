@@ -171,24 +171,7 @@ public class ParserUtil {
      * Parses {@code String time} into a {@code Time}
      */
     public static Time parseTime(String time) {
-        char[] timeArr = time.toCharArray();
-        String mins = "";
-        String hrs = "";
-        int marker = timeArr.length - 2;
-        if (time.length() > 2) {
-            for (int i = marker; i < timeArr.length; i++) {
-                mins += timeArr[i];
-            }
-            for (int i = 0; i < marker; i++) {
-                hrs += timeArr[i];
-            }
-        } else {
-            hrs += "0";
-            mins += time;
-            if (mins.equals("")) {
-                mins += 0;
-            }
-        }
+        requireNonNull(time);
         return new Time(Integer.parseInt(mins), Integer.parseInt(hrs));
     }
 
