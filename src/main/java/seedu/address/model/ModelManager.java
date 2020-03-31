@@ -14,9 +14,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.event.TempPlace;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.Person;
+import seedu.address.ui.ObservablePlaceListPanel;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,6 +31,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Group> filteredGroups;
     private final ObservableList<EventDescriptor> frequencyList;
+    private final ObservableList<TempPlace> placesList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -44,6 +47,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
         frequencyList = FXCollections.observableArrayList();
+        placesList = FXCollections.observableArrayList();
     }
 
     public ModelManager() {
@@ -212,9 +216,24 @@ public class ModelManager implements Model {
         }
     }
 
+    public void showPlaces(Person p) {
+        copyList2(p.getPlaceList2().getObservablePlaceList());
+    }
+
+    public void copyList2(ObservableList<TempPlace> xs) {
+        for(TempPlace p : xs) {
+            placesList.add(p);
+        }
+    }
+
     @Override
     public ObservableList<EventDescriptor> getFrequencyList() {
         return frequencyList;
+    }
+
+    @Override
+    public ObservableList<TempPlace> getTempPlaceList() {
+        return this.placesList;
     }
 
     @Override

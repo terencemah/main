@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -36,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private GroupListPanel groupListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ObservablePlaceListPanel observablePlaceListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -176,6 +178,12 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(frequencyListPanel.getRoot());
     }
 
+    private void handleViewPlaces() {
+        observablePlaceListPanel = new ObservablePlaceListPanel(logic.getObservablePlaceList());
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(observablePlaceListPanel.getRoot());
+    }
+
     private void handleGroup() {
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
         personListPanelPlaceholder.getChildren().clear();
@@ -213,7 +221,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
                 break;
             case EVENTS:
-                handleView();
+                //handleView();
+                handleViewPlaces();
                 break;
             case GROUPS:
                 handleGroup();

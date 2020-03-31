@@ -99,6 +99,8 @@ public class AddEventCommand extends Command {
                 personToEdit.getAddress(), personToEdit.getTags(), newTime, newPlaceList, newActivityList);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        editedPerson.addPlace(place);
+        editedPerson.addActivity(activity);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, personToEdit));
     }

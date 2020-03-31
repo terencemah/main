@@ -155,11 +155,11 @@ public class Person {
     }
 
     public void addPlace(String name) {
-        placeList.addPlace(name);
+        placeList2.add(name);
     }
 
     public void addActivity(String name) {
-        activityList.addActivity(name);
+        activityList2.add(name);
     }
 
     public ObservableList<EventDescriptor> getPlaceList() {
