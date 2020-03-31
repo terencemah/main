@@ -203,6 +203,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public void suggestPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void suggestPlace() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void suggestActivity() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<EventDescriptor> getFrequencyList() {
             throw new AssertionError("This method should not be called.");
         }

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -14,9 +15,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.event.Event;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
+import seedu.address.model.person.NameContainsFullNamePredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.RecentEvent;
 
@@ -232,6 +233,51 @@ public class ModelManager implements Model {
         }
     }
 
+    /**
+     * Updates filtered person list with suggested person based on time spent.
+     */
+    public void suggestPerson() {
+        ObservableList<Person> personsList = addressBook.getPersonList();
+        Person suggestedPerson;
+        List<String> names = new ArrayList<>();
+        NameContainsFullNamePredicate predicate = new NameContainsFullNamePredicate(names);
+        if (!personsList.isEmpty()) {
+            suggestedPerson = personsList.get(0);
+            for (Person onePerson : personsList) {
+                int suggestedHours = suggestedPerson.getTime().getHours();
+                int suggestedMins = suggestedPerson.getTime().getMinutes();
+                int hours = onePerson.getTime().getHours();
+                int mins = onePerson.getTime().getMinutes();
+                if (hours <= suggestedHours) {
+                    if (mins <= suggestedMins) {
+                        if (suggestedPerson.equals(onePerson)) {
+                            continue;
+                        } else {
+                            suggestedPerson = onePerson;
+                        }
+                    }
+                }
+            }
+            names.add(suggestedPerson.getName().toString());
+            updateFilteredPersonList(predicate);
+        } else {
+            updateFilteredPersonList(predicate);
+        }
+
+    }
+
+    /**
+     * Suggests a place based on frequency
+     */
+    public void suggestPlace() {
+        //        ObservableList<Event> eventList = addressBook.getEventList();
+        //        System.out.println(eventList);
+
+    }
+
+    public void suggestActivity() {
+
+    }
     @Override
     public ObservableList<EventDescriptor> getFrequencyList() {
         return frequencyList;

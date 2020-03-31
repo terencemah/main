@@ -115,6 +115,12 @@ public interface Model {
 
     void showRecentList(Person target);
 
+    void suggestPerson();
+
+    void suggestPlace();
+
+    void suggestActivity();
+
     ObservableList<EventDescriptor> getFrequencyList();
 
     ObservableList<RecentEvent> getRecentList();
