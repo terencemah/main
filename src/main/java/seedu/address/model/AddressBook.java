@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+//import seedu.address.model.event.Event;
+//import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.person.Person;
@@ -17,9 +19,12 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueGroupList groups;
+    //    private final UniqueEventList events;
+
     {
         persons = new UniquePersonList();
         groups = new UniqueGroupList();
+        //        events = new UniqueEventList();
     }
 
     public AddressBook() {
@@ -162,6 +167,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Group> getGroupList() {
         return groups.asUnmodifiableObservableList();
     }
+
+    //    @Override
+    //    public ObservableList<Event> getEventList() {
+    //        return events.asUnmodifiableObservableList();
+    //    }
 
     @Override
     public boolean equals(Object other) {

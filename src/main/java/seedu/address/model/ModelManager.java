@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+//import seedu.address.model.event.Event;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.NameContainsFullNamePredicate;
@@ -259,11 +260,16 @@ public class ModelManager implements Model {
 
     }
 
+    /**
+     * Suggests a place based on frequency
+     */
     public void suggestPlace() {
+    //        ObservableList<Event> eventList = addressBook.getEventList();
+    //        System.out.println(eventList);
+
     }
 
     public void suggestActivity() {
-
     }
 
     @Override

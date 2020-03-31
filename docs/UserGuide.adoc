@@ -276,25 +276,25 @@ Exports your group data to `group.csv`
 
 === Suggestions: `suggest`
 
-Suggests a place / activity or person to hang out with +
+Suggests a person to hang out with +
 Format: `suggest SUGGESTION_PARAMETER`
 
 ****
-* Suggestion parameters includes `place`, `activity` or `person`
+* Suggestion parameters include `person` `[coming v1.4 activity or place]`
 * CoderLifeInsights will suggest:
-** A place to go to.
-** An activity to do.
 ** A person to hangout with.
+** A place to go to. `[coming v1.4]`
+** An activity to do. `[coming v1.4]`
 ****
 
 Examples:
 
-* `suggest place` +
-Returns a place to go to.
-* `suggest activity` +
-Returns an activity to do.
 * `suggest person` +
 Returns a person to hangout with.
+* `[coming v1.4]` `suggest place` +
+Returns a place to go to.
+* `[coming v1.4]` `suggest activity` +
+Returns an activity to do.
 
 === Getting a random person: `random` `[coming in v1.4]`
 

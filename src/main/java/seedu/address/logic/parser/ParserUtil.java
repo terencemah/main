@@ -175,7 +175,7 @@ public class ParserUtil {
      */
     public static Time parseTime(String time) {
         requireNonNull(time);
-        String [] arr = time.split(" ");
+        String[] arr = time.split(" ");
         // get hours
         String hours = arr[0].substring(0, arr[0].length() - 1);
         String minutes = arr[1].substring(0, arr[1].length() - 1);
@@ -191,10 +191,13 @@ public class ParserUtil {
     public static String parseSuggest(String suggest) throws ParseException {
         requireNonNull(suggest);
         String trimmedSuggestParameter = suggest.trim();
-        if (!trimmedSuggestParameter.equalsIgnoreCase("person")) {
+        if (trimmedSuggestParameter.equalsIgnoreCase("person")) {
+            return trimmedSuggestParameter;
+        } else if (trimmedSuggestParameter.equalsIgnoreCase("place")) {
+            return trimmedSuggestParameter;
+        } else {
             throw new ParseException(MESSAGE_INVALID_PARAMETER);
         }
-        return trimmedSuggestParameter;
     }
 
     /**
