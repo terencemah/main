@@ -16,5 +16,4 @@ public class JsonAdaptedGroupTest {
         JsonAdaptedGroup group = new JsonAdaptedGroup(g1);
         assertEquals(g1, group.toModelType());
     }
-
 }

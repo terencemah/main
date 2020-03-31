@@ -31,7 +31,6 @@ public class Person {
     private final FrequencyList placeList2;
     private final FrequencyList activityList2;
     private final PlaceList placeList = new PlaceList(new ArrayList<String>());
-    private float totalTimeSpent;
 
     /**
      * Every field must be present and not null.
@@ -49,7 +48,6 @@ public class Person {
         this.activityList.addActivityList(activityList.getActivityList());
         placeList2 = new FrequencyList();
         activityList2 = new FrequencyList();
-        totalTimeSpent = 0;
     }
 
     public Name getName() {
@@ -168,9 +166,5 @@ public class Person {
 
     public ObservableList<EventDescriptor> getActivityList() {
         return activityList2.getFrequencyList();
-    }
-
-    public float getTotalTimeSpent() {
-        return totalTimeSpent;
     }
 }
