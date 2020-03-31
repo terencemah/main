@@ -50,6 +50,8 @@ public class Person {
         placeList2.generate(this.placeList.getPlaceList());
         activityList2 = new FrequencyList();
         activityList2.generate(this.activityList.getActivityList());
+
+
     }
 
     public Name getName() {
