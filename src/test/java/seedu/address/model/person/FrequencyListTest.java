@@ -12,6 +12,9 @@ public class FrequencyListTest {
     private FrequencyList list2;
     private ArrayList<String> strings;
 
+    /**
+     * Fills the test FrequencyLists with arbitrary strings.
+     */
     public void fillLists() {
         strings = new ArrayList<>();
         this.strings.add("abc");
