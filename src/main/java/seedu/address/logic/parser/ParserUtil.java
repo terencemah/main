@@ -4,17 +4,21 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 
@@ -188,4 +192,27 @@ public class ParserUtil {
         return new Time(Integer.parseInt(mins), Integer.parseInt(hrs));
     }
 
+    /**
+     * Parses {@code String input} into {@code PlaceList}
+     */
+    public static PlaceList parsePlaces(String input) {
+        List<String> toAdd = new ArrayList<>();
+        String [] process = input.split(", ");
+        for (String s : process) {
+            toAdd.add(s);
+        }
+        return new PlaceList(toAdd);
+    }
+
+    /**
+     * Parses {@code String input} into {@code ActivityList}
+     */
+    public static ActivityList parseActivities(String input) {
+        List<String> toAdd = new ArrayList<>();
+        String [] process = input.split(", ");
+        for (String s : process) {
+            toAdd.add(s);
+        }
+        return new ActivityList(toAdd);
+    }
 }

@@ -20,7 +20,11 @@ public class Time {
             this.minutes = minutes;
             this.hours = hours;
         }
-        value = "" + hours + minutes;
+        if (minutes < 10) {
+            value = hours + "0" + minutes;
+        } else {
+            value = "" + hours + minutes;
+        }
     }
 
     public int getMinutes() {
@@ -45,6 +49,22 @@ public class Time {
         } else {
             this.hours = hours;
         }
+    }
+
+    /**
+     * Adds the input mins and hrs to the current Time
+     */
+    public Time addTime(int mins, int hrs) {
+        int newMins;
+        int newHrs;
+        if (mins + this.getMinutes() >= 60) {
+            newMins = (mins + this.getMinutes()) - 60;
+            newHrs = (hrs + this.getHours()) + 1;
+        } else {
+            newMins = mins + this.getMinutes();
+            newHrs = hrs + this.getHours();
+        }
+        return new Time(newMins, newHrs);
     }
 
     @Override

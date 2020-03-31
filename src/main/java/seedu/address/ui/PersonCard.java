@@ -42,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label time;
+    @FXML
+    private Label activities;
 
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
