@@ -64,13 +64,13 @@ public class ViewCommand extends Command {
         case KEYWORD_PLACE:
             model.showPlaceList(personToView);
             message = MESSAGE_PLACE + personToView.getName() + ".";
-            vt = ViewType.EVENTS;
+            vt = ViewType.PLACES;
             break;
 
         case KEYWORD_ACTIVITY:
             model.showActivityList(personToView);
             message = MESSAGE_ACTIVITY + personToView.getName() + ".";
-            vt = ViewType.EVENTS;
+            vt = ViewType.ACTIVITIES;
             break;
 
 

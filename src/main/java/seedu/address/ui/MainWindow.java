@@ -31,7 +31,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private FrequencyListPanel frequencyListPanel;
+    private PlaceListPanel placeListPanel;
     private PersonListPanel personListPanel;
     private GroupListPanel groupListPanel;
     private ResultDisplay resultDisplay;
@@ -170,10 +170,16 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void handleView() {
-        frequencyListPanel = new FrequencyListPanel(logic.getFrequencyList());
+    private void handleViewPlaces() {
+        placeListPanel = new PlaceListPanel(logic.getFrequencyList());
         personListPanelPlaceholder.getChildren().clear();
-        personListPanelPlaceholder.getChildren().add(frequencyListPanel.getRoot());
+        personListPanelPlaceholder.getChildren().add(placeListPanel.getRoot());
+    }
+
+    private void handleViewActivities() {
+        placeListPanel = new PlaceListPanel(logic.getFrequencyList());
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(placeListPanel.getRoot());
     }
 
     private void handleGroup() {
@@ -212,8 +218,8 @@ public class MainWindow extends UiPart<Stage> {
             case EXIT:
                 handleExit();
                 break;
-            case EVENTS:
-                handleView();
+            case PLACES:
+                handleViewPlaces();
                 break;
             case GROUPS:
                 handleGroup();
