@@ -21,9 +21,9 @@ public class PlaceList {
      * @return new PlaceList
      */
     public PlaceList addPlace(String place) {
-        List<String> toEdit = this.placeList;
-        toEdit.add(place);
-        return new PlaceList(toEdit);
+        List<String> current = this.placeList;
+        current.add(place);
+        return new PlaceList(current);
     }
 
     /**
