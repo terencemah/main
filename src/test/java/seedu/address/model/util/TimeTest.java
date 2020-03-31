@@ -24,7 +24,7 @@ public class TimeTest {
 
     @Test void timeToString() {
         Time time = new Time(59, 2);
-        Assertions.assertEquals("2:59", time.toString());
+        Assertions.assertEquals("2h 59m", time.toString());
     }
 
 }

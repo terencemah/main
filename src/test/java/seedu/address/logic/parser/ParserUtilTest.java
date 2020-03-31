@@ -226,7 +226,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseTime_emptyString_success() throws Exception {
-        String input = "";
+        String input = "0h 0m";
         Time expectedTime = new Time(0, 0);
         assertEquals(expectedTime, ParserUtil.parseTime(input));
     }

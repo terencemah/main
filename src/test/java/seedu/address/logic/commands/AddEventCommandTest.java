@@ -37,7 +37,7 @@ public class AddEventCommandTest {
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withName(firstPerson.getName().fullName).withTime("030").withActivityList("test")
+                .withName(firstPerson.getName().fullName).withTime("0h 30m").withActivityList("test")
                 .withPlaceList("anywhere").build();
 
         AddEventCommand addEventCommand = new AddEventCommand(activity, INDEX_FIRST_PERSON.getOneBased(), place, time);
@@ -61,7 +61,7 @@ public class AddEventCommandTest {
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withName(firstPerson.getName().fullName).withTime("101").withActivityList("test")
+                .withName(firstPerson.getName().fullName).withTime("1h 1m").withActivityList("test")
                 .withPlaceList("anywhere").build();
 
         AddEventCommand addEventCommand = new AddEventCommand(activity, INDEX_FIRST_PERSON.getOneBased(), place, time);
@@ -111,7 +111,7 @@ public class AddEventCommandTest {
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased()))
-                .withName(firstPerson.getName().fullName).withTime("101").withActivityList("test")
+                .withName(firstPerson.getName().fullName).withTime("1h 1m").withActivityList("test")
                 .withPlaceList("anywhere").build();
 
         AddEventCommand addEventCommand = new AddEventCommand(activity, INDEX_THIRD_PERSON.getOneBased(), place, time);
