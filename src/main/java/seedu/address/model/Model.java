@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RecentEvent;
 
 /**
  * The API of the Model component.
@@ -112,5 +113,9 @@ public interface Model {
 
     void showActivityList(Person target);
 
+    void showRecentList(Person target);
+
     ObservableList<EventDescriptor> getFrequencyList();
+
+    ObservableList<RecentEvent> getRecentList();
 }

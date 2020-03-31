@@ -14,9 +14,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.event.Event;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RecentEvent;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,6 +31,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Group> filteredGroups;
     private final ObservableList<EventDescriptor> frequencyList;
+    private final ObservableList<RecentEvent> recentEventList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -44,6 +47,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
         frequencyList = FXCollections.observableArrayList();
+        recentEventList = FXCollections.observableArrayList();
     }
 
     public ModelManager() {
@@ -206,6 +210,10 @@ public class ModelManager implements Model {
         copyList(target.getActivityList());
     }
 
+    public void showRecentList(Person target) {
+        copyRecent(target.getRecentEventList());
+    }
+
     /**
      * Copies the active PlaceList or ActivityList onto the Model's Frequency List.
      * @param list List to be copied.
@@ -217,9 +225,21 @@ public class ModelManager implements Model {
         }
     }
 
+    private void copyRecent(ObservableList<RecentEvent> list) {
+        recentEventList.clear();
+        for (RecentEvent recentEvent : list) {
+            recentEventList.add(recentEvent);
+        }
+    }
+
     @Override
     public ObservableList<EventDescriptor> getFrequencyList() {
         return frequencyList;
+    }
+
+    @Override
+    public ObservableList<RecentEvent> getRecentList() {
+        return recentEventList;
     }
 
     @Override

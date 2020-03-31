@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Shows the user the places visited, activities done and time spent
+ * Shows the user the places visited, activities done or last 5 events
  * with a chosen person from the Address Book.
  */
 public class ViewCommand extends Command {
@@ -20,19 +20,19 @@ public class ViewCommand extends Command {
 
     public static final String KEYWORD_PLACE = "places";
     public static final String KEYWORD_ACTIVITY = "activities";
-    public static final String KEYWORD_TIME = "time";
+    public static final String KEYWORD_RECENT = "recent";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays insights about the places visited, "
             + "activities done, or time spent with the person identified "
             + "by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) [INSIGHT_PARAMETER]\n"
             + "[INSIGHT_PARAMETER] can be [" + KEYWORD_PLACE + "], [" + KEYWORD_ACTIVITY
-            + "], or [" + KEYWORD_TIME + ".\n"
+            + "], or [" + KEYWORD_RECENT + ".\n"
             + "Example: " + COMMAND_WORD + " 1 " + KEYWORD_PLACE;
 
     public static final String MESSAGE_PLACE = "Displaying places visited with ";
     public static final String MESSAGE_ACTIVITY = "Displaying activities done with ";
-    public static final String MESSAGE_TIME = "Displaying time spent with ";
+    public static final String MESSAGE_RECENT = "Listing last 5 events with ";
     public static final String MESSAGE_INVALID_PARAMETER = "The entered parameter is invalid.\n";
 
     private final Index index;
@@ -73,12 +73,10 @@ public class ViewCommand extends Command {
             vt = ViewType.ACTIVITIES;
             break;
 
-
-
         default:
-            message = MESSAGE_TIME + personToView.getName() + ".\nTotal individual time spent: "
-                    + personToView.getTime().toString();
-            vt = ViewType.NORMAL;
+            model.showRecentList(personToView);
+            message = MESSAGE_RECENT + personToView.getName() + ".";
+            vt = ViewType.RECENT;
         }
 
 

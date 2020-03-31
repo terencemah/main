@@ -31,6 +31,7 @@ public class Person {
     private final FrequencyList placeList2;
     private final FrequencyList activityList2;
     private final PlaceList placeList = new PlaceList(new ArrayList<String>());
+    private final RecentEventList recentEventList;
 
     /**
      * Every field must be present and not null.
@@ -50,8 +51,8 @@ public class Person {
         placeList2.generate(this.placeList.getPlaceList());
         activityList2 = new FrequencyList();
         activityList2.generate(this.activityList.getActivityList());
-
-
+        recentEventList = new RecentEventList();
+        recentEventList.generate(this.placeList, this.activityList);
     }
 
     public Name getName() {
@@ -81,6 +82,11 @@ public class Person {
     public ActivityList getActivityList2() {
         return activityList;
     }
+
+    public ObservableList<RecentEvent> getRecentEventList() {
+        return recentEventList.getList();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException} if
      * modification is attempted.

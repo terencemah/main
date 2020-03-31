@@ -13,7 +13,7 @@ public class PlaceList {
         this.placeList = places;
     }
 
-    public List getPlaceList() {
+    public List<String> getPlaceList() {
         return this.placeList;
     }
 

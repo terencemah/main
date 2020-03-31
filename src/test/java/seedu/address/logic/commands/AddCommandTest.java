@@ -24,6 +24,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RecentEvent;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -188,12 +189,17 @@ public class AddCommandTest {
 
         @Override
         public void showPlaceList(Person target) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void showActivityList(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public void showRecentList(Person target) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -201,7 +207,10 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
+        @Override
+        public ObservableList<RecentEvent> getRecentList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

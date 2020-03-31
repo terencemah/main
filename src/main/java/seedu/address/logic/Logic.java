@@ -11,6 +11,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RecentEvent;
 
 /**
  * API of the Logic component
@@ -56,4 +57,6 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     ObservableList<EventDescriptor> getFrequencyList();
+
+    ObservableList<RecentEvent> getRecentList();
 }

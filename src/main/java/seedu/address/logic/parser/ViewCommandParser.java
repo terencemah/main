@@ -38,7 +38,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         }
 
         if (!parameter.equals(ViewCommand.KEYWORD_PLACE) && !parameter.equals(ViewCommand.KEYWORD_ACTIVITY)
-                && !parameter.equals(ViewCommand.KEYWORD_TIME)) {
+                && !parameter.equals(ViewCommand.KEYWORD_RECENT)) {
             throw new ParseException(ViewCommand.MESSAGE_INVALID_PARAMETER + ViewCommand.MESSAGE_USAGE);
         }
 
