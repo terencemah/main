@@ -27,10 +27,6 @@ public class PlaceList {
         return new PlaceList(current);
     }
 
-    /**
-     * Adds a place to the current placeList
-     * @return new PlaceList
-     */
     public void setPlaceList(List<String> xs) {
         List<String> newList = new ArrayList<>();
         newList.addAll(this.placeList);

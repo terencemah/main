@@ -27,10 +27,6 @@ public class ActivityList {
         return new ActivityList(toEdit);
     }
 
-    /**
-     * Adds an activity to the current activityList
-     * @return new ActivityList
-     */
     public void setActivityList(List<String> oldList) {
         List<String> newList = new ArrayList<>();
         newList.addAll(this.activityList);

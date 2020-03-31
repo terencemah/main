@@ -39,6 +39,10 @@ public class FrequencyList {
         frequencyList.sort(new DescriptorComparator());
     }
 
+    /**
+     * Generates the items in the Frequency List from an ArrayList.
+     * @param items List of items to be added.
+     */
     public void generate(List<String> items) {
         for (String item : items) {
             this.add(item);
