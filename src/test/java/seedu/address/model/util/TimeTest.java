@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Time;
-import seedu.address.testutil.Assert;
 
 public class TimeTest {
 
