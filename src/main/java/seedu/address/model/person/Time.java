@@ -20,7 +20,11 @@ public class Time {
             this.minutes = minutes;
             this.hours = hours;
         }
-        value = "" + hours + minutes;
+        if (minutes < 10) {
+            value = hours + "0" + minutes;
+        } else {
+            value = "" + hours + minutes;
+        }
     }
 
     public int getMinutes() {

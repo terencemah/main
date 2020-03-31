@@ -1,14 +1,18 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.logic.parser.ParserUtil;
+import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -24,6 +28,8 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final int DEFAULT_MINS = 0;
     public static final int DEFAULT_HOURS = 0;
+    public static final List<String> DEFAULT_PLACELIST = new ArrayList<String>();
+    public static final List<String> DEFAULT_ACTIVITYLIST = new ArrayList<String>();
 
     private Name name;
     private Phone phone;
@@ -31,6 +37,8 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private Time time;
+    private PlaceList places;
+    private ActivityList activities;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -39,6 +47,8 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         time = new Time(DEFAULT_MINS, DEFAULT_HOURS);
+        places = new PlaceList(DEFAULT_PLACELIST);
+        activities = new ActivityList(DEFAULT_ACTIVITYLIST);
     }
 
     /**
@@ -51,6 +61,8 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         time = personToCopy.getTime();
+        places = personToCopy.getPlaceList2();
+        activities = personToCopy.getActivityList2();
     }
 
     /**
@@ -101,8 +113,24 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code PlaceList} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPlaceList(String input) {
+        this.places = ParserUtil.parsePlaces(input);
+        return this;
+    }
+
+    /**
+     * Sets the {@code PlaceList} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withActivityList(String input) {
+        this.activities = ParserUtil.parseActivities(input);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags, time);
+        return new Person(name, phone, email, address, tags, time, places, activities);
     }
 
 }
