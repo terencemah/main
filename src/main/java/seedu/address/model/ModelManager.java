@@ -221,7 +221,12 @@ public class ModelManager implements Model {
         copyList(target.getActivityList());
     }
 
+    /**
+     * Copies the active PlaceList or ActivityList onto the Model's Frequency List.
+     * @param list List to be copied.
+     */
     private void copyList(ObservableList<EventDescriptor> list) {
+        frequencyList.clear();
         for (EventDescriptor eventDescriptor : list) {
             frequencyList.add(eventDescriptor);
         }

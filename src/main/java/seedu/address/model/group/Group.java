@@ -71,6 +71,17 @@ public class Group {
         this.eventIDs = events;
     }
 
+    /**
+     * Returns a string representation of member IDs.
+     * @return string representation
+     */
+    public String printEventIds() {
+        String result = "event IDs: ";
+        for (int i = 0; i < this.eventIDs.size(); i++) {
+            result += this.eventIDs.get(i) + " ";
+        }
+        return result;
+    }
 
     /**
      * Returns a String output with all the names in a single line separated by whitespace.
@@ -78,7 +89,7 @@ public class Group {
      * @return
      */
     public String printMemberList() {
-        String build = "";
+        String build = "members: ";
         for (int i = 0; i < memberIDs.size(); i++) {
             build += memberIDs.get(i) + " ";
         }

@@ -44,10 +44,14 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.time = time;
-        this.placeList.addPlaceList(placeList.getPlaceList());
-        this.activityList.addActivityList(activityList.getActivityList());
+        this.placeList.setPlaceList(placeList.getPlaceList());
+        this.activityList.setActivityList(activityList.getActivityList());
         placeList2 = new FrequencyList();
+        placeList2.generate(this.placeList.getPlaceList());
         activityList2 = new FrequencyList();
+        activityList2.generate(this.activityList.getActivityList());
+
+
     }
 
     public Name getName() {
