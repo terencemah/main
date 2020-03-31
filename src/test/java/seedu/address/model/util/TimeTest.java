@@ -19,7 +19,7 @@ public class TimeTest {
     @Test
     public void timeCreationInvalid() {
         Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, (
-                ) -> new Time(162, 2));
+        ) -> new Time(162, 2));
         Assertions.assertEquals(exception.getMessage(), MINUTES_RANGE_ERROR);
     }
 
@@ -41,6 +41,14 @@ public class TimeTest {
     public void timeToString() {
         Time time = new Time(59, 2);
         Assertions.assertEquals("2h 59m", time.toString());
+    }
+
+    @Test
+    public void setMinutesRangeError() {
+        Time time = new Time(0, 0);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            time.setMinutes(120);
+        });
     }
 
 }
