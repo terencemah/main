@@ -183,17 +183,22 @@ public class AddCommandTest {
 
         @Override
         public void importCsvToAddressBook(List<Person> importedPeople) throws CommandException {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void showPlaceList(Person target) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void showActivityList(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public void suggestPerson() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

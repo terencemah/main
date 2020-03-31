@@ -1,6 +1,6 @@
 package seedu.address.storage;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PATH;
 
 import java.io.File;
 import java.io.IOException;
@@ -72,7 +72,7 @@ public class ImportFile {
             }
             return people;
         } catch (IOException | ParseException ioe) {
-            throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT));
+            throw new CommandException(String.format(MESSAGE_INVALID_PATH));
         }
     }
 }

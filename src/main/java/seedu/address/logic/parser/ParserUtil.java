@@ -27,6 +27,8 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_PATH = "Path provided must exist.";
     public static final String MESSAGE_FILE_ALREADY_EXIST = "File already exist. Please specify another name.";
+    public static final String MESSAGE_INVALID_PARAMETER = "Invalid suggestion parameter entered. "
+            + "Please input person/place/activity.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing
@@ -146,11 +148,11 @@ public class ParserUtil {
     }
 
     /**
-    * Parses {@code String path} into a trimmed path if file does not exist.
-    * Leading and trailing whitespaces will be trimmed.
-    *
-    * @throws ParseException if {@code file} exist.
-    */
+     * Parses {@code String path} into a trimmed path if file does not exist.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if {@code file} exist.
+     */
     public static String parseExportPath(String path) throws ParseException, IOException {
         requireNonNull(path);
         String trimmedPath = path.strip();
@@ -186,6 +188,21 @@ public class ParserUtil {
             }
         }
         return new Time(Integer.parseInt(mins), Integer.parseInt(hrs));
+    }
+
+    /**
+     * Parses {@code String suggest} into a trimmed parameter.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if {@code suggest} parameter not equal to person.
+     */
+    public static String parseSuggest(String suggest) throws ParseException {
+        requireNonNull(suggest);
+        String trimmedSuggestParameter = suggest.trim();
+        if (!trimmedSuggestParameter.equalsIgnoreCase("person")) {
+            throw new ParseException(MESSAGE_INVALID_PARAMETER);
+        }
+        return trimmedSuggestParameter;
     }
 
 }
