@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,10 +31,12 @@ public class PlaceList {
      * Adds a place to the current placeList
      * @return new PlaceList
      */
-    public PlaceList addPlaceList(List<String> xs) {
-        List<String> toEdit = this.placeList;
-        toEdit.addAll(xs);
-        return new PlaceList(toEdit);
+    public void setPlaceList(List<String> xs) {
+        List<String> newList = new ArrayList<>();
+        newList.addAll(this.placeList);
+        newList.addAll(xs);
+        this.placeList.clear();
+        this.placeList.addAll(newList);
     }
 
     @Override

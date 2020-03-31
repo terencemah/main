@@ -67,16 +67,11 @@ public class ViewCommand extends Command {
             vt = ViewType.EVENTS;
             break;
 
-        case KEYWORD_ACTIVITY:
+        default:
             model.showActivityList(personToView);
             message = MESSAGE_ACTIVITY + personToView.getName() + ".";
             vt = ViewType.EVENTS;
             break;
-
-        default:
-            message = MESSAGE_TIME + personToView.getName() + ".\nTotal individual time spent: "
-                    + personToView.getTotalTimeSpent() + " hours.";
-            vt = ViewType.NORMAL;
         }
 
 

@@ -31,7 +31,6 @@ public class Person {
     private final FrequencyList placeList2;
     private final FrequencyList activityList2;
     private final PlaceList placeList = new PlaceList(new ArrayList<String>());
-    private float totalTimeSpent;
 
     /**
      * Every field must be present and not null.
@@ -45,11 +44,12 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.time = time;
-        this.placeList.addPlaceList(placeList.getPlaceList());
-        this.activityList.addActivityList(activityList.getActivityList());
+        this.placeList.setPlaceList(placeList.getPlaceList());
+        this.activityList.setActivityList(activityList.getActivityList());
         placeList2 = new FrequencyList();
+        placeList2.generate(this.placeList.getPlaceList());
         activityList2 = new FrequencyList();
-        totalTimeSpent = 0;
+        activityList2.generate(this.activityList.getActivityList());
     }
 
     public Name getName() {
@@ -168,9 +168,5 @@ public class Person {
 
     public ObservableList<EventDescriptor> getActivityList() {
         return activityList2.getFrequencyList();
-    }
-
-    public float getTotalTimeSpent() {
-        return totalTimeSpent;
     }
 }

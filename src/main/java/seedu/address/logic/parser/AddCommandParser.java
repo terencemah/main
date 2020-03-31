@@ -52,7 +52,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Time time = new Time(0, 0);
-        PlaceList placeList = new PlaceList(argMultimap.getAllValues(PREFIX_PLACE));
+        PlaceList placeList = new PlaceList(new ArrayList<String>());
         ActivityList activityList = new ActivityList(new ArrayList<String>());
 
         Person person = new Person(name, phone, email, address, tagList, time, placeList, activityList);

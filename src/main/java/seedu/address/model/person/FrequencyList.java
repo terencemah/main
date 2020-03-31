@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,6 +37,12 @@ public class FrequencyList {
             frequencyList.add(new EventDescriptor(name));
         }
         frequencyList.sort(new DescriptorComparator());
+    }
+
+    public void generate(List<String> items) {
+        for (String item : items) {
+            this.add(item);
+        }
     }
 
     public ObservableList<EventDescriptor> getFrequencyList() {

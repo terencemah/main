@@ -207,6 +207,7 @@ public class ModelManager implements Model {
     }
 
     private void copyList(ObservableList<EventDescriptor> list) {
+        frequencyList.clear();
         for (EventDescriptor eventDescriptor : list) {
             frequencyList.add(eventDescriptor);
         }

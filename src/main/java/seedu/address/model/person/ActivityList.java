@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,10 +31,12 @@ public class ActivityList {
      * Adds an activity to the current activityList
      * @return new ActivityList
      */
-    public ActivityList addActivityList(List<String> activity) {
-        List<String> toEdit = this.activityList;
-        toEdit.addAll(activity);
-        return new ActivityList(toEdit);
+    public void setActivityList(List<String> oldList) {
+        List<String> newList = new ArrayList<>();
+        newList.addAll(this.activityList);
+        newList.addAll(oldList);
+        this.activityList.clear();
+        this.activityList.addAll(newList);
     }
 
     @Override
