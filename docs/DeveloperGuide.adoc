@@ -185,8 +185,8 @@ The following is an activity diagram when a user executes the import command:
 [#ImportFileActivityDiagram,align="center"]
 image::ImportFileActivityDiagram.png[]
 
-When a user executes the `import` command, a parser would check if the CSV is valid or not. That means it would check 
-if the CSV file exists within the specified file path and whether the CSV file is 
+When a user executes the `import` command, a parser would check if the CSV is valid or not. That means it would check
+if the CSV file exists within the specified file path and whether the CSV file is
 
 If valid, the rows in the CSV file would then parsed and then creates a list of person to be imported.
 
