@@ -4,23 +4,27 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 
-
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Contains utility methods used for parsing strings in the various *Parser
+ * classes.
  */
 public class ParserUtil {
 
@@ -31,10 +35,11 @@ public class ParserUtil {
             + "Please input person/place/activity.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing
-     * whitespaces will be trimmed.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading
+     * and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws ParseException if the specified index is invalid (not non-zero
+     *                        unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
@@ -45,8 +50,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses a {@code String name} into a {@code Name}. Leading and trailing
+     * whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
@@ -60,8 +65,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses a {@code String phone} into a {@code Phone}. Leading and trailing
+     * whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
@@ -75,8 +80,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}. Leading and trailing whitespaces will
-     * be trimmed.
+     * Parses a {@code String address} into an {@code Address}. Leading and trailing
+     * whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
@@ -90,8 +95,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses a {@code String email} into an {@code Email}. Leading and trailing
+     * whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
@@ -105,8 +110,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses a {@code String tag} into a {@code Tag}. Leading and trailing
+     * whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
@@ -132,8 +137,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String path} into a trimmed path if file exists. Leading and trailing whitespaces
-     * will be trimmed.
+     * Parses {@code String path} into a trimmed path if file exists. Leading and
+     * trailing whitespaces will be trimmed.
      *
      * @throws ParseException if {@code file} does not exist.
      */
@@ -191,8 +196,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String suggest} into a trimmed parameter.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses {@code String suggest} into a trimmed parameter. Leading and trailing
+     * whitespaces will be trimmed.
      *
      * @throws ParseException if {@code suggest} parameter not equal to person.
      */
@@ -205,4 +210,27 @@ public class ParserUtil {
         return trimmedSuggestParameter;
     }
 
+    /**
+     * Parses {@code String input} into {@code PlaceList}
+     */
+    public static PlaceList parsePlaces(String input) {
+        List<String> toAdd = new ArrayList<>();
+        String[] process = input.split(", ");
+        for (String s : process) {
+            toAdd.add(s);
+        }
+        return new PlaceList(toAdd);
+    }
+
+    /**
+     * Parses {@code String input} into {@code ActivityList}
+     */
+    public static ActivityList parseActivities(String input) {
+        List<String> toAdd = new ArrayList<>();
+        String[] process = input.split(", ");
+        for (String s : process) {
+            toAdd.add(s);
+        }
+        return new ActivityList(toAdd);
+    }
 }
