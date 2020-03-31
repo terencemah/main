@@ -239,7 +239,6 @@ public class ModelManager implements Model {
         }
     }
 
-<<<<<<< HEAD
     private void copyRecent(ObservableList<RecentEvent> list) {
         recentEventList.clear();
         for (RecentEvent recentEvent : list) {
@@ -247,8 +246,6 @@ public class ModelManager implements Model {
         }
     }
 
-=======
->>>>>>> 50bd06e4a19f7b616a8cbd2465d5dc103af9f2d3
     /**
      * Updates filtered person list with suggested person based on time spent.
      */
@@ -286,24 +283,18 @@ public class ModelManager implements Model {
      * Suggests a place based on frequency
      */
     public void suggestPlace() {
-<<<<<<< HEAD
-        //        ObservableList<Event> eventList = addressBook.getEventList();
-        //        System.out.println(eventList);
-=======
+
     //        ObservableList<Event> eventList = addressBook.getEventList();
     //        System.out.println(eventList);
->>>>>>> 50bd06e4a19f7b616a8cbd2465d5dc103af9f2d3
+    //        ObservableList<Event> eventList = addressBook.getEventList();
+    //        System.out.println(eventList);
 
     }
 
     public void suggestActivity() {
-<<<<<<< HEAD
 
     }
-=======
-    }
 
->>>>>>> 50bd06e4a19f7b616a8cbd2465d5dc103af9f2d3
     @Override
     public ObservableList<EventDescriptor> getFrequencyList() {
         return frequencyList;
