@@ -5,7 +5,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.event.Event;
 
 /**
  * An observable list of EventDescriptor objects whose uniqueness is

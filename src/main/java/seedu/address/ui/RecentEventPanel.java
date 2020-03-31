@@ -10,6 +10,10 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.RecentEvent;
 
+/**
+ * Panel showing the last 5 events with the target person
+ * in reverse chronological order of event addition.
+ */
 public class RecentEventPanel extends UiPart<Region> {
     private static final String FXML = "RecentEventPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PlaceListPanel.class);

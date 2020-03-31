@@ -239,6 +239,10 @@ public class ModelManager implements Model {
         }
     }
 
+    /**
+     * Copies the target Person's active RecentEventList onto the Model's list.
+     * @param list List to be copied.
+     */
     private void copyRecent(ObservableList<RecentEvent> list) {
         recentEventList.clear();
         for (RecentEvent recentEvent : list) {
