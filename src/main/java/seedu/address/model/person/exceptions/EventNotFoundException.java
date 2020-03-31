@@ -1,6 +1,8 @@
 package seedu.address.model.person.exceptions;
-
-public class EventNotFoundException extends RuntimeException{
+/**
+ * Signals that the operation is unable to find the specified event.
+ */
+public class EventNotFoundException extends RuntimeException {
     public EventNotFoundException() {
         super("Did not find the specified event");
     }
