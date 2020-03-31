@@ -14,7 +14,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.event.TempPlace;
+//import seedu.address.model.event.TempPlace;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.Person;
@@ -89,8 +89,8 @@ public class LogicManager implements Logic {
         return model.getFrequencyList();
     }
 
-    @Override
+    /*@Override
     public ObservableList<TempPlace> getObservablePlaceList() {
         return model.getTempPlaceList();
-    }
+    }*/
 }

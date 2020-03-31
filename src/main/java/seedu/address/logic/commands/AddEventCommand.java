@@ -90,7 +90,7 @@ public class AddEventCommand extends Command {
         Time newTime = current.addTime(time.getMinutes(), time.getHours());
 
         PlaceList currentPlaceList = personToEdit.getPlaceList2();
-        PlaceList newPlaceList = currentPlaceList.addPlace(place);;
+        PlaceList newPlaceList = currentPlaceList.addPlace(place);
 
         ActivityList currentActivityList = personToEdit.getActivityList2();
         ActivityList newActivityList = currentActivityList.addActivity(activity);
@@ -99,8 +99,6 @@ public class AddEventCommand extends Command {
                 personToEdit.getAddress(), personToEdit.getTags(), newTime, newPlaceList, newActivityList);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        editedPerson.addPlace(place);
-        editedPerson.addActivity(activity);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, personToEdit));
     }

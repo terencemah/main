@@ -4,6 +4,7 @@ import seedu.address.model.event.TempPlace;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,12 +16,12 @@ import javafx.collections.ObservableList;
  */
 public class PlaceList {
     public final List<String> placeList;
-    private HashMap<String, Integer> placeSet = new HashMap<>();
-    private ObservableList<TempPlace> observablePlaceList;
+    /*private HashMap<String, Integer> placeSet = new HashMap<>();
+    private ObservableList<TempPlace> observablePlaceList;*/
 
     public PlaceList(List<String> places) {
         this.placeList = places;
-        for (String s: placeList) {
+        /*for (String s: placeList) {
            if (placeSet.containsKey(s)) {
                int count = placeSet.get(s);
                count += 1;
@@ -29,14 +30,14 @@ public class PlaceList {
                placeSet.put(s, 1);
            }
         }
-        observablePlaceList = toObservablePlaceList();
+        observablePlaceList = toObservablePlaceList();*/
     }
 
     public List<String> getPlaceList() {
         return this.placeList;
     }
 
-    private HashMap<String, Integer> getPlaceSet() {
+    /*private HashMap<String, Integer> getPlaceSet() {
         return this.placeSet;
     }
 
@@ -52,7 +53,8 @@ public class PlaceList {
             tmpLs.add(new TempPlace((String) mapElement.getKey(), (int) mapElement.getValue()));
         }
         return tmpLs;
-    }
+    }*/
+
     /**
      * Adds a place to the current placeList
      * @return new PlaceList
@@ -63,14 +65,12 @@ public class PlaceList {
         return new PlaceList(current);
     }
 
-    /**
-     * Adds a place to the current placeList
-     * @return new PlaceList
-     */
-    public PlaceList addPlaceList(List<String> xs) {
-        List<String> toEdit = this.placeList;
-        toEdit.addAll(xs);
-        return new PlaceList(toEdit);
+    public void setPlaceList(List<String> xs) {
+        List<String> newList = new ArrayList<>();
+        newList.addAll(this.placeList);
+        newList.addAll(xs);
+        this.placeList.clear();
+        this.placeList.addAll(newList);
     }
 
     @Override

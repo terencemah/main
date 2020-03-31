@@ -13,27 +13,33 @@ public class UniqueGroupListTest {
     private final UniqueGroupList uniqueGroupList = new UniqueGroupList();
 
     @Test
-    public void contains_nullPerson_throwsNullPointerException() {
+    public void contains_nullGroup_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueGroupList.contains(null));
     }
 
     @Test
-    public void remove_nullPerson_throwsNullPointerException() {
+    public void remove_nullGroup_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueGroupList.removeGroup(null));
     }
 
     @Test
-    public void contains_personInList_returnsTrue() {
+    public void contains_groupInList_returnsTrue() {
         Group group = new Group(new Name("Soc Friends"));
         uniqueGroupList.addGroup(group);
         assertTrue(uniqueGroupList.contains(group));
     }
 
     @Test
-    public void add_duplicatePerson_throwsDuplicatePersonException() {
+    public void add_duplicateGroup_throwsDuplicateGroupException() {
         Group group = new Group(new Name("Soc Friends"));
         uniqueGroupList.addGroup(group);
         assertThrows(DuplicateGroupException.class, () -> uniqueGroupList.addGroup(group));
+    }
+
+    @Test
+    public void setGroups_nullUniqueGroupsList_throwsNullPointerException() {
+        assertThrows(
+                NullPointerException.class, () -> uniqueGroupList.setGroups((UniqueGroupList) null));
     }
 
 }

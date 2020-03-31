@@ -64,7 +64,7 @@ public class PersonTest {
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // same name, same phone, different time -> returns true
-        editedAlice = new PersonBuilder(ALICE).withTime("2359").build();
+        editedAlice = new PersonBuilder(ALICE).withTime("2h 0m").build();
         assertTrue(ALICE.isSamePerson(editedAlice));
     }
 
@@ -107,7 +107,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different time -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTime("30").build();
+        editedAlice = new PersonBuilder(ALICE).withTime("1h 0m").build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

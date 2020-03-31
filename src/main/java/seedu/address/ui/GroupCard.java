@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+
 import seedu.address.model.group.Group;
 
 /**
@@ -21,12 +22,22 @@ public class GroupCard extends UiPart<Region> {
     private Label name;
     @FXML
     private Label id;
+    @FXML
+    private Label timeSpent;
+    @FXML
+    private Label members;
+    @FXML
+    private Label events;
 
     public GroupCard(Group group, int displayedIndex) {
         super(FXML);
         this.group = group;
         id.setText(displayedIndex + ". ");
         name.setText(group.getName().fullName);
+        String text = group.getTimeSpent().toString();
+        timeSpent.setText("Total Time Spent:" + text);
+        members.setText(group.printMemberList());
+        events.setText(group.printEventIds());
     }
 
     @Override
