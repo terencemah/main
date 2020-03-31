@@ -27,7 +27,8 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_PATH = "testing.csv";
+    private static final String INVALID_PATH = "testing123.csv";
+    private static final String INVALID_SUGGEST = "invalid parameter";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -229,5 +230,32 @@ public class ParserUtilTest {
         String input = "0h 0m";
         Time expectedTime = new Time(0, 0);
         assertEquals(expectedTime, ParserUtil.parseTime(input));
+    }
+
+    @Test
+    public void parseSuggest_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSuggest(null));
+    }
+
+    @Test
+    public void parseSuggest_emptyString_throwsNullPointerException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSuggest(""));
+    }
+
+    @Test
+    public void parseSuggest_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSuggest(INVALID_SUGGEST));
+    }
+
+    @Test
+    public void parseSuggest_validValueWithoutWhitespace_returnsPerson() throws Exception {
+        assertEquals("person", ParserUtil.parseSuggest("person"));
+    }
+
+    @Test
+    public void parseSuggest_validValueWithWhitespace_returnsTrimmedPath() throws Exception {
+        String suggestWithWhitespace = WHITESPACE + "person" + WHITESPACE;
+        String expectedSuggest = "person";
+        assertEquals(expectedSuggest, ParserUtil.parseSuggest(suggestWithWhitespace));
     }
 }

@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.exceptions.CommandException;
+//import seedu.address.model.event.Event;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.NameContainsFullNamePredicate;
@@ -123,6 +123,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasGroups(List<Group> groups) {
+        requireNonNull(groups);
+        return addressBook.hasGroups(groups);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -178,9 +184,16 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void importCsvToAddressBook(List<Person> importedPeople) throws CommandException {
+    public void importCsvToAddressBook(List<Person> importedPeople) {
         requireNonNull(importedPeople);
         addressBook.addPersons(importedPeople);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void importCsvGroupsToAddressBook(List<Group> importedGroup) {
+        requireNonNull(importedGroup);
+        addressBook.addGroups(importedGroup);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -226,6 +239,7 @@ public class ModelManager implements Model {
         }
     }
 
+<<<<<<< HEAD
     private void copyRecent(ObservableList<RecentEvent> list) {
         recentEventList.clear();
         for (RecentEvent recentEvent : list) {
@@ -233,6 +247,8 @@ public class ModelManager implements Model {
         }
     }
 
+=======
+>>>>>>> 50bd06e4a19f7b616a8cbd2465d5dc103af9f2d3
     /**
      * Updates filtered person list with suggested person based on time spent.
      */
@@ -270,14 +286,24 @@ public class ModelManager implements Model {
      * Suggests a place based on frequency
      */
     public void suggestPlace() {
+<<<<<<< HEAD
         //        ObservableList<Event> eventList = addressBook.getEventList();
         //        System.out.println(eventList);
+=======
+    //        ObservableList<Event> eventList = addressBook.getEventList();
+    //        System.out.println(eventList);
+>>>>>>> 50bd06e4a19f7b616a8cbd2465d5dc103af9f2d3
 
     }
 
     public void suggestActivity() {
+<<<<<<< HEAD
 
     }
+=======
+    }
+
+>>>>>>> 50bd06e4a19f7b616a8cbd2465d5dc103af9f2d3
     @Override
     public ObservableList<EventDescriptor> getFrequencyList() {
         return frequencyList;

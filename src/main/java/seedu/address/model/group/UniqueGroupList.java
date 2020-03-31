@@ -31,6 +31,22 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
+     * Returns true if the list contains an equivalent personList as the given argument.
+     */
+    public boolean containsGroups(List<Group> toCheck) {
+        requireNonNull(toCheck);
+        boolean groupExists;
+        for (Group oneGroup : toCheck) {
+            groupExists = internalList.stream().anyMatch(oneGroup::equals);
+            if (groupExists) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * Adds a given group to the list.
      *
      * @param toAdd group to be added
@@ -41,6 +57,19 @@ public class UniqueGroupList implements Iterable<Group> {
             throw new DuplicateGroupException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Adds given groups to the list
+     *
+     * @param toAdd groups to be added
+     */
+    public void addAll(List<Group> toAdd) {
+        requireNonNull(toAdd);
+        if (containsGroups(toAdd)) {
+            throw new DuplicateGroupException();
+        }
+        internalList.addAll(toAdd);
     }
 
     public void setGroups(List<Group> groups) {

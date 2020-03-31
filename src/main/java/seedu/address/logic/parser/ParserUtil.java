@@ -22,21 +22,24 @@ import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
 import seedu.address.model.tag.Tag;
 
-
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Contains utility methods used for parsing strings in the various *Parser
+ * classes.
  */
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_PATH = "Path provided must exist.";
     public static final String MESSAGE_FILE_ALREADY_EXIST = "File already exist. Please specify another name.";
+    public static final String MESSAGE_INVALID_PARAMETER = "Invalid suggestion parameter entered. "
+            + "Please input person/place/activity.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing
-     * whitespaces will be trimmed.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading
+     * and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws ParseException if the specified index is invalid (not non-zero
+     *                        unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
@@ -47,8 +50,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses a {@code String name} into a {@code Name}. Leading and trailing
+     * whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
@@ -62,8 +65,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses a {@code String phone} into a {@code Phone}. Leading and trailing
+     * whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
@@ -77,8 +80,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}. Leading and trailing whitespaces will
-     * be trimmed.
+     * Parses a {@code String address} into an {@code Address}. Leading and trailing
+     * whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
@@ -92,8 +95,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses a {@code String email} into an {@code Email}. Leading and trailing
+     * whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
@@ -107,8 +110,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses a {@code String tag} into a {@code Tag}. Leading and trailing
+     * whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
@@ -134,8 +137,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String path} into a trimmed path if file exists. Leading and trailing whitespaces
-     * will be trimmed.
+     * Parses {@code String path} into a trimmed path if file exists. Leading and
+     * trailing whitespaces will be trimmed.
      *
      * @throws ParseException if {@code file} does not exist.
      */
@@ -150,11 +153,11 @@ public class ParserUtil {
     }
 
     /**
-    * Parses {@code String path} into a trimmed path if file does not exist.
-    * Leading and trailing whitespaces will be trimmed.
-    *
-    * @throws ParseException if {@code file} exist.
-    */
+     * Parses {@code String path} into a trimmed path if file does not exist.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if {@code file} exist.
+     */
     public static String parseExportPath(String path) throws ParseException, IOException {
         requireNonNull(path);
         String trimmedPath = path.strip();
@@ -172,7 +175,7 @@ public class ParserUtil {
      */
     public static Time parseTime(String time) {
         requireNonNull(time);
-        String [] arr = time.split(" ");
+        String[] arr = time.split(" ");
         // get hours
         String hours = arr[0].substring(0, arr[0].length() - 1);
         String minutes = arr[1].substring(0, arr[1].length() - 1);
@@ -180,11 +183,29 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code String suggest} into a trimmed parameter. Leading and trailing
+     * whitespaces will be trimmed.
+     *
+     * @throws ParseException if {@code suggest} parameter not equal to person.
+     */
+    public static String parseSuggest(String suggest) throws ParseException {
+        requireNonNull(suggest);
+        String trimmedSuggestParameter = suggest.trim();
+        if (trimmedSuggestParameter.equalsIgnoreCase("person")) {
+            return trimmedSuggestParameter;
+        } else if (trimmedSuggestParameter.equalsIgnoreCase("place")) {
+            return trimmedSuggestParameter;
+        } else {
+            throw new ParseException(MESSAGE_INVALID_PARAMETER);
+        }
+    }
+
+    /**
      * Parses {@code String input} into {@code PlaceList}
      */
     public static PlaceList parsePlaces(String input) {
         List<String> toAdd = new ArrayList<>();
-        String [] process = input.split(", ");
+        String[] process = input.split(", ");
         for (String s : process) {
             toAdd.add(s);
         }
@@ -196,7 +217,7 @@ public class ParserUtil {
      */
     public static ActivityList parseActivities(String input) {
         List<String> toAdd = new ArrayList<>();
-        String [] process = input.split(", ");
+        String[] process = input.split(", ");
         for (String s : process) {
             toAdd.add(s);
         }
