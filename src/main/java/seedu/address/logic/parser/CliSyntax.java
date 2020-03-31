@@ -15,4 +15,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_GROUP = new Prefix("g/");
     public static final Prefix PREFIX_PLACE = new Prefix("place/");
     public static final Prefix PREFIX_TIME = new Prefix("time/");
+    public static final Prefix PREFIX_LIFE = new Prefix("l/");
 }

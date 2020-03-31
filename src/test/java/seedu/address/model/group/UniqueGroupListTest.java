@@ -3,6 +3,8 @@ package seedu.address.model.group;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Name;
@@ -37,9 +39,24 @@ public class UniqueGroupListTest {
     }
 
     @Test
+    public void add_duplicateGroup_throwsDuplicateGroupsException() {
+        Group group = new Group(new Name("Soc Friends"));
+        ArrayList<Group> groups = new ArrayList<>();
+        groups.add(group);
+        uniqueGroupList.addAll(groups);
+        assertThrows(DuplicateGroupException.class, () -> uniqueGroupList.addAll(groups));
+    }
+
+    @Test
     public void setGroups_nullUniqueGroupsList_throwsNullPointerException() {
         assertThrows(
                 NullPointerException.class, () -> uniqueGroupList.setGroups((UniqueGroupList) null));
     }
+
+    @Test
+    public void contains_nullGroups_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueGroupList.containsGroups(null));
+    }
+
 
 }

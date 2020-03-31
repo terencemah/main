@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+//import seedu.address.model.event.Event;
+//import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.person.Person;
@@ -17,16 +19,12 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueGroupList groups;
+    //    private final UniqueEventList events;
 
-     /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */ {
+    {
         persons = new UniquePersonList();
         groups = new UniqueGroupList();
+        //        events = new UniqueEventList();
     }
 
     public AddressBook() {
@@ -96,6 +94,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a groups with the same identity as {@code group} exists in the address book.
+     */
+    public boolean hasGroups(List<Group> groupList) {
+        requireNonNull(groupList);
+        return groups.containsGroups(groupList);
+    }
+
+    /**
      * Adds given group to the groups list.
      *
      * @param group given group
@@ -104,6 +110,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(group);
         groups.addGroup(group);
     }
+
+
+    public void addGroups(List<Group> g) {
+        groups.addAll(g);
+    }
+
 
     /**
      * Adds a person to the address book. The person must not already exist in the address book.
@@ -155,6 +167,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Group> getGroupList() {
         return groups.asUnmodifiableObservableList();
     }
+
+    //    @Override
+    //    public ObservableList<Event> getEventList() {
+    //        return events.asUnmodifiableObservableList();
+    //    }
 
     @Override
     public boolean equals(Object other) {
