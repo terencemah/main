@@ -65,7 +65,7 @@ public class Time {
 
     @Override
     public String toString() {
-        return String.format("%s h %s m", this.hours, this.minutes);
+        return String.format("%sh %sm", this.hours, this.minutes);
     }
 
     @Override

@@ -75,7 +75,7 @@ public class ViewCommand extends Command {
 
         default:
             message = MESSAGE_TIME + personToView.getName() + ".\nTotal individual time spent: "
-                    + personToView.getTotalTimeSpent() + " hours.";
+                    + personToView.getTime().toString();
             vt = ViewType.NORMAL;
         }
 

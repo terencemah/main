@@ -172,7 +172,11 @@ public class ParserUtil {
      */
     public static Time parseTime(String time) {
         requireNonNull(time);
-        return new Time(Integer.parseInt(mins), Integer.parseInt(hrs));
+        String [] arr = time.split(" ");
+        // get hours
+        String hours = arr[0].substring(0, arr[0].length() - 1);
+        String minutes = arr[1].substring(0, arr[1].length() - 1);
+        return new Time(Integer.valueOf(hours), Integer.valueOf(minutes));
     }
 
     /**
