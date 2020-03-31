@@ -36,4 +36,10 @@ public class UniqueGroupListTest {
         assertThrows(DuplicateGroupException.class, () -> uniqueGroupList.addGroup(group));
     }
 
+    @Test
+    public void setGroups_nullUniqueGroupsList_throwsNullPointerException() {
+        assertThrows(
+                NullPointerException.class, () -> uniqueGroupList.setGroups((UniqueGroupList) null));
+    }
+
 }
