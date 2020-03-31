@@ -4,11 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.ModelManager;
-import seedu.address.model.group.Group;
 
-import java.util.logging.Logger;
+import seedu.address.model.group.Group;
 
 /**
  * A UI component that displaces information of a {@code Group}
