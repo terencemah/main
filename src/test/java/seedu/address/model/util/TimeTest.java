@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Time;
+import seedu.address.testutil.Assert;
 
 public class TimeTest {
 
@@ -16,13 +17,29 @@ public class TimeTest {
         Assertions.assertTrue(time.getHours() == 2 && time.getMinutes() == 59);
     }
 
-    @Test void timeCreationInvalid() {
+    @Test
+    public void timeCreationInvalid() {
         Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, (
                 ) -> new Time(162, 2));
         Assertions.assertEquals(exception.getMessage(), MINUTES_RANGE_ERROR);
     }
 
-    @Test void timeToString() {
+    @Test
+    public void timeEqualsFalse() {
+        Time time1 = new Time(59, 2);
+        Time time2 = new Time(0, 0);
+        Assertions.assertFalse(time1.equals(time2));
+    }
+
+    @Test
+    public void timeHashCodeDifferent() {
+        Time time1 = new Time(59, 0);
+        Time time2 = new Time(1, 0);
+        Assertions.assertFalse(time1.hashCode() == time2.hashCode());
+    }
+
+    @Test
+    public void timeToString() {
         Time time = new Time(59, 2);
         Assertions.assertEquals("2h 59m", time.toString());
     }
