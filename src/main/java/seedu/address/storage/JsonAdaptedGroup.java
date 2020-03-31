@@ -81,8 +81,10 @@ public class JsonAdaptedGroup {
         //%TODO: Add more checks as group class and info evolve
 
         Group group = new Group(new Name(name));
-        String[] times = timeSpent.split(":");
-        Time time = new Time(Integer.valueOf(times[1]), Integer.valueOf(times[0]));
+        String[] times = timeSpent.split(" ");
+        String hours = times[0].substring(0, times[0].length() - 1);
+        String minutes = times[1].substring(0, times[1].length() - 1);
+        Time time = new Time(Integer.valueOf(hours), Integer.valueOf(minutes));
         group.setTimeSpent(time);
 
         ArrayList<Integer> members = new ArrayList<>();
