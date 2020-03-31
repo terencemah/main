@@ -8,6 +8,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.Person;
 
 /**
@@ -81,5 +82,25 @@ public class ViewCommand extends Command {
 
 
         return new CommandResult(message, vt);
+    }
+
+    public Index getIndex() {
+        return index;
+    }
+
+    public String getParam() {
+        return parameter;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof ViewCommand)) {
+            return false;
+        }
+        return ((ViewCommand) o).getIndex().equals(this.getIndex())
+                && ((ViewCommand) o).getParam() == this.getParam();
     }
 }

@@ -157,6 +157,21 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void showPlaceList_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.showPlaceList(null));
+    }
+
+    @Test
+    public void showActivityList_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.showActivityList(null));
+    }
+
+    @Test
+    public void showRecentList_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.showRecentList(null));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
