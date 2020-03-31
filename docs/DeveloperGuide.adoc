@@ -200,7 +200,7 @@ The following class diagram illustrates the summary of the ImportFile class.
 image::ImportFileClassDiagram.png[][pdfwidth="30%",width="30%"]
 ==== Csv file format and constraints
 In order for data to be imported into CoderLifeInsights, the CSV file provided must be in the exact format.
-There are 9 columns specified for `name`, `phone`, `email`, `address`, `tagged`, `time`, `places` , `activities` and 
+There are 9 columns specified for `name`, `phone`, `email`, `address`, `tagged`, `time`, `places` , `activities` and
 === Export feature
 ==== Implementation
 

@@ -180,7 +180,7 @@ Imports your Life from `C:\Users\Harry\Desktop\Documents\life.csv`
 * `import l/./Desktop/life.csv` +
 Imports your Life from `C:\Users\Harry\Desktop\Documents\life.csv`
 
-==== Retrieving File Path 
+==== Retrieving File Path
 
 For Windows:
 
