@@ -49,19 +49,19 @@ public class UniqueGroupListTest {
     }
 
     @Test
-    public void setGroup_nullTargetGroup_throwsNullPointerException() {
+    public void setGroupNullTargetGroupThrowsNullPointerException() {
         Group group = new Group(new Name("Soc Friends"));
         assertThrows(NullPointerException.class, () -> uniqueGroupList.setGroup(null, group));
     }
 
     @Test
-    public void setGroup_nullEditedGroup_throwsNullPointerException() {
+    public void setGroupNullEditedGroupThrowsNullPointerException() {
         Group group = new Group(new Name("Soc Friends"));
         assertThrows(NullPointerException.class, () -> uniqueGroupList.setGroup(group, null));
     }
 
     @Test
-    public void setGroup_editedGroupHasNonUniqueIdentity_throwsDuplicatePersonException() {
+    public void setGroupEditedGroupHasNonUniqueIdentityThrowsDuplicatePersonException() {
         Group group = new Group(new Name("Soc Friends"));
         uniqueGroupList.addGroup(group);
         Group group1 = new Group(new Name("Cinnamon Friends"));
@@ -70,7 +70,7 @@ public class UniqueGroupListTest {
     }
 
     @Test
-    public void setGroup_editedGroupIsSameGroup_success() {
+    public void setGroupEditedGroupIsSameGroupSuccess() {
         Group group = new Group(new Name("Soc Friends"));
         uniqueGroupList.addGroup(group);
         uniqueGroupList.setGroup(group, group);

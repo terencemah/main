@@ -83,7 +83,7 @@ public class AddEventCommand extends Command {
             Person toEdit = lastShownList.get(index - 1);
 
             Time curr = toEdit.getTime();
-            Time newTime = curr.addTime(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
+            curr.addTime(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
 
             PlaceList currentPlaceList = toEdit.getPlaceList2();
             PlaceList newPlaceList = currentPlaceList.addPlace(toAdd.getPlace());
@@ -92,7 +92,7 @@ public class AddEventCommand extends Command {
             ActivityList newActivityList = currentActivityList.addActivity(toAdd.getActivity());
 
             Person editedPerson = new Person(toEdit.getName(), toEdit.getPhone(), toEdit.getEmail(),
-                    toEdit.getAddress(), toEdit.getTags(), newTime, newPlaceList, newActivityList);
+                    toEdit.getAddress(), toEdit.getTags(), curr, newPlaceList, newActivityList);
             model.setPerson(toEdit, editedPerson);
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             model.addEvent(toAdd);
@@ -107,12 +107,12 @@ public class AddEventCommand extends Command {
             Group toEdit = lastShownList.get(index - 1);
 
             Time curr = toEdit.getTimeSpent();
-            Time newTime = curr.addTime(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
+            curr.addTime(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
 
             // % TODO: Add to activity and place lists
 
             Group editedGroup = new Group(toEdit.getName());
-            editedGroup.setTimeSpent(newTime);
+            editedGroup.setTimeSpent(curr);
             model.setGroup(toEdit, editedGroup);
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             model.addEvent(toAdd);
