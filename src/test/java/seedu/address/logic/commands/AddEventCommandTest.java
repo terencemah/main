@@ -84,7 +84,6 @@ public class AddEventCommandTest {
         final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         final String activity = "test";
         final String place = "anywhere";
-        final Time time = new Time(30, 0);
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
 
         Event event = new Event(activity, place, 30, 0);
