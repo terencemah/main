@@ -4,32 +4,32 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+//import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.AddEventTypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+//import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+//import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.AddressBook;
+//import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Person;
+//import seedu.address.model.person.Person;
 import seedu.address.model.person.Time;
-import seedu.address.testutil.PersonBuilder;
+//import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for AddEventCommand.
  */
 public class AddEventCommandTest {
 
-        /*@Test //need fix
+    /*    @Test //need fix
         public void execute_addEventUnfilteredList_success() {
             final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
             final String activity = "test";
@@ -56,7 +56,7 @@ public class AddEventCommandTest {
             assertTrue(model.getFilteredEventList().equals(expectedModel.getFilteredEventList()));
         }*/
 
-        /*@Test //need fix
+    /*    @Test need fix
         public void execute_addEventFilteredList_success() {
             final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
             final String activity = "test";
@@ -114,7 +114,7 @@ public class AddEventCommandTest {
         assertCommandFailure(addEventCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-        /*@Test //need fix
+    /*    @Test need fix
         public void execute_addEventOfMoreThan1HourUnfilteredList_success() {
             final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
             final String activity = "test";
