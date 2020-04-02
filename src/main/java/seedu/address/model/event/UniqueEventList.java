@@ -12,7 +12,7 @@ import seedu.address.model.person.exceptions.DuplicateEventException;
 import seedu.address.model.person.exceptions.EventNotFoundException;
 
 /**
- * Represents the list of events that enforces unqiueness in its events.
+ * Represents the list of events that enforces uniqueness in its events.
  */
 public class UniqueEventList implements Iterable<Event> {
 
@@ -28,7 +28,7 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public boolean contains(Event toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::equals);
+        return internalList.stream().anyMatch(toCheck::isSameEvent);
     }
 
     /**
@@ -38,7 +38,7 @@ public class UniqueEventList implements Iterable<Event> {
         requireNonNull(toCheck);
         boolean eventExists;
         for (Event oneEvent : toCheck) {
-            eventExists = internalList.stream().anyMatch(oneEvent:: equals);
+            eventExists = internalList.stream().anyMatch(oneEvent::isSameEvent);
             if (eventExists) {
                 return true;
             }
@@ -67,6 +67,14 @@ public class UniqueEventList implements Iterable<Event> {
             throw new DuplicateEventException();
         }
         internalList.addAll(toAdd);
+    }
+
+    public void setEvents(List<Event> events) {
+        requireNonNull(events);
+        if (!eventsAreUnique(events)) {
+            throw new DuplicateEventException();
+        }
+        internalList.setAll(events);
     }
 
     /**
@@ -103,4 +111,17 @@ public class UniqueEventList implements Iterable<Event> {
         return internalList.hashCode();
     }
 
+    /**
+     * Returns true if {@code groups} contains only unique persons.
+     */
+    private boolean eventsAreUnique(List<Event> events) {
+        for (int i = 0; i < events.size() - 1; i++) {
+            for (int j = i + 1; j < events.size(); j++) {
+                if (events.get(i).isSameEvent(events.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

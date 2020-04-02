@@ -20,6 +20,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
+import seedu.address.model.person.TimeList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -224,5 +225,17 @@ public class ParserUtil {
             toAdd.add(s);
         }
         return new ActivityList(toAdd);
+    }
+
+    /**
+     * Parses {@code String input} into {@code TimeList}
+     */
+    public static TimeList parseTimes(String input) {
+        List<String> toAdd = new ArrayList<>();
+        String[] process = input.split(", ");
+        for (String s : process) {
+            toAdd.add(s);
+        }
+        return new TimeList(toAdd);
     }
 }

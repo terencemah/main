@@ -12,12 +12,12 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.EventDescriptor;
 
 /**
- * Panel showing the list of places or activities,
+ * Panel showing the list of places,
  * and their frequencies in descending order.
  */
-public class FrequencyListPanel extends UiPart<Region> {
-    private static final String FXML = "FrequencyListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(FrequencyListPanel.class);
+public class PlaceListPanel extends UiPart<Region> {
+    private static final String FXML = "PlaceListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(PlaceListPanel.class);
 
     @FXML
     private TableView<EventDescriptor> frequencyTable;
@@ -28,7 +28,7 @@ public class FrequencyListPanel extends UiPart<Region> {
     @FXML
     private TableColumn<EventDescriptor, String> frequencyColumn;
 
-    public FrequencyListPanel(ObservableList<EventDescriptor> frequencyList) {
+    public PlaceListPanel(ObservableList<EventDescriptor> frequencyList) {
         super(FXML);
         placeColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         frequencyColumn.setCellValueFactory(cellData -> cellData.getValue().frequencyProperty());

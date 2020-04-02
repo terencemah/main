@@ -31,7 +31,9 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private FrequencyListPanel frequencyListPanel;
+    private PlaceListPanel placeListPanel;
+    private ActivityListPanel activityListPanel;
+    private RecentEventPanel recentEventPanel;
     private PersonListPanel personListPanel;
     private GroupListPanel groupListPanel;
     private ResultDisplay resultDisplay;
@@ -188,17 +190,22 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void handleView() {
-        frequencyListPanel = new FrequencyListPanel(logic.getFrequencyList());
-        frequencyListPanelPlaceholder.getChildren().clear();
-        frequencyListPanelPlaceholder.getChildren().add(frequencyListPanel.getRoot());
+    private void handleViewActivities() {
+        activityListPanel = new ActivityListPanel(logic.getFrequencyList());
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(activityListPanel.getRoot());
+    }
+
+    private void handleViewRecent() {
+        recentEventPanel = new RecentEventPanel(logic.getRecentList());
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(recentEventPanel.getRoot());
     }
 
     private void handleGroup() {
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
         groupListPanelPlaceholder.getChildren().clear();
         groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
-    }
 
     private void handleNormal() {
         personListPanelPlaceholder.getChildren().clear();
@@ -224,20 +231,26 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             switch (commandResult.getViewType()) {
 
-                case HELP:
-                    handleHelp();
-                    break;
-                case EXIT:
-                    handleExit();
-                    break;
-                case EVENTS:
-                    handleView();
-                    break;
-                case GROUPS:
-                    handleGroup();
-                    break;
-                default:
-                    handleNormal();
+            case HELP:
+                handleHelp();
+                break;
+            case EXIT:
+                handleExit();
+                break;
+            case PLACES:
+                handleViewPlaces();
+                break;
+            case ACTIVITIES:
+                handleViewActivities();
+                break;
+            case RECENT:
+                handleViewRecent();
+                break;
+            case GROUPS:
+                handleGroup();
+                break;
+            default:
+                handleNormal();
             }
             return commandResult;
 

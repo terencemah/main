@@ -22,6 +22,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.NameContainsFullNamePredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RecentEvent;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -35,6 +36,7 @@ public class ModelManager implements Model {
     private final FilteredList<Group> filteredGroups;
     private final FilteredList<Event> filteredEvents;
     private final ObservableList<EventDescriptor> frequencyList;
+    private final ObservableList<RecentEvent> recentEventList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -51,6 +53,7 @@ public class ModelManager implements Model {
         filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
         frequencyList = FXCollections.observableArrayList();
+        recentEventList = FXCollections.observableArrayList();
     }
 
     public ModelManager() {
@@ -214,6 +217,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
+    }
+
+    @Override
     public void importCsvToAddressBook(List<Person> importedPeople) {
         requireNonNull(importedPeople);
         addressBook.addPersons(importedPeople);
@@ -225,6 +234,14 @@ public class ModelManager implements Model {
         requireNonNull(importedGroup);
         addressBook.addGroups(importedGroup);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void importCsvEventsToAddressBook(List<Event> importedEvent) {
+        requireNonNull(importedEvent);
+        addressBook.addEvents(importedEvent);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredEventList(unused -> true);
     }
 
     @Override
@@ -254,6 +271,10 @@ public class ModelManager implements Model {
         copyList(target.getActivityList());
     }
 
+    public void showRecentList(Person target) {
+        copyRecent(target.getRecentEventList());
+    }
+
     /**
      * Copies the active PlaceList or ActivityList onto the Model's Frequency List.
      *
@@ -263,6 +284,18 @@ public class ModelManager implements Model {
         frequencyList.clear();
         for (EventDescriptor eventDescriptor : list) {
             frequencyList.add(eventDescriptor);
+        }
+    }
+
+    /**
+     * Copies the target Person's active RecentEventList onto the Model's list.
+     * @param list List to be copied.
+     */
+    @Override
+    public void copyRecent(ObservableList<RecentEvent> list) {
+        recentEventList.clear();
+        for (RecentEvent recentEvent : list) {
+            recentEventList.add(recentEvent);
         }
     }
 
@@ -364,6 +397,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<EventDescriptor> getFrequencyList() {
         return frequencyList;
+    }
+
+    @Override
+    public ObservableList<RecentEvent> getRecentList() {
+        return recentEventList;
     }
 
     @Override

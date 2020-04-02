@@ -52,4 +52,20 @@ public class FrequencyList {
     public ObservableList<EventDescriptor> getFrequencyList() {
         return frequencyList;
     }
+
+    public HashMap<String, Integer> getMap() {
+        return uniqueNameList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof FrequencyList)) {
+            return false;
+        }
+        return ((FrequencyList) o).getFrequencyList().equals(this.getFrequencyList())
+                && ((FrequencyList) o).getMap().equals(this.getMap());
+    }
 }

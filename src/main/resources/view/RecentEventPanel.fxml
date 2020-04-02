@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <TableView fx:id="eventTable" prefHeight="400.0" prefWidth="222.0">
+            <columns>
+                <TableColumn fx:id="placeColumn" prefWidth="180.0" text="Place" />
+                <TableColumn fx:id="activityColumn" prefWidth="180.0" text="Activity" />
+            <TableColumn fx:id="timeColumn" prefWidth="180.0" text="Duration" />
+            </columns>
+        </TableView>
+    </children>
+</VBox>
