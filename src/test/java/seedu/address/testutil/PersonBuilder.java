@@ -124,13 +124,16 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code PlaceList} of the {@code Person} that we are building.
+     * Sets the {@code ActivityList} of the {@code Person} that we are building.
      */
     public PersonBuilder withActivityList(String input) {
         this.activities = ParserUtil.parseActivities(input);
         return this;
     }
 
+    /**
+     * Sets the {@code TimeList} of the {@code Person} that we are building.
+     */
     public PersonBuilder withTimeList(String input) {
         this.times = ParserUtil.parseTimes(input);
         return this;
