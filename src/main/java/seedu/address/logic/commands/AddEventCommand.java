@@ -5,19 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.List;
-
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.ActivityList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PlaceList;
-import seedu.address.model.person.Time;
-
 /**
  * Represents the command to add a new event to CoderLifeInsights.
  */
@@ -55,7 +46,7 @@ public class AddEventCommand extends Command {
             + "[1 hour = 100]; "
             + "[10 hours and 30 minutes = 1030]";
     public static final String MESSAGE_SUCCESS = "New event successfully added: %1$s";
-    public static final String MESSAGE_DUPLICATE_GROUP = "Event with given arguments already exists. Please try again."
+    public static final String MESSAGE_DUPLICATE_EVENT = "Event with given arguments already exists. Please try again."
     public static final String MESSAGE_ARGUMENTS = "Activity: %1$s, Index: %2$d, Place: %3$s, Time: %4$s";
 
     private final Event toAdd;
@@ -67,45 +58,13 @@ public class AddEventCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        requireAllNonNull(model);
 
-        if (index - 1 >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-        Person personToEdit = lastShownList.get(index - 1);
-
-        Time current = personToEdit.getTime();
-        Time newTime = current.addTime(time.getMinutes(), time.getHours());
-
-        PlaceList currentPlaceList = personToEdit.getPlaceList2();
-        PlaceList newPlaceList = currentPlaceList.addPlace(place);
-
-        ActivityList currentActivityList = personToEdit.getActivityList2();
-        ActivityList newActivityList = currentActivityList.addActivity(activity);
-
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), newTime, newPlaceList, newActivityList);
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, personToEdit));
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
+        if (model.hasEvent(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof AddEventCommand)) {
-            return false;
-        }
-
-        // state check
-        AddEventCommand e = (AddEventCommand) other;
-        return index == (e.index)
-                && activity.equals(e.activity) && place.equals(e.place) && time.equals(e.time);
+        model.addEvent(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 }
