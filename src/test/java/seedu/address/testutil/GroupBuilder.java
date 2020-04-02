@@ -75,7 +75,7 @@ public class GroupBuilder {
      * @param memberIds
      * @return
      */
-    public GroupBuilder withMembers(ArrayList<Integer> memberIds){
+    public GroupBuilder withMembers(ArrayList<Integer> memberIds) {
         this.memberIds = memberIds;
         return this;
     }

@@ -65,6 +65,10 @@ public class AddEventCommand extends Command {
         this.toAdd = event;
     }
 
+    public Event getToAdd() {
+        return this.toAdd;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
@@ -122,8 +126,20 @@ public class AddEventCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddEventCommand // instanceof handles nulls
-                && toAdd.equals(((AddEventCommand) other).toAdd));
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AddEventCommand)) {
+            return false;
+        }
+
+        AddEventCommand e = (AddEventCommand) other;
+
+        return this.toAdd.getActivity().equalsIgnoreCase(e.getToAdd().getActivity())
+                && this.toAdd.getPlace().equalsIgnoreCase(e.getToAdd().getPlace())
+                && this.toAdd.getTime().equals(e.getToAdd().getTime())
+                && this.toAdd.getWithGroup().equals(e.getToAdd().getWithGroup())
+                && this.toAdd.getWithPerson().equals(e.getToAdd().getWithPerson());
     }
 }
