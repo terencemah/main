@@ -195,6 +195,8 @@ public class ParserUtil {
             return trimmedSuggestParameter;
         } else if (trimmedSuggestParameter.equalsIgnoreCase("place")) {
             return trimmedSuggestParameter;
+        } else if (trimmedSuggestParameter.equalsIgnoreCase("activity")) {
+            return trimmedSuggestParameter;
         } else {
             throw new ParseException(MESSAGE_INVALID_PARAMETER);
         }

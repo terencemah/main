@@ -10,8 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Time;
-
+import seedu.address.model.event.Event;
 /**
  * Parses input arguments and creates a new {@code AddEventCommand object}
  */
@@ -37,16 +36,6 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
 
-        Index index;
-        if (argMultimap.getValue(PREFIX_MEMBER).isEmpty() && argMultimap.getValue(PREFIX_GROUP).isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
-        } else if (argMultimap.getValue(PREFIX_MEMBER).isEmpty()) {
-            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_GROUP).get());
-        } else {
-            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER).get());
-        }
-        int idx = index.getOneBased();
-
         String input = argMultimap.getValue(PREFIX_TIME).get();
         String mins = "";
         String hours = "";
@@ -71,7 +60,22 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
             }
         }
 
-        return new AddEventCommand(activity, idx, place, new Time(Integer.parseInt(mins), Integer.parseInt(hours)));
+        Event event = new Event(activity, place, Integer.parseInt(mins), Integer.parseInt(hours));
+
+        Index index;
+        if (argMultimap.getValue(PREFIX_MEMBER).isEmpty() && argMultimap.getValue(PREFIX_GROUP).isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
+        } else if (argMultimap.getValue(PREFIX_MEMBER).isEmpty()) {
+            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_GROUP).get());
+            int idx = index.getOneBased();
+            event.setWithGroup(idx);
+        } else {
+            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER).get());
+            int idx = index.getOneBased();
+            event.setWithPerson(idx);
+        }
+
+        return new AddEventCommand(event);
     }
 }
 

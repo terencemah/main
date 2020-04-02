@@ -1,6 +1,7 @@
 package seedu.address.model.group;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
@@ -31,7 +32,7 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Returns true if the list contains an equivalent personList as the given argument.
+     * Returns true if the list contains an equivalent groupList as the given argument.
      */
     public boolean containsGroups(List<Group> toCheck) {
         requireNonNull(toCheck);
@@ -70,6 +71,21 @@ public class UniqueGroupList implements Iterable<Group> {
             throw new DuplicateGroupException();
         }
         internalList.addAll(toAdd);
+    }
+
+    public void setGroup(Group target, Group edited) {
+        requireAllNonNull(target, edited);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new GroupNotFoundException();
+        }
+
+        if (!target.equals(edited) && contains(edited)) {
+            throw new DuplicateGroupException();
+        }
+
+        internalList.set(index, edited);
     }
 
     public void setGroups(List<Group> groups) {

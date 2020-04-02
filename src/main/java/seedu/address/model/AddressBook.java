@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-//import seedu.address.model.event.Event;
-//import seedu.address.model.event.UniqueEventList;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.person.Person;
@@ -19,12 +19,12 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueGroupList groups;
-    //    private final UniqueEventList events;
+    private final UniqueEventList events;
 
     {
         persons = new UniquePersonList();
         groups = new UniqueGroupList();
-        //        events = new UniqueEventList();
+        events = new UniqueEventList();
     }
 
     public AddressBook() {
@@ -102,6 +102,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a group with the same identity as {@code group} exists in the address book.
+     */
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return events.contains(event);
+    }
+
+    /**
+     * Returns true if a groups with the same identity as {@code group} exists in the address book.
+     */
+    public boolean hasEvents(List<Event> eventList) {
+        requireNonNull(eventList);
+        return events.containsEvents(eventList);
+    }
+
+    /**
      * Adds given group to the groups list.
      *
      * @param group given group
@@ -128,6 +144,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.addAll(p);
     }
 
+    public void addEvent(Event e) {
+        events.add(e);
+    }
+
+    public void addEvents(List<Event> e) {
+        events.addAll(e);
+    }
+
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}. {@code target}
      * must exist in the address book. The person identity of {@code editedPerson} must not be the
@@ -137,6 +161,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
+    }
+
+    public void setGroup(Group target, Group editedGroup) {
+        requireNonNull(editedGroup);
+        groups.setGroup(target, editedGroup);
     }
 
     /**
@@ -168,10 +197,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return groups.asUnmodifiableObservableList();
     }
 
-    //    @Override
-    //    public ObservableList<Event> getEventList() {
-    //        return events.asUnmodifiableObservableList();
-    //    }
+    @Override
+    public ObservableList<Event> getEventList() {
+        return events.asUnmodifiableObservableList();
+    }
 
     @Override
     public boolean equals(Object other) {

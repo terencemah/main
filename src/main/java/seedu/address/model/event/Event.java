@@ -1,6 +1,9 @@
 package seedu.address.model.event;
 
-import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
+
+import seedu.address.model.person.Time;
 
 /**
  * Container class for adding activity, time spent and place to a person or a group
@@ -11,26 +14,22 @@ public class Event {
      * Represents the eventID for the next created group
      */
     private static int events = 0;
-    private static ArrayList<Event> eventList = new ArrayList<>();
 
     private int eventId;
     private String activity;
     private String place;
-    private int toAdd;
-    //private int withGroup;
-    //private int withPerson;
-    private int time;
+    private Optional<Integer> withPerson;
+    private Optional<Integer> withGroup;
+    private Time time;
 
-    public Event(String activity, String place, int toAdd, int time) {
-        this.eventId = events++;
+    public Event(String activity, String place, int minutes, int hours) {
+        this.eventId = events;
         this.activity = activity;
         this.place = place;
-        this.toAdd = toAdd;
-        this.time = time;
-    }
-
-    public int getEventId() {
-        return this.eventId;
+        this.time = new Time(minutes, hours);
+        this.withPerson = Optional.empty();
+        this.withGroup = Optional.empty();
+        events += 1;
     }
 
     public String getActivity() {
@@ -41,15 +40,59 @@ public class Event {
         return this.place;
     }
 
-    public int getTime() {
+    public Optional<Integer> getWithGroup() {
+        return this.withGroup;
+    }
+
+    public Optional<Integer> getWithPerson() {
+        return this.withPerson;
+    }
+
+    public Time getTime() {
         return this.time;
     }
 
-    public void setTime(int time) {
+    public void setWithGroup(int groupId) {
+        this.withGroup = Optional.of(groupId);
+    }
+
+    public void setWithPerson(int personId) {
+        this.withPerson = Optional.of(personId);
+    }
+
+    public int getEventId() {
+        return this.eventId;
+    }
+
+    public void setTime(Time time) {
         this.time = time;
     }
 
-    //public void addEvent(Event e) {
-    //eventList.add(e);
-    //}
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Event)) {
+            return false;
+        }
+
+        Event otherEvent = (Event) other;
+        return this.getActivity().equalsIgnoreCase(otherEvent.getActivity())
+                && this.getPlace().equalsIgnoreCase(otherEvent.getPlace())
+                && this.getTime().equals(otherEvent.getTime())
+                && this.getWithGroup().equals(otherEvent.getWithGroup())
+                && this.getWithPerson().equals(otherEvent.getWithPerson());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(activity, place, withGroup, withPerson, time);
+    }
+
+    @Override
+    public String toString() {
+        return "Event: " + activity + " place: " + place + " for " + time;
+    }
 }

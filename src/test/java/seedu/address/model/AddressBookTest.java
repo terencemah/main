@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.event.Event;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -146,6 +147,7 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Group> groups = FXCollections.observableArrayList();
+        private final ObservableList<Event> events = FXCollections.observableArrayList();
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
@@ -158,6 +160,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Group> getGroupList() {
             return this.groups;
+        }
+
+        @Override
+        public ObservableList<Event> getEventList() {
+            return this.events;
         }
     }
 }

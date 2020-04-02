@@ -5,7 +5,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -15,6 +17,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 //import seedu.address.model.event.Event;
+import seedu.address.model.event.Event;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.NameContainsFullNamePredicate;
@@ -30,6 +33,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Group> filteredGroups;
+    private final FilteredList<Event> filteredEvents;
     private final ObservableList<EventDescriptor> frequencyList;
 
     /**
@@ -45,6 +49,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
+        filteredEvents = new FilteredList<>(this.addressBook.getEventList());
         frequencyList = FXCollections.observableArrayList();
     }
 
@@ -114,6 +119,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    @Override
     public boolean hasPersons(List<Person> people) {
         requireNonNull(people);
         return addressBook.hasPersons(people);
@@ -123,6 +134,12 @@ public class ModelManager implements Model {
     public boolean hasGroups(List<Group> groups) {
         requireNonNull(groups);
         return addressBook.hasGroups(groups);
+    }
+
+    @Override
+    public boolean hasEvents(List<Event> events) {
+        requireNonNull(events);
+        return addressBook.hasEvents(events);
     }
 
     @Override
@@ -147,9 +164,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addEvent(Event event) {
+        addressBook.addEvent(event);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void setGroup(Group target, Group editedGroup) {
+        requireAllNonNull(target, editedGroup);
+        addressBook.setGroup(target, editedGroup);
     }
 
     // =========== Filtered Person List Accessors =============================================================
@@ -166,6 +194,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         return this.filteredGroups;
+    }
+
+    @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return this.filteredEvents;
     }
 
     @Override
@@ -223,6 +256,7 @@ public class ModelManager implements Model {
 
     /**
      * Copies the active PlaceList or ActivityList onto the Model's Frequency List.
+     *
      * @param list List to be copied.
      */
     private void copyList(ObservableList<EventDescriptor> list) {
@@ -269,12 +303,62 @@ public class ModelManager implements Model {
      * Suggests a place based on frequency
      */
     public void suggestPlace() {
-    //        ObservableList<Event> eventList = addressBook.getEventList();
-    //        System.out.println(eventList);
-
+        ObservableList<Event> eventList = addressBook.getEventList();
+        Map<String, Integer> placeIntegerMap = new HashMap<>();
+        String minKey = "No places available. ";
+        if (!eventList.isEmpty()) {
+            for (Event oneEvent : eventList) {
+                String suggestedPlace = oneEvent.getPlace();
+                if (placeIntegerMap.containsKey(suggestedPlace)) {
+                    placeIntegerMap.put(suggestedPlace, placeIntegerMap.get(suggestedPlace) + 1);
+                } else {
+                    placeIntegerMap.put(suggestedPlace, 1);
+                }
+            }
+            
+            //get min place visited
+            int minValue = Integer.MAX_VALUE;
+            for (String key : placeIntegerMap.keySet()) {
+                int value = placeIntegerMap.get(key);
+                if (value < minValue) {
+                    minValue = value;
+                    minKey = key;
+                }
+            }
+            System.out.println(minKey);
+        } else {
+            System.out.println(minKey);
+        }
     }
 
     public void suggestActivity() {
+        ObservableList<Event> eventList = addressBook.getEventList();
+        Map<String, Integer> activityIntegerMap = new HashMap<>();
+        String minKey = "No activities available. ";
+        if (!eventList.isEmpty()) {
+            for (Event oneEvent : eventList) {
+                String suggestedActivity = oneEvent.getActivity();
+                if (activityIntegerMap.containsKey(suggestedActivity)) {
+                    activityIntegerMap.put(suggestedActivity, activityIntegerMap.get(suggestedActivity) + 1);
+                } else {
+                    activityIntegerMap.put(suggestedActivity, 1);
+                }
+            }
+
+            //get min activity done
+            int minValue = Integer.MAX_VALUE;
+            for (String key : activityIntegerMap.keySet()) {
+                int value = activityIntegerMap.get(key);
+                if (value < minValue) {
+                    minValue = value;
+                    minKey = key;
+                }
+            }
+            System.out.println(eventList);
+            System.out.println(minKey);
+        } else {
+            System.out.println(minKey);
+        }
     }
 
     @Override
