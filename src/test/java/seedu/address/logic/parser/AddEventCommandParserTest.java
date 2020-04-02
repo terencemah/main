@@ -11,7 +11,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddEventCommand;
-import seedu.address.model.person.Time;
+import seedu.address.model.event.Event;
 
 public class AddEventCommandParserTest {
     private AddEventCommandParser parser = new AddEventCommandParser();
@@ -27,8 +27,10 @@ public class AddEventCommandParserTest {
                 + PREFIX_MEMBER + targetIndex + " "
                 + PREFIX_PLACE + place + " "
                 + PREFIX_TIME + time;
-        AddEventCommand expectedCommand = new AddEventCommand(activity, Integer.parseInt(targetIndex), place,
-                new Time(11, 11));
+
+        Event event = new Event(activity, place, 11, 11);
+        event.setWithPerson(Integer.parseInt(targetIndex));
+        AddEventCommand expectedCommand = new AddEventCommand(event);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -42,8 +44,9 @@ public class AddEventCommandParserTest {
                 + PREFIX_GROUP + targetIndex + " "
                 + PREFIX_PLACE + place + " "
                 + PREFIX_TIME + time;
-        AddEventCommand expectedCommand = new AddEventCommand(activity, Integer.parseInt(targetIndex), place,
-                new Time(11, 11));
+        Event event = new Event(activity, place, 11, 11);
+        event.setWithGroup(Integer.parseInt(targetIndex));
+        AddEventCommand expectedCommand = new AddEventCommand(event);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -71,8 +74,9 @@ public class AddEventCommandParserTest {
                 + PREFIX_GROUP + targetIndex + " "
                 + PREFIX_PLACE + place + " "
                 + PREFIX_TIME + time;
-        AddEventCommand expectedCommand = new AddEventCommand(activity, Integer.parseInt(targetIndex), place,
-                new Time(11, 0));
+        Event event = new Event(activity, place, 11, 0);
+        event.setWithPerson(Integer.parseInt(targetIndex));
+        AddEventCommand expectedCommand = new AddEventCommand(event);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

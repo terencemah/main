@@ -19,6 +19,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Time;
 import seedu.address.testutil.PersonBuilder;
@@ -33,14 +34,15 @@ public class AddEventCommandTest {
         final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         final String activity = "test";
         final String place = "anywhere";
-        final Time time = new Time(30, 0);
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
                 .withName(firstPerson.getName().fullName).withTime("0h 30m").withActivityList("test")
                 .withPlaceList("anywhere").build();
 
-        AddEventCommand addEventCommand = new AddEventCommand(activity, INDEX_FIRST_PERSON.getOneBased(), place, time);
+        Event event = new Event(activity, place, 30, 0);
+        event.setWithPerson(INDEX_FIRST_PERSON.getOneBased());
+        AddEventCommand addEventCommand = new AddEventCommand(event);
 
         String expectedMessage = String.format(AddEventCommand.MESSAGE_SUCCESS, editedPerson);
 
@@ -55,7 +57,6 @@ public class AddEventCommandTest {
         final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         final String activity = "test";
         final String place = "anywhere";
-        final Time time = new Time(1, 1);
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
 
@@ -64,7 +65,9 @@ public class AddEventCommandTest {
                 .withName(firstPerson.getName().fullName).withTime("1h 1m").withActivityList("test")
                 .withPlaceList("anywhere").build();
 
-        AddEventCommand addEventCommand = new AddEventCommand(activity, INDEX_FIRST_PERSON.getOneBased(), place, time);
+        Event event = new Event(activity, place, 1, 1);
+        event.setWithPerson(INDEX_FIRST_PERSON.getOneBased());
+        AddEventCommand addEventCommand = new AddEventCommand(event);
 
         String expectedMessage = String.format(AddEventCommand.MESSAGE_SUCCESS, editedPerson);
 
@@ -82,7 +85,9 @@ public class AddEventCommandTest {
         final Time time = new Time(30, 0);
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
 
-        AddEventCommand addEventCommand = new AddEventCommand(activity, outOfBoundIndex.getOneBased(), place, time);
+        Event event = new Event(activity, place, 30, 0);
+        event.setWithPerson(outOfBoundIndex.getOneBased());
+        AddEventCommand addEventCommand = new AddEventCommand(event);
 
         assertCommandFailure(addEventCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -97,7 +102,10 @@ public class AddEventCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
 
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-        AddEventCommand addEventCommand = new AddEventCommand(activity, outOfBoundIndex.getOneBased(), place, time);
+
+        Event event = new Event(activity, place, 30, 0);
+        event.setWithPerson(outOfBoundIndex.getOneBased());
+        AddEventCommand addEventCommand = new AddEventCommand(event);
 
         assertCommandFailure(addEventCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -114,7 +122,9 @@ public class AddEventCommandTest {
                 .withName(firstPerson.getName().fullName).withTime("1h 1m").withActivityList("test")
                 .withPlaceList("anywhere").build();
 
-        AddEventCommand addEventCommand = new AddEventCommand(activity, INDEX_THIRD_PERSON.getOneBased(), place, time);
+        Event event = new Event(activity, place, 1, 01);
+        event.setWithPerson(INDEX_THIRD_PERSON.getOneBased());
+        AddEventCommand addEventCommand = new AddEventCommand(event);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -130,11 +140,11 @@ public class AddEventCommandTest {
         final int index = 1;
         final String place = "anywhere";
         final Time time = new Time(30, 0);
+        Event finalEvent = new Event(activity, place, 30, 0);
+        finalEvent.setWithPerson(1);
+        final AddEventCommand standardCommand = new AddEventCommand(finalEvent);
 
-        final AddEventCommand standardCommand = new AddEventCommand(activity, index, place, time);
-
-        AddEventCommand commandWithSameValues = new AddEventCommand("test", 1, "anywhere",
-                new Time(30, 0));
+        AddEventCommand commandWithSameValues = new AddEventCommand(finalEvent);
 
         //same values -> returns true
         assertTrue(standardCommand.equals(commandWithSameValues));
@@ -149,16 +159,23 @@ public class AddEventCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new AddEventCommand(activity, 2, place, time)));
+        Event anotherEvent = new Event(activity, place, 30, 0);
+        anotherEvent.setWithPerson(2);
+        assertFalse(standardCommand.equals(new AddEventCommand(anotherEvent)));
 
         // different place -> returns false
-        assertFalse(standardCommand.equals(new AddEventCommand(activity, index, "anywhere 2", time)));
+        Event thirdEvent = new Event(activity, "anywhere 2", 30, 0);
+        thirdEvent.setWithPerson(1);
+        assertFalse(standardCommand.equals(new AddEventCommand(thirdEvent)));
 
         // different activity -> returns false
-        assertFalse(standardCommand.equals(new AddEventCommand("test 2", index, place, time)));
+        Event fourthEvent = new Event("test 2", place, 30, 0);
+        fourthEvent.setWithPerson(1);
+        assertFalse(standardCommand.equals(new AddEventCommand(fourthEvent)));
 
         // different time -> returns false
-        assertFalse(standardCommand.equals(new AddEventCommand(activity, index, place, new Time(45,
-                0))));
+        Event fifthEvent = new Event(activity, place, 45, 0);
+        fifthEvent.setWithPerson(1);
+        assertFalse(standardCommand.equals(new AddEventCommand(fifthEvent)));
     }
 }

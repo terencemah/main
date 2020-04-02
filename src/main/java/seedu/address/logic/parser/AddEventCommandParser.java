@@ -11,10 +11,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
-import seedu.address.model.group.Group;
-
-import java.util.List;
-
 /**
  * Parses input arguments and creates a new {@code AddEventCommand object}
  */

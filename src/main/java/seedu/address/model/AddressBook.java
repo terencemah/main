@@ -20,7 +20,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniquePersonList persons;
     private final UniqueGroupList groups;
     private final UniqueEventList events;
-    //    private final UniqueEventList events;
 
     {
         persons = new UniquePersonList();
@@ -149,7 +148,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         events.add(e);
     }
 
-    public void addEvents(List<Event> e){
+    public void addEvents(List<Event> e) {
         events.addAll(e);
     }
 
