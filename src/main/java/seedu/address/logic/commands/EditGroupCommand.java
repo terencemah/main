@@ -94,7 +94,13 @@ public class EditGroupCommand extends Command{
 
         Name updatedName = editGroupDescriptor.getName().orElse(groupToEdit.getName());
         Time oldTime = groupToEdit.getTimeSpent();
-        ArrayList<Integer> memberIds = editGroupDescriptor.getMemberIds().get();
+        ArrayList<Integer> memberIds;
+        if (editGroupDescriptor.getMemberIds().isPresent()) {
+            memberIds = editGroupDescriptor.getMemberIds().get();
+        } else {
+            memberIds = groupToEdit.getMembers();
+        }
+
         ArrayList<Integer> eventIds = groupToEdit.getEvents();
         int groupID = groupToEdit.getGroupId();
 

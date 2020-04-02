@@ -50,6 +50,10 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
             ArrayList<Integer> memberIds = new ArrayList<>(memberIDs);
             editGroupDescriptor.setMemberIds(memberIds);
         }
+
+        if (!editGroupDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditGroupCommand.MESSAGE_NOT_EDITED);
+        }
         return new EditGroupCommand(index, editGroupDescriptor);
     }
 
