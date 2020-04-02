@@ -31,6 +31,7 @@ public class PersonBuilder {
     public static final int DEFAULT_HOURS = 0;
     public static final List<String> DEFAULT_PLACELIST = new ArrayList<String>();
     public static final List<String> DEFAULT_ACTIVITYLIST = new ArrayList<String>();
+    public static final List<String> DEFAULT_TIMELIST = new ArrayList<String>();
 
     private Name name;
     private Phone phone;
@@ -51,6 +52,7 @@ public class PersonBuilder {
         time = new Time(DEFAULT_MINS, DEFAULT_HOURS);
         places = new PlaceList(DEFAULT_PLACELIST);
         activities = new ActivityList(DEFAULT_ACTIVITYLIST);
+        times = new TimeList(DEFAULT_TIMELIST);
     }
 
     /**
@@ -65,6 +67,7 @@ public class PersonBuilder {
         time = personToCopy.getTime();
         places = personToCopy.getPlaceList2();
         activities = personToCopy.getActivityList2();
+        times = personToCopy.getTimeList();
     }
 
     /**

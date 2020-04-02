@@ -68,6 +68,24 @@ public class Event {
         this.time = time;
     }
 
+    public boolean isSameEvent(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Event)) {
+            return false;
+        }
+
+        Event otherEvent = (Event) other;
+        return (this.getEventId() == otherEvent.getEventId()
+                && this.getActivity().equalsIgnoreCase(otherEvent.getActivity())
+                && this.getPlace().equalsIgnoreCase(otherEvent.getPlace())
+                && this.getTime().equals(otherEvent.getTime())
+                && this.getWithGroup().equals(otherEvent.getWithGroup())
+                && this.getWithPerson().equals(otherEvent.getWithPerson()));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -79,12 +97,11 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-        return (this.getEventId() == ((Event) other).getEventId())
-                && this.getActivity().equalsIgnoreCase(otherEvent.getActivity())
+        return (this.getActivity().equalsIgnoreCase(otherEvent.getActivity())
                 && this.getPlace().equalsIgnoreCase(otherEvent.getPlace())
                 && this.getTime().equals(otherEvent.getTime())
                 && this.getWithGroup().equals(otherEvent.getWithGroup())
-                && this.getWithPerson().equals(otherEvent.getWithPerson());
+                && this.getWithPerson().equals(otherEvent.getWithPerson()));
     }
 
     @Override
