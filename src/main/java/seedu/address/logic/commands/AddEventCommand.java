@@ -6,9 +6,18 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.util.List;
+
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
+import seedu.address.model.group.Group;
+import seedu.address.model.person.ActivityList;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PlaceList;
+import seedu.address.model.person.Time;
+
 /**
  * Represents the command to add a new event to CoderLifeInsights.
  */
@@ -46,7 +55,7 @@ public class AddEventCommand extends Command {
             + "[1 hour = 100]; "
             + "[10 hours and 30 minutes = 1030]";
     public static final String MESSAGE_SUCCESS = "New event successfully added: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "Event with given arguments already exists. Please try again."
+    public static final String MESSAGE_DUPLICATE_EVENT = "Event with given arguments already exists. Please try again.";
     public static final String MESSAGE_ARGUMENTS = "Activity: %1$s, Index: %2$d, Place: %3$s, Time: %4$s";
 
     private final Event toAdd;
@@ -64,7 +73,50 @@ public class AddEventCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
-        model.addEvent(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        if (toAdd.getWithPerson().isPresent()) {
+            // edit person
+            List<Person> lastShownList = model.getFilteredPersonList();
+            int index = toAdd.getWithPerson().get();
+            if (index - 1 >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            Person toEdit = lastShownList.get(index - 1);
+
+            Time curr = toEdit.getTime();
+            Time newTime = curr.addTime(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
+
+            PlaceList currentPlaceList = toEdit.getPlaceList2();
+            PlaceList newPlaceList = currentPlaceList.addPlace(toAdd.getPlace());
+
+            ActivityList currentActivityList = toEdit.getActivityList2();
+            ActivityList newActivityList = currentActivityList.addActivity(toAdd.getActivity());
+
+            Person editedPerson = new Person(toEdit.getName(), toEdit.getPhone(), toEdit.getEmail(),
+                    toEdit.getAddress(), toEdit.getTags(), newTime, newPlaceList, newActivityList);
+            model.setPerson(toEdit, editedPerson);
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            model.addEvent(toAdd);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        } else {
+            // edit group
+            List<Group> lastShownList = model.getFilteredGroupList();
+            int index = toAdd.getWithGroup().get();
+            if (index - 1 >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+            }
+            Group toEdit = lastShownList.get(index - 1);
+
+            Time curr = toEdit.getTimeSpent();
+            Time newTime = curr.addTime(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
+
+            // % TODO: Add to activity and place lists
+
+            Group editedGroup = new Group(toEdit.getName());
+            editedGroup.setTimeSpent(newTime);
+            model.setGroup(toEdit, editedGroup);
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            model.addEvent(toAdd);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), ViewType.GROUPS);
+        }
     }
 }

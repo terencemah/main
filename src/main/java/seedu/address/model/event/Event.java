@@ -90,4 +90,9 @@ public class Event {
     public int hashCode() {
         return Objects.hash(activity, place, withGroup, withPerson, time);
     }
+
+    @Override
+    public String toString() {
+        return "Event: " + activity + " place: " + place + " for " + time;
+    }
 }

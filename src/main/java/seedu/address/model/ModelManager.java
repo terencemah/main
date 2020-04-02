@@ -15,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 //import seedu.address.model.event.Event;
+import seedu.address.model.event.Event;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.NameContainsFullNamePredicate;
@@ -30,6 +31,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Group> filteredGroups;
+    private final FilteredList<Event> filteredEvents;
     private final ObservableList<EventDescriptor> frequencyList;
 
     /**
@@ -45,6 +47,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
+        filteredEvents = new FilteredList<>(this.addressBook.getEventList());
         frequencyList = FXCollections.observableArrayList();
     }
 
@@ -114,6 +117,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    @Override
     public boolean hasPersons(List<Person> people) {
         requireNonNull(people);
         return addressBook.hasPersons(people);
@@ -123,6 +132,12 @@ public class ModelManager implements Model {
     public boolean hasGroups(List<Group> groups) {
         requireNonNull(groups);
         return addressBook.hasGroups(groups);
+    }
+
+    @Override
+    public boolean hasEvents(List<Event> events) {
+        requireNonNull(events);
+        return addressBook.hasEvents(events);
     }
 
     @Override
@@ -147,9 +162,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addEvent(Event event) {
+        addressBook.addEvent(event);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void setGroup(Group target, Group editedGroup) {
+        requireAllNonNull(target, editedGroup);
+        addressBook.setGroup(target, editedGroup);
     }
 
     // =========== Filtered Person List Accessors =============================================================
@@ -166,6 +192,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         return this.filteredGroups;
+    }
+
+    @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return this.filteredEvents;
     }
 
     @Override
