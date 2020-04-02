@@ -147,6 +147,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasGroups(List<Group> groups) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addGroup(Group group) {
             throw new AssertionError("This method should not be called.");
         }
@@ -182,18 +187,38 @@ public class AddCommandTest {
         }
 
         @Override
-        public void importCsvToAddressBook(List<Person> importedPeople) throws CommandException {
+        public void importCsvToAddressBook(List<Person> importedPeople) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public void importCsvGroupsToAddressBook(List<Group> importedGroup) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void showPlaceList(Person target) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void showActivityList(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public void suggestPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void suggestPlace() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void suggestActivity() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
