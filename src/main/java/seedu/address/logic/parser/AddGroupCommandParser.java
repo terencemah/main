@@ -4,13 +4,16 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PlaceList;
 
 /**
  * Parses the input argument to create a new AddGroupCommand instance
@@ -32,7 +35,11 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE));
         }
 
-        Group group = new Group(new Name(argMultimap.getValue(PREFIX_NAME).get()));
+
+        PlaceList placeList = new PlaceList(new ArrayList<String>());
+        ActivityList activityList = new ActivityList(new ArrayList<String>());
+
+        Group group = new Group(new Name(argMultimap.getValue(PREFIX_NAME).get()), placeList, activityList);
         if (arePrefixesPresent(argMultimap, PREFIX_MEMBER)) {
             List<String> members = argMultimap.getAllValues(PREFIX_MEMBER);
             for (int i = 0; i < members.size(); i++) {

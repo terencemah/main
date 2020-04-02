@@ -128,6 +128,10 @@ public class ImportFile {
                 String[] memberIds = oneMemberIds.split(";");
                 String oneEventIds = oneGroup.get("eventIDs").strip();
                 String[] eventIds = oneEventIds.split(";");
+                String onePlaceList = oneGroup.get("places");
+                String[] places = onePlaceList.split(";");
+                String oneActivityList = oneGroup.get("activities");
+                String[] activities = oneActivityList.split(";");
 
                 ArrayList<Integer> members = new ArrayList<>();
                 if (!oneMemberIds.isEmpty()) {
@@ -143,8 +147,28 @@ public class ImportFile {
                 }
                 Name name = ParserUtil.parseName(oneName);
                 Time time = ParserUtil.parseTime(oneTimeSpent);
+                PlaceList placeList;
+                if (onePlaceList.isEmpty()) {
+                    placeList = new PlaceList(new ArrayList<String>());
+                } else {
+                    List<String> xs = new ArrayList<>();
+                    for (String s : places) {
+                        xs.add(s);
+                    }
+                    placeList = new PlaceList(xs);
+                }
+                ActivityList activityList;
+                if (oneActivityList.isEmpty()) {
+                    activityList = new ActivityList(new ArrayList<String>());
+                } else {
+                    List<String> xs = new ArrayList<>();
+                    for (String s : activities) {
+                        xs.add(s);
+                    }
+                    activityList = new ActivityList(xs);
+                }
 
-                Group group = new Group(name);
+                Group group = new Group(name, placeList, activityList);
                 group.setTimeSpent(time);
                 group.setMemberIDs(members);
                 group.setEventIDs(events);

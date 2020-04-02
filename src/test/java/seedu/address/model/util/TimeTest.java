@@ -1,10 +1,14 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.group.Group;
+import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
 
 public class TimeTest {
@@ -43,7 +47,8 @@ public class TimeTest {
     @Test
     public void timeAnotherObjectEqualsFalse() {
         Time time = new Time(50, 2);
-        Group group = new Group(new Name("Dummy"));
+        Group group = new Group(new Name("Dummy"), new PlaceList(new ArrayList<String>()),
+                new ActivityList(new ArrayList<String>()));
         Assertions.assertFalse(time.equals(group));
     }
 

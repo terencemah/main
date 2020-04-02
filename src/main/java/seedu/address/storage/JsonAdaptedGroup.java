@@ -8,7 +8,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
 
 /**
@@ -23,12 +25,16 @@ public class JsonAdaptedGroup {
     private final String timeSpent;
     private final List<String> memberIDs = new ArrayList<>();
     private final List<String> eventIDs = new ArrayList<>();
+    private final List<String> places = new ArrayList<>();
+    private final List<String> activities = new ArrayList<>();
 
     @JsonCreator
     public JsonAdaptedGroup(@JsonProperty("name") String name, @JsonProperty("groupId") String groupId,
                             @JsonProperty("timeSpent") String timeSpent,
                             @JsonProperty("memberIDs") List<String> memberIDs,
-                            @JsonProperty("eventIDs") List<String> eventIDs) {
+                            @JsonProperty("eventIDs") List<String> eventIDs,
+                            @JsonProperty("places") List<String> places,
+                            @JsonProperty("activities") List<String> activities) {
         this.name = name;
         this.groupId = groupId;
         this.timeSpent = timeSpent;
@@ -39,6 +45,13 @@ public class JsonAdaptedGroup {
 
         if (eventIDs != null) {
             this.eventIDs.addAll(eventIDs);
+        }
+
+        if (!places.isEmpty()) {
+            this.places.addAll(places);
+        }
+        if (!activities.isEmpty()) {
+            this.activities.addAll(activities);
         }
     }
 
@@ -59,6 +72,9 @@ public class JsonAdaptedGroup {
         for (int i = 0; i < events.size(); i++) {
             eventIDs.add(Integer.toString(events.get(i)));
         }
+
+        places.addAll(source.getPlaceList().placeList);
+        activities.addAll(source.getActivityList().activityList);
     }
 
     /**
@@ -80,7 +96,11 @@ public class JsonAdaptedGroup {
 
         //%TODO: Add more checks as group class and info evolve
 
-        Group group = new Group(new Name(name));
+        final PlaceList modelPlaceList = new PlaceList(places);
+
+        final ActivityList modelActivityList = new ActivityList(activities);
+
+        Group group = new Group(new Name(name), modelPlaceList, modelActivityList);
         String[] times = timeSpent.split(" ");
         String hours = times[0].substring(0, times[0].length() - 1);
         String minutes = times[1].substring(0, times[1].length() - 1);

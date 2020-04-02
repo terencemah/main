@@ -110,8 +110,13 @@ public class AddEventCommand extends Command {
             curr.addTime(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
 
             // % TODO: Add to activity and place lists
+            PlaceList currentPlaceList = toEdit.getPlaceList();
+            PlaceList newPlaceList = currentPlaceList.addPlace(toAdd.getPlace());
 
-            Group editedGroup = new Group(toEdit.getName());
+            ActivityList currentActivityList = toEdit.getActivityList();
+            ActivityList newActivityList = currentActivityList.addActivity(toAdd.getActivity());
+
+            Group editedGroup = new Group(toEdit.getName(), newPlaceList, newActivityList);
             editedGroup.setTimeSpent(curr);
             model.setGroup(toEdit, editedGroup);
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);

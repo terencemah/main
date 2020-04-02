@@ -75,7 +75,7 @@ public class AddEventCommandParserTest {
                     + PREFIX_PLACE + place + " "
                     + PREFIX_TIME + time;
             Event event = new Event(activity, place, 11, 0);
-            event.setWithPerson(Integer.parseInt(targetIndex));
+            event.setWithGroup(Integer.parseInt(targetIndex));
             AddEventCommand expectedCommand = new AddEventCommand(event);
             assertParseSuccess(parser, userInput, expectedCommand);
         }
