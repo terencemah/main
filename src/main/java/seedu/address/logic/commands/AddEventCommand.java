@@ -5,13 +5,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PlaceList;
@@ -53,71 +54,76 @@ public class AddEventCommand extends Command {
             + "[5 minutes = 05]; "
             + "[1 hour = 100]; "
             + "[10 hours and 30 minutes = 1030]";
-    public static final String MESSAGE_SUCCESS = "New event successfully added.";
-
+    public static final String MESSAGE_SUCCESS = "New event successfully added: %1$s";
+    public static final String MESSAGE_DUPLICATE_EVENT = "Event with given arguments already exists. Please try again.";
     public static final String MESSAGE_ARGUMENTS = "Activity: %1$s, Index: %2$d, Place: %3$s, Time: %4$s";
 
-    private final String activity;
-    private final int index;
-    private final String place;
-    private final Time time;
+    private final Event toAdd;
 
-    /**
-     * @param activity to be added to person/group activity list
-     * @param index of the person or group to be added to
-     * @param place to be added to person/group place list
-     * @param time to be added to person/group
-     */
-    public AddEventCommand(String activity, int index, String place, Time time) {
-        requireAllNonNull(activity, index, place, time);
-
-        this.activity = activity;
-        this.index = index;
-        this.place = place;
-        this.time = time;
+    public AddEventCommand(Event event) {
+        requireAllNonNull(event);
+        this.toAdd = event;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        requireAllNonNull(model);
 
-        if (index - 1 >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (model.hasEvent(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
-        Person personToEdit = lastShownList.get(index - 1);
 
-        Time current = personToEdit.getTime();
-        Time newTime = current.addTime(time.getMinutes(), time.getHours());
+        if (toAdd.getWithPerson().isPresent()) {
+            // edit person
+            List<Person> lastShownList = model.getFilteredPersonList();
+            int index = toAdd.getWithPerson().get();
+            if (index - 1 >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            Person toEdit = lastShownList.get(index - 1);
 
-        PlaceList currentPlaceList = personToEdit.getPlaceList2();
-        PlaceList newPlaceList = currentPlaceList.addPlace(place);
+            Time curr = toEdit.getTime();
+            curr.addTime(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
 
-        ActivityList currentActivityList = personToEdit.getActivityList2();
-        ActivityList newActivityList = currentActivityList.addActivity(activity);
+            PlaceList currentPlaceList = toEdit.getPlaceList2();
+            PlaceList newPlaceList = currentPlaceList.addPlace(toAdd.getPlace());
 
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), newTime, newPlaceList, newActivityList);
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            ActivityList currentActivityList = toEdit.getActivityList2();
+            ActivityList newActivityList = currentActivityList.addActivity(toAdd.getActivity());
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, personToEdit));
+            Person editedPerson = new Person(toEdit.getName(), toEdit.getPhone(), toEdit.getEmail(),
+                    toEdit.getAddress(), toEdit.getTags(), curr, newPlaceList, newActivityList);
+            model.setPerson(toEdit, editedPerson);
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            model.addEvent(toAdd);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        } else {
+            // edit group
+            List<Group> lastShownList = model.getFilteredGroupList();
+            int index = toAdd.getWithGroup().get();
+            if (index - 1 >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+            }
+            Group toEdit = lastShownList.get(index - 1);
+
+            Time curr = toEdit.getTimeSpent();
+            curr.addTime(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
+
+            // % TODO: Add to activity and place lists
+
+            Group editedGroup = new Group(toEdit.getName());
+            editedGroup.setTimeSpent(curr);
+            model.setGroup(toEdit, editedGroup);
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            model.addEvent(toAdd);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), ViewType.GROUPS);
+        }
     }
 
     @Override
     public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof AddEventCommand)) {
-            return false;
-        }
-
-        // state check
-        AddEventCommand e = (AddEventCommand) other;
-        return index == (e.index)
-                && activity.equals(e.activity) && place.equals(e.place) && time.equals(e.time);
+        return other == this // short circuit if same object
+                || (other instanceof AddEventCommand // instanceof handles nulls
+                && toAdd.equals(((AddEventCommand) other).toAdd));
     }
 }
