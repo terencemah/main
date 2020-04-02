@@ -122,8 +122,25 @@ public class AddEventCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddEventCommand)) {
+            return false;
+        }
+
+        // state check
+        AddEventCommand e = (AddEventCommand) other;
+        return toAdd.getWithGroup().equals(e.toAdd.getWithGroup())
+                && toAdd.getWithPerson().equals(e.toAdd.getWithPerson())
+                && toAdd.getActivity().equals(e.toAdd.getActivity())
+                && toAdd.getPlace().equals(e.toAdd.getPlace())
+                && toAdd.getTime().equals(e.toAdd.getTime());
+        /*return other == this // short circuit if same object
                 || (other instanceof AddEventCommand // instanceof handles nulls
-                && toAdd.equals(((AddEventCommand) other).toAdd));
+                && toAdd.equals(((AddEventCommand) other).toAdd));*/
     }
 }

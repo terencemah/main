@@ -64,21 +64,21 @@ public class AddEventCommandParserTest {
                 AddEventCommand.MESSAGE_INVALID_TIME_INPUT));
     }
 
-    //    @Test //need fix
-    //    public void parse_emptyHourField_success () {
-    //        String targetIndex = "1";
-    //        String activity = "Some activity";
-    //        String place = "Anywhere";
-    //        String time = "011";
-    //        String userInput = activity + " "
-    //                + PREFIX_GROUP + targetIndex + " "
-    //                + PREFIX_PLACE + place + " "
-    //                + PREFIX_TIME + time;
-    //        Event event = new Event(activity, place, 11, 0);
-    //        event.setWithPerson(Integer.parseInt(targetIndex));
-    //        AddEventCommand expectedCommand = new AddEventCommand(event);
-    //        assertParseSuccess(parser, userInput, expectedCommand);
-    //    }
+        @Test //need fix
+        public void parse_emptyHourField_success () {
+            String targetIndex = "1";
+            String activity = "Some activity";
+            String place = "Anywhere";
+            String time = "11";
+            String userInput = activity + " "
+                    + PREFIX_GROUP + targetIndex + " "
+                    + PREFIX_PLACE + place + " "
+                    + PREFIX_TIME + time;
+            Event event = new Event(activity, place, 11, 0);
+            event.setWithPerson(Integer.parseInt(targetIndex));
+            AddEventCommand expectedCommand = new AddEventCommand(event);
+            assertParseSuccess(parser, userInput, expectedCommand);
+        }
 
     @Test
     public void parse_emptyActivity_failure() {
