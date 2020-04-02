@@ -18,7 +18,7 @@ public class RecentEventPanel extends UiPart<Region> {
     private static final String FXML = "RecentEventPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PlaceListPanel.class);
 
-    @javafx.fxml.FXML
+    @FXML
     private TableView<RecentEvent> eventTable;
 
     @FXML
@@ -27,10 +27,14 @@ public class RecentEventPanel extends UiPart<Region> {
     @FXML
     private TableColumn<RecentEvent, String> activityColumn;
 
+    @FXML
+    private TableColumn<RecentEvent, String> timeColumn;
+
     public RecentEventPanel(ObservableList<RecentEvent> list) {
         super(FXML);
         placeColumn.setCellValueFactory(cellData -> cellData.getValue().placeProperty());
         activityColumn.setCellValueFactory(cellData -> cellData.getValue().activityProperty());
+        timeColumn.setCellValueFactory(cellData -> cellData.getValue().timeProperty());
         eventTable.setItems(list);
     }
 }

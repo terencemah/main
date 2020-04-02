@@ -26,6 +26,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
+import seedu.address.model.person.TimeList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -61,6 +62,8 @@ public class ImportFile {
                 String[] places = onePlaceList.split(";");
                 String oneActivityList = onePerson.get("activities");
                 String[] activities = oneActivityList.split(";");
+                String oneTimeList = onePerson.get("times");
+                String[] times = oneTimeList.split(";");
 
                 Set<Tag> tag;
                 if (oneTagged.isEmpty()) {
@@ -93,8 +96,19 @@ public class ImportFile {
                     }
                     activityList = new ActivityList(xs);
                 }
+                TimeList timeList;
+                if (oneTimeList.isEmpty()) {
+                    timeList = new TimeList(new ArrayList<String>());
+                } else {
+                    List<String> xs = new ArrayList<>();
+                    for (String s : times) {
+                        xs.add(s);
+                    }
+                    timeList = new TimeList(xs);
+                }
 
-                Person person = new Person(name, phone, email, address, tag, time, placeList, activityList);
+                Person person = new Person(name, phone, email, address, tag, time,
+                        placeList, activityList, timeList);
                 people.add(person);
             }
             return people;

@@ -10,14 +10,14 @@ public class ViewCommandTest {
 
     @Test
     public void equals() {
-        ViewCommand firstViewCommand = new ViewCommand(INDEX_FIRST_PERSON, "places");
-        ViewCommand secondViewCommand = new ViewCommand(INDEX_FIRST_PERSON, "recent");
+        ViewCommand firstViewCommand = new ViewCommand(INDEX_FIRST_PERSON, "places", 1);
+        ViewCommand secondViewCommand = new ViewCommand(INDEX_FIRST_PERSON, "recent", 1);
 
         // same object -> returns true
         assertTrue(firstViewCommand.equals(firstViewCommand));
 
         // same values -> returns true
-        ViewCommand firstViewCommandCopy = new ViewCommand(INDEX_FIRST_PERSON, "places");
+        ViewCommand firstViewCommandCopy = new ViewCommand(INDEX_FIRST_PERSON, "places", 1);
         assertTrue(firstViewCommand.equals(firstViewCommandCopy));
 
         // different types -> returns false

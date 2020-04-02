@@ -215,6 +215,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
+    }
+
+    @Override
     public void importCsvToAddressBook(List<Person> importedPeople) {
         requireNonNull(importedPeople);
         addressBook.addPersons(importedPeople);
@@ -226,6 +232,14 @@ public class ModelManager implements Model {
         requireNonNull(importedGroup);
         addressBook.addGroups(importedGroup);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void importCsvEventsToAddressBook(List<Event> importedEvent) {
+        requireNonNull(importedEvent);
+        addressBook.addEvents(importedEvent);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredEventList(unused -> true);
     }
 
     @Override
@@ -274,7 +288,8 @@ public class ModelManager implements Model {
      * Copies the target Person's active RecentEventList onto the Model's list.
      * @param list List to be copied.
      */
-    private void copyRecent(ObservableList<RecentEvent> list) {
+    @Override
+    public void copyRecent(ObservableList<RecentEvent> list) {
         recentEventList.clear();
         for (RecentEvent recentEvent : list) {
             recentEventList.add(recentEvent);

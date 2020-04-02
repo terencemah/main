@@ -4,11 +4,16 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RecentEvent;
 
 /**
  * Shows the user the places visited, activities done or last 5 events
@@ -32,24 +37,50 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_PLACE = "Displaying places visited with ";
     public static final String MESSAGE_ACTIVITY = "Displaying activities done with ";
-    public static final String MESSAGE_RECENT = "Listing last 5 events with ";
+    public static final String MESSAGE_RECENT_ALL = "Listing last 5 events.";
+    public static final String MESSAGE_RECENT_PERSON = "Listing last 5 events with ";
     public static final String MESSAGE_INVALID_PARAMETER = "The entered parameter is invalid.\n";
+    public static final int NUM_EVENTS = 5;
+    public static final int TYPE_ALL = 0;
+    public static final int TYPE_PERSON = 1;
 
     private final Index index;
     private final String parameter;
+    private final int type;
 
-    public ViewCommand(Index index, String parameter) {
+    public ViewCommand(Index index, String parameter, int type) {
         requireNonNull(index);
         requireNonNull(parameter);
 
         this.index = index;
         this.parameter = parameter;
+        this.type = type;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (type == TYPE_ALL && parameter.equals(KEYWORD_RECENT)) {
+            int size = model.getFilteredEventList().size();
+            ObservableList<RecentEvent> recentEventList = FXCollections.observableArrayList();
+            if (size < NUM_EVENTS) {
+                for (int i = size - 1; i >= 0; i--) {
+                    recentEventList.add(new RecentEvent(model.getFilteredEventList().get(i).getPlace(),
+                            model.getFilteredEventList().get(i).getActivity(),
+                            model.getFilteredEventList().get(i).getTime().toString()));
+                }
+            } else {
+                for (int i = 0; i < NUM_EVENTS; i++) {
+                    recentEventList.add(new RecentEvent(model.getFilteredEventList().get(size - 1 - i).getPlace(),
+                            model.getFilteredEventList().get(size - 1 - i).getActivity(),
+                            model.getFilteredEventList().get(size - 1 - i).getTime().toString()));
+                }
+            }
+            model.copyRecent(recentEventList);
+            return new CommandResult(MESSAGE_RECENT_ALL, ViewType.RECENT);
+        }
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -75,7 +106,7 @@ public class ViewCommand extends Command {
 
         default:
             model.showRecentList(personToView);
-            message = MESSAGE_RECENT + personToView.getName() + ".";
+            message = MESSAGE_RECENT_PERSON + personToView.getName() + ".";
             vt = ViewType.RECENT;
         }
 

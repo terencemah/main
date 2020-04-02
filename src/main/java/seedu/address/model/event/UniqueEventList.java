@@ -8,6 +8,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import seedu.address.model.group.Group;
 import seedu.address.model.person.exceptions.DuplicateEventException;
 import seedu.address.model.person.exceptions.EventNotFoundException;
 
@@ -69,6 +70,14 @@ public class UniqueEventList implements Iterable<Event> {
         internalList.addAll(toAdd);
     }
 
+    public void setEvents(List<Event> events) {
+        requireNonNull(events);
+        if (!eventsAreUnique(events)) {
+            throw new DuplicateEventException();
+        }
+        internalList.setAll(events);
+    }
+
     /**
      * Removes the equivalent person from the list. The person must exist in the list.
      */
@@ -103,4 +112,17 @@ public class UniqueEventList implements Iterable<Event> {
         return internalList.hashCode();
     }
 
+    /**
+     * Returns true if {@code groups} contains only unique persons.
+     */
+    private boolean eventsAreUnique(List<Event> events) {
+        for (int i = 0; i < events.size() - 1; i++) {
+            for (int j = i + 1; j < events.size(); j++) {
+                if (events.get(i).equals(events.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

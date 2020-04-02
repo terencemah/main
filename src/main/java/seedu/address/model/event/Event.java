@@ -79,7 +79,8 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-        return this.getActivity().equalsIgnoreCase(otherEvent.getActivity())
+        return (this.getEventId() == ((Event) other).getEventId())
+                && this.getActivity().equalsIgnoreCase(otherEvent.getActivity())
                 && this.getPlace().equalsIgnoreCase(otherEvent.getPlace())
                 && this.getTime().equals(otherEvent.getTime())
                 && this.getWithGroup().equals(otherEvent.getWithGroup())
@@ -88,7 +89,7 @@ public class Event {
 
     @Override
     public int hashCode() {
-        return Objects.hash(activity, place, withGroup, withPerson, time);
+        return Objects.hash(eventId, activity, place, withGroup, withPerson, time);
     }
 
     @Override

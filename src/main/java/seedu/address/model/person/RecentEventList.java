@@ -19,17 +19,18 @@ public class RecentEventList {
      * @param pl The target person's PlaceList.
      * @param al The target person's ActivityList.
      */
-    public void generate(PlaceList pl, ActivityList al) {
+    public void generate(PlaceList pl, ActivityList al, TimeList tl) {
         recentEventList.clear();
         int size = pl.getPlaceList().size();
         if (size < NUM_EVENTS) {
             for (int i = size - 1; i >= 0; i--) {
-                recentEventList.add(new RecentEvent(pl.getPlaceList().get(i), al.getActivityList().get(i)));
+                recentEventList.add(new RecentEvent(pl.getPlaceList().get(i), al.getActivityList().get(i),
+                        tl.getTimeList().get(i)));
             }
         } else {
             for (int i = 0; i < NUM_EVENTS; i++) {
                 recentEventList.add(new RecentEvent(pl.getPlaceList().get(size - 1 - i),
-                        al.getActivityList().get(size - 1 - i)));
+                        al.getActivityList().get(size - 1 - i), tl.getTimeList().get(size - 1 - i)));
             }
         }
     }

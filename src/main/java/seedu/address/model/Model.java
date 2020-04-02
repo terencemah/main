@@ -120,9 +120,13 @@ public interface Model {
 
     void updateFilteredGroupList(Predicate<Group> predicate);
 
+    void updateFilteredEventList(Predicate<Event> predicate);
+
     void importCsvToAddressBook(List<Person> importedPeople);
 
     void importCsvGroupsToAddressBook(List<Group> importedGroup);
+
+    void importCsvEventsToAddressBook(List<Event> importedEvent);
 
     void showPlaceList(Person target);
 
@@ -135,6 +139,8 @@ public interface Model {
     void suggestPlace();
 
     void suggestActivity();
+
+    void copyRecent(ObservableList<RecentEvent> list);
 
     ObservableList<EventDescriptor> getFrequencyList();
 

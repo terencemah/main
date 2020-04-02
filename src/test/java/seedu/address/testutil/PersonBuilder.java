@@ -14,6 +14,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
+import seedu.address.model.person.TimeList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -39,6 +40,7 @@ public class PersonBuilder {
     private Time time;
     private PlaceList places;
     private ActivityList activities;
+    private TimeList times;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -129,8 +131,13 @@ public class PersonBuilder {
         return this;
     }
 
+    public PersonBuilder withTimeList(String input) {
+        this.times = ParserUtil.parseTimes(input);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags, time, places, activities);
+        return new Person(name, phone, email, address, tags, time, places, activities, times);
     }
 
 }

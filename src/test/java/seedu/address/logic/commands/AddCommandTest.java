@@ -104,6 +104,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateFilteredEventList(Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Group> getFilteredGroupList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -224,6 +229,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void importCsvEventsToAddressBook(List<Event> importedEvent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void showPlaceList(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -250,6 +260,11 @@ public class AddCommandTest {
 
         @Override
         public void suggestActivity() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void copyRecent(ObservableList<RecentEvent> list) {
             throw new AssertionError("This method should not be called.");
         }
 
