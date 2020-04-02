@@ -34,7 +34,7 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 . Some example commands you can try:
 
-* *`list`* : lists all contacts
+* *`list_persons`* : lists all contacts
 * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to your Life.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
@@ -87,7 +87,7 @@ Examples:
 Returns a list of the saved persons in CoderLifeInsights.
 //* `list activities` +
 //Returns a list of the saved activities in CoderLifeInsights.
-* `list groups` +
+* `list_groups` +
 Returns a list of the saved groups in CoderLifeInsights.
 //* `list places`
 //Returns a list of the saved places in CoderLifeInsights.
@@ -118,8 +118,8 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 
 Deletes an entity, such as Person, Group, or Event from the CoderLifeInsights +
 Format: `delete person ID` (for person) +
-        `delete group ID` (for group) +
-        `delete event ID` (for event)
+        `delete group ID` (for group)
+//        `delete event ID` (for event)
 
 ****
 * Deletes the person at the specified `INDEX`.
@@ -130,7 +130,7 @@ Remarks: CoderLifeInsights uses 1-indexing.
 
 Examples:
 
-* `list` +
+* `list_persons` +
 `delete 2` +
 Deletes the 2nd person in the CoderLifeInsights.
 * `find Betsy` +
@@ -273,6 +273,42 @@ Examples:
 * `export l/life.csv g/groups.csv` +
 Exports your Life to `life.csv`
 Exports your group data to `group.csv`
+
+=== Adding an Event: `add_event`
+Adds an event to a person or a group at the specified INDEX. +
+Format for adding to a person: `add_event ACTIVITY_NAME place/PLACE_NAME time/TIME m/INDEX` +
+Format for adding to a group: `add_event ACTIVITY_NAME place/PLACE_NAME time/TIME g/INDEX` +
+Remarks:
+
+* TIME has to be in entered in the format `HHMM`: +
+Input for a time of 1 hour and 5 minutes would be: `time/105` +
+Input for a time of 9 minutes would be: `time/09`
+* MM entered cannot exceed 59.
+* The INDEX refers to the index number shown in the displayed person list. The INDEX must be a positive integer.
+* CoderLifeInsights uses 1-indexing.
+
+****
+CoderLifeInsights will store the input `ACTIVITY` and `PLACE` in the Json file so that all events added are kept even through termination of CoderLifeInsights.
+The input `TIME` will be added to the respective persons or events and the cumulative time spent with a person or a group is recorded and displayed. This cumulative `TIME` is also stored to the Json file.
+Insights and suggestions will be generated from the saved `PLACES`, `ACTIVITIES` and `TIME`
+****
+Examples:
+
+* `list_persons`
+* `add_event Date Night place/MBS time/300 m/2` +
+Creates an Event Date Night at MBS with a time spent of 3 hours and adds it to the second person in CoderLifeInsights.
+
+* `list_groups`
+* `add_event Dancing lessons place/Changi Country Club time/130 g/1` +
+Creates an Event Dancing lessons at Changi Country Club with a time spent of 1 hour and 30 minutes and adds it to the first group in CoderLifeInsights.
+
+* find `Betsy`
+* `add_event Date Night place/MBS time/300 m/1` +
+Creates an Event Date Night at MBS with a time spent of 3 hours and adds it to the first result returned by the `find Betsy` command in CoderLifeInsights.
+
+
+
+
 
 === Suggestions: `suggest`
 
