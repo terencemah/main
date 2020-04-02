@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
-//import seedu.address.model.event.TempPlace;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.Person;
@@ -113,9 +112,5 @@ public interface Model {
 
     void showActivityList(Person target);
 
-    //void showPlaces(Person person);
-
     ObservableList<EventDescriptor> getFrequencyList();
-
-    //ObservableList<TempPlace> getTempPlaceList();
 }
