@@ -21,7 +21,7 @@ import seedu.address.model.person.Time;
 /**
  * Represents the command to edit a group in Coder Life Insights.
  */
-public class EditGroupCommand extends Command{
+public class EditGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "edit_group";
 
@@ -102,13 +102,13 @@ public class EditGroupCommand extends Command{
         }
 
         ArrayList<Integer> eventIds = groupToEdit.getEvents();
-        int groupID = groupToEdit.getGroupId();
+        int groupId = groupToEdit.getGroupId();
 
         Group modifiedGroup = new Group(updatedName);
         modifiedGroup.setTimeSpent(oldTime);
         modifiedGroup.setMemberIDs(memberIds);
         modifiedGroup.setEventIDs(eventIds);
-        modifiedGroup.setGroupId(groupID);
+        modifiedGroup.setGroupId(groupId);
 
         return modifiedGroup;
     }
