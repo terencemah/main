@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.event.Event;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.Person;
@@ -72,6 +73,10 @@ public interface Model {
 
     boolean hasGroups(List<Group> groups);
 
+    boolean hasEvent(Event event);
+
+    boolean hasEvents(List<Event> events);
+
     /**
      * Deletes the given person. The person must exist in the address book.
      */
@@ -86,6 +91,8 @@ public interface Model {
 
     void addGroup(Group group);
 
+    void addEvent(Event event);
+
     /**
      * Replaces the given person {@code target} with {@code editedPerson}. {@code target} must exist
      * in the address book. The person identity of {@code editedPerson} must not be the same as
@@ -93,12 +100,16 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    void setGroup(Group target, Group editedGroup);
+
     /**
      * Returns an unmodifiable view of the filtered person list
      */
     ObservableList<Person> getFilteredPersonList();
 
     ObservableList<Group> getFilteredGroupList();
+
+    ObservableList<Event> getFilteredEventList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

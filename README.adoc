@@ -1,4 +1,6 @@
 = CoderLifeInsights
+
+image:https://api.codacy.com/project/badge/Grade/3dd835e750584121bf94b97532fc5763[link="https://app.codacy.com/gh/AY1920S2-CS2103-W14-4/main?utm_source=github.com&utm_medium=referral&utm_content=AY1920S2-CS2103-W14-4/main&utm_campaign=Badge_Grade_Settings"]
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/AY1920S2-CS2103-W14-4/main[image:https://travis-ci.org/AY1920S2-CS2103-W14-4/main.svg?branch=master[Build Status]]
