@@ -41,6 +41,10 @@ public class Group {
         return this.name;
     }
 
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
+
     public int getGroupId() {
         return this.groupId;
     }

@@ -68,6 +68,30 @@ public class Event {
         this.time = time;
     }
 
+    /**
+     * Checks that this event is the same event and has the same
+     * event ID as the event parameter.
+     * @param other Event to be compared against.
+     * @return True if the two events are the same, false otherwise.
+     */
+    public boolean isSameEvent(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Event)) {
+            return false;
+        }
+
+        Event otherEvent = (Event) other;
+        return (this.getEventId() == otherEvent.getEventId()
+                && this.getActivity().equalsIgnoreCase(otherEvent.getActivity())
+                && this.getPlace().equalsIgnoreCase(otherEvent.getPlace())
+                && this.getTime().equals(otherEvent.getTime())
+                && this.getWithGroup().equals(otherEvent.getWithGroup())
+                && this.getWithPerson().equals(otherEvent.getWithPerson()));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -79,16 +103,16 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-        return this.getActivity().equalsIgnoreCase(otherEvent.getActivity())
+        return (this.getActivity().equalsIgnoreCase(otherEvent.getActivity())
                 && this.getPlace().equalsIgnoreCase(otherEvent.getPlace())
                 && this.getTime().equals(otherEvent.getTime())
                 && this.getWithGroup().equals(otherEvent.getWithGroup())
-                && this.getWithPerson().equals(otherEvent.getWithPerson());
+                && this.getWithPerson().equals(otherEvent.getWithPerson()));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(activity, place, withGroup, withPerson, time);
+        return Objects.hash(eventId, activity, place, withGroup, withPerson, time);
     }
 
     @Override

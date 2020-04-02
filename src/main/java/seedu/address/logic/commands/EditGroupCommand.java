@@ -1,0 +1,159 @@
+package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.group.Group;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Time;
+
+/**
+ * Represents the command to edit a group in Coder Life Insights.
+ */
+public class EditGroupCommand extends Command {
+
+    public static final String COMMAND_WORD = "edit_group";
+
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD
+                    + ": Edits the details of the group identified "
+                    + "by the index number used in the displayed group list. "
+                    + "Existing values will be overwritten by the input values.\n"
+                    + "Parameters: INDEX (must be a positive integer) "
+                    + "["
+                    + PREFIX_NAME
+                    + "NAME] "
+                    + "["
+                    + PREFIX_MEMBER
+                    + "MEMBERS]...\n"
+                    + "Example: "
+                    + COMMAND_WORD
+                    + " 1 "
+                    + PREFIX_NAME
+                    + "SoC Friends "
+                    + PREFIX_MEMBER
+                    + "1"
+                    + PREFIX_MEMBER
+                    + "7";
+
+    public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one edit field must be provided";
+    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in Coder Life Insights";
+
+    private final Index index;
+    private final EditGroupDescriptor editGroupDescriptor;
+
+    public EditGroupCommand(Index index, EditGroupDescriptor editGroupDescriptor) {
+        requireNonNull(index);
+        requireNonNull(editGroupDescriptor);
+
+        this.index = index;
+        this.editGroupDescriptor = editGroupDescriptor;
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Group> lastShownList = model.getFilteredGroupList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+        }
+
+        Group groupToEdit = lastShownList.get(index.getZeroBased());
+        Group editedGroup = createEditedGroup(groupToEdit, editGroupDescriptor);
+
+        if (!groupToEdit.equals(editedGroup) && model.hasGroup(editedGroup)) {
+            throw new CommandException(MESSAGE_DUPLICATE_GROUP);
+        }
+
+        model.setGroup(groupToEdit, editedGroup);
+        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup), ViewType.GROUPS);
+    }
+
+    /**
+     * Creates and returns a {@code Group} with the details of {@code groupToEdit}.
+     * @param groupToEdit
+     * @param editGroupDescriptor
+     * @return
+     */
+    private static Group createEditedGroup(Group groupToEdit, EditGroupDescriptor editGroupDescriptor) {
+        assert groupToEdit != null;
+
+        Name updatedName = editGroupDescriptor.getName().orElse(groupToEdit.getName());
+        Time oldTime = groupToEdit.getTimeSpent();
+        ArrayList<Integer> memberIds;
+        if (editGroupDescriptor.getMemberIds().isPresent()) {
+            memberIds = editGroupDescriptor.getMemberIds().get();
+        } else {
+            memberIds = groupToEdit.getMembers();
+        }
+
+        ArrayList<Integer> eventIds = groupToEdit.getEvents();
+        int groupId = groupToEdit.getGroupId();
+
+        Group modifiedGroup = new Group(updatedName);
+        modifiedGroup.setTimeSpent(oldTime);
+        modifiedGroup.setMemberIDs(memberIds);
+        modifiedGroup.setEventIDs(eventIds);
+        modifiedGroup.setGroupId(groupId);
+
+        return modifiedGroup;
+    }
+
+
+    /**
+     * Stores the details to edit the group with. Each non-empty field value will replace the corresponding field value
+     * of the specified group.
+     */
+    public static class EditGroupDescriptor {
+        private Name name;
+        private ArrayList<Integer> memberIds;
+
+        public EditGroupDescriptor() {
+
+        }
+
+        public EditGroupDescriptor(EditGroupDescriptor toCopy) {
+            setName(toCopy.name);
+            setMemberIds(toCopy.memberIds);
+        }
+
+        /**
+         * Checks if at least one field is edited by user.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(name, memberIds);
+        }
+
+        public void setName(Name name) {
+            this.name = name;
+        }
+
+        public Optional<Name> getName() {
+            return Optional.ofNullable(this.name);
+        }
+
+        public void setMemberIds(ArrayList<Integer> memberIds) {
+            this.memberIds = (memberIds != null) ? new ArrayList<>(memberIds) : null;
+        }
+
+        public Optional<ArrayList<Integer>> getMemberIds() {
+            return (memberIds != null) ? Optional.of(memberIds) : Optional.empty();
+        }
+
+    }
+
+}

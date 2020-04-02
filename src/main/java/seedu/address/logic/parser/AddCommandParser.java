@@ -21,6 +21,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
+import seedu.address.model.person.TimeList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -53,8 +54,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Time time = new Time(0, 0);
         PlaceList placeList = new PlaceList(new ArrayList<String>());
         ActivityList activityList = new ActivityList(new ArrayList<String>());
+        TimeList timeList = new TimeList(new ArrayList<String>());
 
-        Person person = new Person(name, phone, email, address, tagList, time, placeList, activityList);
+        Person person = new Person(name, phone, email, address, tagList, time,
+                placeList, activityList, timeList);
 
         return new AddCommand(person);
     }
