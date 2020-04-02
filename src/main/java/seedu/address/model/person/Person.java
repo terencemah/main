@@ -31,12 +31,14 @@ public class Person {
     private final FrequencyList placeList2;
     private final FrequencyList activityList2;
     private final PlaceList placeList = new PlaceList(new ArrayList<String>());
+    private final TimeList timeList = new TimeList(new ArrayList<String>());
+    private final RecentEventList recentEventList;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Time time, PlaceList placeList,
-                  ActivityList activityList) {
+                  ActivityList activityList, TimeList timeList) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -46,12 +48,13 @@ public class Person {
         this.time = time;
         this.placeList.setPlaceList(placeList.getPlaceList());
         this.activityList.setActivityList(activityList.getActivityList());
+        this.timeList.setTimeList(timeList.getTimeList());
         placeList2 = new FrequencyList();
         placeList2.generate(this.placeList.getPlaceList());
         activityList2 = new FrequencyList();
         activityList2.generate(this.activityList.getActivityList());
-
-
+        recentEventList = new RecentEventList();
+        recentEventList.generate(this.placeList, this.activityList, this.timeList);
     }
 
     public Name getName() {
@@ -81,6 +84,15 @@ public class Person {
     public ActivityList getActivityList2() {
         return activityList;
     }
+
+    public TimeList getTimeList() {
+        return timeList;
+    }
+
+    public ObservableList<RecentEvent> getRecentEventList() {
+        return recentEventList.getList();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException} if
      * modification is attempted.
@@ -154,14 +166,6 @@ public class Person {
         builder.append(" Activities done together: ")
                 .append(getActivityList2().toString());
         return builder.toString();
-    }
-
-    public void addPlace(String name) {
-        placeList.addPlace(name);
-    }
-
-    public void addActivity(String name) {
-        activityList.addActivity(name);
     }
 
     public ObservableList<EventDescriptor> getPlaceList() {

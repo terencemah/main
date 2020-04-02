@@ -17,6 +17,7 @@ import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
+import seedu.address.model.person.TimeList;
 
 /**
  * Represents the command to add a new event to CoderLifeInsights.
@@ -91,8 +92,11 @@ public class AddEventCommand extends Command {
             ActivityList currentActivityList = toEdit.getActivityList2();
             ActivityList newActivityList = currentActivityList.addActivity(toAdd.getActivity());
 
+            TimeList currentTimeList = toEdit.getTimeList();
+            TimeList newTimeList = currentTimeList.addTime(toAdd.getTime().toString());
+
             Person editedPerson = new Person(toEdit.getName(), toEdit.getPhone(), toEdit.getEmail(),
-                    toEdit.getAddress(), toEdit.getTags(), curr, newPlaceList, newActivityList);
+                    toEdit.getAddress(), toEdit.getTags(), curr, newPlaceList, newActivityList, newTimeList);
             model.setPerson(toEdit, editedPerson);
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             model.addEvent(toAdd);

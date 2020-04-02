@@ -25,6 +25,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RecentEvent;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -99,6 +100,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredGroupList(Predicate<Group> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredEventList(Predicate<Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -223,6 +229,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void importCsvEventsToAddressBook(List<Event> importedEvent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void showPlaceList(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -230,6 +241,11 @@ public class AddCommandTest {
         @Override
         public void showActivityList(Person target) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void showRecentList(Person target) {
+
         }
 
         @Override
@@ -248,11 +264,19 @@ public class AddCommandTest {
         }
 
         @Override
+        public void copyRecent(ObservableList<RecentEvent> list) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<EventDescriptor> getFrequencyList() {
             throw new AssertionError("This method should not be called.");
         }
 
-
+        @Override
+        public ObservableList<RecentEvent> getRecentList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -10,6 +10,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RecentEvent;
 
 /**
  * The API of the Model component.
@@ -119,13 +120,19 @@ public interface Model {
 
     void updateFilteredGroupList(Predicate<Group> predicate);
 
+    void updateFilteredEventList(Predicate<Event> predicate);
+
     void importCsvToAddressBook(List<Person> importedPeople);
 
     void importCsvGroupsToAddressBook(List<Group> importedGroup);
 
+    void importCsvEventsToAddressBook(List<Event> importedEvent);
+
     void showPlaceList(Person target);
 
     void showActivityList(Person target);
+
+    void showRecentList(Person target);
 
     void suggestPerson();
 
@@ -133,5 +140,9 @@ public interface Model {
 
     void suggestActivity();
 
+    void copyRecent(ObservableList<RecentEvent> list);
+
     ObservableList<EventDescriptor> getFrequencyList();
+
+    ObservableList<RecentEvent> getRecentList();
 }

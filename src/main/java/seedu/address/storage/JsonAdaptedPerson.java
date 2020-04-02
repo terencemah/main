@@ -19,6 +19,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
+import seedu.address.model.person.TimeList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,6 +37,7 @@ class JsonAdaptedPerson {
     private final String time;
     private final List<String> places = new ArrayList<>();
     private final List<String> activities = new ArrayList<>();
+    private final List<String> times = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -75,6 +77,7 @@ class JsonAdaptedPerson {
         time = source.getTime().toString();
         places.addAll(source.getPlaceList2().placeList);
         activities.addAll(source.getActivityList2().activityList);
+        times.addAll(source.getTimeList().timeList);
     }
 
     /**
@@ -133,7 +136,9 @@ class JsonAdaptedPerson {
 
         final ActivityList modelActivityList = new ActivityList(activities);
 
+        final TimeList modelTimeList = new TimeList(times);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTime, modelPlaceList,
-                modelActivityList);
+                modelActivityList, modelTimeList);
     }
 }
