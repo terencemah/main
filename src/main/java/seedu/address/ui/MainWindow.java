@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private GroupListPanel groupListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private TimePieChart timePieChart;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -47,10 +48,19 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane groupListPanelPlaceholder;
+
+    @FXML
+    private StackPane frequencyListPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane timePieChartPanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -101,12 +111,12 @@ public class MainWindow extends UiPart<Stage> {
         getRoot()
                 .addEventFilter(
                         KeyEvent.KEY_PRESSED,
-                    event -> {
-                        if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
-                            menuItem.getOnAction().handle(new ActionEvent());
-                            event.consume();
-                        }
-                    });
+                        event -> {
+                            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
+                                menuItem.getOnAction().handle(new ActionEvent());
+                                event.consume();
+                            }
+                        });
     }
 
     /**
@@ -115,6 +125,14 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        timePieChart = new TimePieChart();
+        timePieChartPanelPlaceholder.getChildren().add(timePieChart.getRoot());
+//        frequencyListPanel = new FrequencyListPanel(logic.getFrequencyList());
+//        frequencyListPanelPlaceholder.getChildren().add(frequencyListPanel.getRoot());
+
+        groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
+        groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -172,14 +190,14 @@ public class MainWindow extends UiPart<Stage> {
 
     private void handleView() {
         frequencyListPanel = new FrequencyListPanel(logic.getFrequencyList());
-        personListPanelPlaceholder.getChildren().clear();
-        personListPanelPlaceholder.getChildren().add(frequencyListPanel.getRoot());
+        frequencyListPanelPlaceholder.getChildren().clear();
+        frequencyListPanelPlaceholder.getChildren().add(frequencyListPanel.getRoot());
     }
 
     private void handleGroup() {
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
-        personListPanelPlaceholder.getChildren().clear();
-        personListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        groupListPanelPlaceholder.getChildren().clear();
+        groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
     }
 
     private void handleNormal() {
@@ -206,20 +224,20 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             switch (commandResult.getViewType()) {
 
-            case HELP:
-                handleHelp();
-                break;
-            case EXIT:
-                handleExit();
-                break;
-            case EVENTS:
-                handleView();
-                break;
-            case GROUPS:
-                handleGroup();
-                break;
-            default:
-                handleNormal();
+                case HELP:
+                    handleHelp();
+                    break;
+                case EXIT:
+                    handleExit();
+                    break;
+                case EVENTS:
+                    handleView();
+                    break;
+                case GROUPS:
+                    handleGroup();
+                    break;
+                default:
+                    handleNormal();
             }
             return commandResult;
 
