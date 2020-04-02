@@ -12,6 +12,7 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PlaceList;
@@ -53,28 +54,15 @@ public class AddEventCommand extends Command {
             + "[5 minutes = 05]; "
             + "[1 hour = 100]; "
             + "[10 hours and 30 minutes = 1030]";
-    public static final String MESSAGE_SUCCESS = "New event successfully added.";
-
+    public static final String MESSAGE_SUCCESS = "New event successfully added: %1$s";
+    public static final String MESSAGE_DUPLICATE_GROUP = "Event with given arguments already exists. Please try again."
     public static final String MESSAGE_ARGUMENTS = "Activity: %1$s, Index: %2$d, Place: %3$s, Time: %4$s";
 
-    private final String activity;
-    private final int index;
-    private final String place;
-    private final Time time;
+    private final Event toAdd;
 
-    /**
-     * @param activity to be added to person/group activity list
-     * @param index of the person or group to be added to
-     * @param place to be added to person/group place list
-     * @param time to be added to person/group
-     */
-    public AddEventCommand(String activity, int index, String place, Time time) {
-        requireAllNonNull(activity, index, place, time);
-
-        this.activity = activity;
-        this.index = index;
-        this.place = place;
-        this.time = time;
+    public AddEventCommand(Event event) {
+        requireAllNonNull(event);
+        this.toAdd = event;
     }
 
     @Override
