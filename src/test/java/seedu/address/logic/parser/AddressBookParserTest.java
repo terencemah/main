@@ -31,9 +31,9 @@ import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Time;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -108,8 +108,9 @@ public class AddressBookParserTest {
                 + " " + PREFIX_MEMBER + index
                 + " " + PREFIX_PLACE + place
                 + " " + PREFIX_TIME + time);
-        assertEquals(new AddEventCommand(activity, Integer.parseInt(index), place, new Time(11, 11)),
-                command);
+        Event event = new Event(activity, place, 11, 11);
+        event.setWithPerson(Integer.parseInt(index));
+        assertEquals(new AddEventCommand(event), command);
     }
 
     @Test

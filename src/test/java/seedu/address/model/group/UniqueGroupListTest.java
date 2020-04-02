@@ -1,5 +1,6 @@
 package seedu.address.model.group;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -45,6 +46,37 @@ public class UniqueGroupListTest {
         groups.add(group);
         uniqueGroupList.addAll(groups);
         assertThrows(DuplicateGroupException.class, () -> uniqueGroupList.addAll(groups));
+    }
+
+    @Test
+    public void setGroupNullTargetGroupThrowsNullPointerException() {
+        Group group = new Group(new Name("Soc Friends"));
+        assertThrows(NullPointerException.class, () -> uniqueGroupList.setGroup(null, group));
+    }
+
+    @Test
+    public void setGroupNullEditedGroupThrowsNullPointerException() {
+        Group group = new Group(new Name("Soc Friends"));
+        assertThrows(NullPointerException.class, () -> uniqueGroupList.setGroup(group, null));
+    }
+
+    @Test
+    public void setGroupEditedGroupHasNonUniqueIdentityThrowsDuplicatePersonException() {
+        Group group = new Group(new Name("Soc Friends"));
+        uniqueGroupList.addGroup(group);
+        Group group1 = new Group(new Name("Cinnamon Friends"));
+        uniqueGroupList.addGroup(group1);
+        assertThrows(DuplicateGroupException.class, () -> uniqueGroupList.setGroup(group, group1));
+    }
+
+    @Test
+    public void setGroupEditedGroupIsSameGroupSuccess() {
+        Group group = new Group(new Name("Soc Friends"));
+        uniqueGroupList.addGroup(group);
+        uniqueGroupList.setGroup(group, group);
+        UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
+        expectedUniqueGroupList.addGroup(group);
+        assertEquals(expectedUniqueGroupList, uniqueGroupList);
     }
 
     @Test

@@ -3,6 +3,7 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,6 +32,21 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
+     * Returns true if the list contains an equivalent eventList as the given argument.
+     */
+    public boolean containsEvents(List<Event> toCheck) {
+        requireNonNull(toCheck);
+        boolean eventExists;
+        for (Event oneEvent : toCheck) {
+            eventExists = internalList.stream().anyMatch(oneEvent:: equals);
+            if (eventExists) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds an event to the list. The event must not already exist in the list.
      */
     public void add(Event toAdd) {
@@ -39,6 +55,18 @@ public class UniqueEventList implements Iterable<Event> {
             throw new DuplicateEventException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Adds given events to the list if they are already not in the list.
+     * @param toAdd events to be added.
+     */
+    public void addAll(List<Event> toAdd) {
+        requireNonNull(toAdd);
+        if (containsEvents(toAdd)) {
+            throw new DuplicateEventException();
+        }
+        internalList.addAll(toAdd);
     }
 
     /**
