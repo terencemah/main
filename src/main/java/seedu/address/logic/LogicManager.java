@@ -87,5 +87,4 @@ public class LogicManager implements Logic {
     public ObservableList<EventDescriptor> getFrequencyList() {
         return model.getFrequencyList();
     }
-
 }

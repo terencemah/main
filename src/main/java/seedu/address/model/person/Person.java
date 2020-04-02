@@ -156,14 +156,6 @@ public class Person {
         return builder.toString();
     }
 
-    public void addPlace(String name) {
-        placeList2.add(name);
-    }
-
-    public void addActivity(String name) {
-        activityList2.add(name);
-    }
-
     public ObservableList<EventDescriptor> getPlaceList() {
         return placeList2.getFrequencyList();
     }

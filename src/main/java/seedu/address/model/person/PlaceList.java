@@ -68,5 +68,4 @@ public class PlaceList {
     public int hashCode() {
         return placeList.hashCode();
     }
-
 }
