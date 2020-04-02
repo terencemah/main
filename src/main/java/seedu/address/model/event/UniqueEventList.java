@@ -8,12 +8,11 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import seedu.address.model.group.Group;
 import seedu.address.model.person.exceptions.DuplicateEventException;
 import seedu.address.model.person.exceptions.EventNotFoundException;
 
 /**
- * Represents the list of events that enforces unqiueness in its events.
+ * Represents the list of events that enforces uniqueness in its events.
  */
 public class UniqueEventList implements Iterable<Event> {
 

@@ -225,6 +225,9 @@ public class ParserUtil {
         return new ActivityList(toAdd);
     }
 
+    /**
+     * Parses {@code String input} into {@code TimeList}
+     */
     public static TimeList parseTimes(String input) {
         List<String> toAdd = new ArrayList<>();
         String[] process = input.split(", ");
