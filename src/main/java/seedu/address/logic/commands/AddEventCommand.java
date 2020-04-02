@@ -119,4 +119,11 @@ public class AddEventCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), ViewType.GROUPS);
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddEventCommand // instanceof handles nulls
+                && toAdd.equals(((AddEventCommand) other).toAdd));
+    }
 }
