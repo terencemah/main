@@ -27,6 +27,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
+import seedu.address.model.person.TimeList;
 import seedu.address.model.tag.Tag;
 
 
@@ -124,9 +125,10 @@ public class EditCommand extends Command {
         PlaceList updatedPlaceList = editPersonDescriptor.getPlaceList().orElse(personToEdit.getPlaceList2());
         ActivityList updatedActivityList = editPersonDescriptor.getActivityList().orElse(personToEdit
                 .getActivityList2());
+        TimeList updatedTimeList = editPersonDescriptor.getTimeList().orElse(personToEdit.getTimeList());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedTime,
-                updatedPlaceList, updatedActivityList);
+                updatedPlaceList, updatedActivityList, updatedTimeList);
     }
 
     @Override
@@ -159,6 +161,7 @@ public class EditCommand extends Command {
         private Time time;
         private PlaceList placeList;
         private ActivityList activityList;
+        private TimeList timeList;
 
         public EditPersonDescriptor() {
         }
@@ -238,6 +241,14 @@ public class EditCommand extends Command {
 
         public Optional<ActivityList> getActivityList() {
             return (activityList != null) ? Optional.ofNullable(activityList) : Optional.empty();
+        }
+
+        public void setTimeList(TimeList timeList) {
+            this.timeList = timeList;
+        }
+
+        public Optional<TimeList> getTimeList() {
+            return (timeList != null) ? Optional.ofNullable(timeList) : Optional.empty();
         }
 
         /**

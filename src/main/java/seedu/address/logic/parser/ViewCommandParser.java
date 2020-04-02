@@ -24,11 +24,19 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         StringTokenizer st = new StringTokenizer(args);
         Index index;
         String parameter;
+        String token = "";
 
         try {
-            index = ParserUtil.parseIndex(st.nextToken());
+            token = st.nextToken();
+            index = ParserUtil.parseIndex(token);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), pe);
+            if (token.equals(ViewCommand.KEYWORD_RECENT)) {
+                index = ParserUtil.parseIndex("1");
+                parameter = ViewCommand.KEYWORD_RECENT;
+                return new ViewCommand(index, parameter, ViewCommand.TYPE_ALL);
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), pe);
+            }
         }
 
         if (st.hasMoreTokens()) {
@@ -38,10 +46,10 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         }
 
         if (!parameter.equals(ViewCommand.KEYWORD_PLACE) && !parameter.equals(ViewCommand.KEYWORD_ACTIVITY)
-                && !parameter.equals(ViewCommand.KEYWORD_TIME)) {
+                && !parameter.equals(ViewCommand.KEYWORD_RECENT)) {
             throw new ParseException(ViewCommand.MESSAGE_INVALID_PARAMETER + ViewCommand.MESSAGE_USAGE);
         }
 
-        return new ViewCommand(index, parameter);
+        return new ViewCommand(index, parameter, ViewCommand.TYPE_PERSON);
     }
 }
