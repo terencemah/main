@@ -83,7 +83,8 @@ public class Event {
                 && this.getPlace().equalsIgnoreCase(otherEvent.getPlace())
                 && this.getTime().equals(otherEvent.getTime())
                 && this.getWithGroup().equals(otherEvent.getWithGroup())
-                && this.getWithPerson().equals(otherEvent.getWithPerson());
+                && this.getWithPerson().equals(otherEvent.getWithPerson())
+                && this.getEventId() == (otherEvent.getEventId());
     }
 
     @Override
