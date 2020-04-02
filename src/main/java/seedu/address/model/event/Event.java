@@ -68,6 +68,12 @@ public class Event {
         this.time = time;
     }
 
+    /**
+     * Checks that this event is the same event and has the same
+     * event ID as the event parameter.
+     * @param other Event to be compared against.
+     * @return True if the two events are the same, false otherwise.
+     */
     public boolean isSameEvent(Object other) {
         if (other == this) {
             return true;
