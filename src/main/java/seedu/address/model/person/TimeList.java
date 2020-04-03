@@ -20,6 +20,7 @@ public class TimeList {
 
     /**
      * Adds a time to the current timeList
+     *
      * @return new TimeList
      */
     public TimeList addTime(String time) {

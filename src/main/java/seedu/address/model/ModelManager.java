@@ -23,6 +23,7 @@ import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.NameContainsFullNamePredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.RecentEvent;
+import seedu.address.model.person.Time;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -37,6 +38,7 @@ public class ModelManager implements Model {
     private final FilteredList<Event> filteredEvents;
     private final ObservableList<EventDescriptor> frequencyList;
     private final ObservableList<RecentEvent> recentEventList;
+    private final ObservableList<Time> timeList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -54,6 +56,7 @@ public class ModelManager implements Model {
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
         frequencyList = FXCollections.observableArrayList();
         recentEventList = FXCollections.observableArrayList();
+        timeList = FXCollections.observableArrayList();
     }
 
     public ModelManager() {
@@ -289,6 +292,7 @@ public class ModelManager implements Model {
 
     /**
      * Copies the target Person's active RecentEventList onto the Model's list.
+     *
      * @param list List to be copied.
      */
     @Override
@@ -297,6 +301,38 @@ public class ModelManager implements Model {
         for (RecentEvent recentEvent : list) {
             recentEventList.add(recentEvent);
         }
+    }
+
+    @Override
+    public void copyTime(ObservableList<Time> list) {
+        timeList.clear();
+        for (Time time : list) {
+            timeList.add(time);
+        }
+    }
+
+    @Override
+    public void showTime() {
+        ObservableList<Person> personList = addressBook.getPersonList();
+        ObservableList<Group> groupList = addressBook.getGroupList();
+        ObservableList<Time> timeList = FXCollections.observableArrayList();
+
+        Time personTime = new Time(0, 0);
+        Time groupTime = new Time(0, 0);
+        for (Person onePerson : personList) {
+            int personHour = onePerson.getTime().getHours();
+            int personMin = onePerson.getTime().getMinutes();
+            personTime.addTime(personMin, personHour);
+        }
+
+        for (Group oneGroup : groupList) {
+            int groupHour = oneGroup.getTimeSpent().getHours();
+            int groupMin = oneGroup.getTimeSpent().getMinutes();
+            groupTime.addTime(groupMin, groupHour);
+        }
+        timeList.add(personTime);
+        timeList.add(groupTime);
+        copyTime(timeList);
     }
 
     /**
@@ -348,7 +384,7 @@ public class ModelManager implements Model {
                     placeIntegerMap.put(suggestedPlace, 1);
                 }
             }
-            
+
             //get min place visited
             int minValue = Integer.MAX_VALUE;
             for (String key : placeIntegerMap.keySet()) {
@@ -387,7 +423,6 @@ public class ModelManager implements Model {
                     minKey = key;
                 }
             }
-            System.out.println(eventList);
             System.out.println(minKey);
         } else {
             System.out.println(minKey);
@@ -402,6 +437,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<RecentEvent> getRecentList() {
         return recentEventList;
+    }
+
+    @Override
+    public ObservableList<Time> getTimeList() {
+        return timeList;
     }
 
     @Override

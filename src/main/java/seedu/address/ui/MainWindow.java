@@ -128,8 +128,9 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        timePieChart = new TimePieChart();
+        timePieChart = new TimePieChart(logic.getTimeList(), logic.getFilteredGroupList(), logic.getFilteredPersonList());
         timePieChartPanelPlaceholder.getChildren().add(timePieChart.getRoot());
+
 //        frequencyListPanel = new FrequencyListPanel(logic.getFrequencyList());
 //        frequencyListPanelPlaceholder.getChildren().add(frequencyListPanel.getRoot());
 
@@ -190,22 +191,36 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void handleViewPlaces() {
+        placeListPanel = new PlaceListPanel(logic.getFrequencyList());
+        timePieChartPanelPlaceholder.getChildren().clear();
+        timePieChartPanelPlaceholder.getChildren().add(placeListPanel.getRoot());
+    }
+
     private void handleViewActivities() {
         activityListPanel = new ActivityListPanel(logic.getFrequencyList());
-        personListPanelPlaceholder.getChildren().clear();
-        personListPanelPlaceholder.getChildren().add(activityListPanel.getRoot());
+        timePieChartPanelPlaceholder.getChildren().clear();
+        timePieChartPanelPlaceholder.getChildren().add(activityListPanel.getRoot());
     }
 
     private void handleViewRecent() {
         recentEventPanel = new RecentEventPanel(logic.getRecentList());
-        personListPanelPlaceholder.getChildren().clear();
-        personListPanelPlaceholder.getChildren().add(recentEventPanel.getRoot());
+        timePieChartPanelPlaceholder.getChildren().clear();
+        timePieChartPanelPlaceholder.getChildren().add(recentEventPanel.getRoot());
     }
+
+    private void handleViewTime() {
+        timePieChart = new TimePieChart(logic.getTimeList(), logic.getFilteredGroupList(), logic.getFilteredPersonList());
+        timePieChartPanelPlaceholder.getChildren().clear();
+        timePieChartPanelPlaceholder.getChildren().add(timePieChart.getRoot());
+    }
+
 
     private void handleGroup() {
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
         groupListPanelPlaceholder.getChildren().clear();
         groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+    }
 
     private void handleNormal() {
         personListPanelPlaceholder.getChildren().clear();
@@ -230,27 +245,31 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             switch (commandResult.getViewType()) {
-
-            case HELP:
-                handleHelp();
-                break;
-            case EXIT:
-                handleExit();
-                break;
-            case PLACES:
-                handleViewPlaces();
-                break;
-            case ACTIVITIES:
-                handleViewActivities();
-                break;
-            case RECENT:
-                handleViewRecent();
-                break;
-            case GROUPS:
-                handleGroup();
-                break;
-            default:
-                handleNormal();
+                case HELP:
+                    handleHelp();
+                    break;
+                case EXIT:
+                    handleExit();
+                    break;
+                case PLACES:
+                    handleViewPlaces();
+                    break;
+                case ACTIVITIES:
+                    handleViewActivities();
+                    break;
+                case TIME:
+                    handleViewTime();
+                    break;
+                case RECENT:
+                    handleViewRecent();
+                    break;
+                case ALL:
+                    handleViewRecent();
+                case GROUPS:
+                    handleGroup();
+                    break;
+                default:
+                    handleNormal();
             }
             return commandResult;
 
