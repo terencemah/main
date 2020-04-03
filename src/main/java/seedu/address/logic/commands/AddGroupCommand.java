@@ -4,9 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.Person;
 
 /**
  * Represents the command to add a new group to CoderLifeInsights.
@@ -39,6 +43,7 @@ public class AddGroupCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New group added: %1$s";
     public static final String MESSAGE_DUPLICATE_GROUP =
             "Group with given name already exists. " + "Please try again with another name";
+    public static final String MESSAGE_PERSON_DOES_NOT_EXIST = "Person(s) with given Id does not exist";
 
     private final Group toAdd;
 
@@ -50,9 +55,17 @@ public class AddGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         if (model.hasGroup(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
+        }
+
+        List<Person> lastShownList = model.getFilteredPersonList();
+        ArrayList<Integer> members = toAdd.getMembers();
+
+        for (int i = 0; i < members.size(); i++) {
+            if (!lastShownList.contains(members.get(i))) {
+                throw new CommandException(MESSAGE_PERSON_DOES_NOT_EXIST);
+            }
         }
 
         model.addGroup(toAdd);
