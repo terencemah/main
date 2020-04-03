@@ -29,55 +29,58 @@ import seedu.address.model.person.Time;
  */
 public class AddEventCommandTest {
 
-    //    @Test //need fix
-    //    public void execute_addEventUnfilteredList_success() {
-    //        final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    //        final String activity = "test";
-    //        final String place = "anywhere";
-    //
-    //        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-    //        Person editedPerson = new PersonBuilder(
-    //        model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-    //                .withName(firstPerson.getName().fullName).withTime("0h 30m").withActivityList("test")
-    //                .withPlaceList("anywhere").build();
-    //
-    //        Event event = new Event(activity, place, 30, 0);
-    //        event.setWithPerson(INDEX_FIRST_PERSON.getOneBased());
-    //        AddEventCommand addEventCommand = new AddEventCommand(event);
-    //
-    //        String expectedMessage = String.format(AddEventCommand.MESSAGE_SUCCESS, editedPerson);
-    //
-    //        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-    //        expectedModel.setPerson(firstPerson, editedPerson);
-    //
-    //        assertCommandSuccess(addEventCommand, model, expectedMessage, expectedModel);
-    //    }
+    /*    @Test //need fix
+        public void execute_addEventUnfilteredList_success() {
+            final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+            final String activity = "test";
+            final String place = "anywhere";
 
-    //    @Test //need fix
-    //    public void execute_addEventFilteredList_success() {
-    //        final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    //        final String activity = "test";
-    //        final String place = "anywhere";
-    //
-    //        showPersonAtIndex(model, INDEX_SECOND_PERSON);
-    //
-    //        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-    //        Person editedPerson = new PersonBuilder(
-    //        model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-    //                .withName(firstPerson.getName().fullName).withTime("1h 1m").withActivityList("test")
-    //                .withPlaceList("anywhere").build();
-    //
-    //        Event event = new Event(activity, place, 1, 1);
-    //        event.setWithPerson(INDEX_FIRST_PERSON.getOneBased());
-    //        AddEventCommand addEventCommand = new AddEventCommand(event);
-    //
-    //        String expectedMessage = String.format(AddEventCommand.MESSAGE_SUCCESS, editedPerson);
-    //
-    //        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-    //        expectedModel.setPerson(firstPerson, editedPerson);
-    //
-    //        assertCommandSuccess(addEventCommand, model, expectedMessage, expectedModel);
-    //    }
+            Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+            Person editedPerson = new PersonBuilder(
+            model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
+                    .withName(firstPerson.getName().fullName).withTime("0h 30m").withActivityList("test")
+                    .withPlaceList("anywhere").build();
+
+            Event event = new Event(activity, place, 30, 0);
+            event.setWithPerson(INDEX_FIRST_PERSON.getOneBased());
+            AddEventCommand addEventCommand = new AddEventCommand(event);
+
+            String expectedMessage = String.format(AddEventCommand.MESSAGE_SUCCESS, editedPerson);
+
+            Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+            expectedModel.setPerson(firstPerson, editedPerson);
+            expectedModel.addEvent(event);
+
+            assertCommandSuccess(addEventCommand, model, expectedMessage, expectedModel);
+
+            assertTrue(model.getFilteredEventList().equals(expectedModel.getFilteredEventList()));
+        }*/
+
+    /*    @Test need fix
+        public void execute_addEventFilteredList_success() {
+            final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+            final String activity = "test";
+            final String place = "anywhere";
+
+            showPersonAtIndex(model, INDEX_SECOND_PERSON);
+
+            Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+            Person editedPerson = new PersonBuilder(
+            model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
+                    .withName(firstPerson.getName().fullName).withTime("1h 1m").withActivityList("test")
+                    .withPlaceList("anywhere").build();
+
+            Event event = new Event(activity, place, 1, 1);
+            event.setWithPerson(INDEX_FIRST_PERSON.getOneBased());
+            AddEventCommand addEventCommand = new AddEventCommand(event);
+
+            String expectedMessage = String.format(AddEventCommand.MESSAGE_SUCCESS, editedPerson);
+
+            Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+            expectedModel.setPerson(firstPerson, editedPerson);
+
+            assertCommandSuccess(addEventCommand, model, expectedMessage, expectedModel);
+        }*/
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
@@ -111,30 +114,30 @@ public class AddEventCommandTest {
         assertCommandFailure(addEventCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-    //    @Test //need fix
-    //    public void execute_addEventOfMoreThan1HourUnfilteredList_success() {
-    //        final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    //        final String activity = "test";
-    //        final String place = "anywhere";
-    //        final Time time = new Time(1, 01);
-    //
-    //        Person firstPerson = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
-    //        Person editedPerson = new PersonBuilder(
-    //        model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased()))
-    //                .withName(firstPerson.getName().fullName).withTime("1h 1m").withActivityList("test")
-    //                .withPlaceList("anywhere").build();
-    //
-    //        Event event = new Event(activity, place, 1, 01);
-    //        event.setWithPerson(INDEX_THIRD_PERSON.getOneBased());
-    //        AddEventCommand addEventCommand = new AddEventCommand(event);
-    //
-    //        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-    //        expectedModel.setPerson(firstPerson, editedPerson);
-    //
-    //        String expectedMessage = String.format(AddEventCommand.MESSAGE_SUCCESS, editedPerson);
-    //
-    //        assertCommandSuccess(addEventCommand, model, expectedMessage, expectedModel);
-    //    }
+    /*    @Test need fix
+        public void execute_addEventOfMoreThan1HourUnfilteredList_success() {
+            final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+            final String activity = "test";
+            final String place = "anywhere";
+            final Time time = new Time(1, 01);
+
+            Person firstPerson = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+            Person editedPerson = new PersonBuilder(
+            model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased()))
+                    .withName(firstPerson.getName().fullName).withTime("1h 1m").withActivityList("test")
+                    .withPlaceList("anywhere").build();
+
+            Event event = new Event(activity, place, 1, 01);
+            event.setWithPerson(INDEX_THIRD_PERSON.getOneBased());
+            AddEventCommand addEventCommand = new AddEventCommand(event);
+
+            Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+            expectedModel.setPerson(firstPerson, editedPerson);
+
+            String expectedMessage = String.format(AddEventCommand.MESSAGE_SUCCESS, editedPerson);
+
+            assertCommandSuccess(addEventCommand, model, expectedMessage, expectedModel);
+        }*/
 
     @Test
     public void equals() {

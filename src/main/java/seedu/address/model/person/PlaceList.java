@@ -17,6 +17,7 @@ public class PlaceList {
         return this.placeList;
     }
 
+
     /**
      * Adds a place to the current placeList
      * @return new PlaceList

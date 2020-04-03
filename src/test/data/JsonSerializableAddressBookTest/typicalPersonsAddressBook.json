@@ -7,7 +7,6 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "tagged" : [ "friends" ],
     "time" : "0h 0m",
-
     "places" : [ ],
     "activities" : [ ]
   }, {
@@ -17,7 +16,6 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "tagged" : [ "owesMoney", "friends" ],
     "time" : "0h 0m",
-
     "places" : [ ],
     "activities" : [ ]
   }, {
@@ -27,7 +25,6 @@
     "address" : "wall street",
     "tagged" : [ ],
     "time" : "0h 0m",
-
     "places" : [ ],
     "activities" : [ ]
   }, {
@@ -37,7 +34,6 @@
     "address" : "10th street",
     "tagged" : [ "friends" ],
     "time" : "0h 0m",
-
     "places" : [ ],
     "activities" : [ ]
   }, {
@@ -47,7 +43,6 @@
     "address" : "michegan ave",
     "tagged" : [ ],
     "time" : "0h 0m",
-
     "places" : [ ],
     "activities" : [ ]
   }, {
@@ -57,7 +52,6 @@
     "address" : "little tokyo",
     "tagged" : [ ],
     "time" : "0h 0m",
-
     "places" : [ ],
     "activities" : [ ]
   }, {
@@ -67,7 +61,6 @@
     "address" : "4th street",
     "tagged" : [ ],
     "time" : "0h 0m",
-
     "places" : [ ],
     "activities" : [ ]
   } ],
@@ -75,22 +68,25 @@
     "name" : "soc friends",
     "groupId" : "1",
     "timeSpent" : "0h 0m",
-
     "memberIDs" : [ ],
-    "eventIDs" : [ ]
+    "eventIDs" : [ ],
+    "places" : [ ],
+    "activities" : [ ]
   }, {
     "name" : "rc people",
     "groupId" : "2",
     "timeSpent" : "0h 0m",
-
     "memberIDs" : [1, 2, 3],
-    "eventIDs" : [ ]
+    "eventIDs" : [ ],
+    "places" : [ ],
+    "activities" : [ ]
   }, {
     "name" : "NS friends",
     "groupId" : "2",
     "timeSpent" : "0h 0m",
-
     "memberIDs" : [5, 6, 7],
-    "eventIDs" : [ ]
+    "eventIDs" : [ ],
+    "places" : [ ],
+    "activities" : [ ]
   } ]
 }
