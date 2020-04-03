@@ -57,10 +57,10 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a person: `add_person`
 
 Adds a person to the CoderLifeInsights +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Format: `add_person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
 [TIP]
 A person can have any number of tags (including 0)
@@ -117,8 +117,8 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 === Deleting an object : `delete`
 
 Deletes an entity, such as Person, Group, or Event from the CoderLifeInsights +
-Format: `delete person ID` (for person) +
-        `delete group ID` (for group)
+Format: `delete_person ID` (for person) +
+        `delete_group ID` (for group)
 //        `delete event ID` (for event)
 
 ****
@@ -131,10 +131,13 @@ Remarks: CoderLifeInsights uses 1-indexing.
 Examples:
 
 * `list_persons` +
-`delete 2` +
-Deletes the 2nd person in the CoderLifeInsights.
+`delete_person 2` +
+Deletes the 2nd person in CoderLifeInsights.
+* `list_groups` +
+`delete_group 2` +
+Deletes the 2nd group in CoderLifeInsights.
 * `find Betsy` +
-`delete 1` +
+`delete_person 1` +
 Deletes the 1st person in the results of the `find` command.
 
 === Locating persons by name: `find`
@@ -348,10 +351,10 @@ Example:
 * `random` +
 Returns the name of a random person saved in CoderLifeInsights.
 
-=== Social Group: `group`
+=== Social Group: `add_group`
 
 Creates an empty social group with given name. +
-Format: `group <name>`
+Format: `add_group <name>`
 
 ****
 * Only one parameter: group name
@@ -360,7 +363,7 @@ Format: `group <name>`
 
 Example:
 
-* `group SoC Friends` +
+* `add_group n/SoC Friends` +
 Creates a group named `SoC Friends` and assigns a group ID, which is shown to the user.
 
 === Assign Group: `assign`
