@@ -24,10 +24,10 @@ Looking for insights in your social life as a programmer?Look no further!
 
 == Site Map
 
-* <<UserGuide#, User Guide>>
-* <<DeveloperGuide#, Developer Guide>>
-* <<AboutUs#, About Us>>
-* <<ContactUs#, Contact Us>>
+* https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/docs/UserGuide.adoc[User Guide]
+* https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/docs/DeveloperGuide.adoc[Developer Guide]
+* https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/docs/AboutUs.adoc[About Us]
+* https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/docs/ContactUs.adoc[Contact Us]
 
 == Acknowledgements
 
