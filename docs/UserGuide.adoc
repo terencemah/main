@@ -373,15 +373,24 @@ Creates a group named `SoC Friends` and assigns a group ID, which is shown to th
 Creates a group named `RC Friends` and assigns a group ID and the given memberIDs to the group. Both are displayed
 to the user after creation.
 
-=== Assign Group: `assign`
+=== Edit Group: `edit_group`
 
-Assigns a given person id with a given group id +
-Format: `assign <person-id> <group id>`
+Edit a given person id with a given group id +
+Format: `edit_group <person-id> <name> <member_ids>`
 
 ****
-* CoderLifeInsight will add person with given id to the Group with given group id
-* CoderLifeInsight will add the group name as a string to the list of groups for the person
+* CoderLifeInsight will edit the group with given id to change the name to supplied name and change the list of members
+to the ones supplied. One parameter is required to edit the group.
 ****
+
+Examples:
+
+* `edit_group 1 n/FOS` changes the name of the group with index 1 in CoderLifeInsights to `FOS` from whatever it was
+before. Name overwritten, memberIDs remain the same as before.
+* `edit_group 1 m/1 m/21` changes the members of the group with index 1 in CoderLifeInsights to `1 and 2` from whatever
+it was before. Member list overwritten, Name stays the same.
+* `edit_group 1 n/new_name m/1` changes both the name and members of the group with index 1 in Coder Life Insights. Both values overwritten.
+
 
 === Insights: `view`
 
