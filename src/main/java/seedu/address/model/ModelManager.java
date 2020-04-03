@@ -400,6 +400,9 @@ public class ModelManager implements Model {
         }
     }
 
+    /**
+     * Suggest activity
+     */
     public void suggestActivity() {
         ObservableList<Event> eventList = addressBook.getEventList();
         Map<String, Integer> activityIntegerMap = new HashMap<>();

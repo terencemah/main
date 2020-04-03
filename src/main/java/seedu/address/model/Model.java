@@ -128,7 +128,7 @@ public interface Model {
     void importCsvGroupsToAddressBook(List<Group> importedGroup);
 
     void importCsvEventsToAddressBook(List<Event> importedEvent);
-    
+
     void showTime();
 
     void showPlaceList(Person target);
@@ -150,6 +150,6 @@ public interface Model {
     ObservableList<EventDescriptor> getFrequencyList();
 
     ObservableList<RecentEvent> getRecentList();
-    
+
     ObservableList<Time> getTimeList();
 }

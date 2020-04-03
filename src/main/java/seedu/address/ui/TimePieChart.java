@@ -1,19 +1,21 @@
 package seedu.address.ui;
 
-import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
-import javafx.fxml.FXML;
 import javafx.collections.ObservableList;
-import javafx.scene.layout.Region;
+import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Time;
 
+/**
+ * Pie Chart for time
+ */
 public class TimePieChart extends UiPart<Region> {
 
     private static final String FXML = "TimePieChartPanel.fxml";
@@ -22,7 +24,8 @@ public class TimePieChart extends UiPart<Region> {
     @FXML
     private StackPane timePieChartPane;
 
-    public TimePieChart(ObservableList<Time> timeList, ObservableList<Group> groupList, ObservableList<Person> personList) {
+    public TimePieChart(ObservableList<Time> timeList, ObservableList<Group> groupList,
+                        ObservableList<Person> personList) {
         super(FXML);
 
         Time personTime = new Time(0, 0);

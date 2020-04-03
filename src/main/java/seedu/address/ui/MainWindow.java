@@ -113,12 +113,12 @@ public class MainWindow extends UiPart<Stage> {
         getRoot()
                 .addEventFilter(
                         KeyEvent.KEY_PRESSED,
-                        event -> {
-                            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
-                                menuItem.getOnAction().handle(new ActionEvent());
-                                event.consume();
-                            }
-                        });
+                    event -> {
+                        if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
+                            menuItem.getOnAction().handle(new ActionEvent());
+                            event.consume();
+                        }
+                    });
     }
 
     /**
@@ -128,11 +128,12 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        timePieChart = new TimePieChart(logic.getTimeList(), logic.getFilteredGroupList(), logic.getFilteredPersonList());
+        timePieChart = new TimePieChart(logic.getTimeList(), logic.getFilteredGroupList(),
+                logic.getFilteredPersonList());
         timePieChartPanelPlaceholder.getChildren().add(timePieChart.getRoot());
 
-//        frequencyListPanel = new FrequencyListPanel(logic.getFrequencyList());
-//        frequencyListPanelPlaceholder.getChildren().add(frequencyListPanel.getRoot());
+        //        frequencyListPanel = new FrequencyListPanel(logic.getFrequencyList());
+        //        frequencyListPanelPlaceholder.getChildren().add(frequencyListPanel.getRoot());
 
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
         groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
@@ -209,8 +210,12 @@ public class MainWindow extends UiPart<Stage> {
         timePieChartPanelPlaceholder.getChildren().add(recentEventPanel.getRoot());
     }
 
+    /**
+     * Displays pie chart
+     */
     private void handleViewTime() {
-        timePieChart = new TimePieChart(logic.getTimeList(), logic.getFilteredGroupList(), logic.getFilteredPersonList());
+        timePieChart = new TimePieChart(logic.getTimeList(), logic.getFilteredGroupList(),
+                logic.getFilteredPersonList());
         timePieChartPanelPlaceholder.getChildren().clear();
         timePieChartPanelPlaceholder.getChildren().add(timePieChart.getRoot());
     }
@@ -245,31 +250,32 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             switch (commandResult.getViewType()) {
-                case HELP:
-                    handleHelp();
-                    break;
-                case EXIT:
-                    handleExit();
-                    break;
-                case PLACES:
-                    handleViewPlaces();
-                    break;
-                case ACTIVITIES:
-                    handleViewActivities();
-                    break;
-                case TIME:
-                    handleViewTime();
-                    break;
-                case RECENT:
-                    handleViewRecent();
-                    break;
-                case ALL:
-                    handleViewRecent();
-                case GROUPS:
-                    handleGroup();
-                    break;
-                default:
-                    handleNormal();
+            case HELP:
+                handleHelp();
+                break;
+            case EXIT:
+                handleExit();
+                break;
+            case PLACES:
+                handleViewPlaces();
+                break;
+            case ACTIVITIES:
+                handleViewActivities();
+                break;
+            case TIME:
+                handleViewTime();
+                break;
+            case RECENT:
+                handleViewRecent();
+                break;
+            case ALL:
+                handleViewRecent();
+                break;
+            case GROUPS:
+                handleGroup();
+                break;
+            default:
+                handleNormal();
             }
             return commandResult;
 

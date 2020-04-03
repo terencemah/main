@@ -60,6 +60,6 @@ public interface Logic {
     ObservableList<EventDescriptor> getFrequencyList();
 
     ObservableList<RecentEvent> getRecentList();
-    
+
     ObservableList<Time> getTimeList();
 }

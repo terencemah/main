@@ -10,10 +10,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.RecentEvent;
-import seedu.address.model.person.Time;
 
 /**
  * Shows the user the places visited, activities done or last 5 events
@@ -114,22 +112,22 @@ public class ViewCommand extends Command {
 
         switch (parameter) {
 
-            case KEYWORD_PLACE:
-                model.showPlaceList(personToView);
-                message = MESSAGE_PLACE + personToView.getName() + ".";
-                vt = ViewType.PLACES;
-                break;
+        case KEYWORD_PLACE:
+            model.showPlaceList(personToView);
+            message = MESSAGE_PLACE + personToView.getName() + ".";
+            vt = ViewType.PLACES;
+            break;
 
-            case KEYWORD_ACTIVITY:
-                model.showActivityList(personToView);
-                message = MESSAGE_ACTIVITY + personToView.getName() + ".";
-                vt = ViewType.ACTIVITIES;
-                break;
+        case KEYWORD_ACTIVITY:
+            model.showActivityList(personToView);
+            message = MESSAGE_ACTIVITY + personToView.getName() + ".";
+            vt = ViewType.ACTIVITIES;
+            break;
 
-            default:
-                model.showRecentList(personToView);
-                message = MESSAGE_RECENT_PERSON + personToView.getName() + ".";
-                vt = ViewType.RECENT;
+        default:
+            model.showRecentList(personToView);
+            message = MESSAGE_RECENT_PERSON + personToView.getName() + ".";
+            vt = ViewType.RECENT;
         }
 
 

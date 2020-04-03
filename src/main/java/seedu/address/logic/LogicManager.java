@@ -96,5 +96,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Time> getTimeList() { return model.getTimeList(); }
+    public ObservableList<Time> getTimeList() {
+        return model.getTimeList();
+    }
 }

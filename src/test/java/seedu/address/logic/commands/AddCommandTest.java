@@ -26,6 +26,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.RecentEvent;
+import seedu.address.model.person.Time;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -245,7 +246,12 @@ public class AddCommandTest {
 
         @Override
         public void showRecentList(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public void showTime() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -269,12 +275,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public void copyTime(ObservableList<Time> list) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<EventDescriptor> getFrequencyList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ObservableList<RecentEvent> getRecentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Time> getTimeList() {
             throw new AssertionError("This method should not be called.");
         }
     }
