@@ -408,12 +408,12 @@ Format: `view INSIGHT_PARAMETER`
 
 Examples:
 
-* `view places` +
-Returns a pie chart of the places user has visited with friend.
+* `view 1 places` +
+Coder Life Insights shows a table of places and the frequency of visits for the person with index 1.
 * `view time` +
-Returns a graph of time spent with friend each day over the past month.
-* `view activities` +
-Returns a pie chart of the activities user has done with friend.
+Coder Life Insights shows a pie chart comparing time spent with groups vs time spent with individuals.
+* `view recent` +
+Coder Life Insights shows the last 5 events. Info shows: places, activity done and time spent.
 * `view all`
 Returns the output of 'view places', 'view time', and 'view activities', in that order.
 ****
