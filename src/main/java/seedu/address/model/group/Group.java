@@ -91,10 +91,11 @@ public class Group {
 
     /**
      * Returns a string representation of member IDs.
+     *
      * @return string representation
      */
     public String printEventIds() {
-        String result = "event IDs: ";
+        String result = "Event IDs: ";
         for (int i = 0; i < this.eventIDs.size(); i++) {
             result += this.eventIDs.get(i) + " ";
         }
@@ -107,9 +108,13 @@ public class Group {
      * @return
      */
     public String printMemberList() {
-        String build = "members: ";
+        String build = "Members: ";
         for (int i = 0; i < memberIDs.size(); i++) {
-            build += memberIDs.get(i) + " ";
+            if (i == memberIDs.size() - 1) {
+                build += memberIDs.get(i);
+            } else {
+                build += memberIDs.get(i) + ", ";
+            }
         }
         return build;
     }

@@ -38,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     private GroupListPanel groupListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private TimePieChart timePieChart;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -49,10 +50,19 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane groupListPanelPlaceholder;
+
+    @FXML
+    private StackPane frequencyListPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane timePieChartPanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -118,6 +128,16 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        timePieChart = new TimePieChart(logic.getTimeList(), logic.getFilteredGroupList(),
+                logic.getFilteredPersonList());
+        timePieChartPanelPlaceholder.getChildren().add(timePieChart.getRoot());
+
+        //        frequencyListPanel = new FrequencyListPanel(logic.getFrequencyList());
+        //        frequencyListPanelPlaceholder.getChildren().add(frequencyListPanel.getRoot());
+
+        groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
+        groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -174,26 +194,37 @@ public class MainWindow extends UiPart<Stage> {
 
     private void handleViewPlaces() {
         placeListPanel = new PlaceListPanel(logic.getFrequencyList());
-        personListPanelPlaceholder.getChildren().clear();
-        personListPanelPlaceholder.getChildren().add(placeListPanel.getRoot());
+        timePieChartPanelPlaceholder.getChildren().clear();
+        timePieChartPanelPlaceholder.getChildren().add(placeListPanel.getRoot());
     }
 
     private void handleViewActivities() {
         activityListPanel = new ActivityListPanel(logic.getFrequencyList());
-        personListPanelPlaceholder.getChildren().clear();
-        personListPanelPlaceholder.getChildren().add(activityListPanel.getRoot());
+        timePieChartPanelPlaceholder.getChildren().clear();
+        timePieChartPanelPlaceholder.getChildren().add(activityListPanel.getRoot());
     }
 
     private void handleViewRecent() {
         recentEventPanel = new RecentEventPanel(logic.getRecentList());
-        personListPanelPlaceholder.getChildren().clear();
-        personListPanelPlaceholder.getChildren().add(recentEventPanel.getRoot());
+        timePieChartPanelPlaceholder.getChildren().clear();
+        timePieChartPanelPlaceholder.getChildren().add(recentEventPanel.getRoot());
     }
+
+    /**
+     * Displays pie chart
+     */
+    private void handleViewTime() {
+        timePieChart = new TimePieChart(logic.getTimeList(), logic.getFilteredGroupList(),
+                logic.getFilteredPersonList());
+        timePieChartPanelPlaceholder.getChildren().clear();
+        timePieChartPanelPlaceholder.getChildren().add(timePieChart.getRoot());
+    }
+
 
     private void handleGroup() {
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
-        personListPanelPlaceholder.getChildren().clear();
-        personListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        groupListPanelPlaceholder.getChildren().clear();
+        groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
     }
 
     private void handleNormal() {
@@ -219,7 +250,6 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             switch (commandResult.getViewType()) {
-
             case HELP:
                 handleHelp();
                 break;
@@ -232,7 +262,13 @@ public class MainWindow extends UiPart<Stage> {
             case ACTIVITIES:
                 handleViewActivities();
                 break;
+            case TIME:
+                handleViewTime();
+                break;
             case RECENT:
+                handleViewRecent();
+                break;
+            case ALL:
                 handleViewRecent();
                 break;
             case GROUPS:

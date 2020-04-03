@@ -18,6 +18,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.RecentEvent;
+import seedu.address.model.person.Time;
 import seedu.address.storage.Storage;
 
 /**
@@ -92,5 +93,10 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<RecentEvent> getRecentList() {
         return model.getRecentList();
+    }
+
+    @Override
+    public ObservableList<Time> getTimeList() {
+        return model.getTimeList();
     }
 }

@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
@@ -24,8 +25,12 @@ public class GroupCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label timeSpent;
+
     @FXML
-    private Label members;
+    private Label memberLabel;
+
+    @FXML
+    private FlowPane members;
     @FXML
     private Label events;
 
@@ -35,8 +40,13 @@ public class GroupCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(group.getName().fullName);
         String text = group.getTimeSpent().toString();
-        timeSpent.setText("Total Time Spent:" + text);
-        members.setText(group.printMemberList());
+        timeSpent.setText("Total Time Spent: " + text);
+        memberLabel.setText("Member IDs: ");
+        group
+                .getMembers()
+                .stream()
+                .forEach(member -> members.getChildren().add(new Label(member.toString())));
+        //        members.setText(group.printMemberList());
         events.setText(group.printEventIds());
     }
 
