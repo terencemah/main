@@ -4,13 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
-import seedu.address.model.person.Person;
+//import seedu.address.model.person.Person;
 
 /**
  * Represents the command to add a new group to CoderLifeInsights.
@@ -59,14 +59,14 @@ public class AddGroupCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
 
-        List<Person> lastShownList = model.getFilteredPersonList();
-        ArrayList<Integer> members = toAdd.getMembers();
+        //        List<Person> lastShownList = model.getFilteredPersonList();
+        //        ArrayList<Integer> members = toAdd.getMembers();
 
-        for (int i = 0; i < members.size(); i++) {
-            if (!lastShownList.contains(members.get(i))) {
-                throw new CommandException(MESSAGE_PERSON_DOES_NOT_EXIST);
-            }
-        }
+        //        for (int i = 0; i < members.size(); i++) {
+        //            if (!lastShownList.contains(members.get(i))) {
+        //                throw new CommandException(MESSAGE_PERSON_DOES_NOT_EXIST);
+        //            }
+        //        }
 
         model.addGroup(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), ViewType.GROUPS);

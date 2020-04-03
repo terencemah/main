@@ -12,6 +12,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.RecentEvent;
+import seedu.address.model.person.Time;
 
 /**
  * API of the Logic component
@@ -59,4 +60,6 @@ public interface Logic {
     ObservableList<EventDescriptor> getFrequencyList();
 
     ObservableList<RecentEvent> getRecentList();
+
+    ObservableList<Time> getTimeList();
 }

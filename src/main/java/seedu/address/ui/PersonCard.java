@@ -53,12 +53,13 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+
         person
                 .getTags()
                 .stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        time.setText("Time spent together: " + person.getTime().toString());
+        time.setText("Total Time Spent: " + person.getTime().toString());
     }
 
     @Override

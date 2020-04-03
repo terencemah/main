@@ -11,6 +11,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.RecentEvent;
+import seedu.address.model.person.Time;
 
 /**
  * The API of the Model component.
@@ -128,6 +129,8 @@ public interface Model {
 
     void importCsvEventsToAddressBook(List<Event> importedEvent);
 
+    void showTime();
+
     void showPlaceList(Person target);
 
     void showActivityList(Person target);
@@ -142,7 +145,11 @@ public interface Model {
 
     void copyRecent(ObservableList<RecentEvent> list);
 
+    void copyTime(ObservableList<Time> list);
+
     ObservableList<EventDescriptor> getFrequencyList();
 
     ObservableList<RecentEvent> getRecentList();
+
+    ObservableList<Time> getTimeList();
 }
