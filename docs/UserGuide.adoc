@@ -57,10 +57,10 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a person: `add_person`
 
 Adds a person to the CoderLifeInsights +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Format: `add_person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
 [TIP]
 A person can have any number of tags (including 0)
@@ -117,8 +117,8 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 === Deleting an object : `delete`
 
 Deletes an entity, such as Person, Group, or Event from the CoderLifeInsights +
-Format: `delete person ID` (for person) +
-        `delete group ID` (for group)
+Format: `delete_person ID` (for person) +
+        `delete_group ID` (for group)
 //        `delete event ID` (for event)
 
 ****
@@ -131,10 +131,13 @@ Remarks: CoderLifeInsights uses 1-indexing.
 Examples:
 
 * `list_persons` +
-`delete 2` +
-Deletes the 2nd person in the CoderLifeInsights.
+`delete_person 2` +
+Deletes the 2nd person in CoderLifeInsights.
+* `list_groups` +
+`delete_group 2` +
+Deletes the 2nd group in CoderLifeInsights.
 * `find Betsy` +
-`delete 1` +
+`delete_person 1` +
 Deletes the 1st person in the results of the `find` command.
 
 === Locating persons by name: `find`
@@ -348,30 +351,46 @@ Example:
 * `random` +
 Returns the name of a random person saved in CoderLifeInsights.
 
-=== Social Group: `group`
+=== Social Group: `add_group`
 
 Creates an empty social group with given name. +
-Format: `group <name>`
+Format: `add_group <name> <member_ids>`
+
+[TIP]
+A group can have any number of member_ids (including 0)
 
 ****
-* Only one parameter: group name
-* CoderLifeInsights will create a new group and show a uniquely generated Group ID for the same
+* 1 required parameter (group_name)
+* CoderLifeInsights will create a new group and show a uniquely generated Group ID for the same.
+* Member_IDs will be added to the group and displayed if supplied while creating the group.
 ****
 
-Example:
+Examples:
 
-* `group SoC Friends` +
+* `add_group n/SoC Friends` +
 Creates a group named `SoC Friends` and assigns a group ID, which is shown to the user.
+* `add_group n/RC Friends m/1 m/2 m/3` +
+Creates a group named `RC Friends` and assigns a group ID and the given memberIDs to the group. Both are displayed
+to the user after creation.
 
-=== Assign Group: `assign`
+=== Edit Group: `edit_group`
 
-Assigns a given person id with a given group id +
-Format: `assign <person-id> <group id>`
+Edit a given person id with a given group id +
+Format: `edit_group <person-id> <name> <member_ids>`
 
 ****
-* CoderLifeInsight will add person with given id to the Group with given group id
-* CoderLifeInsight will add the group name as a string to the list of groups for the person
+* CoderLifeInsight will edit the group with given id to change the name to supplied name and change the list of members
+to the ones supplied. One parameter is required to edit the group.
 ****
+
+Examples:
+
+* `edit_group 1 n/FOS` changes the name of the group with index 1 in CoderLifeInsights to `FOS` from whatever it was
+before. Name overwritten, memberIDs remain the same as before.
+* `edit_group 1 m/1 m/21` changes the members of the group with index 1 in CoderLifeInsights to `1 and 2` from whatever
+it was before. Member list overwritten, Name stays the same.
+* `edit_group 1 n/new_name m/1` changes both the name and members of the group with index 1 in Coder Life Insights. Both values overwritten.
+
 
 === Insights: `view`
 
@@ -389,34 +408,14 @@ Format: `view INSIGHT_PARAMETER`
 
 Examples:
 
-* `view places` +
-Returns a pie chart of the places user has visited with friend.
+* `view 1 places` +
+Coder Life Insights shows a table of places and the frequency of visits for the person with index 1.
 * `view time` +
-Returns a graph of time spent with friend each day over the past month.
-* `view activities` +
-Returns a pie chart of the activities user has done with friend.
+Coder Life Insights shows a pie chart comparing time spent with groups vs time spent with individuals.
+* `view recent` +
+Coder Life Insights shows the last 5 events. Info shows: places, activity done and time spent.
 * `view all`
 Returns the output of 'view places', 'view time', and 'view activities', in that order.
-****
-
-=== Deleting a person : `delete`
-
-Deletes the specified person from the CoderLifeInsights. +
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
-
-****
-Examples:
-
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the CoderLifeInsights.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
 ****
 // end::delete[]
 === Clearing all entries : `clear`
