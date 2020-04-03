@@ -3,7 +3,9 @@ package seedu.address.model.group;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
 
 /**
@@ -21,14 +23,18 @@ public class Group {
     private Time timeSpent;
     private ArrayList<Integer> memberIDs;
     private ArrayList<Integer> eventIDs;
+    private final ActivityList activityList = new ActivityList(new ArrayList<String>());
+    private final PlaceList placeList = new PlaceList(new ArrayList<String>());
 
-    public Group(Name name) {
+    public Group(Name name, PlaceList placeList, ActivityList activityList) {
         this.name = name;
         this.memberIDs = new ArrayList<>();
         this.eventIDs = new ArrayList<>();
         this.timeSpent = new Time(0, 0);
         this.groupId = groups;
         groups += 1;
+        this.placeList.setPlaceList(placeList.getPlaceList());
+        this.activityList.setActivityList(activityList.getActivityList());
     }
 
     public Name getName() {
@@ -73,6 +79,14 @@ public class Group {
 
     public void setEventIDs(ArrayList<Integer> events) {
         this.eventIDs = events;
+    }
+
+    public PlaceList getPlaceList() {
+        return placeList;
+    }
+
+    public ActivityList getActivityList() {
+        return activityList;
     }
 
     /**

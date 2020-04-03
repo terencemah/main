@@ -118,8 +118,13 @@ public class AddEventCommand extends Command {
             curr.addTime(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
 
             // % TODO: Add to activity and place lists
+            PlaceList currentPlaceList = toEdit.getPlaceList();
+            PlaceList newPlaceList = currentPlaceList.addPlace(toAdd.getPlace());
 
-            Group editedGroup = new Group(toEdit.getName());
+            ActivityList currentActivityList = toEdit.getActivityList();
+            ActivityList newActivityList = currentActivityList.addActivity(toAdd.getActivity());
+
+            Group editedGroup = new Group(toEdit.getName(), newPlaceList, newActivityList);
             editedGroup.setTimeSpent(curr);
             model.setGroup(toEdit, editedGroup);
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
@@ -130,20 +135,22 @@ public class AddEventCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
+        // short circuit if same object
         if (other == this) {
             return true;
         }
 
+        // instanceof handles nulls
         if (!(other instanceof AddEventCommand)) {
             return false;
         }
 
+        // state check
         AddEventCommand e = (AddEventCommand) other;
-
-        return this.toAdd.getActivity().equalsIgnoreCase(e.getToAdd().getActivity())
-                && this.toAdd.getPlace().equalsIgnoreCase(e.getToAdd().getPlace())
-                && this.toAdd.getTime().equals(e.getToAdd().getTime())
-                && this.toAdd.getWithGroup().equals(e.getToAdd().getWithGroup())
-                && this.toAdd.getWithPerson().equals(e.getToAdd().getWithPerson());
+        return this.toAdd.getActivity().equalsIgnoreCase(e.toAdd.getActivity())
+                && this.toAdd.getPlace().equalsIgnoreCase(e.toAdd.getPlace())
+                && this.toAdd.getTime().equals(e.toAdd.getTime())
+                && this.toAdd.getWithGroup().equals(e.toAdd.getWithGroup())
+                && this.toAdd.getWithPerson().equals(e.toAdd.getWithPerson());
     }
 }
