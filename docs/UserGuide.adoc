@@ -354,17 +354,24 @@ Returns the name of a random person saved in CoderLifeInsights.
 === Social Group: `add_group`
 
 Creates an empty social group with given name. +
-Format: `add_group <name>`
+Format: `add_group <name> <member_ids>`
+
+[TIP]
+A group can have any number of member_ids (including 0)
 
 ****
-* Only one parameter: group name
-* CoderLifeInsights will create a new group and show a uniquely generated Group ID for the same
+* 1 required parameter (group_name)
+* CoderLifeInsights will create a new group and show a uniquely generated Group ID for the same.
+* Member_IDs will be added to the group and displayed if supplied while creating the group.
 ****
 
-Example:
+Examples:
 
 * `add_group n/SoC Friends` +
 Creates a group named `SoC Friends` and assigns a group ID, which is shown to the user.
+* `add_group n/RC Friends m/1 m/2 m/3` +
+Creates a group named `RC Friends` and assigns a group ID and the given memberIDs to the group. Both are displayed
+to the user after creation.
 
 === Assign Group: `assign`
 
