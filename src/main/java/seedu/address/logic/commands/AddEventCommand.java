@@ -7,7 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PLACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -25,6 +27,7 @@ import seedu.address.model.person.TimeList;
 public class AddEventCommand extends Command {
 
     public static final String COMMAND_WORD = "add_event";
+    private static final Logger logger = LogsCenter.getLogger(AddEventCommand.class);
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an event with a group or an individual"
             + "that adds an activity, place and time to the subject. \n"
@@ -66,10 +69,6 @@ public class AddEventCommand extends Command {
         this.toAdd = event;
     }
 
-    public Event getToAdd() {
-        return this.toAdd;
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
@@ -86,6 +85,7 @@ public class AddEventCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             Person toEdit = lastShownList.get(index - 1);
+            logger.info("Person to edit is " + toEdit.getName().toString());
 
             Time curr = toEdit.getTime();
             curr.addTime(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
@@ -101,6 +101,7 @@ public class AddEventCommand extends Command {
 
             Person editedPerson = new Person(toEdit.getName(), toEdit.getPhone(), toEdit.getEmail(),
                     toEdit.getAddress(), toEdit.getTags(), curr, newPlaceList, newActivityList, newTimeList);
+            logger.info("Edited person is " + editedPerson.getName().toString());
             model.setPerson(toEdit, editedPerson);
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             model.addEvent(toAdd);

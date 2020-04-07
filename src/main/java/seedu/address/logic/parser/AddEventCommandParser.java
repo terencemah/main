@@ -7,14 +7,21 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Time;
+
+import java.util.logging.Logger;
+
 /**
  * Parses input arguments and creates a new {@code AddEventCommand object}
  */
 public class AddEventCommandParser implements Parser<AddEventCommand> {
+
+    private static final Logger logger = LogsCenter.getLogger(AddEventCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the {@code AddEventCommand}
@@ -60,22 +67,29 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
             }
         }
 
-        Event event = new Event(activity, place, Integer.parseInt(mins), Integer.parseInt(hours));
+        try {
+            Time time = new Time(Integer.parseInt(mins), Integer.parseInt(hours));
+            Event event = new Event(activity, place, time);
 
-        Index index;
-        if (argMultimap.getValue(PREFIX_MEMBER).isEmpty() && argMultimap.getValue(PREFIX_GROUP).isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
-        } else if (argMultimap.getValue(PREFIX_MEMBER).isEmpty()) {
-            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_GROUP).get());
-            int idx = index.getOneBased();
-            event.setWithGroup(idx);
-        } else {
-            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER).get());
-            int idx = index.getOneBased();
-            event.setWithPerson(idx);
+            Index index;
+            if (argMultimap.getValue(PREFIX_MEMBER).isEmpty() && argMultimap.getValue(PREFIX_GROUP).isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
+            } else if (argMultimap.getValue(PREFIX_MEMBER).isEmpty()) {
+                index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_GROUP).get());
+                int idx = index.getOneBased();
+                event.setWithGroup(idx);
+            } else {
+                index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER).get());
+                int idx = index.getOneBased();
+                event.setWithPerson(idx);
+                logger.info("The parsed index is " + idx);
+            }
+
+            return new AddEventCommand(event);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
         }
 
-        return new AddEventCommand(event);
     }
 }
 

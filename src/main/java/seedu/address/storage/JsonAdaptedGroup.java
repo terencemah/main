@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Name;
@@ -101,10 +102,7 @@ public class JsonAdaptedGroup {
         final ActivityList modelActivityList = new ActivityList(activities);
 
         Group group = new Group(new Name(name), modelPlaceList, modelActivityList);
-        String[] times = timeSpent.split(" ");
-        String hours = times[0].substring(0, times[0].length() - 1);
-        String minutes = times[1].substring(0, times[1].length() - 1);
-        Time time = new Time(Integer.valueOf(hours), Integer.valueOf(minutes));
+        Time time = ParserUtil.parseTime(timeSpent);
         group.setTimeSpent(time);
 
         ArrayList<Integer> members = new ArrayList<>();

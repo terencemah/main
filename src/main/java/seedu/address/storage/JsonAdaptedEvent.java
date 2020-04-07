@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Time;
 
 /**
  * Jackson-friendly version of {@link Event}
@@ -92,9 +93,13 @@ public class JsonAdaptedEvent {
         String hours = times[0].substring(0, times[0].length() - 1);
         String minutes = times[1].substring(0, times[1].length() - 1);
 
-        Event event = new Event(activity, place, Integer.parseInt(minutes), Integer.parseInt(hours));
-
-        return event;
+        try {
+            Time time = new Time(Integer.parseInt(minutes), Integer.parseInt(hours));
+            Event event = new Event(activity, place, time);
+            return event;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(e.getMessage());
+        }
     }
 
 }
