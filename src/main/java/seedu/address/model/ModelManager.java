@@ -105,6 +105,7 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        showTime();
     }
 
     @Override
@@ -172,6 +173,7 @@ public class ModelManager implements Model {
     @Override
     public void addEvent(Event event) {
         addressBook.addEvent(event);
+        showTime();
     }
 
     @Override
@@ -230,6 +232,7 @@ public class ModelManager implements Model {
         requireNonNull(importedPeople);
         addressBook.addPersons(importedPeople);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        showTime();
     }
 
     @Override
@@ -237,6 +240,7 @@ public class ModelManager implements Model {
         requireNonNull(importedGroup);
         addressBook.addGroups(importedGroup);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        showTime();
     }
 
     @Override
@@ -245,6 +249,7 @@ public class ModelManager implements Model {
         addressBook.addEvents(importedEvent);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         updateFilteredEventList(unused -> true);
+        showTime();
     }
 
     @Override

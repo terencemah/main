@@ -39,7 +39,7 @@ public class ExportFile {
             csvMapper.writerFor(JsonNode.class)
                     .with(csvSchema)
                     .writeValue(new File(fileToSave), jsonTree);
-        } catch (IOException ioe) {
+        } catch (Exception ioe) {
             throw new CommandException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT));
         }
