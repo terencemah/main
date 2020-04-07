@@ -43,10 +43,10 @@ public class AddEventCommand extends Command {
             + "Example: "
             + COMMAND_WORD
             + " Dancing "
-            + PREFIX_MEMBER
-            + "1 "
             + PREFIX_PLACE
             + "SCAPE "
+            + PREFIX_MEMBER
+            + "1 "
             + PREFIX_TIME
             + "300";
 

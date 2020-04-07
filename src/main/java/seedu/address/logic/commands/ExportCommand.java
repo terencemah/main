@@ -22,6 +22,8 @@ public class ExportCommand extends Command {
             + "\n"
             + "%1$s \n"
             + "%2$s";
+    public static final String EMPTY_FILE = "Unable to export empty life/group."
+            + " Please add contacts/groups and try again.";
     private final String groupFilePath;
     private final String lifeFilePath;
 
@@ -36,15 +38,19 @@ public class ExportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (groupFilePath.isEmpty()) {
-            new ExportFile().exportCsv(String.valueOf(model.getAddressBookFilePath()), lifeFilePath);
-        } else if (lifeFilePath.isEmpty()) {
-            new ExportFile().exportGroupCsv(String.valueOf(model.getAddressBookFilePath()), groupFilePath);
-        } else {
-            new ExportFile().exportCsv(String.valueOf(model.getAddressBookFilePath()), lifeFilePath);
-            new ExportFile().exportGroupCsv(String.valueOf(model.getAddressBookFilePath()), groupFilePath);
+        try {
+            if (groupFilePath.isEmpty()) {
+                new ExportFile().exportCsv(String.valueOf(model.getAddressBookFilePath()), lifeFilePath);
+            } else if (lifeFilePath.isEmpty()) {
+                new ExportFile().exportGroupCsv(String.valueOf(model.getAddressBookFilePath()), groupFilePath);
+            } else {
+                new ExportFile().exportCsv(String.valueOf(model.getAddressBookFilePath()), lifeFilePath);
+                new ExportFile().exportGroupCsv(String.valueOf(model.getAddressBookFilePath()), groupFilePath);
+            }
+            return new CommandResult(String.format(MESSAGE_SUCCESS, lifeFilePath, groupFilePath));
+        } catch (Exception e) {
+            throw new CommandException(String.format(EMPTY_FILE), e);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, lifeFilePath, groupFilePath));
     }
 
     @Override

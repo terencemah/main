@@ -157,6 +157,7 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
+// tag::import[]
 === Import Life CSV: `import`
 
 Imports your existing Life CSV into the application +
@@ -255,9 +256,10 @@ Example:
 * `1;2;3`
 * `5;6`
 ====
+// end::import[]
 
 
-
+// tag::export[]
 === Export Life CSV: `export`
 
 Exports your existing Life into a CSV file. +
@@ -273,6 +275,7 @@ Examples:
 * `export l/life.csv g/groups.csv` +
 Exports your Life to `life.csv`
 Exports your group data to `group.csv`
+// end::export[]
 
 === Adding an Event: `add_event`
 Adds an event to a person or a group at the specified INDEX. +
@@ -306,10 +309,7 @@ Creates an Event Dancing lessons at Changi Country Club with a time spent of 1 h
 * `add_event Date Night place/MBS time/300 m/1` +
 Creates an Event Date Night at MBS with a time spent of 3 hours and adds it to the first result returned by the `find Betsy` command in CoderLifeInsights.
 
-
-
-
-
+// tag::suggest[]
 === Suggestions: `suggest`
 
 Suggests a person to hang out with +
@@ -331,6 +331,7 @@ Returns a person to hangout with.
 Returns a place to go to.
 * `[coming v1.4]` `suggest activity` +
 Returns an activity to do.
+// end::suggest[]
 
 === Getting a random person: `random` `[coming in v1.4]`
 
