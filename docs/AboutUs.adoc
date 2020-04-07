@@ -22,7 +22,7 @@ Responsibilities: Scheduling and Tracking, Integration
 === Raivat Bhupesh Shah
 
 image::raivatshah.png[width="150",align="left"]
-{empty}[http://github.com/raivatshah[github]] +
+{empty}[http://github.com/raivatshah[github]] [<<raivatshah#, porfolio>>] [https://raivat.dev[homepage]] +
 Role: Developer +
 Responsibilities: Dev Ops, UI
 
