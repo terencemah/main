@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PATH;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+//import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PATH;
+//import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -45,12 +45,12 @@ public class ImportCommandTest {
         assertFalse(firstImportCommand.equals(secondImportCommand));
     }
 
-//    @Test
-//    public void execute_importFile_notFound() {
-//        String emptyFilePath = "";
-//        ImportCommand importCommand = new ImportCommand(emptyFilePath, emptyFilePath, emptyFilePath);
-//        String expectedMessage = MESSAGE_INVALID_PATH + "\n" + ImportCommand.MESSAGE_USAGE;
-//        assertCommandFailure(importCommand, model, expectedMessage);
-//    }
+    //    @Test
+    //    public void execute_importFile_notFound() {
+    //        String emptyFilePath = "";
+    //        ImportCommand importCommand = new ImportCommand(emptyFilePath, emptyFilePath, emptyFilePath);
+    //        String expectedMessage = MESSAGE_INVALID_PATH + "\n" + ImportCommand.MESSAGE_USAGE;
+    //        assertCommandFailure(importCommand, model, expectedMessage);
+    //    }
 
 }
