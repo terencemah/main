@@ -89,7 +89,7 @@ public class AddEventCommandTest {
         final String place = "anywhere";
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
 
-        Event event = new Event(activity, place, 30, 0);
+        Event event = new Event(activity, place, new Time(30, 0));
         event.setWithPerson(outOfBoundIndex.getOneBased());
         AddEventCommand addEventCommand = new AddEventCommand(event);
 
@@ -107,7 +107,7 @@ public class AddEventCommandTest {
 
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        Event event = new Event(activity, place, 30, 0);
+        Event event = new Event(activity, place, new Time(30, 0));
         event.setWithPerson(outOfBoundIndex.getOneBased());
         AddEventCommand addEventCommand = new AddEventCommand(event);
 
@@ -143,7 +143,7 @@ public class AddEventCommandTest {
     public void equals() {
         final String activity = "test";
         final String place = "anywhere";
-        Event finalEvent = new Event(activity, place, 30, 0);
+        Event finalEvent = new Event(activity, place, new Time(30, 0));
         finalEvent.setWithPerson(1);
         final AddEventCommand standardCommand = new AddEventCommand(finalEvent);
 
@@ -162,22 +162,22 @@ public class AddEventCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        Event anotherEvent = new Event(activity, place, 30, 0);
+        Event anotherEvent = new Event(activity, place, new Time(30, 0));
         anotherEvent.setWithPerson(2);
         assertFalse(standardCommand.equals(new AddEventCommand(anotherEvent)));
 
         // different place -> returns false
-        Event thirdEvent = new Event(activity, "anywhere 2", 30, 0);
+        Event thirdEvent = new Event(activity, "anywhere 2", new Time(30, 0));
         thirdEvent.setWithPerson(1);
         assertFalse(standardCommand.equals(new AddEventCommand(thirdEvent)));
 
         // different activity -> returns false
-        Event fourthEvent = new Event("test 2", place, 30, 0);
+        Event fourthEvent = new Event("test 2", place, new Time(30, 0));
         fourthEvent.setWithPerson(1);
         assertFalse(standardCommand.equals(new AddEventCommand(fourthEvent)));
 
         // different time -> returns false
-        Event fifthEvent = new Event(activity, place, 45, 0);
+        Event fifthEvent = new Event(activity, place, new Time(45, 0));
         fifthEvent.setWithPerson(1);
         assertFalse(standardCommand.equals(new AddEventCommand(fifthEvent)));
     }

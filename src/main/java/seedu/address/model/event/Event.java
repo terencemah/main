@@ -22,11 +22,11 @@ public class Event {
     private Optional<Integer> withGroup;
     private Time time;
 
-    public Event(String activity, String place, int minutes, int hours) {
+    public Event(String activity, String place, Time time) {
         this.eventId = events;
         this.activity = activity;
         this.place = place;
-        this.time = new Time(minutes, hours);
+        this.time = time;
         this.withPerson = Optional.empty();
         this.withGroup = Optional.empty();
         events += 1;
@@ -103,11 +103,7 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-        return (this.getActivity().equalsIgnoreCase(otherEvent.getActivity())
-                && this.getPlace().equalsIgnoreCase(otherEvent.getPlace())
-                && this.getTime().equals(otherEvent.getTime())
-                && this.getWithGroup().equals(otherEvent.getWithGroup())
-                && this.getWithPerson().equals(otherEvent.getWithPerson()));
+        return this.getEventId() == otherEvent.getEventId();
     }
 
     @Override
