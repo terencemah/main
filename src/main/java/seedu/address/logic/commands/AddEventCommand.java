@@ -27,7 +27,7 @@ import seedu.address.model.person.TimeList;
 public class AddEventCommand extends Command {
 
     public static final String COMMAND_WORD = "add_event";
-    private static final Logger logger = LogsCenter.getLogger(AddEventCommand.class);
+
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an event with a group or an individual"
             + "that adds an activity, place and time to the subject. \n"
@@ -62,6 +62,7 @@ public class AddEventCommand extends Command {
     public static final String MESSAGE_DUPLICATE_EVENT = "Event with given arguments already exists. Please try again.";
     public static final String MESSAGE_ARGUMENTS = "Activity: %1$s, Index: %2$d, Place: %3$s, Time: %4$s";
 
+    private static final Logger logger = LogsCenter.getLogger(AddEventCommand.class);
     private final Event toAdd;
 
     public AddEventCommand(Event event) {
