@@ -13,98 +13,99 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="1000" onCloseRequest="#handleExit" title="CoderLifeInsights" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="1000" onCloseRequest="#handleExit" title="CoderLifeInsights"
+         type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
-        <Image url="@/images/coderlifeinsights.png" />
+        <Image url="@/images/coderlifeinsights.png"/>
     </icons>
     <scene>
         <Scene>
             <stylesheets>
-                <URL value="@DarkTheme.css" />
-                <URL value="@Extensions.css" />
+                <URL value="@DarkTheme.css"/>
+                <URL value="@Extensions.css"/>
             </stylesheets>
 
-            <VBox>
+            <VBox VBox.vgrow="ALWAYS">
                 <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
                     <Menu mnemonicParsing="false" text="File">
-                        <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit"/>
                     </Menu>
                     <Menu mnemonicParsing="false" text="Help">
-                        <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+                        <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help"/>
                     </Menu>
                 </MenuBar>
 
 
-                <HBox>
-                    <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                <HBox HBox.hgrow="ALWAYS">
+                    <VBox fx:id="personList" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                         <padding>
-                            <Insets bottom="10" left="10" right="10" top="10" />
+                            <Insets bottom="10" left="10" right="10" top="10"/>
                         </padding>
 
                         <Label styleClass="label-bright" text="People">
                             <VBox.margin>
-                                <Insets />
+                                <Insets/>
                             </VBox.margin>
                             <opaqueInsets>
-                                <Insets />
+                                <Insets/>
                             </opaqueInsets>
                             <padding>
-                                <Insets bottom="5.0" />
+                                <Insets bottom="5.0"/>
                             </padding>
                         </Label>
-                        <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                        <StackPane fx:id="personListPanelPlaceholder" prefWidth="500" VBox.vgrow="ALWAYS"/>
                     </VBox>
 
-                    <VBox fx:id="viewList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="viewList" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                         <padding>
-                            <Insets bottom="10" left="10" right="10" top="10" />
+                            <Insets bottom="10" left="10" right="10" top="10"/>
                         </padding>
                         <Label styleClass="label-bright" text="Insights">
                             <VBox.margin>
-                                <Insets />
+                                <Insets/>
                             </VBox.margin>
                             <opaqueInsets>
-                                <Insets />
+                                <Insets/>
                             </opaqueInsets>
                             <padding>
-                                <Insets bottom="5.0" />
+                                <Insets bottom="5.0"/>
                             </padding>
                         </Label>
-                        <StackPane fx:id="timePieChartPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                        <StackPane fx:id="timePieChartPanelPlaceholder" prefWidth="500" VBox.vgrow="ALWAYS"/>
                     </VBox>
 
-                    <VBox fx:id="groupList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="groupList" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                         <padding>
-                            <Insets bottom="10" left="10" right="10" top="10" />
+                            <Insets bottom="10" left="10" right="10" top="10"/>
                         </padding>
                         <Label styleClass="label-bright" text="Groups">
                             <VBox.margin>
-                                <Insets />
+                                <Insets/>
                             </VBox.margin>
                             <opaqueInsets>
-                                <Insets />
+                                <Insets/>
                             </opaqueInsets>
                             <padding>
-                                <Insets bottom="5.0" />
+                                <Insets bottom="5.0"/>
                             </padding>
                         </Label>
-                        <StackPane fx:id="groupListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                        <StackPane fx:id="groupListPanelPlaceholder" prefWidth="500" VBox.vgrow="ALWAYS"/>
                     </VBox>
-
                 </HBox>
-                <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
+
+                <StackPane fx:id="resultDisplayPlaceholder" minHeight="100"
+                           styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                     <padding>
-                        <Insets bottom="5" left="10" right="10" top="5" />
+                        <Insets bottom="5" left="10" right="10" top="5"/>
                     </padding>
                 </StackPane>
-                <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
+                <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                     <padding>
-                        <Insets bottom="5" left="10" right="10" top="5" />
+                        <Insets bottom="5" left="10" right="10" top="5"/>
                     </padding>
                 </StackPane>
 
-
-                <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+                <StackPane fx:id="statusbarPlaceholder" minHeight="20" prefHeight="20" VBox.vgrow="ALWAYS"/>
             </VBox>
         </Scene>
     </scene>

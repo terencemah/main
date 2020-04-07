@@ -221,15 +221,25 @@ public class MainWindow extends UiPart<Stage> {
     }
 
 
+    /**
+     * Displays group list
+     */
     private void handleGroup() {
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
         groupListPanelPlaceholder.getChildren().clear();
         groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        handleViewTime();
     }
 
+    /**
+     * Displays normal display
+     */
     private void handleNormal() {
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        groupListPanelPlaceholder.getChildren().clear();
+        groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        handleViewTime();
     }
 
     public PersonListPanel getPersonListPanel() {
