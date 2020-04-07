@@ -64,6 +64,10 @@ public class Time {
         this.hours = newHrs;
     }
 
+    /**
+     * Creates a new Time object
+     * By adding current Time to input parameters
+     */
     public Time addTime2(int mins, int hrs) {
         int newMins;
         int newHrs;
