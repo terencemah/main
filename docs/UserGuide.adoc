@@ -18,7 +18,7 @@ By: `Team CoderLifeInsights`      Since: `Mar 2020`      Licence: `MIT`
 
 == Introduction
 
-CoderLifeInsights (CLI) is a desktop application that provides you insights and suggestions to your social life as a programmer using a CLI (Command Line Interface)
+CoderLifeInsights (CLI) is a desktop application that provides you insights and suggestions to your social life as a programmer using a CLI (Command Line Interface).
 
 == Quick Start
 
@@ -303,6 +303,7 @@ Exports your group data to `group.csv`
 |=======================================================================
 // end::export[]
 
+// tag::addEvent[]
 === Adding an Event: `add_event`
 Adds an event to a person or a group at the specified INDEX. +
 Format for adding to a person: `add_event ACTIVITY_NAME place/PLACE_NAME time/TIME m/INDEX` +
@@ -343,6 +344,7 @@ Creates an Event Dancing lessons at Changi Country Club with a time spent of 1 h
 Creates an Event Date Night at MBS with a time spent of 3 hours and adds it to the first result returned by the `find Betsy` command in CoderLifeInsights.
 
 |=======================================================================
+// end::addEvent[]
 
 // tag::suggest[]
 === Suggestions: `suggest`
