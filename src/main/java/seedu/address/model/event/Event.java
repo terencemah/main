@@ -103,11 +103,7 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-        return (this.getActivity().equalsIgnoreCase(otherEvent.getActivity())
-                && this.getPlace().equalsIgnoreCase(otherEvent.getPlace())
-                && this.getTime().equals(otherEvent.getTime())
-                && this.getWithGroup().equals(otherEvent.getWithGroup())
-                && this.getWithPerson().equals(otherEvent.getWithPerson()));
+        return this.getEventId() == otherEvent.getEventId();
     }
 
     @Override
