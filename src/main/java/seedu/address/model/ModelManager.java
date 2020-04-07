@@ -239,7 +239,7 @@ public class ModelManager implements Model {
     public void importCsvGroupsToAddressBook(List<Group> importedGroup) {
         requireNonNull(importedGroup);
         addressBook.addGroups(importedGroup);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         showTime();
     }
 
@@ -248,7 +248,7 @@ public class ModelManager implements Model {
         requireNonNull(importedEvent);
         addressBook.addEvents(importedEvent);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        updateFilteredEventList(unused -> true);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         showTime();
     }
 

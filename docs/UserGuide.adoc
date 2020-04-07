@@ -66,6 +66,7 @@ Format: `add_person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 A person can have any number of tags (including 0)
 
 Examples:
+
 [width="75%",cols="30%,<20%,<60%",options="header"]
 |=========================================================================
 |Example | Command | Result
@@ -85,6 +86,7 @@ Format: `list_LIST_PARAMETER`
 ****
 
 Examples:
+
 [width="75%",cols="30%,<20%,<60%",options="header"]
 |=========================================================================
 |Example | Command | Result
@@ -112,6 +114,7 @@ The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Examples:
+
 [width="75%",cols="40%,<20%,<40%",options="header"]
 |=========================================================================
 |Example| Command | Result
@@ -136,6 +139,7 @@ Remarks: CoderLifeInsights uses 1-indexing.
 ****
 
 Examples:
+
 [width="75%",cols="30%,<30%,<40%",options="header"]
 |=========================================================================
 |Example| Command | Result
@@ -161,6 +165,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 ****
 
 Examples:
+
 [width="75%",cols="40%,<20%,<40%",options="header"]
 |=========================================================================
 | Example | Command | Result
@@ -172,24 +177,27 @@ Examples:
 === Import Life CSV: `import`
 
 Imports your existing Life CSV into the application +
-Format: `import l/LIFE_FILE_PATH g/GROUP_FILE_PATH`
+Format: `import l/LIFE_FILE_PATH g/GROUP_FILE_PATH e/EVENT_FILE_PATH`
 
 ****
 * Imports your existing Life contacts into the application.
 * An existing CSV file exported from CoderLifeInsights must exist before import.
-* LIFE_FILE_PATH and GROUP_FILE_PATH must match your existing file path.
+* LIFE_FILE_PATH, GROUP_FILE_PATH and EVENT_FILE_PATH must match your existing file path.
 ****
 
 Examples:
+
 [width="75%",cols="40%,<20%,<40%",options="header"]
 |=========================================================================
 | Example | Command | Result
-| Import Life from file "life.csv" and group data from "groups.csv" | `import l/life.csv +
-g/groups.csv` |
-Imports your Life from `life.csv` and your group data from `groups.csv`
+| Import Life from file "life.csv", group data from "groups.csv" and event data from "events.csv"
+| `import l/life.csv +
+g/groups.csv +
+e/events.csv` |
+Imports your Life from `life.csv` , group data from `groups.csv` and event data from `events.csv`
 
 | Import Life from file "life.csv" at specific file path | `import l/C:\Users\User\Documents
-                \life.csv` |
+                                                            \life.csv` |
 Imports your Life from `C:\Users\Harry\Desktop\Documents
                         \life.csv`
 
@@ -197,6 +205,7 @@ Imports your Life from `C:\Users\Harry\Desktop\Documents
 Imports your Life from `C:\Users\Harry\Desktop\Documents
                         \life.csv`
 |=========================================================================
+
 ==== Retrieving File Path
 
 For Windows:
@@ -252,7 +261,7 @@ Example:
 
 For `Groups.csv`:
 
-Before using the `import` command on `Life.csv`, please ensure the following headers are present.
+Before using the `import` command on `Groups.csv`, please ensure the following headers are present.
 
 * `name`
 * `groupId`
@@ -264,7 +273,7 @@ Before using the `import` command on `Life.csv`, please ensure the following hea
 
 .Example Groups.csv format
 [#CSVFileConstraints, align="center"]
-image::groupCSVFormat.png[pdfwidth="70%",width="70%"]
+image::eventCSVFormat.png[pdfwidth="70%",width="70%"]
 
 ====
 `memberIDs`, `eventIDs` should be separated by a semi-colon.
@@ -274,6 +283,21 @@ Example:
 * `1;2;3`
 * `5;6`
 ====
+
+For `Events.csv`:
+
+Before using the `import` command on `Events.csv`, please ensure the following headers are present.
+
+* `eventId`
+* `activity`
+* `place`
+* `withPerson`
+* `withGroup`
+* `time`
+
+.Example Events.csv format
+[#CSVFileConstraints, align="center"]
+image::groupCSVFormat.png[pdfwidth="70%",width="70%"]
 // end::import[]
 
 
@@ -281,12 +305,13 @@ Example:
 === Export Life CSV: `export`
 
 Exports your existing Life into a CSV file. +
-Format: `export l/LIFE_FILE_NAME g/GROUP_FILE_NAME`
+Format: `export l/LIFE_FILE_NAME g/GROUP_FILE_NAME e/EVENT_FILE_NAME`
 
 ****
-* Exports your existing Life contacts and/or group data into a CSV file.
-* Specify the file name you want to export for life and group data.
+* Exports your existing Life contacts and/or group data and/or event data into a CSV file.
+* Specify the file name you want to export for life, group and event data.
 ****
+
 Remarks:
 
 * On the very first run of CoderLifeInsights, this command is invalid as there is no saved data and CoderLifeInsights is using a sample data file to display sample contacts.
@@ -297,14 +322,16 @@ Examples:
 [width="80%",cols="30%,<30%,<40%",options="header"]
 |=======================================================================
 | Example | Command | Result
-| Export current life and group data | `export l/life.csv g/groups.csv` |
+| Export current life and group data | `export l/life.csv g/groups.csv e/events.csv` |
 Exports your Life to `life.csv` +
-Exports your group data to `group.csv`
+Exports your group data to `groups.csv` +
+Exports your event data to `events.csv`
 |=======================================================================
 // end::export[]
 
 // tag::addEvent[]
 === Adding an Event: `add_event`
+
 Adds an event to a person or a group at the specified INDEX. +
 Format for adding to a person: `add_event ACTIVITY_NAME place/PLACE_NAME time/TIME m/INDEX` +
 Format for adding to a group: `add_event ACTIVITY_NAME place/PLACE_NAME time/TIME g/INDEX` +
@@ -314,14 +341,17 @@ Remarks:
 Input for a time of 1 hour and 5 minutes would be: `time/105` +
 Input for a time of 9 minutes would be: `time/09`
 * MM entered has to be between 0 and 60 (1 to 59).
-* The INDEX refers to the index number shown in the displayed person list. The INDEX must be a positive integer.
+* The INDEX refers to the index number shown in the displayed person list.
+The INDEX must be a positive integer.
 * CoderLifeInsights uses 1-indexing.
 
 ****
 CoderLifeInsights will store the input `ACTIVITY` and `PLACE` in the Json file so that all events added are kept even through termination of CoderLifeInsights.
-The input `TIME` will be added to the respective persons or events and the cumulative time spent with a person or a group is recorded and displayed. This cumulative `TIME` is also stored to the Json file.
+The input `TIME` will be added to the respective persons or events and the cumulative time spent with a person or a group is recorded and displayed.
+This cumulative `TIME` is also stored to the Json file.
 Insights and suggestions will be generated from the saved `PLACES`, `ACTIVITIES` and `TIME`
 ****
+
 Examples:
 
 [width="80%",cols="30%,<30%,<40%",options="header"]
@@ -358,13 +388,13 @@ Format: `suggest SUGGESTION_PARAMETER`
 ** A person to hangout with.
 *** Suggestion is based on time spent with a person.
 CoderLifeInsights will return a person which the user has spent the least time with.
-If there are multiple persons with the same amount of time spent,
-CoderLifeInsights will return a person based on reverse-lexicographical order of the persons with the least amount of time spent.
+If there are multiple persons with the same amount of time spent, CoderLifeInsights will return a person based on reverse-lexicographical order of the persons with the least amount of time spent.
 ** A place to go to. `[coming v1.4]`
 ** An activity to do. `[coming v1.4]`
 ****
 
 Examples:
+
 [width="80%",cols="30%,<30%,<40%",options="header"]
 |=======================================================================
 | Example | Command | Result
@@ -412,6 +442,7 @@ A group can have any number of member_ids (including 0)
 ****
 
 Examples:
+
 [width="80%",cols="30%,<30%,<40%",options="header"]
 |=======================================================================
 | Example | Command | Result
@@ -427,11 +458,12 @@ Edit a given person id with a given group id +
 Format: `edit_group <person-id> <name> <member_ids>`
 
 ****
-* CoderLifeInsight will edit the group with given id to change the name to supplied name and change the list of members
-to the ones supplied. One parameter is required to edit the group.
+* CoderLifeInsight will edit the group with given id to change the name to supplied name and change the list of members to the ones supplied.
+One parameter is required to edit the group.
 ****
 
 Examples:
+
 [width="80%",cols="30%,<30%,<40%",options="header"]
 |=======================================================================
 | Example | Command | Result
@@ -441,7 +473,6 @@ before. Name overwritten, memberIDs remain the same as before.
 it was before. Member list overwritten, Name stays the same.
 |Change the name and members of the first group| `edit_group 1 n/new_name m/1` | Changes both the name and members of the group with index 1 in Coder Life Insights. Both values overwritten.
 |=======================================================================
-
 
 === Insights: `view`
 
@@ -458,6 +489,7 @@ Format: `view INSIGHT_PARAMETER`
 *** Time spent with friend/group
 
 Examples:
+
 [width="80%",cols="30%,<30%,<40%",options="header"]
 |=======================================================================
 | Example | Command | Result

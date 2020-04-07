@@ -25,14 +25,14 @@ public class ImportCommandTest {
 
     @Test
     public void equals() {
-        ImportCommand firstImportCommand = new ImportCommand("testing.csv", "testing2.csv");
-        ImportCommand secondImportCommand = new ImportCommand("testing2.csv", "testing.csv");
+        ImportCommand firstImportCommand = new ImportCommand("testing.csv", "testing2.csv", "testing2.csv");
+        ImportCommand secondImportCommand = new ImportCommand("testing2.csv", "testing.csv", "testing2.csv");
 
         // same object -> returns true
         assertTrue(firstImportCommand.equals(firstImportCommand));
 
         // same values -> returns true
-        ImportCommand firstImportCommandCopy = new ImportCommand("testing.csv", "testing2.csv");
+        ImportCommand firstImportCommandCopy = new ImportCommand("testing.csv", "testing2.csv", "testing2.csv");
         assertTrue(firstImportCommand.equals(firstImportCommandCopy));
 
         // different types -> returns false
@@ -48,7 +48,7 @@ public class ImportCommandTest {
     @Test
     public void execute_importFile_notFound() {
         String emptyFilePath = "";
-        ImportCommand importCommand = new ImportCommand(emptyFilePath, emptyFilePath);
+        ImportCommand importCommand = new ImportCommand(emptyFilePath, emptyFilePath, emptyFilePath);
         String expectedMessage = MESSAGE_INVALID_PATH;
         assertCommandFailure(importCommand, model, expectedMessage);
     }
