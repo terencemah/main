@@ -64,6 +64,19 @@ public class Time {
         this.hours = newHrs;
     }
 
+    public Time addTime2(int mins, int hrs) {
+        int newMins;
+        int newHrs;
+        if (mins + this.getMinutes() >= 60) {
+            newMins = (mins + this.getMinutes()) - 60;
+            newHrs = (hrs + this.getHours()) + 1;
+        } else {
+            newMins = mins + this.getMinutes();
+            newHrs = hrs + this.getHours();
+        }
+        return new Time(newMins, newHrs);
+    }
+
     @Override
     public String toString() {
         return String.format("%sh %sm", this.hours, this.minutes);

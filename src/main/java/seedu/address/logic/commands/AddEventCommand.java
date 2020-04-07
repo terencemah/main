@@ -88,7 +88,7 @@ public class AddEventCommand extends Command {
             Person toEdit = lastShownList.get(index - 1);
 
             Time curr = toEdit.getTime();
-            curr.addTime(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
+            Time newTime = curr.addTime2(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
 
             PlaceList currentPlaceList = toEdit.getPlaceList2();
             PlaceList newPlaceList = currentPlaceList.addPlace(toAdd.getPlace());
@@ -100,7 +100,7 @@ public class AddEventCommand extends Command {
             TimeList newTimeList = currentTimeList.addTime(toAdd.getTime().toString());
 
             Person editedPerson = new Person(toEdit.getName(), toEdit.getPhone(), toEdit.getEmail(),
-                    toEdit.getAddress(), toEdit.getTags(), curr, newPlaceList, newActivityList, newTimeList);
+                    toEdit.getAddress(), toEdit.getTags(), newTime, newPlaceList, newActivityList, newTimeList);
             model.setPerson(toEdit, editedPerson);
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             model.addEvent(toAdd);
@@ -115,7 +115,7 @@ public class AddEventCommand extends Command {
             Group toEdit = lastShownList.get(index - 1);
 
             Time curr = toEdit.getTimeSpent();
-            curr.addTime(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
+            Time newTime = curr.addTime2(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
 
             // % TODO: Add to activity and place lists
             PlaceList currentPlaceList = toEdit.getPlaceList();
@@ -125,7 +125,7 @@ public class AddEventCommand extends Command {
             ActivityList newActivityList = currentActivityList.addActivity(toAdd.getActivity());
 
             Group editedGroup = new Group(toEdit.getName(), newPlaceList, newActivityList);
-            editedGroup.setTimeSpent(curr);
+            editedGroup.setTimeSpent(newTime);
             model.setGroup(toEdit, editedGroup);
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             model.addEvent(toAdd);
