@@ -34,9 +34,9 @@ public class AddGroupCommand extends Command {
                     + PREFIX_NAME
                     + "SoC Friends "
                     + PREFIX_MEMBER
-                    + "1"
+                    + "1 "
                     + PREFIX_MEMBER
-                    + "3"
+                    + "3 "
                     + PREFIX_MEMBER
                     + "7";
 

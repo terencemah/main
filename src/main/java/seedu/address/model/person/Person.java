@@ -17,10 +17,16 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    /**
+     * Represents the personID for the next created group
+     */
+    private static int events = 0;
+
     // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private int personId;
 
     // Data fields
     private final Address address;

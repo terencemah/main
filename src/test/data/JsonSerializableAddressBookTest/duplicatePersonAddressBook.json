@@ -17,5 +17,6 @@
     "places" : [ ],
     "activities" : [ ]
   } ],
-  "groups" : []
+  "groups" : [],
+  "events" : []
 }
