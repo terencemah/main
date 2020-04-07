@@ -1,0 +1,117 @@
+= Raivat Shah - Project Portfolio
+:site-section: AboutUs
+:icons: font
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+:xrefstyle: full
+:experimental:
+
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:warning-caption: :warning:
+endif::[]
+
+== PROJECT: CoderLifeInsights
+CoderLifeInsights (CLI) is a desktop application that provides you insights and suggestions to your social life as a programmer using a CLI (Command Line Interface)
+
+---
+
+== My Role
+I am responsible to complete the features related to group and overall system design. Furthermore, I've worked extensively on the storage package and
+developed the JSON implementations for group and event classes.
+I have also made notable contributions to the User Guide and Developer Guide.
+
+
+Listed in the table below are some notations that are used throughout the document.
+
+.Legend table
+[#Legend]
+[width="100%",cols="^15%,85%",options="header"]
+|===
+a| *Icon* | *Description*
+a| `command` | Command that can be executed, or a component, class or object in the architecture of the application
+a| icon:lightbulb-o[role="icon-tip", size="2x"] | Tips that might be helpful in navigating the application
+a| icon:info-circle[role="icon-note blue", size="2x"] | Important information that should be noted
+a| ====
+==== | Useful information for a deeper understanding of the command
+|===
+
+As shown in <<Legend>>, these icons associated to their following descriptions, such as commands, tips, important information and useful information, enable greater clarity in understanding the document. Note that useful information will have text enclosed in its box.
+
+
+== Summary of contributions
+=== Major enhancements:
+* *Major enhancement #1*: Implemented group features - `add_group`, `delete_group`, `edit_group` and `list_groups`
+** What they do: They allow the user of CoderLifeInsights to add a social group, delete a social group or edit the
+group for adding/removing members or changing the name of the group.
+** Justification: A social group is a crucial aspect of the
+CoderLifeInsights app as it allows the users to distinguish between time spent in group interactions and individual,
+one-to-one interactions. They are implemented similar to `add_person`, `delete_person` and `edit_person`
+features of the addressbook3 due to the robust design and defensive programming style.
+** Highlights: This enhancement functions well with existing commands as it adds more CoderLifeInsights into the list,
+all the other features such as groups, and events are updated as well. It required an in-depth analysis
+of design alternatives.
+
+* *Major enhancement #2*: Implemented storage features - JSON Implementations
+** What it does: JSON implementations allow the app to store and retrieve data from file. This is crucial as the app is
+not expected to always run.
+** Justification: Using the JSON implementations, the app can go back to its last state when a user
+re-launches the app.
+** Highlights: This enhancement required an in-depth understanding of JSON and Java Data structures in order to convert
+between Java Classes such as `Group` and `Event` and JSON implementations which stored strings.
+
+=== Minor enhancements:
+* *Minor enhancement #1*: Designed Initial System
+** What it does: I designed the initial architecture of the system using
+** Justification: To better fit and light up the social life as a Coder, it would be more pleasing to view the application in a brighter color as
+compared to the dark theme provided in AddressBook - Level3.
+** Highlights: Window size is adjustable to fit all components in to the desired smaller window size. It allows the user to use the application in full screen mode or as a smaller window without disruption of coding productivity.
+
+* *Minor enhancement #2*: Implemented Time Class
+** What is does: Allows the user to store a specific time spent in terms of number of hours and minutes.
+** Justification: The constraints the in the class allow for efficient management of time format, which suites the
+customised need of the app.
+** Highlights: This enhancement functions well with all the classes that depend upon it and use it. This required an
+thorough understanding of the different time use cases.
+
+* *Code contributed*:[https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=raivatshah&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false[RepoSense]]
+
+* *Other contributions*:
+
+** Project management:
+*** Initiated group meetings and set policies for Pull Requests
+*** Opened issues on Github repo to account for bugs
+
+** Enhancements to existing features:
+*** Updated the GUI color scheme and layout (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/95[#95], https://github.com/AY1920S2-CS2103-W14-4/main/pull/69[#69])
+
+** Documentation:
+*** Added contents of the User Guide (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/12[#96], https://github.com/AY1920S2-CS2103-W14-4/main/pull/13[#97])
+*** Added contents of the Developer Guide (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/74[#76])
+
+** Community:
+*** PRs reviewed: https://github.com/AY1920S2-CS2103-W14-4/main/pull/132[#132],
+https://github.com/AY1920S2-CS2103-W14-4/main/pull/95[#95]
+
+** Tools:
+*** Integrated Codeacy to automate code quality checks
+*** Used Creately to create UML class diagrams.
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=add_group]
+include::../UserGuide.adoc[tag=edit_group]
+include::../UserGuide.adoc[tag=view]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=list_group]

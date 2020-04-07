@@ -397,6 +397,7 @@ Example:
 * `random` +
 Returns the name of a random person saved in CoderLifeInsights.
 
+// tag::add_group[]
 === Social Group: `add_group`
 
 Creates an empty social group with given name. +
@@ -420,7 +421,8 @@ Examples:
 Creates a group named `RC Friends` and assigns a group ID and the given memberIDs to the group. Both are displayed
 to the user after creation.
 |=======================================================================
-
+// end::add_group[]
+// start::edit_group[]
 === Edit Group: `edit_group`
 
 Edit a given person id with a given group id +
@@ -441,8 +443,8 @@ before. Name overwritten, memberIDs remain the same as before.
 it was before. Member list overwritten, Name stays the same.
 |Change the name and members of the first group| `edit_group 1 n/new_name m/1` | Changes both the name and members of the group with index 1 in Coder Life Insights. Both values overwritten.
 |=======================================================================
-
-
+// end::edit_group[]
+// start::view[]
 === Insights: `view`
 
 Lists insights about the user's interactions with a particular friend or group, in the form of a pie chart.
@@ -467,7 +469,7 @@ Coder Life Insights shows a table of places and the frequency of visits for the 
 |Get insights of the last 5 events |`view recent` | Coder Life Insights shows the last 5 events. Info shows: places, activity done and time spent.
 |Get insights of places, time and activities | `view all` | Returns the output of 'view places', 'view time', and 'view activities', in that order.
 ****
-// end::delete[]
+// end::view[]
 === Clearing all entries : `clear`
 
 Clears all entries from the CoderLifeInsights. +
