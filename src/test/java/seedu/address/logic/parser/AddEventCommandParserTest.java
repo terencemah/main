@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Time;
 
 public class AddEventCommandParserTest {
     private AddEventCommandParser parser = new AddEventCommandParser();
@@ -28,7 +29,7 @@ public class AddEventCommandParserTest {
                 + PREFIX_PLACE + place + " "
                 + PREFIX_TIME + time;
 
-        Event event = new Event(activity, place, 11, 11);
+        Event event = new Event(activity, place, new Time(11, 11));
         event.setWithPerson(Integer.parseInt(targetIndex));
         AddEventCommand expectedCommand = new AddEventCommand(event);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -44,7 +45,7 @@ public class AddEventCommandParserTest {
                 + PREFIX_GROUP + targetIndex + " "
                 + PREFIX_PLACE + place + " "
                 + PREFIX_TIME + time;
-        Event event = new Event(activity, place, 11, 11);
+        Event event = new Event(activity, place, new Time(11, 11));
         event.setWithGroup(Integer.parseInt(targetIndex));
         AddEventCommand expectedCommand = new AddEventCommand(event);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -74,7 +75,7 @@ public class AddEventCommandParserTest {
                 + PREFIX_GROUP + targetIndex + " "
                 + PREFIX_PLACE + place + " "
                 + PREFIX_TIME + time;
-        Event event = new Event(activity, place, 11, 0);
+        Event event = new Event(activity, place, new Time(11, 0));
         event.setWithGroup(Integer.parseInt(targetIndex));
         AddEventCommand expectedCommand = new AddEventCommand(event);
         assertParseSuccess(parser, userInput, expectedCommand);
