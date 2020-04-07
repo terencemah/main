@@ -66,9 +66,12 @@ Format: `add_person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 A person can have any number of tags (including 0)
 
 Examples:
-
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+[width="75%",cols="30%,<20%,<60%",options="header"]
+|=========================================================================
+|Example | Command | Result
+|Add a person John Doe to CoderLifeInsights|`add_person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` | John Doe is added to CoderLifeInsights with the input information.
+|Add a person Betsy Crowe to CoderLifeInsights| `add_person n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` | Betsy Crowe is added to CoderLifeInsights with the input information.
+|=========================================================================
 
 === Listing saved data : `list`
 
@@ -78,19 +81,20 @@ Format: `list_LIST_PARAMETER`
 ****
 * LIST_PARAMETER include `persons`,`groups`.
 //`places`, `activities`
-* CoderLifeInsights will display an indexed list of the saved `LIST_PARAMS`.
+* CoderLifeInsights will display an indexed list of the saved `LIST_PARAMATER`.
 ****
 
 Examples:
-
-* `list_persons` +
-Returns a list of the saved persons in CoderLifeInsights.
+[width="75%",cols="30%,<20%,<60%",options="header"]
+|=========================================================================
+|Example | Command | Result
+| Show all persons| `list_persons` | Returns a list of the saved persons in CoderLifeInsights.
 //* `list activities` +
 //Returns a list of the saved activities in CoderLifeInsights.
-* `list_groups` +
-Returns a list of the saved groups in CoderLifeInsights.
+|Show all groups | `list_groups` | Returns a list of the saved groups in CoderLifeInsights.
 //* `list places`
 //Returns a list of the saved places in CoderLifeInsights.
+|=========================================================================
 
 === Editing a person : `edit`
 
@@ -108,11 +112,14 @@ The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Examples:
-
-* `edit 1 p/91234567 e/johndoe@example.com` +
+[width="75%",cols="40%,<20%,<40%",options="header"]
+|=========================================================================
+|Example| Command | Result
+| Change the phone number and email address of the 1st person|`edit 1 p/91234567 e/johndoe@example.com` |
 Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
+|Change the name of the second person and remove tags| `edit 2 n/Betsy Crower t/` |
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+|=========================================================================
 
 === Deleting an object : `delete`
 
@@ -129,16 +136,16 @@ Remarks: CoderLifeInsights uses 1-indexing.
 ****
 
 Examples:
-
-* `list_persons` +
-`delete_person 2` +
-Deletes the 2nd person in CoderLifeInsights.
-* `list_groups` +
-`delete_group 2` +
-Deletes the 2nd group in CoderLifeInsights.
-* `find Betsy` +
-`delete_person 1` +
-Deletes the 1st person in the results of the `find` command.
+[width="75%",cols="30%,<30%,<40%",options="header"]
+|=========================================================================
+|Example| Command | Result
+|Delete the 2nd person in the fully listed persons list|`list_persons` +
+`delete_person 2` | Deletes the 2nd person in CoderLifeInsights.
+|Delete the 2nd group in the fully listed groups list| `list_groups` +
+`delete_group 2` | Deletes the 2nd group in CoderLifeInsights.
+|Find a person and delete the person from the list returned|`find Betsy` +
+`delete_person 1` | Deletes the 1st person in the results of the `find` command.
+|=========================================================================
 
 === Locating persons by name: `find`
 
@@ -154,11 +161,12 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 ****
 
 Examples:
-
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+[width="75%",cols="40%,<20%,<40%",options="header"]
+|=========================================================================
+| Example | Command | Result
+| Find all persons whose name contains John| `find John` | Returns `john` and `John Doe`
+| Find all persons whose name contains 'Betsy', 'Tim' or 'John'| `find Betsy Tim John` |Returns all persons having names `Betsy`, `Tim`, or `John`
+|=========================================================================
 
 // tag::import[]
 === Import Life CSV: `import`
@@ -173,17 +181,22 @@ Format: `import l/LIFE_FILE_PATH g/GROUP_FILE_PATH`
 ****
 
 Examples:
+[width="75%",cols="40%,<20%,<40%",options="header"]
+|=========================================================================
+| Example | Command | Result
+| Import Life from file "life.csv" and group data from "groups.csv" | `import l/life.csv +
+g/groups.csv` |
+Imports your Life from `life.csv` and your group data from `groups.csv`
 
-* `import l/life.csv g/groups.csv` +
-Imports your Life from `life.csv` +
-Imports your group data from `groups.csv`
+| Import Life from file "life.csv" at specific file path | `import l/C:\Users\User\Documents
+                \life.csv` |
+Imports your Life from `C:\Users\Harry\Desktop\Documents
+                        \life.csv`
 
-* `import l/C:\Users\User\Documents\life.csv` +
-Imports your Life from `C:\Users\Harry\Desktop\Documents\life.csv`
-
-* `import l/./Desktop/life.csv` +
-Imports your Life from `C:\Users\Harry\Desktop\Documents\life.csv`
-
+|Import Life from file "life.csv" at specific file path | `import l/./Desktop/life.csv` |
+Imports your Life from `C:\Users\Harry\Desktop\Documents
+                        \life.csv`
+|=========================================================================
 ==== Retrieving File Path
 
 For Windows:
@@ -246,6 +259,8 @@ Before using the `import` command on `Life.csv`, please ensure the following hea
 * `timeSpent`
 * `memberIDs`
 * `eventIDs`
+* `places`
+* `activities`
 
 .Example Groups.csv format
 [#CSVFileConstraints, align="center"]
@@ -272,12 +287,20 @@ Format: `export l/LIFE_FILE_NAME g/GROUP_FILE_NAME`
 * Exports your existing Life contacts and/or group data into a CSV file.
 * Specify the file name you want to export for life and group data.
 ****
+Remarks:
+
+* On the very first run of CoderLifeInsights, this command is invalid as there is no saved data and CoderLifeInsights is using a sample data file to display sample contacts.
+Please proceed to add events, groups or persons before trying to export the information to the respective CSV files.
 
 Examples:
 
-* `export l/life.csv g/groups.csv` +
-Exports your Life to `life.csv`
+[width="80%",cols="30%,<30%,<40%",options="header"]
+|=======================================================================
+| Example | Command | Result
+| Export current life and group data | `export l/life.csv g/groups.csv` |
+Exports your Life to `life.csv` +
 Exports your group data to `group.csv`
+|=======================================================================
 // end::export[]
 
 === Adding an Event: `add_event`
@@ -289,7 +312,7 @@ Remarks:
 * TIME has to be in entered in the format `HHMM`: +
 Input for a time of 1 hour and 5 minutes would be: `time/105` +
 Input for a time of 9 minutes would be: `time/09`
-* MM entered cannot exceed 59.
+* MM entered has to be between 0 and 60 (1 to 59).
 * The INDEX refers to the index number shown in the displayed person list. The INDEX must be a positive integer.
 * CoderLifeInsights uses 1-indexing.
 
@@ -300,17 +323,26 @@ Insights and suggestions will be generated from the saved `PLACES`, `ACTIVITIES`
 ****
 Examples:
 
-* `list_persons`
-* `add_event Date Night place/MBS time/300 m/2` +
-Creates an Event Date Night at MBS with a time spent of 3 hours and adds it to the second person in CoderLifeInsights.
+[width="80%",cols="30%,<30%,<40%",options="header"]
+|=======================================================================
+| Example | Command | Result
 
-* `list_groups`
-* `add_event Dancing lessons place/Changi Country Club time/130 g/1` +
+| Adding an event with a person from the fully listed persons list | `list_persons`
+
+`add_event Date Night place/MBS time/300 m/2`| Creates an Event Date Night at MBS with a time spent of 3 hours and adds it to the second person in CoderLifeInsights.
+
+| Adding an event with a group from the fully listed groups list| list_groups
+
+add_event Dancing lessons place/Changi Country Club time/130 g/1 |
 Creates an Event Dancing lessons at Changi Country Club with a time spent of 1 hour and 30 minutes and adds it to the first group in CoderLifeInsights.
 
-* find `Betsy`
-* `add_event Date Night place/MBS time/300 m/1` +
+| Adding an event to a person after using the find function |
+`find Betsy`
+
+`add_event Date Night place/MBS time/300 m/1`|
 Creates an Event Date Night at MBS with a time spent of 3 hours and adds it to the first result returned by the `find Betsy` command in CoderLifeInsights.
+
+|=======================================================================
 
 // tag::suggest[]
 === Suggestions: `suggest`
@@ -322,11 +354,22 @@ Format: `suggest SUGGESTION_PARAMETER`
 * Suggestion parameters include `person` `[coming v1.4 activity or place]`
 * CoderLifeInsights will suggest:
 ** A person to hangout with.
+*** Suggestion is based on time spent with a person.
+CoderLifeInsights will return a person which the user has spent the least time with.
+If there are multiple persons with the same amount of time spent,
+CoderLifeInsights will return a person based on reverse-lexicographical order of the persons with the least amount of time spent.
 ** A place to go to. `[coming v1.4]`
 ** An activity to do. `[coming v1.4]`
 ****
 
 Examples:
+[width="80%",cols="30%,<30%,<40%",options="header"]
+|=======================================================================
+| Example | Command | Result
+|Look for a person to do something with| `suggest person` | Returns a person to hangout with.
+| Look for a place to do something at | `[coming v1.4]` `suggest place` | Returns a place to go to.
+| Look for an activity to do |`[coming v1.4]` `suggest activity` | Returns an activity to do.
+|=======================================================================
 
 * `suggest person` +
 Returns a person to hangout with.
@@ -367,12 +410,14 @@ A group can have any number of member_ids (including 0)
 ****
 
 Examples:
-
-* `add_group n/SoC Friends` +
-Creates a group named `SoC Friends` and assigns a group ID, which is shown to the user.
-* `add_group n/RC Friends m/1 m/2 m/3` +
+[width="80%",cols="30%,<30%,<40%",options="header"]
+|=======================================================================
+| Example | Command | Result
+|Create a group| `add_group n/SoC Friends` | Creates a group named `SoC Friends` and assigns a group ID, which is shown to the user.
+|Create a group and add members into that group| `add_group n/RC Friends m/1 m/2 m/3` |
 Creates a group named `RC Friends` and assigns a group ID and the given memberIDs to the group. Both are displayed
 to the user after creation.
+|=======================================================================
 
 === Edit Group: `edit_group`
 
@@ -385,12 +430,15 @@ to the ones supplied. One parameter is required to edit the group.
 ****
 
 Examples:
-
-* `edit_group 1 n/FOS` changes the name of the group with index 1 in CoderLifeInsights to `FOS` from whatever it was
+[width="80%",cols="30%,<30%,<40%",options="header"]
+|=======================================================================
+| Example | Command | Result
+|Change name of 1st group|`edit_group 1 n/FOS` |Changes the name of the group with index 1 in CoderLifeInsights to `FOS` from whatever it was
 before. Name overwritten, memberIDs remain the same as before.
-* `edit_group 1 m/1 m/21` changes the members of the group with index 1 in CoderLifeInsights to `1 and 2` from whatever
+|Edit the members in the 1st group| `edit_group 1 m/1 m/21` | Changes the members of the group with index 1 in CoderLifeInsights to `1 and 2` from whatever
 it was before. Member list overwritten, Name stays the same.
-* `edit_group 1 n/new_name m/1` changes both the name and members of the group with index 1 in Coder Life Insights. Both values overwritten.
+|Change the name and members of the first group| `edit_group 1 n/new_name m/1` | Changes both the name and members of the group with index 1 in Coder Life Insights. Both values overwritten.
+|=======================================================================
 
 
 === Insights: `view`
@@ -408,15 +456,14 @@ Format: `view INSIGHT_PARAMETER`
 *** Time spent with friend/group
 
 Examples:
-
-* `view 1 places` +
+[width="80%",cols="30%,<30%,<40%",options="header"]
+|=======================================================================
+| Example | Command | Result
+| Get insights of places been with the 1st person| `view 1 places` |
 Coder Life Insights shows a table of places and the frequency of visits for the person with index 1.
-* `view time` +
-Coder Life Insights shows a pie chart comparing time spent with groups vs time spent with individuals.
-* `view recent` +
-Coder Life Insights shows the last 5 events. Info shows: places, activity done and time spent.
-* `view all`
-Returns the output of 'view places', 'view time', and 'view activities', in that order.
+|Get insights of time spent with groups and individuals| `view time` | Coder Life Insights shows a pie chart comparing time spent with groups vs time spent with individuals.
+|Get insights of the last 5 events |`view recent` | Coder Life Insights shows the last 5 events. Info shows: places, activity done and time spent.
+|Get insights of places, time and activities | `view all` | Returns the output of 'view places', 'view time', and 'view activities', in that order.
 ****
 // end::delete[]
 === Clearing all entries : `clear`
@@ -463,7 +510,7 @@ e.g. `export life.csv`
 * *Suggest* : `suggest SUGGESTION_PARAMETER` +
 e.g. `suggest person`
 * *Insight* : `view INSIGHT_PARAMETER` +
-e.g. `view activities`
+e.g. `view 1 activities`
 * *List* : `list_LIST_PARAMETER` +
 e.g. `list_persons`
 * *Help* : `help`
