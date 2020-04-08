@@ -16,7 +16,6 @@ import seedu.address.model.person.Time;
 public class GroupBuilder {
 
     public static final String DEFAULT_NAME = "SoC Friends";
-    public static final int DEFAULT_ID = 1;
     public static final int DEFAULT_MINS = 1;
     public static final int DEFAULT_HOURS = 1;
     public static final ArrayList<Integer> DEFAULT_LIST = new ArrayList<>();
@@ -24,7 +23,6 @@ public class GroupBuilder {
     public static final List<String> DEFAULT_ACTIVITYLIST = new ArrayList<String>();
 
     private Name name;
-    private int id;
     private Time timeSpent;
     private ArrayList<Integer> memberIds;
     private ArrayList<Integer> eventIDs;
@@ -33,7 +31,6 @@ public class GroupBuilder {
 
     public GroupBuilder() {
         this.name = new Name(DEFAULT_NAME);
-        this.id = DEFAULT_ID;
         this.timeSpent = new Time(DEFAULT_MINS, DEFAULT_HOURS);
         this.memberIds = DEFAULT_LIST;
         this.eventIDs = DEFAULT_LIST;
@@ -43,7 +40,6 @@ public class GroupBuilder {
 
     public GroupBuilder(Group groupToCopy) {
         name = groupToCopy.getName();
-        id = groupToCopy.getGroupId();
         timeSpent = groupToCopy.getTimeSpent();
         memberIds = groupToCopy.getMembers();
         eventIDs = groupToCopy.getEvents();
@@ -67,7 +63,6 @@ public class GroupBuilder {
      * @return
      */
     public GroupBuilder withId(int id) {
-        this.id = id;
         return this;
     }
 
@@ -123,7 +118,6 @@ public class GroupBuilder {
      */
     public Group build() {
         Group group = new Group(name, places, activities);
-        group.setGroupId(id);
         group.setTimeSpent(timeSpent);
         group.setMemberIDs(memberIds);
         group.setEventIDs(eventIDs);

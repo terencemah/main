@@ -6,8 +6,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -16,6 +18,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Time;
 
 /**
@@ -50,7 +53,9 @@ public class EditGroupCommand extends Command {
     public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one edit field must be provided";
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in Coder Life Insights";
-
+    public static final String MESSAGE_DUPLICATE_MEMBERS = "Group contains duplicate member indexes. Please try again "
+            + "with unique member indexes.";
+    public static final String MESSAGE_PERSON_DOES_NOT_EXIST = "Person(s) with given index does not exist";
     private final Index index;
     private final EditGroupDescriptor editGroupDescriptor;
 
@@ -72,6 +77,23 @@ public class EditGroupCommand extends Command {
         }
 
         Group groupToEdit = lastShownList.get(index.getZeroBased());
+
+        //check if member indexes are valid
+        List<Person> lastPersonList = model.getFilteredPersonList();
+        ArrayList<Integer> members = editGroupDescriptor.getMemberIds().get();
+        Set<Integer> set = new HashSet<>(members);
+
+        if (set.size() < members.size()) {
+            throw new CommandException(MESSAGE_DUPLICATE_MEMBERS);
+        }
+
+        for (int i = 0; i < members.size(); i++) {
+            int currIndex = members.get(i);
+            if (currIndex > lastPersonList.size() || currIndex <= 0) {
+                throw new CommandException(MESSAGE_PERSON_DOES_NOT_EXIST);
+            }
+        }
+
         Group editedGroup = createEditedGroup(groupToEdit, editGroupDescriptor);
 
         if (!groupToEdit.equals(editedGroup) && model.hasGroup(editedGroup)) {
@@ -102,14 +124,11 @@ public class EditGroupCommand extends Command {
         }
 
         ArrayList<Integer> eventIds = groupToEdit.getEvents();
-        int groupId = groupToEdit.getGroupId();
 
         Group modifiedGroup = new Group(updatedName, groupToEdit.getPlaceList(), groupToEdit.getActivityList());
         modifiedGroup.setTimeSpent(oldTime);
         modifiedGroup.setMemberIDs(memberIds);
         modifiedGroup.setEventIDs(eventIds);
-        modifiedGroup.setGroupId(groupId);
-
         return modifiedGroup;
     }
 
