@@ -80,7 +80,7 @@ public class ImportCommand extends Command {
             }
             model.importCsvEventsToAddressBook(importedEvent);
         }
-
+        
         return new CommandResult(String.format(MESSAGE_SUCCESS, lifeFilePath, groupFilePath, eventFilePath));
     }
 
