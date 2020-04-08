@@ -74,9 +74,8 @@ public class AddGroupCommand extends Command {
         }
 
         for (int i = 0; i < members.size(); i++) {
-            logger.info("current member being checked is" + members.get(i));
             int currIndex = members.get(i);
-            if (currIndex >= lastShownList.size() || currIndex <= 0) {
+            if (currIndex > lastShownList.size() || currIndex <= 0) {
                 throw new CommandException(MESSAGE_PERSON_DOES_NOT_EXIST);
             }
         }
