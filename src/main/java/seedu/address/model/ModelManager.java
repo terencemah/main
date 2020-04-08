@@ -17,7 +17,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 //import seedu.address.model.event.Event;
+import seedu.address.model.event.ActivityContainsActivityNamePredicate;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.PlaceContainsPlaceNamePredicate;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.NameContainsFullNamePredicate;
@@ -379,6 +381,7 @@ public class ModelManager implements Model {
     public void suggestPlace() {
         ObservableList<Event> eventList = addressBook.getEventList();
         Map<String, Integer> placeIntegerMap = new HashMap<>();
+        List<String> place = new ArrayList<>();
         String minKey = "No places available. ";
         if (!eventList.isEmpty()) {
             for (Event oneEvent : eventList) {
@@ -399,9 +402,9 @@ public class ModelManager implements Model {
                     minKey = key;
                 }
             }
-            System.out.println(minKey);
-        } else {
-            System.out.println(minKey);
+            place.add(minKey);
+            PlaceContainsPlaceNamePredicate predicate = new PlaceContainsPlaceNamePredicate(place);
+            updateFilteredEventList(predicate);
         }
     }
 
@@ -411,6 +414,7 @@ public class ModelManager implements Model {
     public void suggestActivity() {
         ObservableList<Event> eventList = addressBook.getEventList();
         Map<String, Integer> activityIntegerMap = new HashMap<>();
+        List<String> activity = new ArrayList<>();
         String minKey = "No activities available. ";
         if (!eventList.isEmpty()) {
             for (Event oneEvent : eventList) {
@@ -431,9 +435,9 @@ public class ModelManager implements Model {
                     minKey = key;
                 }
             }
-            System.out.println(minKey);
-        } else {
-            System.out.println(minKey);
+            activity.add(minKey);
+            ActivityContainsActivityNamePredicate predicate = new ActivityContainsActivityNamePredicate(activity);
+            updateFilteredEventList(predicate);
         }
     }
 
