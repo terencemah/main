@@ -133,6 +133,7 @@ public class AddEventCommand extends Command {
             Group editedGroup = new Group(toEdit.getName(), newPlaceList, newActivityList);
             editedGroup.setMemberIDs(toEdit.getMembers());
             editedGroup.setTimeSpent(newTime);
+            editedGroup.setMemberIDs(toEdit.getMembers());
             model.setGroup(toEdit, editedGroup);
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             model.addEvent(toAdd);
