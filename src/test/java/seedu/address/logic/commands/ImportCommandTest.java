@@ -49,7 +49,7 @@ public class ImportCommandTest {
     //    public void execute_importFile_notFound() {
     //        String emptyFilePath = "";
     //        ImportCommand importCommand = new ImportCommand(emptyFilePath, emptyFilePath, emptyFilePath);
-    //        String expectedMessage = MESSAGE_INVALID_PATH + "\n" + ImportCommand.MESSAGE_USAGE;
+    //        String expectedMessage = MESSAGE_INVALID_PATH;
     //        assertCommandFailure(importCommand, model, expectedMessage);
     //    }
 
