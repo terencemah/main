@@ -17,27 +17,21 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
-    /**
-     * Represents the personID for the next created group
-     */
-    private static int events = 0;
-
     // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private int personId;
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<Tag>();
+    private final Set<Tag> tags = new HashSet<>();
     private final Time time;
 
-    private final ActivityList activityList = new ActivityList(new ArrayList<String>());
+    private final ActivityList activityList = new ActivityList(new ArrayList<>());
     private final FrequencyList placeList2;
     private final FrequencyList activityList2;
-    private final PlaceList placeList = new PlaceList(new ArrayList<String>());
-    private final TimeList timeList = new TimeList(new ArrayList<String>());
+    private final PlaceList placeList = new PlaceList(new ArrayList<>());
+    private final TimeList timeList = new TimeList(new ArrayList<>());
     private final RecentEventList recentEventList;
 
     /**
