@@ -29,7 +29,7 @@ public class AddEventCommand extends Command {
     public static final String COMMAND_WORD = "add_event";
 
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an event with a group or an individual"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an event with a group or an individual "
             + "that adds an activity, place and time to the subject. \n"
             + "Parameters: [ACTIVITY] "
             + "["
@@ -58,6 +58,7 @@ public class AddEventCommand extends Command {
             + "[5 minutes = 05]; "
             + "[1 hour = 100]; "
             + "[10 hours and 30 minutes = 1030]";
+    public static final String MESSAGE_INVALID_TIME = "Time parameter has to be greater than 0 minutes.";
     public static final String MESSAGE_SUCCESS = "New event successfully added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "Event with given arguments already exists. Please try again.";
     public static final String MESSAGE_ARGUMENTS = "Activity: %1$s, Index: %2$d, Place: %3$s, Time: %4$s";
@@ -73,6 +74,10 @@ public class AddEventCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
+
+        if (toAdd.getTime().equals(new Time(0, 0))) {
+            throw new CommandException(MESSAGE_INVALID_TIME);
+        }
 
         if (model.hasEvent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);

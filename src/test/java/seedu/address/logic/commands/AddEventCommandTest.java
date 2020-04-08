@@ -83,13 +83,29 @@ public class AddEventCommandTest {
         }*/
 
     @Test
+    public void execute_invalidTimeUnfilteredList_failure() {
+        final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        final String activity = "test";
+        final String place = "anywhere";
+        final Time time = new Time(0, 0);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+
+        Event event = new Event(activity, place, time);
+        event.setWithPerson(outOfBoundIndex.getOneBased());
+        AddEventCommand addEventCommand = new AddEventCommand(event);
+
+        assertCommandFailure(addEventCommand, model, AddEventCommand.MESSAGE_INVALID_TIME);
+    }
+
+    @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         final String activity = "test";
         final String place = "anywhere";
+        final Time time = new Time(30, 0);
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
 
-        Event event = new Event(activity, place, new Time(30, 0));
+        Event event = new Event(activity, place, time);
         event.setWithPerson(outOfBoundIndex.getOneBased());
         AddEventCommand addEventCommand = new AddEventCommand(event);
 
@@ -107,7 +123,7 @@ public class AddEventCommandTest {
 
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        Event event = new Event(activity, place, new Time(30, 0));
+        Event event = new Event(activity, place, time);
         event.setWithPerson(outOfBoundIndex.getOneBased());
         AddEventCommand addEventCommand = new AddEventCommand(event);
 
