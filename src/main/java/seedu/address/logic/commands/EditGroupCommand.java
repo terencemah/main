@@ -43,7 +43,7 @@ public class EditGroupCommand extends Command {
                     + PREFIX_NAME
                     + "SoC Friends "
                     + PREFIX_MEMBER
-                    + "1"
+                    + "1 "
                     + PREFIX_MEMBER
                     + "7";
 
