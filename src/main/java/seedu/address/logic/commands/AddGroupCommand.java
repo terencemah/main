@@ -3,10 +3,12 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-
+//
 //import java.util.ArrayList;
 //import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
@@ -44,7 +46,7 @@ public class AddGroupCommand extends Command {
     public static final String MESSAGE_DUPLICATE_GROUP =
             "Group with given name already exists. " + "Please try again with another name";
     public static final String MESSAGE_PERSON_DOES_NOT_EXIST = "Person(s) with given Id does not exist";
-
+    private static final Logger logger = LogsCenter.getLogger(AddGroupCommand.class);
     private final Group toAdd;
 
     public AddGroupCommand(Group group) {
@@ -59,14 +61,14 @@ public class AddGroupCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
 
-        //        List<Person> lastShownList = model.getFilteredPersonList();
-        //        ArrayList<Integer> members = toAdd.getMembers();
-
-        //        for (int i = 0; i < members.size(); i++) {
-        //            if (!lastShownList.contains(members.get(i))) {
-        //                throw new CommandException(MESSAGE_PERSON_DOES_NOT_EXIST);
-        //            }
-        //        }
+//        List<Person> lastShownList = model.getFilteredPersonList();
+//        ArrayList<Integer> members = toAdd.getMembers();
+//        for (int i = 0; i < members.size(); i++) {
+//            logger.info("current member being checked is" + members.get(i));
+//            if (!lastShownList.contains(members.get(i))) {
+//                throw new CommandException(MESSAGE_PERSON_DOES_NOT_EXIST);
+//            }
+//        }
 
         model.addGroup(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), ViewType.GROUPS);
