@@ -13,40 +13,24 @@ import seedu.address.model.person.Time;
  */
 public class Group {
 
-    /**
-     * Represents the groupID for the next created group.
-     */
-    private static int groups = 1;
-
     private Name name;
-    private int groupId;
     private Time timeSpent;
     private ArrayList<Integer> memberIDs;
     private ArrayList<Integer> eventIDs;
-    private final ActivityList activityList = new ActivityList(new ArrayList<String>());
-    private final PlaceList placeList = new PlaceList(new ArrayList<String>());
+    private final ActivityList activityList = new ActivityList(new ArrayList<>());
+    private final PlaceList placeList = new PlaceList(new ArrayList<>());
 
     public Group(Name name, PlaceList placeList, ActivityList activityList) {
         this.name = name;
         this.memberIDs = new ArrayList<>();
         this.eventIDs = new ArrayList<>();
         this.timeSpent = new Time(0, 0);
-        this.groupId = groups;
-        groups += 1;
         this.placeList.setPlaceList(placeList.getPlaceList());
         this.activityList.setActivityList(activityList.getActivityList());
     }
 
     public Name getName() {
         return this.name;
-    }
-
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
-    }
-
-    public int getGroupId() {
-        return this.groupId;
     }
 
     public Time getTimeSpent() {
@@ -142,11 +126,9 @@ public class Group {
     @Override
     public String toString() {
         if (this.memberIDs.isEmpty()) {
-            return "group ID: " + this.groupId + ". Name: " + this.name;
+            return "Name: " + this.name;
         } else {
-            return "group ID: "
-                    + this.groupId
-                    + ". Name: "
+            return "Name: "
                     + this.name
                     + ". With members: \n"
                     + printMemberList();
