@@ -21,12 +21,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
 
