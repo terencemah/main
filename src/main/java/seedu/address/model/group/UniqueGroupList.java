@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicateGroupException;
-import seedu.address.model.person.exceptions.GroupNotFoundException;
+import seedu.address.model.group.exceptions.DuplicateGroupException;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 
 /**
  * Represents a unique list of all groups currently in CoderLifeInsights

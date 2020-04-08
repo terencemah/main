@@ -102,14 +102,11 @@ public class EditGroupCommand extends Command {
         }
 
         ArrayList<Integer> eventIds = groupToEdit.getEvents();
-        int groupId = groupToEdit.getGroupId();
 
         Group modifiedGroup = new Group(updatedName, groupToEdit.getPlaceList(), groupToEdit.getActivityList());
         modifiedGroup.setTimeSpent(oldTime);
         modifiedGroup.setMemberIDs(memberIds);
         modifiedGroup.setEventIDs(eventIds);
-        modifiedGroup.setGroupId(groupId);
-
         return modifiedGroup;
     }
 

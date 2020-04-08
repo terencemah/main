@@ -22,7 +22,6 @@ public class JsonAdaptedGroup {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Groups's %s field is missing!";
 
     private final String name;
-    private final String groupId;
     private final String timeSpent;
     private final List<String> memberIDs = new ArrayList<>();
     private final List<String> eventIDs = new ArrayList<>();
@@ -30,14 +29,13 @@ public class JsonAdaptedGroup {
     private final List<String> activities = new ArrayList<>();
 
     @JsonCreator
-    public JsonAdaptedGroup(@JsonProperty("name") String name, @JsonProperty("groupId") String groupId,
+    public JsonAdaptedGroup(@JsonProperty("name") String name,
                             @JsonProperty("timeSpent") String timeSpent,
                             @JsonProperty("memberIDs") List<String> memberIDs,
                             @JsonProperty("eventIDs") List<String> eventIDs,
                             @JsonProperty("places") List<String> places,
                             @JsonProperty("activities") List<String> activities) {
         this.name = name;
-        this.groupId = groupId;
         this.timeSpent = timeSpent;
 
         if (memberIDs != null) {
@@ -61,7 +59,6 @@ public class JsonAdaptedGroup {
      */
     public JsonAdaptedGroup(Group source) {
         name = source.getName().fullName;
-        groupId = Integer.toString(source.getGroupId());
         timeSpent = source.getTimeSpent().toString();
 
         List<Integer> members = source.getMembers();

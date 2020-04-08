@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PlaceList;
-import seedu.address.model.person.exceptions.DuplicateGroupException;
 
 public class UniqueGroupListTest {
 

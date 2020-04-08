@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Time;
 
@@ -89,13 +90,9 @@ public class JsonAdaptedEvent {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "time"));
         }
 
-        String[] times = time.split(" ");
-        String hours = times[0].substring(0, times[0].length() - 1);
-        String minutes = times[1].substring(0, times[1].length() - 1);
-
         try {
-            Time time = new Time(Integer.parseInt(minutes), Integer.parseInt(hours));
-            Event event = new Event(activity, place, time);
+            Time timeSpent = ParserUtil.parseTime(time);
+            Event event = new Event(activity, place, timeSpent);
             return event;
         } catch (IllegalArgumentException e) {
             throw new IllegalValueException(e.getMessage());
