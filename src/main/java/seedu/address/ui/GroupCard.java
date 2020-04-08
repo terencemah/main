@@ -41,7 +41,7 @@ public class GroupCard extends UiPart<Region> {
         name.setText(group.getName().fullName);
         String text = group.getTimeSpent().toString();
         timeSpent.setText("Total Time Spent: " + text);
-        memberLabel.setText("Member IDs: ");
+        memberLabel.setText("Members: ");
         group
                 .getMembers()
                 .stream()

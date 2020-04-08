@@ -95,7 +95,7 @@ public class Group {
      * @return string representation
      */
     public String printEventIds() {
-        String result = "Event IDs: ";
+        String result = "Events: ";
         for (int i = 0; i < this.eventIDs.size(); i++) {
             result += this.eventIDs.get(i) + " ";
         }
