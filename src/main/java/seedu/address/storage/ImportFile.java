@@ -17,6 +17,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Event;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Address;
@@ -35,7 +36,7 @@ import seedu.address.model.tag.Tag;
 public class ImportFile {
 
     /**
-     * Reads a CSV File and returns a list of person to be added to the current address book.
+     * Reads a CSV File and returns a list of person to be added to the current CoderLifeInsights.
      *
      * @param fileName path of CSV file to be imported.
      * @return List of person to be imported.
@@ -118,11 +119,50 @@ public class ImportFile {
     }
 
     /**
-     * Reads a CSV File and returns a list of groups to be added to the current address book.
+     * Reads a CSV File and returns a list of events to be added to the current CoderLifeInsights.
      *
      * @param fileName path of CSV file to be imported.
      * @return List of groups to be imported.
-     * @throws CommandException if person in CSV file does not conform to format.
+     * @throws CommandException if event in CSV file does not conform to format.
+     */
+    public List<Event> importEventCsv(String fileName) throws CommandException {
+        try {
+            File csvFile = new File(fileName);
+            CsvMapper mapper = new CsvMapper();
+            CsvSchema schema = CsvSchema.emptySchema().withHeader();
+            MappingIterator<Map<String, String>> it =
+                    mapper.readerFor(Map.class).with(schema).readValues(csvFile);
+
+            List<Event> events = new ArrayList<>();
+            while (it.hasNext()) {
+                Map<String, String> oneEvent = it.next();
+                String eventId = oneEvent.get("eventId");
+                String oneActivity = oneEvent.get("activity");
+                String onePlace = oneEvent.get("place");
+                String oneWithPerson = oneEvent.get("withPerson");
+                String oneWithGroup = oneEvent.get("withGroup");
+                String oneTime = oneEvent.get("time");
+
+                Time time = ParserUtil.parseTime(oneTime);
+                int withPerson = Integer.valueOf(oneWithPerson);
+                int withGroup = Integer.valueOf(oneWithGroup);
+                Event event = new Event(oneActivity, onePlace, time);
+                event.setWithPerson(withPerson);
+                event.setWithGroup(withGroup);
+                events.add(event);
+            }
+            return events;
+        } catch (IOException ioe) {
+            throw new CommandException(String.format(MESSAGE_INVALID_PATH));
+        }
+    }
+
+    /**
+     * Reads a CSV File and returns a list of groups to be added to the current CoderLifeInsights.
+     *
+     * @param fileName path of CSV file to be imported.
+     * @return List of events to be imported.
+     * @throws CommandException if group in CSV file does not conform to format.
      */
     public List<Group> importGroupCsv(String fileName) throws CommandException {
         try {

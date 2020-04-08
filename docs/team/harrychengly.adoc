@@ -1,4 +1,4 @@
-= John Doe - Project Portfolio
+= Cheng Lit Yaw - Project Portfolio
 :site-section: AboutUs
 :icons: font
 :imagesDir: ../images
@@ -67,7 +67,7 @@ theme as well as allows the application window size to be resizeable.
 compared to the dark theme provided in AddressBook - Level3.
 ** Highlights: Window size is adjustable to fit all components in to the desired smaller window size. It allows the user to use the application in full screen mode or as a smaller window without disruption of coding productivity.
 
-* *Minor enhancement #2: Added view time insights feature
+* *Minor enhancement #2*: Added view time insights feature
 ** What is does: This enhancement allows users to be able to view insights of individual time spent vs group time spent in the form of a pie chart.
 ** Justification: Users are able to gain knowledge on whether they spend more time with individuals or group as a whole.
 ** Highlights: This enhancement functions well with existing commands. It required an in-depth analysis of design alternatives.

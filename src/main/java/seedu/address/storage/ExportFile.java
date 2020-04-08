@@ -73,4 +73,33 @@ public class ExportFile {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT));
         }
     }
+
+    /**
+     * Reads Life events and exports to CSV file to be imported on another Life application.
+     *
+     * @param fileToExport path of Life events to be exported.
+     * @param fileToSave   name of file to be saved.
+     * @throws CommandException if file name already exist or path provided instead of file.
+     */
+    public void exportEventCsv(String fileToExport, String fileToSave) throws CommandException {
+        try {
+            JsonNode jsonFile = new ObjectMapper().readTree(new File(fileToExport));
+
+            JsonNode jsonTree = jsonFile.get("events");
+            CsvSchema.Builder csvSchemaBuilder = CsvSchema.builder();
+            JsonNode firstObject = jsonTree.elements().next();
+            firstObject.fieldNames().forEachRemaining(fieldName -> {
+                csvSchemaBuilder.addColumn(fieldName);
+            });
+            CsvSchema csvSchema = csvSchemaBuilder.build().withHeader();
+
+            CsvMapper csvMapper = new CsvMapper();
+            csvMapper.writerFor(JsonNode.class)
+                    .with(csvSchema)
+                    .writeValue(new File(fileToSave), jsonTree);
+        } catch (IOException ioe) {
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT));
+        }
+    }
 }

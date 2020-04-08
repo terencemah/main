@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LIFE;
 
@@ -22,9 +23,10 @@ public class ExportCommandParser implements Parser<ExportCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ExportCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LIFE, PREFIX_GROUP);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LIFE, PREFIX_GROUP, PREFIX_EVENT);
 
-        if ((!arePrefixesPresent(argMultimap, PREFIX_LIFE) && !arePrefixesPresent(argMultimap, PREFIX_GROUP))
+        if ((!arePrefixesPresent(argMultimap, PREFIX_LIFE) && !arePrefixesPresent(argMultimap, PREFIX_GROUP)
+                && !arePrefixesPresent(argMultimap, PREFIX_EVENT))
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
@@ -32,6 +34,7 @@ public class ExportCommandParser implements Parser<ExportCommand> {
         try {
             String lifePath = "";
             String groupPath = "";
+            String eventPath = "";
 
             if (argMultimap.getValue(PREFIX_LIFE).isPresent()) {
                 lifePath = ParserUtil.parseExportPath(argMultimap.getValue(PREFIX_LIFE).get());
@@ -39,7 +42,10 @@ public class ExportCommandParser implements Parser<ExportCommand> {
             if (argMultimap.getValue(PREFIX_GROUP).isPresent()) {
                 groupPath = ParserUtil.parseExportPath(argMultimap.getValue(PREFIX_GROUP).get());
             }
-            return new ExportCommand(lifePath, groupPath);
+            if (argMultimap.getValue(PREFIX_EVENT).isPresent()) {
+                eventPath = ParserUtil.parseExportPath(argMultimap.getValue(PREFIX_EVENT).get());
+            }
+            return new ExportCommand(lifePath, groupPath, eventPath);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(ParserUtil.MESSAGE_FILE_ALREADY_EXIST, ExportCommand.MESSAGE_USAGE), pe);
