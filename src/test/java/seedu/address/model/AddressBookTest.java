@@ -26,7 +26,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.GroupNotFoundException;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
 
