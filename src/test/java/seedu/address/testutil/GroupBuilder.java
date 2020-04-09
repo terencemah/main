@@ -19,8 +19,8 @@ public class GroupBuilder {
     public static final int DEFAULT_MINS = 1;
     public static final int DEFAULT_HOURS = 1;
     public static final ArrayList<Integer> DEFAULT_LIST = new ArrayList<>();
-    public static final List<String> DEFAULT_PLACELIST = new ArrayList<String>();
-    public static final List<String> DEFAULT_ACTIVITYLIST = new ArrayList<String>();
+    public static final List<String> DEFAULT_PLACELIST = new ArrayList<>();
+    public static final List<String> DEFAULT_ACTIVITYLIST = new ArrayList<>();
 
     private Name name;
     private Time timeSpent;
