@@ -329,7 +329,7 @@ e/events.csv` |
 Imports your Life from `life.csv` , group data from `groups.csv` and event data from `events.csv`
 
 | Import Life from file "life.csv", "groups.csv" and "events.csv" at specific file path |
-`import l/C:\Users\User\Documents\life.csv + 
+`import l/C:\Users\User\Documents\life.csv +
 g/C:\Users\User\Documents\groups.csv +
 e/C:\Users\User\Documents\events.csv` |
 Imports your Life from `C:\Users\Harry\Desktop\Documents\life.csv` +
@@ -607,5 +607,6 @@ or +
 `delete_group 2`|
 
 *Clear* | `clear`||
-*Exit* | `exit`||
+*Exit* | `exit`
+
 ****
