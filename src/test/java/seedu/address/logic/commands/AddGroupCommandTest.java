@@ -29,12 +29,12 @@ import seedu.address.testutil.ModelStub;
 public class AddGroupCommandTest {
 
     @Test
-    public void constructor_nullGroup_throwsNullGroupPointer() {
+    public void constructorNullGroupThrowsNullGroupPointer() {
         assertThrows(NullPointerException.class, () -> new AddGroupCommand(null));
     }
 
     @Test
-    public void execute_groupAcceptedByModel_addSuccessful() throws Exception {
+    public void executeGroupAcceptedByModelAddSuccessful() throws Exception {
         ModelStubAcceptingGroupAdded modelStub = new ModelStubAcceptingGroupAdded();
         Group validGroup = new GroupBuilder().build();
         validGroup.setMemberIDs(new ArrayList<>(Arrays.asList(1, 2, 3)));
@@ -46,7 +46,7 @@ public class AddGroupCommandTest {
     }
 
     @Test
-    public void execute_duplicateGroup_throwsCommandException() throws Exception {
+    public void executeDuplicateGroupThrowsCommandException() throws Exception {
         Group validGroup = new GroupBuilder().build();
         validGroup.setMemberIDs(new ArrayList<>(Arrays.asList(1, 2, 3)));
         AddGroupCommand addGroupCommand = new AddGroupCommand(validGroup);
@@ -72,7 +72,7 @@ public class AddGroupCommandTest {
         assertTrue(addSoCCopy.equals(addSoCCommand));
 
         //differeny types so should false
-        assertFalse(addSoCCommand.equals("sample text"));
+        assertFalse(("sample text").equals(addSoCCommand));
 
         //equality with null should be false
         assertFalse(addRcCommand.equals(null));
@@ -98,7 +98,7 @@ public class AddGroupCommandTest {
 
 
     private class ModelStubAcceptingGroupAdded extends ModelStub {
-        final ArrayList<Group> groupsAdded = new ArrayList<>();
+        private final ArrayList<Group> groupsAdded = new ArrayList<>();
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
