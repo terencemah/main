@@ -133,7 +133,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_import() throws Exception {
-        assertTrue(parser.parseCommand(ImportCommand.COMMAND_WORD + " l/src/test/data/CsvFilesTest/life.csv")
+        assertTrue(parser.parseCommand(ImportCommand.COMMAND_WORD + " l/src/test/data/CsvFilesTest/life.csv g/src/test/data/CsvFilesTest/group.csv e/src/test/data/CsvFilesTest/event.csv")
                 instanceof ImportCommand);
     }
 

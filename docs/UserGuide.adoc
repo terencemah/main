@@ -35,8 +35,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 . Some example commands you can try:
 
 * *`list_persons`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to your Life.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* **`add_person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to your Life.
+* **`delete_person 2` : deletes the 2rd contact shown in the current list
 * *`exit`* : exits the app
 
 . Refer to <<Features>> for details of each command.
@@ -50,7 +50,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`,`p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
 === Viewing help : `help`
@@ -123,211 +123,56 @@ Edits the phone number and email address of the 1st person to be `91234567` and 
 |Change the name of the second person and remove tags| `edit 2 n/Betsy Crower t/` |
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 |=========================================================================
+// tag::add_group[]
+=== Social Group: `add_group`
 
-=== Deleting an object : `delete`
+Creates an empty social group with given name. +
+Format: `add_group n/GROUP_NAME m/MEMBER_IDs ...`
 
-Deletes an entity, such as Person, Group, or Event from the CoderLifeInsights +
-Format: `delete_person ID` (for person) +
-        `delete_group ID` (for group)
-//        `delete event ID` (for event)
-
-****
-* Deletes the person at the specified `INDEX`.
-The index refers to the index number shown in the displayed person list.
-The index *must be a positive integer* 1, 2, 3, ...
-Remarks: CoderLifeInsights uses 1-indexing.
-****
-
-Examples:
-
-[width="75%",cols="30%,<30%,<40%",options="header"]
-|=========================================================================
-|Example| Command | Result
-|Delete the 2nd person in the fully listed persons list|`list_persons` +
-`delete_person 2` | Deletes the 2nd person in CoderLifeInsights.
-|Delete the 2nd group in the fully listed groups list| `list_groups` +
-`delete_group 2` | Deletes the 2nd group in CoderLifeInsights.
-|Find a person and delete the person from the list returned|`find Betsy` +
-`delete_person 1` | Deletes the 1st person in the results of the `find` command.
-|=========================================================================
-
-=== Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+[TIP]
+A group can have any number of member_ids (including 0)
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* 1 required parameter (group_name)
+* CoderLifeInsights will create a new group and show a uniquely generated Group ID for the same.
+* Member_IDs will be added to the group and displayed if supplied while creating the group.
 ****
-
-Examples:
-
-[width="75%",cols="40%,<20%,<40%",options="header"]
-|=========================================================================
-| Example | Command | Result
-| Find all persons whose name contains John| `find John` | Returns `john` and `John Doe`
-| Find all persons whose name contains 'Betsy', 'Tim' or 'John'| `find Betsy Tim John` |Returns all persons having names `Betsy`, `Tim`, or `John`
-|=========================================================================
-
-// tag::import[]
-=== Import Life CSV: `import`
-
-Imports your existing Life CSV into the application +
-Format: `import l/LIFE_FILE_PATH g/GROUP_FILE_PATH e/EVENT_FILE_PATH`
-
-****
-* Imports your existing Life contacts into the application.
-* An existing CSV file exported from CoderLifeInsights must exist before import.
-* LIFE_FILE_PATH, GROUP_FILE_PATH and EVENT_FILE_PATH must match your existing file path.
-****
-
-Examples:
-
-[width="75%",cols="40%,<20%,<40%",options="header"]
-|=========================================================================
-| Example | Command | Result
-| Import Life from file "life.csv", group data from "groups.csv" and event data from "events.csv"
-| `import l/life.csv +
-g/groups.csv +
-e/events.csv` |
-Imports your Life from `life.csv` , group data from `groups.csv` and event data from `events.csv`
-
-| Import Life from file "life.csv" at specific file path | `import l/C:\Users\User\Documents
-                                                            \life.csv` |
-Imports your Life from `C:\Users\Harry\Desktop\Documents
-                        \life.csv`
-
-|Import Life from file "life.csv" at specific file path | `import l/./Desktop/life.csv` |
-Imports your Life from `C:\Users\Harry\Desktop\Documents
-                        \life.csv`
-|=========================================================================
-
-==== Retrieving File Path
-
-For Windows:
-
-* Navigate to the file where you saved CoderLifeInsights data files.
-* Click on the address bar of File Explorer window.
-* Refer to the diagram below for reference.
-
-.File path finding in Windows
-[#RetrievingFilePath, align="center"]
-image::windowsPathFinding.png[]
-
-[pdfwidth="50%",width="50%"]
-For Mac:
-* Navigate to the file where you saved CoderLifeInsights data files.
-* Right-click on the CSV File and select `Get info`.
-* Refer to the diagram below for reference.
-
-.File path finding in MacOS
-[#RetrievingFilePath, align="center"]
-image::macPathFinding.png[pdfwidth="50%",width="50%"]
-
-==== CSV File Constraints
-
-For `Life.csv`:
-
-Before using the `import` command on `Life.csv`, please ensure the following headers are present.
-
-* `name`
-* `phone`
-* `email`
-* `address`
-* `tagged`
-* `time`
-* `places`
-* `activities`
-
-Refer to image below for reference:
-
-.Example Life.csv format
-[#CSVFileConstraints, align="center"]
-image::lifeCSVFormat.png[pdfwidth="70%",width="70%"]
-
-====
-`Tags`, `Places` and `Activities` should be separated by a semi-colon.
-
-Example:
-
-* `friends;school-mate`
-* `Orchard;NUS`
-* `Gym;Rock-Climbing`
-====
-
-For `Groups.csv`:
-
-Before using the `import` command on `Groups.csv`, please ensure the following headers are present.
-
-* `name`
-* `groupId`
-* `timeSpent`
-* `memberIDs`
-* `eventIDs`
-* `places`
-* `activities`
-
-.Example Groups.csv format
-[#CSVFileConstraints, align="center"]
-image::eventCSVFormat.png[pdfwidth="70%",width="70%"]
-
-====
-`memberIDs`, `eventIDs` should be separated by a semi-colon.
-
-Example:
-
-* `1;2;3`
-* `5;6`
-====
-
-For `Events.csv`:
-
-Before using the `import` command on `Events.csv`, please ensure the following headers are present.
-
-* `eventId`
-* `activity`
-* `place`
-* `withPerson`
-* `withGroup`
-* `time`
-
-.Example Events.csv format
-[#CSVFileConstraints, align="center"]
-image::groupCSVFormat.png[pdfwidth="70%",width="70%"]
-// end::import[]
-
-
-// tag::export[]
-=== Export Life CSV: `export`
-
-Exports your existing Life into a CSV file. +
-Format: `export l/LIFE_FILE_NAME g/GROUP_FILE_NAME e/EVENT_FILE_NAME`
-
-****
-* Exports your existing Life contacts and/or group data and/or event data into a CSV file.
-* Specify the file name you want to export for life, group and event data.
-****
-
-Remarks:
-
-* On the very first run of CoderLifeInsights, this command is invalid as there is no saved data and CoderLifeInsights is using a sample data file to display sample contacts.
-Please proceed to add events, groups or persons before trying to export the information to the respective CSV files.
 
 Examples:
 
 [width="80%",cols="30%,<30%,<40%",options="header"]
 |=======================================================================
 | Example | Command | Result
-| Export current life and group data | `export l/life.csv g/groups.csv e/events.csv` |
-Exports your Life to `life.csv` +
-Exports your group data to `groups.csv` +
-Exports your event data to `events.csv`
+|Create a group| `add_group n/SoC Friends` | Creates a group named `SoC Friends` and assigns a group ID, which is shown to the user.
+|Create a group and add members into that group| `add_group n/RC Friends m/1 m/2 m/3` |
+Creates a group named `RC Friends` and assigns a group ID and the given memberIDs to the group. Both are displayed
+to the user after creation.
 |=======================================================================
-// end::export[]
+// end::add_group[]
+// start::edit_group[]
+=== Edit Group: `edit_group`
+
+Edit a given person id with a given group id +
+Format: `edit_group GROUP_ID n/GROUP_NAME m/MEMBER_IDs`
+
+****
+* CoderLifeInsight will edit the group with given id to change the name to supplied name and change the list of members to the ones supplied.
+One parameter is required to edit the group.
+****
+
+Examples:
+
+[width="80%",cols="30%,<30%,<40%",options="header"]
+|=======================================================================
+| Example | Command | Result
+|Change name of 1st group|`edit_group 1 n/FOS` |Changes the name of the group with index 1 in CoderLifeInsights to `FOS` from whatever it was
+before. Name overwritten, memberIDs remain the same as before.
+|Edit the members in the 1st group| `edit_group 1 m/1 m/5` | Changes the members of the group with index 1 in CoderLifeInsights to `1 and 2` from whatever
+it was before. Member list overwritten, Name stays the same.
+|Change the name and members of the first group| `edit_group 1 n/new_name m/1` | Changes both the name and members of the group with index 1 in Coder Life Insights. Both values overwritten.
+|=======================================================================
+
+// end::edit_group[]
 
 // tag::addEvent[]
 === Adding an Event: `add_event`
@@ -362,9 +207,9 @@ Examples:
 
 `add_event Date Night place/MBS time/300 m/2`| Creates an Event Date Night at MBS with a time spent of 3 hours and adds it to the second person in CoderLifeInsights.
 
-| Adding an event with a group from the fully listed groups list| list_groups
+| Adding an event with a group from the fully listed groups list| `list_groups`
 
-add_event Dancing lessons place/Changi Country Club time/130 g/1 |
+`add_event Dancing lessons place/Changi Country Club time/130 g/1` |
 Creates an Event Dancing lessons at Changi Country Club with a time spent of 1 hour and 30 minutes and adds it to the first group in CoderLifeInsights.
 
 | Adding an event to a person after using the find function |
@@ -375,22 +220,27 @@ Creates an Event Date Night at MBS with a time spent of 3 hours and adds it to t
 
 |=======================================================================
 // end::addEvent[]
-
 // tag::suggest[]
 === Suggestions: `suggest`
 
-Suggests a person to hang out with +
+Suggests a person to hang out with, a place to go or an activity to do. +
 Format: `suggest SUGGESTION_PARAMETER`
 
 ****
-* Suggestion parameters include `person` `[coming v1.4 activity or place]`
+* Suggestion parameters include `person`, `activity` or `place`
 * CoderLifeInsights will suggest:
 ** A person to hangout with.
 *** Suggestion is based on time spent with a person.
-CoderLifeInsights will return a person which the user has spent the least time with.
-If there are multiple persons with the same amount of time spent, CoderLifeInsights will return a person based on reverse-lexicographical order of the persons with the least amount of time spent.
-** A place to go to. `[coming v1.4]`
-** An activity to do. `[coming v1.4]`
+*** CoderLifeInsights will return a person which the user has spent the least time with.
+*** If there are multiple people with the same amount of time spent, CoderLifeInsights will return a person based on reverse-lexicographical order of the people with the least amount of time spent.
+** A place to go to.
+*** Suggestion is based on frequency of place visited from events added.
+*** CoderLifeInsights will return the events that happened at the suggested place which the user has visited the least in terms of frequency.
+*** If there are multiple places with the same amount of frequency, CoderLifeInsights will return the first place based on chronological order.
+** An activity to do.
+*** Suggestion is based on frequency of activity done from events added.
+*** CoderLifeInsights will return the events that happened with the suggested activity which the user has done the least in terms of frequency.
+*** If there are multiple activities with the same amount of frequency, CoderLifeInsights will return the first activity based on chronological order.
 ****
 
 Examples:
@@ -398,85 +248,12 @@ Examples:
 [width="80%",cols="30%,<30%,<40%",options="header"]
 |=======================================================================
 | Example | Command | Result
-|Look for a person to do something with| `suggest person` | Returns a person to hangout with.
-| Look for a place to do something at | `[coming v1.4]` `suggest place` | Returns a place to go to.
-| Look for an activity to do |`[coming v1.4]` `suggest activity` | Returns an activity to do.
+|Look for a person to do something with.|`suggest person` | Returns a person to hangout with.
+| Look for a place to do something at.|`suggest place` | Returns events based on suggested place to go to.
+| Look for an activity to do.|`suggest activity` | Returns events based on suggested activity to do.
 |=======================================================================
-
-* `suggest person` +
-Returns a person to hangout with.
-* `[coming v1.4]` `suggest place` +
-Returns a place to go to.
-* `[coming v1.4]` `suggest activity` +
-Returns an activity to do.
 // end::suggest[]
 
-=== Getting a random person: `random` `[coming in v1.4]`
-
-Finds a random person from contacts saved in CoderLifeInsights. +
-Format: `random`
-
-****
-* No additional parameters required.
-* CoderLifeInsights will return the name of a random contact that is saved in CoderLifeInsights.
-* Selection of contact is completely random with no parameters used for selection.
-****
-
-Example:
-
-* `random` +
-Returns the name of a random person saved in CoderLifeInsights.
-
-// tag::add_group[]
-=== Social Group: `add_group`
-
-Creates an empty social group with given name. +
-Format: `add_group <name> <member_ids>`
-
-[TIP]
-A group can have any number of member_ids (including 0)
-
-****
-* 1 required parameter (group_name)
-* CoderLifeInsights will create a new group and show a uniquely generated Group ID for the same.
-* Member_IDs will be added to the group and displayed if supplied while creating the group.
-****
-
-Examples:
-
-[width="80%",cols="30%,<30%,<40%",options="header"]
-|=======================================================================
-| Example | Command | Result
-|Create a group| `add_group n/SoC Friends` | Creates a group named `SoC Friends` and assigns a group ID, which is shown to the user.
-|Create a group and add members into that group| `add_group n/RC Friends m/1 m/2 m/3` |
-Creates a group named `RC Friends` and assigns a group ID and the given memberIDs to the group. Both are displayed
-to the user after creation.
-|=======================================================================
-// end::add_group[]
-// start::edit_group[]
-=== Edit Group: `edit_group`
-
-Edit a given person id with a given group id +
-Format: `edit_group <person-id> <name> <member_ids>`
-
-****
-* CoderLifeInsight will edit the group with given id to change the name to supplied name and change the list of members to the ones supplied.
-One parameter is required to edit the group.
-****
-
-Examples:
-
-[width="80%",cols="30%,<30%,<40%",options="header"]
-|=======================================================================
-| Example | Command | Result
-|Change name of 1st group|`edit_group 1 n/FOS` |Changes the name of the group with index 1 in CoderLifeInsights to `FOS` from whatever it was
-before. Name overwritten, memberIDs remain the same as before.
-|Edit the members in the 1st group| `edit_group 1 m/1 m/21` | Changes the members of the group with index 1 in CoderLifeInsights to `1 and 2` from whatever
-it was before. Member list overwritten, Name stays the same.
-|Change the name and members of the first group| `edit_group 1 n/new_name m/1` | Changes both the name and members of the group with index 1 in Coder Life Insights. Both values overwritten.
-|=======================================================================
-
-// end::edit_group[]
 // start::view[]
 === Insights: `view`
 
@@ -504,6 +281,220 @@ Coder Life Insights shows a table of places and the frequency of visits for the 
 |Get insights of places, time and activities | `view all` | Returns the output of 'view places', 'view time', and 'view activities', in that order.
 ****
 // end::view[]
+
+=== Locating persons by name: `find`
+
+Finds persons whose names contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Examples:
+
+[width="75%",cols="40%,<20%,<40%",options="header"]
+|=========================================================================
+| Example | Command | Result
+| Find all persons whose name contains John| `find John` | Returns `john` and `John Doe`
+| Find all persons whose name contains 'Betsy', 'Tim' or 'John'| `find Betsy Tim John` |Returns all persons having names `Betsy`, `Tim`, or `John`
+|=========================================================================
+
+// tag::import[]
+=== Import Life CSV: `import`
+
+Imports your existing Life CSV into the application +
+Format: `import l/LIFE_FILE_PATH g/GROUP_FILE_PATH e/EVENT_FILE_PATH`
+
+****
+* Imports your existing Life contacts into the application.
+* An existing CSV file exported from CoderLifeInsights must exist before import.
+* LIFE_FILE_PATH, GROUP_FILE_PATH and EVENT_FILE_PATH must match your existing file path.
+* ALL three parameters must be specified for successful import.
+****
+
+Examples:
+
+[width="75%",cols="40%,<20%,<40%",options="header"]
+|=========================================================================
+| Example | Command | Result
+| Import Life from file "life.csv", group data from "groups.csv" and event data from "events.csv"
+| `import l/life.csv +
+g/groups.csv +
+e/events.csv` |
+Imports your Life from `life.csv` , group data from `groups.csv` and event data from `events.csv`
+
+| Import Life from file "life.csv", "groups.csv" and "events.csv" at specific file path |
+`import l/C:\Users\User\Documents\life.csv + 
+g/C:\Users\User\Documents\groups.csv +
+e/C:\Users\User\Documents\events.csv` |
+Imports your Life from `C:\Users\Harry\Desktop\Documents\life.csv` +
+, your Group from `C:\Users\User\Documents\groups.csv` +
+and your Events from `C:\Users\User\Documents\events.csv`.
+|Import Life from file "life.csv", "groups.csv" and "events.csv"  at specific file path
+| `import l/./Desktop/life.csv +
+g/./Desktop/groups.csv +
+e/./Desktop/events.csv` |
+Imports your Life from `./Desktop/life.csv` +
+, your Group from `./Desktop/groups.csv` +
+and your Events from `./Desktop/events.csv`.
+|=========================================================================
+
+==== Retrieving File Path
+
+For Windows:
+
+* Navigate to the file where you saved CoderLifeInsights data files.
+* Click on the address bar of File Explorer window.
+* Refer to the diagram below for reference.
+
+.File path finding in Windows
+[#RetrievingFilePath, align="center"]
+image::windowsPathFinding.png[]
+
+[pdfwidth="50%",width="50%"]
+For Mac:
+* Navigate to the file where you saved CoderLifeInsights data files.
+* Right-click on the CSV File and select `Get info`.
+* Refer to the diagram below for reference.
+
+.File path finding in MacOS
+[#RetrievingFilePath, align="center"]
+image::macPathFinding.png[pdfwidth="50%",width="50%"]
+
+==== CSV File Constraints
+
+For `Life.csv`:
+
+Before using the `import` command with `Life.csv`, please ensure the following headers are present.
+
+* `name`
+* `phone`
+* `email`
+* `address`
+* `tagged`
+* `time`
+* `places`
+* `activities`
+
+Refer to image below for reference:
+
+.Example Life.csv format
+[#CSVFileConstraints, align="center"]
+image::lifeCSVFormat.png[pdfwidth="70%",width="70%"]
+
+====
+`Tags`, `Places` and `Activities` should be separated by a semi-colon.
+
+Example:
+
+* `friends;school-mate`
+* `Orchard;NUS`
+* `Gym;Rock-Climbing`
+====
+
+For `Groups.csv`:
+
+Before using the `import` command with `Groups.csv`, please ensure the following headers are present.
+
+* `name`
+* `groupId`
+* `timeSpent`
+* `memberIDs`
+* `eventIDs`
+* `places`
+* `activities`
+
+.Example Groups.csv format
+[#CSVFileConstraints, align="center"]
+image::eventCSVFormat.png[pdfwidth="70%",width="70%"]
+
+====
+`memberIDs`, `eventIDs` should be separated by a semi-colon.
+
+Example:
+
+* `1;2;3`
+* `5;6`
+====
+
+For `Events.csv`:
+
+Before using the `import` command with `Events.csv`, please ensure the following headers are present.
+
+* `eventId`
+* `activity`
+* `place`
+* `withPerson`
+* `withGroup`
+* `time`
+
+.Example Events.csv format
+[#CSVFileConstraints, align="center"]
+image::eventCSVFormat.png[pdfwidth="70%",width="70%"]
+// end::import[]
+
+
+// tag::export[]
+=== Export Life CSV: `export`
+
+Exports your existing Life into a CSV file. +
+Format: `export l/LIFE_FILE_NAME g/GROUP_FILE_NAME e/EVENT_FILE_NAME`
+
+****
+* Exports your existing Life contacts, group data and event data into 3 CSV files respectively.
+* Specify the file name you want to export for life, group and event data.
+* ALL three parameters must be specified for successful export.
+****
+
+Remarks:
+
+* On the very first run of CoderLifeInsights, this command is invalid as there is no saved data and CoderLifeInsights is using a sample data file to display sample contacts.
+Please proceed to add events, groups or persons before trying to export the information to the respective CSV files.
+
+Examples:
+
+[width="80%",cols="30%,<30%,<40%",options="header"]
+|=======================================================================
+| Example | Command | Result
+| Export current life, group and event data | `export l/life.csv g/groups.csv e/events.csv` |
+Exports your Life to `life.csv` +
+Exports your group data to `groups.csv` +
+Exports your event data to `events.csv`
+|=======================================================================
+// end::export[]
+
+=== Deleting an object : `delete`
+
+Deletes an entity, such as Person, Group, or Event from the CoderLifeInsights +
+Format: `delete_person ID` (for person) +
+`delete_group ID` (for group)
+//        `delete event ID` (for event)
+
+****
+* Deletes the person at the specified `INDEX`.
+The index refers to the index number shown in the displayed person list.
+The index *must be a positive integer* 1, 2, 3, ...
+Remarks: CoderLifeInsights uses 1-indexing.
+****
+
+Examples:
+
+[width="75%",cols="30%,<30%,<40%",options="header"]
+|=========================================================================
+|Example| Command | Result
+|Delete the 2nd person in the fully listed persons list|`list_persons` +
+`delete_person 2` | Deletes the 2nd person in CoderLifeInsights.
+|Delete the 2nd group in the fully listed groups list| `list_groups` +
+`delete_group 2` | Deletes the 2nd group in CoderLifeInsights.
+|Find a person and delete the person from the list returned|`find Betsy` +
+`delete_person 1` | Deletes the 1st person in the results of the `find` command.
+|=========================================================================
+
 === Clearing all entries : `clear`
 
 Clears all entries from the CoderLifeInsights. +
@@ -519,6 +510,22 @@ Format: `exit`
 CoderLifeInsights data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
+=== Getting a random person: `random` `[coming in v2.0]`
+
+Finds a random person from contacts saved in CoderLifeInsights. +
+Format: `random`
+
+****
+* No additional parameters required.
+* CoderLifeInsights will return the name of a random contact that is saved in CoderLifeInsights.
+* Selection of contact is completely random with no parameters used for selection.
+****
+
+Example:
+
+* `random` +
+Returns the name of a random person saved in CoderLifeInsights.
+
 // tag::dataencryption[]
 === Encrypting data files `[coming in v2.0]`
 
@@ -532,24 +539,73 @@ _{explain how the user can enable/disable data encryption}_
 
 === Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *Import* : `import FILE_PATH` +
-e.g. `import life.csv`
-* *Export* : `export FILE_NAME` +
-e.g. `export life.csv`
-* *Suggest* : `suggest SUGGESTION_PARAMETER` +
-e.g. `suggest person`
-* *Insight* : `view INSIGHT_PARAMETER` +
-e.g. `view 1 activities`
-* *List* : `list_LIST_PARAMETER` +
-e.g. `list_persons`
-* *Help* : `help`
-* *Random* : `random`
+[width="80%",cols="30%,<30%,<40%",options="header"]
+|=======================================================================
+| Feature | Usage | Example |
+*Add Person* | `add_person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` |
+`add_person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` |
+*List* | `list_LIST_PARAMETER` | `list_persons`|
+*Edit* | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`|
+`edit 1 p/91234567 e/johndoe@example.com`|
+*Add Group*| `add_group n/GROUP_NAME m/MEMBER_IDs`| `add_group n/SoC Friends` +
+
+`add_group n/RC Friends m/1 m/2 m/3`|
+
+*Edit Group* | `edit_group GROUP_ID n/GROUP_NAME m/MEMBER_IDs` |
+`edit_group 1 n/FOS` +
+
+`edit_group 1 m/1 m/5` +
+
+`edit_group 1 n/new_name m/1` |
+*Add Event* |`add_event ACTIVITY_NAME place/PLACE_NAME time/TIME m/INDEX` +
+
+or +
+
+`add_event ACTIVITY_NAME place/PLACE_NAME time/TIME g/INDEX`|
+`list_persons` +
+
+`add_event Date Night place/MBS time/300 m/2` +
+
+or +
+
+`list_groups` +
+
+`add_event Dancing lessons place/Changi Country Club time/130 g/1` |
+*Suggest* | `suggest SUGGESTION_PARAMETER` |  `suggest person` +
+
+`suggest place` +
+
+`suggest activity`|
+
+
+*View* | `view INSIGHT_PARAMETER` | `view 1 places`+
+
+`view time`+
+
+`view recent`+
+
+`view all`|
+*Find* | `find KEYWORD [MORE_KEYWORDS]` |  `find John` |
+*Import* | `import l/LIFE_FILE_PATH g/GROUP_FILE_PATH e/EVENT_FILE_PATH` |
+`import l/life.csv
+ g/groups.csv
+ e/events.csv`|
+*Export* | `export l/LIFE_FILE_NAME g/GROUP_FILE_NAME e/EVENT_FILE_NAME` |
+`export l/life.csv g/groups.csv e/events.csv` |
+*Delete* | `delete_person ID`
+
+or +
+
+`delete_group ID`| `list_persons` +
+
+`delete_person 2` +
+
+or +
+
+`list_groups` +
+
+`delete_group 2`|
+
+*Clear* | `clear`||
+*Exit* | `exit`||
+****
