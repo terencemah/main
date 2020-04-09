@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertFalse;
-//import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -11,13 +11,12 @@ import static seedu.address.testutil.TypicalPersons.CARL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import seedu.address.commons.core.LogsCenter;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -28,7 +27,6 @@ import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.ModelStub;
 
 public class AddGroupCommandTest {
-    private static final Logger logger = LogsCenter.getLogger(AddGroupCommandTest.class);
 
     @Test
     public void constructor_nullGroup_throwsNullGroupPointer() {
@@ -57,6 +55,30 @@ public class AddGroupCommandTest {
         assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP, (
 
         ) -> addGroupCommand.execute(modelStub));
+    }
+
+    @Test
+    public void equals() {
+        Group soc = new GroupBuilder().build();
+        Group rc = new GroupBuilder().withName("RC Friends").build();
+        AddGroupCommand addSoCCommand = new AddGroupCommand(soc);
+        AddGroupCommand addRcCommand = new AddGroupCommand(rc);
+
+        //same object so should be true
+        assertTrue(addSoCCommand.equals(addSoCCommand));
+
+        //same values so should be true
+        AddGroupCommand addSoCCopy = new AddGroupCommand(soc);
+        assertTrue(addSoCCopy.equals(addSoCCommand));
+
+        //differeny types so should false
+        assertFalse(addSoCCommand.equals("sample text"));
+
+        //equality with null should be false
+        assertFalse(addRcCommand.equals(null));
+
+        // different groups should be false
+        assertFalse(addRcCommand.equals(addSoCCommand));
     }
 
     private class ModelStubWithGroup extends ModelStub {

@@ -83,4 +83,18 @@ public class AddGroupCommand extends Command {
         model.addGroup(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), ViewType.GROUPS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AddGroupCommand)) {
+            return false;
+        }
+
+        AddGroupCommand otherCommand = (AddGroupCommand) other;
+        return this.toAdd.equals(otherCommand.toAdd);
+    }
 }
