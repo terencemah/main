@@ -13,11 +13,11 @@ public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports application Life to CSV File specified. "
-            + "Parameters: "
-            + "g/GROUP_FILE_PATH"
-            + " or l/LIFE_FILE_PATH"
-            + " or e/EVENT_FILE_PATH.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports application Life to CSV File specified. \n"
+            + "All 3 parameters must be included for successful import: \n"
+            + "l/LIFE_FILE_PATH \n"
+            + "g/GROUP_FILE_PATH \n"
+            + "e/EVENT_FILE_PATH.";
 
     public static final String MESSAGE_SUCCESS = "Files exported:"
             + "\n"

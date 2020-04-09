@@ -98,7 +98,7 @@ include::../UserGuide.adoc[tag=addEvent]
 == Contributions to the Developer Guide
 
 |===
-|_Shwon below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_Shown below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
 include::../DeveloperGuide.adoc[tag=addEvent]

@@ -29,7 +29,9 @@ public class SuggestCommand extends Command {
                     + COMMAND_WORD
                     + "person";
 
-    public static final String MESSAGE_SUCCESS = "Suggestion provided.";
+    public static final String MESSAGE_PERSON_SUGGEST_SUCCESS = "Person suggestion provided.";
+    public static final String MESSAGE_ACTIVITY_SUGGEST_SUCCESS = "Activity suggestion provided.";
+    public static final String MESSAGE_PLACE_SUGGEST_SUCCESS = "Place suggestion provided.";
     public static final String MESSAGE_INVALID_PARAMETER = "The entered parameter is invalid.\n";
 
 
@@ -47,15 +49,17 @@ public class SuggestCommand extends Command {
 
         case KEYWORD_PERSON:
             model.suggestPerson();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, suggestParameter));
+            return new CommandResult(String.format(MESSAGE_PERSON_SUGGEST_SUCCESS, suggestParameter));
 
         case KEYWORD_ACTIVITY:
             model.suggestActivity();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, suggestParameter));
+            return new CommandResult(String.format(MESSAGE_ACTIVITY_SUGGEST_SUCCESS, suggestParameter),
+                    ViewType.SUGGEST_ACTIVITY);
 
         case KEYWORD_PLACE:
             model.suggestPlace();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, suggestParameter));
+            return new CommandResult(String.format(MESSAGE_PLACE_SUGGEST_SUCCESS, suggestParameter),
+                    ViewType.SUGGEST_PLACE);
 
         default:
             throw new CommandException(MESSAGE_INVALID_PARAMETER);

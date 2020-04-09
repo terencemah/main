@@ -25,8 +25,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LIFE, PREFIX_GROUP, PREFIX_EVENT);
 
-        if ((!arePrefixesPresent(argMultimap, PREFIX_LIFE) && !arePrefixesPresent(argMultimap, PREFIX_GROUP)
-                && !arePrefixesPresent(argMultimap, PREFIX_EVENT))
+        if ((!arePrefixesPresent(argMultimap, PREFIX_LIFE, PREFIX_GROUP, PREFIX_EVENT))
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));

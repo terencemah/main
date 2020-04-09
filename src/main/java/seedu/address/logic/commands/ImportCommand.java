@@ -20,11 +20,11 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_USAGE =
             COMMAND_WORD
-                    + ": Imports application csv to the CoderLifeInsights. "
-                    + "Parameters: "
-                    + "g/GROUP_FILE_PATH"
-                    + " or l/LIFE_FILE_PATH"
-                    + " or e/EVENT_FILE_PATH.";
+                    + ": Imports application csv to the CoderLifeInsights. \n"
+                    + "All 3 parameters must be included for successful import: \n"
+                    + "l/LIFE_FILE_PATH \n"
+                    + "g/GROUP_FILE_PATH \n"
+                    + "e/EVENT_FILE_PATH.";
 
     public static final String MESSAGE_SUCCESS = "Files imported:"
             + "\n"
