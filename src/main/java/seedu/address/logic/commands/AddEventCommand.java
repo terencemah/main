@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -128,6 +129,9 @@ public class AddEventCommand extends Command {
             Group editedGroup = new Group(toEdit.getName(), newPlaceList, newActivityList);
             editedGroup.setTimeSpent(newTime);
             editedGroup.setMemberIDs(toEdit.getMembers());
+            ArrayList<Integer> events = toEdit.getEvents();
+            events.add(toAdd.getEventId());
+            editedGroup.setEventIDs(events);
             model.setGroup(toEdit, editedGroup);
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             model.addEvent(toAdd);
