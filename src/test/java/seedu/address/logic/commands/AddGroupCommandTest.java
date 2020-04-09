@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.Group;
@@ -44,6 +45,18 @@ public class AddGroupCommandTest {
         assertEquals(String.format(AddGroupCommand.MESSAGE_SUCCESS, validGroup), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validGroup), modelStub.groupsAdded);
 
+    }
+
+    @Test
+    public void execute_duplicateGroup_throwsCommandException() throws Exception {
+        Group validGroup = new GroupBuilder().build();
+        validGroup.setMemberIDs(new ArrayList<>(Arrays.asList(1, 2, 3)));
+        AddGroupCommand addGroupCommand = new AddGroupCommand(validGroup);
+        ModelStub modelStub = new ModelStubWithGroup(validGroup);
+
+        assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP, (
+
+        ) -> addGroupCommand.execute(modelStub));
     }
 
     private class ModelStubWithGroup extends ModelStub {
