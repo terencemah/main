@@ -49,7 +49,9 @@ public class RecentEvent {
         return time;
     }
 
-    public StringProperty eventIdProperty() { return eventId; }
+    public StringProperty eventIdProperty() {
+        return eventId;
+    }
 
     @Override
     public boolean equals(Object o) {

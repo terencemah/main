@@ -25,12 +25,16 @@ public class RecentEventList {
         int size = pl.getPlaceList().size();
         if (size < NUM_EVENTS) {
             for (int i = size - 1; i >= 0; i--) {
-                recentEventList.add(new RecentEvent(Integer.toString(i +1), pl.getPlaceList().get(i), al.getActivityList().get(i),
+                recentEventList.add(new RecentEvent(
+                        Integer.toString(i + 1),
+                        pl.getPlaceList().get(i), al.getActivityList().get(i),
                         tl.getTimeList().get(i)));
             }
         } else {
             for (int i = 0; i < NUM_EVENTS; i++) {
-                recentEventList.add(new RecentEvent(Integer.toString(i +1), pl.getPlaceList().get(size - 1 - i),
+                recentEventList.add(new RecentEvent(
+                        Integer.toString(i + 1),
+                        pl.getPlaceList().get(size - 1 - i),
                         al.getActivityList().get(size - 1 - i), tl.getTimeList().get(size - 1 - i)));
             }
         }

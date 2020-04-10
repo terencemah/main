@@ -51,7 +51,6 @@ public class GroupCard extends UiPart<Region> {
                 .getEvents()
                 .stream()
                 .forEach(event -> events.getChildren().add(new Label(event.toString())));
-//        events.setText(group.printEventIds());
     }
 
     @Override

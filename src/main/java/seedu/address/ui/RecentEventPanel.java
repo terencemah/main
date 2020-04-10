@@ -29,7 +29,7 @@ public class RecentEventPanel extends UiPart<Region> {
 
     @FXML
     private TableColumn<RecentEvent, String> timeColumn;
-    
+
     @FXML
     private TableColumn<RecentEvent, String> eventId;
 

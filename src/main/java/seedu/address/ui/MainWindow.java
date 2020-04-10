@@ -208,8 +208,8 @@ public class MainWindow extends UiPart<Stage> {
         timePieChartPanelPlaceholder.getChildren().clear();
         timePieChartPanelPlaceholder.getChildren().add(recentEventPanel.getRoot());
     }
-    
-    private void handleViewAll(){
+
+    private void handleViewAll() {
         allEventPanel = new AllEventPanel(logic.getRecentList());
         timePieChartPanelPlaceholder.getChildren().clear();
         timePieChartPanelPlaceholder.getChildren().add(allEventPanel.getRoot());

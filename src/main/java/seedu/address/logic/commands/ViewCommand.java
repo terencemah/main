@@ -119,22 +119,22 @@ public class ViewCommand extends Command {
 
         switch (parameter) {
 
-            case KEYWORD_PLACE:
-                model.showPlaceList(personToView);
-                message = MESSAGE_PLACE + personToView.getName() + ".";
-                vt = ViewType.PLACES;
-                break;
+        case KEYWORD_PLACE:
+            model.showPlaceList(personToView);
+            message = MESSAGE_PLACE + personToView.getName() + ".";
+            vt = ViewType.PLACES;
+            break;
 
-            case KEYWORD_ACTIVITY:
-                model.showActivityList(personToView);
-                message = MESSAGE_ACTIVITY + personToView.getName() + ".";
-                vt = ViewType.ACTIVITIES;
-                break;
+        case KEYWORD_ACTIVITY:
+            model.showActivityList(personToView);
+            message = MESSAGE_ACTIVITY + personToView.getName() + ".";
+            vt = ViewType.ACTIVITIES;
+            break;
 
-            default:
-                model.showRecentList(personToView);
-                message = MESSAGE_RECENT_PERSON + personToView.getName() + ".";
-                vt = ViewType.RECENT;
+        default:
+            model.showRecentList(personToView);
+            message = MESSAGE_RECENT_PERSON + personToView.getName() + ".";
+            vt = ViewType.RECENT;
         }
 
 
