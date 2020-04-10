@@ -94,4 +94,15 @@ public class EditGroupCommandTest {
         assertCommandFailure(editGroupCommand, model, EditGroupCommand.MESSAGE_DUPLICATE_GROUP);
     }
 
+    @Test
+    public void execute_duplicateGroupFilteredList_failure() {
+        showGroupAtIndex(model, Index.fromOneBased(1));
+
+        Group group = model.getAddressBook().getGroupList().get(1);
+        EditGroupCommand editGroupCommand = new EditGroupCommand(
+                Index.fromOneBased(1), new EditGroupDescriptorBuilder(group).build());
+
+        assertCommandFailure(editGroupCommand, model, EditGroupCommand.MESSAGE_DUPLICATE_GROUP);
+    }
+
 }
