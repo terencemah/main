@@ -2,11 +2,14 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-//import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PATH;
-//import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
+import static seedu.address.testutil.TypicalGroups.getTypicalGroups;
 
-import org.junit.jupiter.api.BeforeEach;
+import java.nio.file.Paths;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -14,14 +17,15 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 public class ImportCommandTest {
+    private static final String TEST_LIFE_CSV = Paths.get("src", "test",
+            "data", "CsvFilesTest", "life.csv").toString();
+    private static final String TEST_GROUP_CSV = Paths.get("src", "test",
+            "data", "CsvFilesTest", "group.csv").toString();
+    private static final String TEST_EVENT_CSV = Paths.get("src", "test",
+            "data", "CsvFilesTest", "event.csv").toString();
 
-    private Model model;
-
-    @BeforeEach
-    public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-    }
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -44,13 +48,5 @@ public class ImportCommandTest {
         // different file -> returns false
         assertFalse(firstImportCommand.equals(secondImportCommand));
     }
-
-    //    @Test
-    //    public void execute_importFile_notFound() {
-    //        String emptyFilePath = "";
-    //        ImportCommand importCommand = new ImportCommand(emptyFilePath, emptyFilePath, emptyFilePath);
-    //        String expectedMessage = MESSAGE_INVALID_PATH;
-    //        assertCommandFailure(importCommand, model, expectedMessage);
-    //    }
-
+    
 }

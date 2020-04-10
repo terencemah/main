@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PATH;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -20,7 +22,7 @@ public class ImportCommandParserTest {
     private ImportCommandParser parser = new ImportCommandParser();
 
     @Test
-    public void parse_emptyArg_throwsParseException() {
+    public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(
                 parser, "some invalid string",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
@@ -37,6 +39,13 @@ public class ImportCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n l/" + TEST_LIFE_CSV
                 + " \n \t g/" + TEST_GROUP_CSV + " \n \t e/" + TEST_EVENT_CSV + "\t", expectedImportCommand);
+    }
+
+    @Test
+    public void parse_emptyFilePath_throwsParseException() {
+        assertParseFailure(
+                parser, " l/ " + " g/ " + " e/ ",
+                String.format(ParserUtil.MESSAGE_INVALID_PATH + "\n" + ImportCommand.MESSAGE_USAGE));
     }
 
 }

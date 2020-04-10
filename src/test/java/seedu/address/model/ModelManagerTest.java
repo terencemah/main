@@ -163,6 +163,18 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void importCsvGroupsToAddressBook_nullList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.importCsvGroupsToAddressBook(null));
+    }
+
+    @Test
+    public void importCsvEventsToAddressBook_nullList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.importCsvEventsToAddressBook(null));
+    }
+    
+    
+
+    @Test
     public void showPlaceList_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.showPlaceList(null));
     }
