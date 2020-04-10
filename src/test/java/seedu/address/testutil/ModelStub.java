@@ -228,4 +228,14 @@ public class ModelStub implements Model {
     public ObservableList<Time> getTimeList() {
         throw new AssertionError("This method should not be called.");
     }
+
+    @Override
+    public void showGroupActivityList(Group groupToView) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void showGroupPlaceList(Group groupToView) {
+        throw new AssertionError("This method should not be called.");
+    }
 }

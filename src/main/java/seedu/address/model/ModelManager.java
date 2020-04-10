@@ -284,6 +284,14 @@ public class ModelManager implements Model {
         copyRecent(target.getRecentEventList());
     }
 
+    public void showGroupPlaceList(Group target) {
+        copyList(target.getPlaceList2());
+    }
+
+    public void showGroupActivityList(Group target) {
+        copyList(target.getActivityList2());
+    }
+
     /**
      * Copies the active PlaceList or ActivityList onto the Model's Frequency List.
      *

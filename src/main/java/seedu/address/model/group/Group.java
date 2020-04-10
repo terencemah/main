@@ -3,7 +3,10 @@ package seedu.address.model.group;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.person.ActivityList;
+import seedu.address.model.person.EventDescriptor;
+import seedu.address.model.person.FrequencyList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
@@ -19,6 +22,8 @@ public class Group {
     private ArrayList<Integer> eventIDs;
     private final ActivityList activityList = new ActivityList(new ArrayList<>());
     private final PlaceList placeList = new PlaceList(new ArrayList<>());
+    private final FrequencyList activityList2;
+    private final FrequencyList placeList2;
 
     public Group(Name name, PlaceList placeList, ActivityList activityList) {
         this.name = name;
@@ -27,6 +32,10 @@ public class Group {
         this.timeSpent = new Time(0, 0);
         this.placeList.setPlaceList(placeList.getPlaceList());
         this.activityList.setActivityList(activityList.getActivityList());
+        activityList2 = new FrequencyList();
+        activityList2.generate(this.activityList.getActivityList());
+        placeList2 = new FrequencyList();
+        placeList2.generate(this.placeList.getPlaceList());
     }
 
     public Name getName() {
@@ -138,4 +147,13 @@ public class Group {
                     + printMemberList();
         }
     }
+
+    public ObservableList<EventDescriptor> getPlaceList2() {
+        return placeList2.getFrequencyList();
+    }
+
+    public ObservableList<EventDescriptor> getActivityList2() {
+        return activityList2.getFrequencyList();
+    }
+
 }
