@@ -24,7 +24,7 @@ public class DeleteGroupCommand extends Command {
                     + COMMAND_WORD
                     + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Group: %1$s";
+    public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Deleted Group: %1$s";
 
     private final Index targetIndex;
 
@@ -43,7 +43,7 @@ public class DeleteGroupCommand extends Command {
 
         Group groupToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteGroup(groupToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, groupToDelete), ViewType.GROUPS);
+        return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete));
     }
 
     @Override
