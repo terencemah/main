@@ -19,7 +19,7 @@ import seedu.address.model.group.Group;
 public class DeleteGroupCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
+    private Index targetIndex = Index.fromOneBased(1);
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Group groupToDelete = model.getFilteredGroupList().get(0);
@@ -40,7 +40,6 @@ public class DeleteGroupCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        Index targetIndex = Index.fromOneBased(1);
         showGroupAtIndex(model, targetIndex);
 
         Group groupToDelete = model.getFilteredGroupList().get(targetIndex.getZeroBased());
@@ -55,7 +54,14 @@ public class DeleteGroupCommandTest {
         assertCommandSuccess(deleteGroupCommand, model, expectedMessage, expectedModel);
     }
 
-    
+    @Test
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
+        showGroupAtIndex(model, targetIndex);
+        Index outOfBounds = Index.fromOneBased(2);
+        assertTrue(outOfBounds.getZeroBased() < model.getAddressBook().getGroupList().size());
+        DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(outOfBounds);
+        assertCommandFailure(deleteGroupCommand, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+    }
 
 
     @Test
