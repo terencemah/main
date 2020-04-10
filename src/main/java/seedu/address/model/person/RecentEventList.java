@@ -16,6 +16,7 @@ public class RecentEventList {
     /**
      * This method generates the list of the 5 most recent events
      * with the target person, from their PlaceList and ActivityList.
+     *
      * @param pl The target person's PlaceList.
      * @param al The target person's ActivityList.
      */
@@ -24,12 +25,16 @@ public class RecentEventList {
         int size = pl.getPlaceList().size();
         if (size < NUM_EVENTS) {
             for (int i = size - 1; i >= 0; i--) {
-                recentEventList.add(new RecentEvent(pl.getPlaceList().get(i), al.getActivityList().get(i),
+                recentEventList.add(new RecentEvent(
+                        Integer.toString(i + 1),
+                        pl.getPlaceList().get(i), al.getActivityList().get(i),
                         tl.getTimeList().get(i)));
             }
         } else {
             for (int i = 0; i < NUM_EVENTS; i++) {
-                recentEventList.add(new RecentEvent(pl.getPlaceList().get(size - 1 - i),
+                recentEventList.add(new RecentEvent(
+                        Integer.toString(i + 1),
+                        pl.getPlaceList().get(size - 1 - i),
                         al.getActivityList().get(size - 1 - i), tl.getTimeList().get(size - 1 - i)));
             }
         }

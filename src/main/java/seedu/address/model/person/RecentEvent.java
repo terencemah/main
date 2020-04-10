@@ -9,14 +9,20 @@ import javafx.beans.property.StringProperty;
  */
 public class RecentEvent {
 
+    private final StringProperty eventId;
     private final StringProperty place;
     private final StringProperty activity;
     private final StringProperty time;
 
-    public RecentEvent(String place, String activity, String time) {
+    public RecentEvent(String eventId, String place, String activity, String time) {
+        this.eventId = new SimpleStringProperty(eventId);
         this.place = new SimpleStringProperty(place);
         this.activity = new SimpleStringProperty(activity);
         this.time = new SimpleStringProperty(time);
+    }
+
+    public String getEventId() {
+        return eventId.get();
     }
 
     public String getPlace() {
@@ -41,6 +47,10 @@ public class RecentEvent {
 
     public StringProperty timeProperty() {
         return time;
+    }
+
+    public StringProperty eventIdProperty() {
+        return eventId;
     }
 
     @Override
