@@ -17,6 +17,9 @@ public class EditGroupDescriptorBuilder {
         this.descriptor = new EditGroupDescriptor(descriptor);
     }
 
+    public EditGroupDescriptorBuilder() {
+        this.descriptor = new EditGroupDescriptor();
+    }
     /**
      * Creates a {@code EditGroupDescriptor} based on {@code Group} instance provided.
      * @param group

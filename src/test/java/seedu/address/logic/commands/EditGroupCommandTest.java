@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showGroupAtIndex;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -64,6 +65,22 @@ public class EditGroupCommandTest {
         String expectedMessage = String.format(EditGroupCommand.MESSAGE_EDIT_GROUP_SUCCESS, editedGroup);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        assertCommandSuccess(editGroupCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_filteredList_success() {
+        showGroupAtIndex(model, Index.fromOneBased(1));
+
+        Group secondGroup = model.getFilteredGroupList().get(0);
+        editedGroup.setName(new Name("CS2103"));
+
+        EditGroupCommand editGroupCommand = new EditGroupCommand(Index.fromOneBased(1),
+                new EditGroupDescriptorBuilder().withName("CS2103").build());
+
+        String expectedMessage = String.format(EditGroupCommand.MESSAGE_EDIT_GROUP_SUCCESS, editedGroup);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setGroup(secondGroup, editedGroup);
         assertCommandSuccess(editGroupCommand, model, expectedMessage, expectedModel);
     }
 
