@@ -40,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private TimePieChart timePieChart;
+    private AllEventPanel allEventPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -208,6 +209,12 @@ public class MainWindow extends UiPart<Stage> {
         timePieChartPanelPlaceholder.getChildren().add(recentEventPanel.getRoot());
     }
 
+    private void handleViewAll() {
+        allEventPanel = new AllEventPanel(logic.getRecentList());
+        timePieChartPanelPlaceholder.getChildren().clear();
+        timePieChartPanelPlaceholder.getChildren().add(allEventPanel.getRoot());
+    }
+
     /**
      * Displays pie chart
      */
@@ -295,7 +302,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleViewRecent();
                 break;
             case ALL:
-                handleViewRecent();
+                handleViewAll();
                 break;
             case GROUPS:
                 handleGroup();

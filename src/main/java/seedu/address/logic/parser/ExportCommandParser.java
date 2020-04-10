@@ -46,8 +46,7 @@ public class ExportCommandParser implements Parser<ExportCommand> {
             }
             return new ExportCommand(lifePath, groupPath, eventPath);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(ParserUtil.MESSAGE_FILE_ALREADY_EXIST, ExportCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(pe.getMessage() + "\n" + ExportCommand.MESSAGE_USAGE));
         } catch (IOException io) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE), io);

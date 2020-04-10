@@ -539,7 +539,7 @@ _{explain how the user can enable/disable data encryption}_
 
 === Command Summary
 
-[width="80%",cols="30%,<30%,<40%",options="header"]
+[width="90%",cols="30%,<30%,<40%",options="header"]
 |=======================================================================
 | Feature | Usage | Example |
 *Add Person* | `add_person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` |
@@ -578,11 +578,11 @@ or +
 `suggest activity`|
 
 
-*View* | `view INSIGHT_PARAMETER` | `view 1 places`+
+*View* | `view INSIGHT_PARAMETER` | `view 1 places` +
 
-`view time`+
+`view time` +
 
-`view recent`+
+`view recent` +
 
 `view all`|
 *Find* | `find KEYWORD [MORE_KEYWORDS]` |  `find John` |
@@ -607,6 +607,6 @@ or +
 `delete_group 2`|
 
 *Clear* | `clear`||
-*Exit* | `exit`
+*Exit* | `exit`||
 
 ****
