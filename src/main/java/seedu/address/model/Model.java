@@ -153,4 +153,8 @@ public interface Model {
     ObservableList<RecentEvent> getRecentList();
 
     ObservableList<Time> getTimeList();
+
+    void showGroupPlaceList(Group groupToView);
+
+    void showGroupActivityList(Group groupToView);
 }
