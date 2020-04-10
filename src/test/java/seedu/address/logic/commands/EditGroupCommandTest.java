@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showGroupAtIndex;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBook;
@@ -82,6 +83,15 @@ public class EditGroupCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setGroup(secondGroup, editedGroup);
         assertCommandSuccess(editGroupCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_duplicateGroupUnfilteredList_failure() {
+        Group firstGroup = model.getFilteredGroupList().get(0);
+        EditGroupDescriptor descriptor = new EditGroupDescriptorBuilder(firstGroup).build();
+        EditGroupCommand editGroupCommand = new EditGroupCommand(Index.fromOneBased(2), descriptor);
+
+        assertCommandFailure(editGroupCommand, model, EditGroupCommand.MESSAGE_DUPLICATE_GROUP);
     }
 
 }
