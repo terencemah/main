@@ -176,6 +176,35 @@ public class EditGroupCommand extends Command {
             return (memberIds != null) ? Optional.of(memberIds) : Optional.empty();
         }
 
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+
+            if (!(other instanceof EditGroupDescriptor)) {
+                return false;
+            }
+
+            EditGroupDescriptor e = (EditGroupDescriptor) other;
+
+            return getName().equals(e.getName()) && getMemberIds().equals(e.getMemberIds());
+        }
+
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof EditGroupCommand)) {
+            return false;
+        }
+
+        EditGroupCommand e = (EditGroupCommand) other;
+        return index.equals(e.index) && editGroupDescriptor.equals(e.editGroupDescriptor);
     }
 
 }

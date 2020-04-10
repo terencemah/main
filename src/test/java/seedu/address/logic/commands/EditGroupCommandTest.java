@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -127,5 +128,34 @@ public class EditGroupCommandTest {
                 new EditGroupDescriptorBuilder().withName("any name").build());
 
         assertCommandFailure(editGroupCommand, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+
+        EditGroupDescriptor copyDescriptor = new EditGroupDescriptorBuilder().withName("sample")
+                .withMemberIds(new ArrayList<>(Arrays.asList(1, 2, 3))).build();
+
+        final EditGroupCommand editGroupCommand = new EditGroupCommand(Index.fromOneBased(1), copyDescriptor);
+
+        //same values -> true
+        EditGroupCommand copy = new EditGroupCommand(Index.fromOneBased(1), copyDescriptor);
+        assertTrue(editGroupCommand.equals(copy));
+
+        //same object -> true
+        assertTrue(editGroupCommand.equals(editGroupCommand));
+
+        //null -> false
+        assertFalse(editGroupCommand.equals(null));
+
+        //other types -> false
+        assertFalse(editGroupCommand.equals(1));
+
+        //different index -> false
+        assertFalse(editGroupCommand.equals(new EditGroupCommand(Index.fromOneBased(2), copyDescriptor)));
+
+        //different descriptor -> false
+        assertFalse(editGroupCommand.equals(new EditGroupCommand(Index.fromOneBased(1),
+                new EditGroupDescriptorBuilder().withName("another name").build())));
     }
 }
