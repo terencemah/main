@@ -80,17 +80,20 @@ public class EditGroupCommand extends Command {
 
         //check if member indexes are valid
         List<Person> lastPersonList = model.getFilteredPersonList();
-        ArrayList<Integer> members = editGroupDescriptor.getMemberIds().get();
-        Set<Integer> set = new HashSet<>(members);
 
-        if (set.size() < members.size()) {
-            throw new CommandException(MESSAGE_DUPLICATE_MEMBERS);
-        }
+        if (editGroupDescriptor.getMemberIds().isPresent()) {
+            ArrayList<Integer> members = editGroupDescriptor.getMemberIds().get();
+            Set<Integer> set = new HashSet<>(members);
 
-        for (int i = 0; i < members.size(); i++) {
-            int currIndex = members.get(i);
-            if (currIndex > lastPersonList.size() || currIndex <= 0) {
-                throw new CommandException(MESSAGE_PERSON_DOES_NOT_EXIST);
+            if (set.size() < members.size()) {
+                throw new CommandException(MESSAGE_DUPLICATE_MEMBERS);
+            }
+
+            for (int i = 0; i < members.size(); i++) {
+                int currIndex = members.get(i);
+                if (currIndex > lastPersonList.size() || currIndex <= 0) {
+                    throw new CommandException(MESSAGE_PERSON_DOES_NOT_EXIST);
+                }
             }
         }
 
@@ -102,7 +105,7 @@ public class EditGroupCommand extends Command {
 
         model.setGroup(groupToEdit, editedGroup);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
-        return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup), ViewType.GROUPS);
+        return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup));
     }
 
     /**
@@ -173,6 +176,35 @@ public class EditGroupCommand extends Command {
             return (memberIds != null) ? Optional.of(memberIds) : Optional.empty();
         }
 
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+
+            if (!(other instanceof EditGroupDescriptor)) {
+                return false;
+            }
+
+            EditGroupDescriptor e = (EditGroupDescriptor) other;
+
+            return getName().equals(e.getName()) && getMemberIds().equals(e.getMemberIds());
+        }
+
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof EditGroupCommand)) {
+            return false;
+        }
+
+        EditGroupCommand e = (EditGroupCommand) other;
+        return index.equals(e.index) && editGroupDescriptor.equals(e.editGroupDescriptor);
     }
 
 }

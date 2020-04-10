@@ -33,6 +33,10 @@ public class Group {
         return this.name;
     }
 
+    public void setName(Name name) {
+        this.name = name;
+    }
+
     public Time getTimeSpent() {
         return this.timeSpent;
     }
