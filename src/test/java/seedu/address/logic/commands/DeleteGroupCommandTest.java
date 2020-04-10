@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showGroupAtIndex;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ public class DeleteGroupCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Group groupToDelete = model.getFilteredGroupList().get(0);
         DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(Index.fromOneBased(1));
-        String expectedMessage = String.format(DeleteGroupCommand.MESSAGE_DELETE_PERSON_SUCCESS, groupToDelete);
+        String expectedMessage = String.format(DeleteGroupCommand.MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteGroup(groupToDelete);
         assertCommandSuccess(deleteGroupCommand, model, expectedMessage, expectedModel);
@@ -38,9 +39,23 @@ public class DeleteGroupCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_success() {
-        showGRou
+    public void execute_validIndexFilteredList_success() {
+        Index targetIndex = Index.fromOneBased(1);
+        showGroupAtIndex(model, targetIndex);
+
+        Group groupToDelete = model.getFilteredGroupList().get(targetIndex.getZeroBased());
+        DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(targetIndex);
+
+        String expectedMessage = String.format(DeleteGroupCommand.MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deleteGroup(groupToDelete);
+        showNoGroup(expectedModel);
+
+        assertCommandSuccess(deleteGroupCommand, model, expectedMessage, expectedModel);
     }
+
+    
 
 
     @Test

@@ -7,10 +7,10 @@ import seedu.address.commons.util.StringUtil;
 /**
  * Checks if a {@code Group}'s {@code Name} matches any of the given keywords.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Group> {
+public class GroupNameContainsKeywordsPredicate implements Predicate<Group> {
     private final List<String> keywords;
 
-    public NameContainsKeywordsPredicate(List<String> keywords) {
+    public GroupNameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -26,11 +26,11 @@ public class NameContainsKeywordsPredicate implements Predicate<Group> {
             return true;
         }
 
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof GroupNameContainsKeywordsPredicate)) {
             return false;
         }
 
-        NameContainsKeywordsPredicate nameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
+        GroupNameContainsKeywordsPredicate nameContainsKeywordsPredicate = (GroupNameContainsKeywordsPredicate) other;
         return this.keywords.equals(nameContainsKeywordsPredicate.keywords);
     }
 }
