@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showGroupAtIndex;
@@ -10,6 +11,7 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditGroupCommand.EditGroupDescriptor;
 import seedu.address.model.AddressBook;
@@ -105,4 +107,25 @@ public class EditGroupCommandTest {
         assertCommandFailure(editGroupCommand, model, EditGroupCommand.MESSAGE_DUPLICATE_GROUP);
     }
 
+    @Test
+    public void execute_invalidGroupIndexUnfilteredList_failure() {
+        Index outOfBounds = Index.fromOneBased(model.getFilteredGroupList().size() + 1);
+        EditGroupDescriptor descriptor = new EditGroupDescriptorBuilder().withName("Any name").build();
+        EditGroupCommand editGroupCommand = new EditGroupCommand(outOfBounds, descriptor);
+
+        assertCommandFailure(editGroupCommand, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidGroupIndexFilteredList_failure() {
+        showGroupAtIndex(model, Index.fromOneBased(1));
+        Index outOfBounds = Index.fromOneBased(2);
+
+        assertTrue(outOfBounds.getZeroBased() < model.getAddressBook().getGroupList().size());
+
+        EditGroupCommand editGroupCommand = new EditGroupCommand(outOfBounds,
+                new EditGroupDescriptorBuilder().withName("any name").build());
+
+        assertCommandFailure(editGroupCommand, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+    }
 }
