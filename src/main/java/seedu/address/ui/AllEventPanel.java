@@ -14,8 +14,8 @@ import seedu.address.model.person.RecentEvent;
  * Panel showing the last 5 events with the target person
  * in reverse chronological order of event addition.
  */
-public class RecentEventPanel extends UiPart<Region> {
-    private static final String FXML = "RecentEventPanel.fxml";
+public class AllEventPanel extends UiPart<Region> {
+    private static final String FXML = "AllEventPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PlaceListPanel.class);
 
     @FXML
@@ -29,11 +29,11 @@ public class RecentEventPanel extends UiPart<Region> {
 
     @FXML
     private TableColumn<RecentEvent, String> timeColumn;
-    
+
     @FXML
     private TableColumn<RecentEvent, String> eventId;
 
-    public RecentEventPanel(ObservableList<RecentEvent> list) {
+    public AllEventPanel(ObservableList<RecentEvent> list) {
         super(FXML);
         eventId.setCellValueFactory(cellData-> cellData.getValue().eventIdProperty());
         placeColumn.setCellValueFactory(cellData -> cellData.getValue().placeProperty());
