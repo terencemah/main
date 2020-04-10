@@ -80,17 +80,20 @@ public class EditGroupCommand extends Command {
 
         //check if member indexes are valid
         List<Person> lastPersonList = model.getFilteredPersonList();
-        ArrayList<Integer> members = editGroupDescriptor.getMemberIds().get();
-        Set<Integer> set = new HashSet<>(members);
 
-        if (set.size() < members.size()) {
-            throw new CommandException(MESSAGE_DUPLICATE_MEMBERS);
-        }
+        if (editGroupDescriptor.getMemberIds().isPresent()) {
+            ArrayList<Integer> members = editGroupDescriptor.getMemberIds().get();
+            Set<Integer> set = new HashSet<>(members);
 
-        for (int i = 0; i < members.size(); i++) {
-            int currIndex = members.get(i);
-            if (currIndex > lastPersonList.size() || currIndex <= 0) {
-                throw new CommandException(MESSAGE_PERSON_DOES_NOT_EXIST);
+            if (set.size() < members.size()) {
+                throw new CommandException(MESSAGE_DUPLICATE_MEMBERS);
+            }
+
+            for (int i = 0; i < members.size(); i++) {
+                int currIndex = members.get(i);
+                if (currIndex > lastPersonList.size() || currIndex <= 0) {
+                    throw new CommandException(MESSAGE_PERSON_DOES_NOT_EXIST);
+                }
             }
         }
 

@@ -55,4 +55,16 @@ public class EditGroupCommandTest {
 
         assertCommandSuccess(editGroupCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void execute_noFieldSpecifiedUnfilteredList_success() {
+        EditGroupCommand editGroupCommand = new EditGroupCommand(Index.fromOneBased(1), new EditGroupDescriptor());
+        Group editedGroup = model.getFilteredGroupList().get(0);
+
+        String expectedMessage = String.format(EditGroupCommand.MESSAGE_EDIT_GROUP_SUCCESS, editedGroup);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        assertCommandSuccess(editGroupCommand, model, expectedMessage, expectedModel);
+    }
+
 }
