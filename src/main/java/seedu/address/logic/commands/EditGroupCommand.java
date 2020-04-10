@@ -102,7 +102,7 @@ public class EditGroupCommand extends Command {
 
         model.setGroup(groupToEdit, editedGroup);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
-        return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup), ViewType.GROUPS);
+        return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup));
     }
 
     /**
