@@ -21,21 +21,27 @@ activate AddressBookParser
 create AddGroupCommandParser
 AddressBookParser -> AddGroupCommandParser
 activate AddGroupCommandParser
+AddGroupCommandParser -> AddressBookParser
+deactivate
+AddressBookParser -> AddGroupCommandParser : parse(String)
+activate AddGroupCommandParser
 create AddGroupCommand
-AddGroupCommandParser -> AddGroupCommand
+AddGroupCommandParser -> AddGroupCommand :
 activate AddGroupCommand
 
 
-AddGroupCommand --> AddressBookParser : CommandResult
+AddGroupCommand --> AddGroupCommandParser : Command
 deactivate AddGroupCommand
-AddressBookParser --> LogicManager : CommandResult
+AddGroupCommandParser -> AddressBookParser : Command
+deactivate AddGroupCommandParser
+AddressBookParser --> LogicManager : Command
 
 LogicManager -> AddGroupCommand : execute(model)
 activate AddGroupCommand
-AddGroupCommand -> Model : hasGroup()
+AddGroupCommand -> Model : getFilteredPersonList()
 activate Model
-Model -> AddGroupCommand
-deactivate
+Model -> AddGroupCommand : FilteredPersonList
+deactivate Model
 AddGroupCommand -> Model : addGroup()
 activate Model
 Model -> AddGroupCommand
