@@ -6,6 +6,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":AddGroupCommandParser" as AddGroupCommandParser LOGIC_COLOR
 participant ":AddGroupCommand" as AddGroupCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -19,20 +20,19 @@ LogicManager -> AddressBookParser : parseCommand(String)
 activate AddressBookParser
 
 create AddGroupCommandParser
-AddressBookParser -> AddGroupCommandParser
+AddressBookParser -> AddGroupCommandParser : AddGroupCommandParser()
 activate AddGroupCommandParser
 AddGroupCommandParser -> AddressBookParser
 deactivate
+
 AddressBookParser -> AddGroupCommandParser : parse(String)
 activate AddGroupCommandParser
 create AddGroupCommand
-AddGroupCommandParser -> AddGroupCommand :
+AddGroupCommandParser -> AddGroupCommand : AddGroupCommand(group)
 activate AddGroupCommand
-
-
 AddGroupCommand --> AddGroupCommandParser : Command
 deactivate AddGroupCommand
-AddGroupCommandParser -> AddressBookParser : Command
+return Command
 deactivate AddGroupCommandParser
 AddGroupCommandParser -[hidden]-> AddressBookParser
 destroy AddGroupCommandParser
@@ -42,12 +42,26 @@ LogicManager -> AddGroupCommand : execute(model)
 activate AddGroupCommand
 AddGroupCommand -> Model : getFilteredPersonList()
 activate Model
-Model -> AddGroupCommand : FilteredPersonList
+Model --> AddGroupCommand : FilteredPersonList
 deactivate Model
+
+note left
+this checks whether
+member indexes
+provided
+are in the app
+end note
+
 AddGroupCommand -> Model : addGroup()
 activate Model
-Model -> AddGroupCommand
+Model --> AddGroupCommand
 deactivate
+
+create CommandResult
+AddGroupCommand -> CommandResult : CommandResult(SuccessMessage, ViewType.GROUPS)
+activate CommandResult
+return
+
 AddGroupCommand -> LogicManager : CommandResult
 deactivate
 
