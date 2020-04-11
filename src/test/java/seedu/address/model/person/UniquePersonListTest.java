@@ -23,7 +23,7 @@ import seedu.address.testutil.PersonBuilder;
 public class UniquePersonListTest {
 
     private final UniquePersonList uniquePersonList = new UniquePersonList();
-    private final List<Person> personList = new ArrayList<Person>();
+    private final List<Person> personList = new ArrayList<>();
 
     @Test
     public void contains_nullPerson_throwsNullPointerException() {

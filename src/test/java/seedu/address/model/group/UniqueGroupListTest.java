@@ -3,8 +3,10 @@ package seedu.address.model.group;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalGroups.SOC;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,10 +18,30 @@ import seedu.address.model.person.PlaceList;
 public class UniqueGroupListTest {
 
     private final UniqueGroupList uniqueGroupList = new UniqueGroupList();
+    private final List<Group> groupList = new ArrayList<>();
 
     @Test
     public void contains_nullGroup_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueGroupList.contains(null));
+    }
+
+    @Test
+    public void contains_nullGroups_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueGroupList.containsGroups(null));
+    }
+
+    @Test
+    public void contains_groupInList_returnsTrue() {
+        Group group = new Group(new Name("Soc Friends"), new PlaceList(new ArrayList<>()),
+                new ActivityList(new ArrayList<>()));
+        uniqueGroupList.addGroup(group);
+        assertTrue(uniqueGroupList.contains(group));
+    }
+    @Test
+    public void containsGroups_groupsInList_returnsTrue() {
+        uniqueGroupList.addGroup(SOC);
+        groupList.add(SOC);
+        assertTrue(uniqueGroupList.contains(SOC));
     }
 
     @Test
@@ -28,25 +50,17 @@ public class UniqueGroupListTest {
     }
 
     @Test
-    public void contains_groupInList_returnsTrue() {
-        Group group = new Group(new Name("Soc Friends"), new PlaceList(new ArrayList<String>()),
-                new ActivityList(new ArrayList<String>()));
-        uniqueGroupList.addGroup(group);
-        assertTrue(uniqueGroupList.contains(group));
-    }
-
-    @Test
     public void add_duplicateGroup_throwsDuplicateGroupException() {
-        Group group = new Group(new Name("Soc Friends"), new PlaceList(new ArrayList<String>()),
-                new ActivityList(new ArrayList<String>()));
+        Group group = new Group(new Name("Soc Friends"), new PlaceList(new ArrayList<>()),
+                new ActivityList(new ArrayList<>()));
         uniqueGroupList.addGroup(group);
         assertThrows(DuplicateGroupException.class, () -> uniqueGroupList.addGroup(group));
     }
 
     @Test
     public void add_duplicateGroup_throwsDuplicateGroupsException() {
-        Group group = new Group(new Name("Soc Friends"), new PlaceList(new ArrayList<String>()),
-                new ActivityList(new ArrayList<String>()));
+        Group group = new Group(new Name("Soc Friends"), new PlaceList(new ArrayList<>()),
+                new ActivityList(new ArrayList<>()));
         ArrayList<Group> groups = new ArrayList<>();
         groups.add(group);
         uniqueGroupList.addAll(groups);
@@ -55,15 +69,15 @@ public class UniqueGroupListTest {
 
     @Test
     public void setGroupNullTargetGroupThrowsNullPointerException() {
-        Group group = new Group(new Name("Soc Friends"), new PlaceList(new ArrayList<String>()),
-                new ActivityList(new ArrayList<String>()));
+        Group group = new Group(new Name("Soc Friends"), new PlaceList(new ArrayList<>()),
+                new ActivityList(new ArrayList<>()));
         assertThrows(NullPointerException.class, () -> uniqueGroupList.setGroup(null, group));
     }
 
     @Test
     public void setGroupNullEditedGroupThrowsNullPointerException() {
-        Group group = new Group(new Name("Soc Friends"), new PlaceList(new ArrayList<String>()),
-                new ActivityList(new ArrayList<String>()));
+        Group group = new Group(new Name("Soc Friends"), new PlaceList(new ArrayList<>()),
+                new ActivityList(new ArrayList<>()));
         assertThrows(NullPointerException.class, () -> uniqueGroupList.setGroup(group, null));
     }
 
@@ -93,11 +107,6 @@ public class UniqueGroupListTest {
     public void setGroups_nullUniqueGroupsList_throwsNullPointerException() {
         assertThrows(
                 NullPointerException.class, () -> uniqueGroupList.setGroups((UniqueGroupList) null));
-    }
-
-    @Test
-    public void contains_nullGroups_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueGroupList.containsGroups(null));
     }
 
     @Test
