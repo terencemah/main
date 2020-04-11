@@ -16,22 +16,22 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-public class ViewCommand_groupTest {
+public class ViewGroupCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
-        ViewCommand_group places = new ViewCommand_group(INDEX_FIRST_PERSON, "places", 1);
-        ViewCommand_group activities = new ViewCommand_group(INDEX_FIRST_PERSON, "activities", 1);
+        ViewGroupCommand places = new ViewGroupCommand(INDEX_FIRST_PERSON, "places", 1);
+        ViewGroupCommand activities = new ViewGroupCommand(INDEX_FIRST_PERSON, "activities", 1);
 
         //same object -> returns true
         assertTrue(places.equals(places));
         assertTrue(activities.equals(activities));
 
         //same values -> returns true
-        ViewCommand_group placesCopy = new ViewCommand_group(INDEX_FIRST_PERSON, "places", 1);
+        ViewGroupCommand placesCopy = new ViewGroupCommand(INDEX_FIRST_PERSON, "places", 1);
         assertTrue(places.equals(placesCopy));
 
         //different types -> returns false
@@ -41,7 +41,7 @@ public class ViewCommand_groupTest {
         assertFalse(places.equals(null));
 
         //different index
-        ViewCommand_group places2 = new ViewCommand_group(INDEX_SECOND_PERSON, "places", 1);
+        ViewGroupCommand places2 = new ViewGroupCommand(INDEX_SECOND_PERSON, "places", 1);
         assertFalse(places.equals(places2));
 
         //different parameters
@@ -55,17 +55,17 @@ public class ViewCommand_groupTest {
 
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getGroupList().size());
 
-        ViewCommand_group command = new ViewCommand_group(outOfBoundIndex, "places", 1);
+        ViewGroupCommand command = new ViewGroupCommand(outOfBoundIndex, "places", 1);
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_invalidParameter_failure() {
-        ViewCommand_group command = new ViewCommand_group(INDEX_FIRST_PERSON, "test", 1);
+        ViewGroupCommand command = new ViewGroupCommand(INDEX_FIRST_PERSON, "test", 1);
 
         assertCommandFailure(command, model, String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                ViewCommand_group.MESSAGE_USAGE));
+                ViewGroupCommand.MESSAGE_USAGE));
     }
 
     //@Test
