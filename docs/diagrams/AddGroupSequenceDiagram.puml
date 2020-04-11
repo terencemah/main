@@ -12,10 +12,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute(add_group n/group_name)
+[-> LogicManager : execute(add_group n/group_name ...)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(add_group n/group_name)
+LogicManager -> AddressBookParser : parseCommand(String)
 activate AddressBookParser
 
 create AddGroupCommandParser
@@ -32,11 +32,11 @@ AddressBookParser --> LogicManager : CommandResult
 
 LogicManager -> AddGroupCommand : execute(model)
 activate AddGroupCommand
-AddGroupCommand -> Model : hasGroup
+AddGroupCommand -> Model : hasGroup()
 activate Model
 Model -> AddGroupCommand
 deactivate
-AddGroupCommand -> Model : addGroup
+AddGroupCommand -> Model : addGroup()
 activate Model
 Model -> AddGroupCommand
 deactivate

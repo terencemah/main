@@ -244,12 +244,17 @@ image::ExportFileClassDiagram.png[][pdfwidth="30%",width="30%"]
 === Add Group Feature
 ==== Implementation
 
-The add group features allows users to add a new social group to Coder Life Insights.
+To allow users to track social activities with a group of people, the `add_group` feature is implemented.
+The feature uses the `AddressBook` class stored in `ModelManager` instance of the app.
 
-Here below is a sequence diagram showcasing how the add group command works.
+Here below is a sequence diagram showcasing the process of this command.
+
+
+
 [#AddGroupSequenceDiagam,align="center"]
 image::AddGroupSequenceDiagram.png[]
 
+==== Design Considerations
 
 
 === Delete Group Feature
