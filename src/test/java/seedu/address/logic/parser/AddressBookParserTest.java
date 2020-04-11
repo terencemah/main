@@ -31,7 +31,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListGroupCommand;
-import seedu.address.logic.commands.ViewCommand_group;
+import seedu.address.logic.commands.ViewGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -168,7 +168,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_view_group() throws Exception {
-        assertTrue(parser.parseCommand(ViewCommand_group.COMMAND_WORD + " places " + PREFIX_GROUP + "1")
-            instanceof ViewCommand_group);
+        assertTrue(parser.parseCommand(ViewGroupCommand.COMMAND_WORD + " places " + PREFIX_GROUP + "1")
+            instanceof ViewGroupCommand);
     }
 }
