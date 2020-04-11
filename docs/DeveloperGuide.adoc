@@ -175,12 +175,11 @@ Given below is an activity diagram shows how the import operation works with the
 .Import feature activity diagram.
 [#ImportFileActivityDiagram,align="center"]
 image::ImportFileActivityDiagram.png[][pdfwidth="40%",width="40%"]
-
 1. User enters `import l/life.csv g/group.csv e/event.csv`.
 2. All 3 files would then be parsed by `ImportCommandParser` to check if the files exist with the path specified.
 3. On successful check, `ImportCommand` would be created and calls `ImportFile#importCsv`, `ImportFile#importGroupCsv` and
 `ImportFile#importEventCsv`to check if the CSV file headers are valid.
-qq4. `ImportCommand` would then call `Model#hasPersons`, `Model#hasGroups` and `Model#hasEvents` to check if the persons, groups and events are duplicates of the current CoderLifeInsights.
+ qq4. `ImportCommand` would then call `Model#hasPersons`, `Model#hasGroups` and `Model#hasEvents` to check if the persons, groups and events are duplicates of the current CoderLifeInsights.
 4. If the imported data are not duplicates, it will then create a valid list of persons, groups and events to be added to CoderLifeInsights.
 5. CoderLifeInsights will then populate the 3 lists to the current data.
 
@@ -249,7 +248,6 @@ Given below is an activity diagram illustrating how the export operation works w
 .Export feature activity diagram.
 [#ExportFileActivityDiagram,align="center"]
 image::ExportFileActivityDiagram.png[][pdfwidth="40%",width="40%"]
-                                      
 1. User enters `export l/life.csv g/group.csv e/event.csv`
 2. All 3 files would then be parsed by `ExportCommandParser` to check if the files specified exist within the specified file path.
 3. This is necessary to avoid existing files being overwritten.
@@ -260,6 +258,7 @@ and `ExportFile#exportEventCsv`.
 
 // tag::suggest[]
 === Suggestion Feature
+
 ==== Implementation
 
 The suggestion feature allows users to get a person to hangout with, a place to hangout or an activity to do.
@@ -268,20 +267,16 @@ Given below is an activity diagram illustrating how the suggestion operation wor
 .Suggest person feature activity diagram.
 [#SuggestPersonActivityDiagram, align="center"]
 image::SuggestPersonActivityDiagram.png[][pdfwidth="40%",width="40%"]
-
 1. User enters `suggest person`.
 2. `SuggestCommand` would then check if keyword entered corresponds to `person`, `place` or `activity`.
-3. Upon valid keyword entered, `SuggestCommand` would call `Model#suggestPerson` to return a suggested person. 
-4. ObservableList of filteredPersons would be iterated to get suggested person based on least time spent and
-reverse lexicographical order of name as a tie breaker.
+3. Upon valid keyword entered, `SuggestCommand` would call `Model#suggestPerson` to return a suggested person.
+4. ObservableList of filteredPersons would be iterated to get suggested person based on least time spent and reverse lexicographical order of name as a tie breaker.
 5. filteredPersonList would then be updated to reflect on the GUI as a suggestion.
 
 A similar approach would apply to `place` and `activity` where instead of `Model#suggestPerson`, it would be
-`Model#suggestPlace` or `Model#suggestActivity` where an ObservableList of filteredEvents would be iterated to get
-suggested place or activity based on the least frequency of the place visited or activity done.
+`Model#suggestPlace` or `Model#suggestActivity` where an ObservableList of filteredEvents would be iterated to get suggested place or activity based on the least frequency of the place visited or activity done.
 
-If there are multiple place visited or activity done has the same frequency, a tie breaker would be introduced
-where the first place/activity would be suggested based on chronological order.
+If there are multiple place visited or activity done has the same frequency, a tie breaker would be introduced where the first place/activity would be suggested based on chronological order.
 //end::suggest[]
 
 
@@ -537,10 +532,11 @@ We use https://www.google.com/chrome/browser/desktop/[Google Chrome] for convert
 
 Here are the steps to convert the project documentation files to PDF format.
 
-.  Follow the instructions in <<UsingGradle#rendering-asciidoc-files, UsingGradle.adoc>> to convert the AsciiDoc files in the `docs/` directory to HTML format.
-.  Go to your generated HTML files in the `build/docs` folder, right click on them and select `Open with` -> `Google Chrome`.
-.  Within Chrome, click on the `Print` option in Chrome's menu.
-.  Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format. For best results, use the settings indicated in the screenshot below.
+. Follow the instructions in <<UsingGradle#rendering-asciidoc-files, UsingGradle.adoc>> to convert the AsciiDoc files in the `docs/` directory to HTML format.
+. Go to your generated HTML files in the `build/docs` folder, right click on them and select `Open with` -> `Google Chrome`.
+. Within Chrome, click on the `Print` option in Chrome's menu.
+. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format.
+For best results, use the settings indicated in the screenshot below.
 
 .Saving documentation as PDF files in Chrome
 image::chrome_save_as_pdf.png[width="300"]
@@ -553,7 +549,7 @@ The link:{repoURL}/build.gradle[`build.gradle`] file specifies some project-spec
 [TIP]
 Attributes left unset in the `build.gradle` file will use their *default value*, if any.
 
-[cols="1,2a,1", options="header"]
+[cols="1,2a,1",options="header"]
 .List of site-wide attributes
 |===
 |Attribute name |Description |Default value
@@ -585,7 +581,7 @@ Asciidoctor's https://asciidoctor.org/docs/user-manual/#builtin-attributes[built
 [TIP]
 Attributes left unset in `.adoc` files will use their *default value*, if any.
 
-[cols="1,2a,1", options="header"]
+[cols="1,2a,1",options="header"]
 .List of per-file attributes, excluding Asciidoctor's built-in attributes
 |===
 |Attribute name |Description |Default value
@@ -609,8 +605,7 @@ _{asterisk} Official SE-EDU projects only_
 The files in link:{repoURL}/docs/stylesheets[`docs/stylesheets`] are the https://developer.mozilla.org/en-US/docs/Web/CSS[CSS stylesheets] of the site.
 You can modify them to change some properties of the site's design.
 
-The files in link:{repoURL}/docs/templates[`docs/templates`] controls the rendering of `.adoc` files into HTML5.
-These template files are written in a mixture of https://www.ruby-lang.org[Ruby] and http://slim-lang.com[Slim].
+The files in link:{repoURL}/docs/templates[`docs/templates`] controls the rendering of `.adoc` files into HTML5. These template files are written in a mixture of https://www.ruby-lang.org[Ruby] and http://slim-lang.com[Slim].
 
 [WARNING]
 ====
@@ -641,15 +636,16 @@ See <<UsingGradle#, UsingGradle.adoc>> for more info on how to run tests using G
 
 We have three types of tests:
 
-.  _Unit tests_ targeting the lowest level methods/classes. +
+. _Unit tests_ targeting the lowest level methods/classes. +
 e.g. `seedu.address.commons.StringUtilTest`
-.  _Integration tests_ that are checking the integration of multiple code units (those code units are assumed to be working). +
+. _Integration tests_ that are checking the integration of multiple code units (those code units are assumed to be working). +
 e.g. `seedu.address.storage.StorageManagerTest`
-.  Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together. +
+. Hybrids of unit and integration tests.
+These test are checking multiple code units as well as how the are connected together. +
 e.g. `seedu.address.logic.LogicManagerTest`
 
-
 === Troubleshooting Testing
+
 **Problem: Keyboard and mouse movements are not simulated on macOS Mojave, resulting in GUI Tests failure.**
 
 * Reason: From macOS Mojave onwards, applications without `Accessibility` permission cannot simulate certain keyboard and mouse movements.
@@ -657,7 +653,6 @@ e.g. `seedu.address.logic.LogicManagerTest`
 
 .`Accessibility` permission is granted to `IntelliJ IDEA`
 image::testfx-idea-accessibility-permissions.png[width="600"]
-
 
 == Dev Ops
 
@@ -667,28 +662,34 @@ See <<UsingGradle#, UsingGradle.adoc>> to learn how to use Gradle for build auto
 
 === Continuous Integration
 
-We use https://travis-ci.org/[Travis CI] and https://www.appveyor.com/[AppVeyor] to perform _Continuous Integration_ on our projects. See <<UsingTravis#, UsingTravis.adoc>> and <<UsingAppVeyor#, UsingAppVeyor.adoc>> for more details.
+We use https://travis-ci.org/[Travis CI] and https://www.appveyor.com/[AppVeyor] to perform _Continuous Integration_ on our projects.
+See <<UsingTravis#, UsingTravis.adoc>> and <<UsingAppVeyor#, UsingAppVeyor.adoc>> for more details.
 
 === Coverage Reporting
 
-We use https://coveralls.io/[Coveralls] to track the code coverage of our projects. See <<UsingCoveralls#, UsingCoveralls.adoc>> for more details.
+We use https://coveralls.io/[Coveralls] to track the code coverage of our projects.
+See <<UsingCoveralls#, UsingCoveralls.adoc>> for more details.
 
 === Documentation Previews
 
-When a pull request has changes to asciidoc files, you can use https://www.netlify.com/[Netlify] to see a preview of how the HTML version of those asciidoc files will look like when the pull request is merged. See <<UsingNetlify#, UsingNetlify.adoc>> for more details.
+When a pull request has changes to asciidoc files, you can use https://www.netlify.com/[Netlify] to see a preview of how the HTML version of those asciidoc files will look like when the pull request is merged.
+See <<UsingNetlify#, UsingNetlify.adoc>> for more details.
 
 === Making a Release
 
 Here are the steps to create a new release.
 
-.  Update the version number in link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp.java`].
-.  Generate a JAR file <<UsingGradle#creating-the-jar-file, using Gradle>>.
-.  Tag the repo with the version number. e.g. `v0.1`
-.  https://help.github.com/articles/creating-releases/[Create a new release using GitHub] and upload the JAR file you created.
+. Update the version number in link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp.java`].
+. Generate a JAR file <<UsingGradle#creating-the-jar-file, using Gradle>>.
+. Tag the repo with the version number. e.g. `v0.1`
+. https://help.github.com/articles/creating-releases/[Create a new release using GitHub] and upload the JAR file you created.
 
 === Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the https://github.com/FasterXML/jackson[Jackson library] for JSON parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives:
+A project often depends on third-party libraries.
+For example, Address Book depends on the https://github.com/FasterXML/jackson[Jackson library] for JSON parsing.
+Managing these _dependencies_ can be automated using Gradle.
+For example, Gradle can download the dependencies automatically, which is better than these alternatives:
 
 [loweralpha]
 . Include those libraries in the repo (this bloats the repo size)
@@ -863,6 +864,7 @@ No details of the person provided as arguments.
 Use case resumes at step 2.
 
 === Use case: Export data
+
 *MSS*
 
 1. User requests to export life, group and event data to specified CSV file path.
@@ -965,8 +967,8 @@ Use case ends
 . Features implemented should be testable using automated and manual testing.
 . Should work for a single user only.
 . Should be able to run with or without internet connection.
-[appendix]
 
+[appendix]
 == Glossary
 
 [[mainstream-os]]
@@ -1048,7 +1050,7 @@ Expected: Similar to previous.
 .. Test case: `suggest person`
 Expected: Details of person with the least time spent shown in People column
 
-. Suggest person with no events added. 
+. Suggest person with no events added.
 
 .. Prerequisites: Have person data with no events added.
 .. Test case: `suggest person`
@@ -1060,7 +1062,6 @@ Expected: The last People alphabetically in CoderlifeInsights shown in People co
 .. Test case: `suggest person`
 Expected: Nothing shown in People column.
 Person suggestion provided shown in status message.
-
 
 ===  Suggest a place
 
@@ -1097,14 +1098,15 @@ Activity suggestion provided shown in status message.
 . Import life, group and event data.
 
 .. Prerequisites: CSV files containing named `life.csv`, `group.csv`
-and `event.csv` data available in specified path. No duplicates of person, group and events available in CoderLifeInsights.
+and `event.csv` data available in specified path.
+No duplicates of person, group and events available in CoderLifeInsights.
 .. Test case: `import l/life.csv g/group.csv e/event.csv`
 Expected: People column populated with person data. +
 Insights column populated with time data. +
 Groups column populated with group data. +
 Files imported: life.csv groups.csv events.csv shown in status message.
 
-. Import life, group and event data with non-existent file. 
+. Import life, group and event data with non-existent file.
 
 .. Prerequisites: CSV files of provided path does not exist.
 .. Test case: `import l/test.csv g/grouptest.csv e/eventtest.csv
