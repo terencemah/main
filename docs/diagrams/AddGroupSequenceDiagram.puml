@@ -34,6 +34,8 @@ AddGroupCommand --> AddGroupCommandParser : Command
 deactivate AddGroupCommand
 AddGroupCommandParser -> AddressBookParser : Command
 deactivate AddGroupCommandParser
+AddGroupCommandParser -[hidden]-> AddressBookParser
+destroy AddGroupCommandParser
 AddressBookParser --> LogicManager : Command
 
 LogicManager -> AddGroupCommand : execute(model)
