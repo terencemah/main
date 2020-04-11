@@ -380,6 +380,7 @@ At the same time, the `model` also has its own `FrequencyList`.
 When the View Command is activated, the `model` updates its own `FrequencyList` with the contents of the selected Person's `placeList` or `activityList`.
 The View Command then switches the application display to show the model's `FrequencyList`.
 
+//tag::undoredo[]
 === [Proposed] Undo/Redo feature
 
 ==== Proposed Implementation
