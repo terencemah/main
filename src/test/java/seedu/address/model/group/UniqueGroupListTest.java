@@ -100,5 +100,12 @@ public class UniqueGroupListTest {
         assertThrows(NullPointerException.class, () -> uniqueGroupList.containsGroups(null));
     }
 
+    @Test
+    public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(
+                UnsupportedOperationException.class, (
+
+                        ) -> uniqueGroupList.asUnmodifiableObservableList().remove(0));
+    }
 
 }
