@@ -282,7 +282,7 @@ image::ListGroupCommandActivity.png[pdfwidth="50%", width="50%"]
 The add event feature allows users to add an event to a saved contact or group in CoderLifeInsights specified using the member `m/` tag or the group `g/` tag.
 
 ==== Implementation
-Command: `add_event ACTIVITY m/INDEX time/TIME place/PLACE`
+Command: `add_event ACTIVITY m/INDEX time/TIME place/PLACE` or `add_event ACTIVITY g/INDEX time/TIME place/PLACE`
 
 Remarks:
 
@@ -295,13 +295,27 @@ Example usage: `add_event date night m/1 time/230 place/Gardens by the Bay`
 
 The command above will add the following to the Person whose index is `1` on the filtered or unfiltered list:
 
-* Activity `date night` into the Person's activity list.
-* Place `Gardens by the Bay` into the Person's place list.
+* Activity `date night` into the Person's activityList.
+* Place `Gardens by the Bay` into the Person's placeList.
 * Time `230` which equals 2 hours and 30 minutes, will be added to the Person's time.
+
+It will also create an Event with the following attributes:
+* Activity: `date night`
+* Place: `Gardens by the Bay`
+* Time: `2h 30m`
+
+Depicted below is the class diagram of the Event class:
+
+image::EventClassDiagram.png[]
+The Event created is stored in an UniqueEventList, which is saved to the Json file as well. The Events saved are used to generate output for features.
 
 The sequence diagram below showcases how the command works with a valid input:
 
 image::addEventSequence.png[pdfwidth="100%", width="92.5%"]
+
+The following class diagram shows how the Time, PlaceList and ActivityList are associated with a Person object:
+
+image::addEventClassDiagram.png[]
 
 The following activity diagram depicts the following scenario:
 
@@ -324,6 +338,8 @@ The following activity diagram depicts the following scenario:
 
 image::addEventActivity.png[pdfwidth="100%", width="75%"]
 
+==== Justification
+The Add Event feature and the relevant classes were added and implemented to add and store Events with relevant data that are used to generate output for other features such as insights.
 
 
 //end::addEvent[]
