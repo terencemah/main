@@ -11,7 +11,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ViewGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class ViewGroupCommand_ParserTest {
+public class ViewGroupCommandParserTest {
 
     private ViewGroupCommandParser parser = new ViewGroupCommandParser();
 
