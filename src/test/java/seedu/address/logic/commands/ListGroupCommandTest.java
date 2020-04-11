@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showGroupAtIndex;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -23,7 +25,14 @@ public class ListGroupCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        CommandResult commandResult = new CommandResult(ListGroupCommand.MESSAGE_SUCCESS, ViewType.GROUPS);
-        assertCommandSuccess(new ListGroupCommand(), model, commandResult, expectedModel);
+        CommandResult expectedResult = new CommandResult(ListGroupCommand.MESSAGE_SUCCESS, ViewType.GROUPS);
+        assertCommandSuccess(new ListGroupCommand(), model, expectedResult, expectedModel);
+    }
+
+    @Test
+    public void execute_listIsFiltered_showsEverything() {
+        showGroupAtIndex(model, Index.fromOneBased(1));
+        CommandResult expectedResult = new CommandResult(ListGroupCommand.MESSAGE_SUCCESS, ViewType.GROUPS);
+        assertCommandSuccess(new ListGroupCommand(), model, expectedResult, expectedModel);
     }
 }
