@@ -50,6 +50,14 @@ public class UniqueGroupListTest {
     }
 
     @Test
+    public void remove_exitingGroup_success() {
+        uniqueGroupList.addGroup(SOC);
+        uniqueGroupList.removeGroup(SOC);
+        UniqueGroupList expectedList = new UniqueGroupList();
+        assertEquals(expectedList, uniqueGroupList);
+    }
+
+    @Test
     public void add_nullGroup_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueGroupList.addGroup(null));
     }
@@ -63,7 +71,7 @@ public class UniqueGroupListTest {
     }
 
     @Test
-    public void add_duplicateGroup_throwsDuplicateGroupsException() {
+    public void addAll_duplicateGroup_throwsDuplicateGroupsException() {
         Group group = new Group(new Name("Soc Friends"), new PlaceList(new ArrayList<>()),
                 new ActivityList(new ArrayList<>()));
         ArrayList<Group> groups = new ArrayList<>();
