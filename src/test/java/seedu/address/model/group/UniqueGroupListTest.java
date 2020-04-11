@@ -50,6 +50,11 @@ public class UniqueGroupListTest {
     }
 
     @Test
+    public void add_nullGroup_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueGroupList.addGroup(null));
+    }
+
+    @Test
     public void add_duplicateGroup_throwsDuplicateGroupException() {
         Group group = new Group(new Name("Soc Friends"), new PlaceList(new ArrayList<>()),
                 new ActivityList(new ArrayList<>()));
@@ -83,19 +88,19 @@ public class UniqueGroupListTest {
 
     @Test
     public void setGroupEditedGroupHasNonUniqueIdentityThrowsDuplicatePersonException() {
-        Group group = new Group(new Name("Soc Friends"), new PlaceList(new ArrayList<String>()),
-                new ActivityList(new ArrayList<String>()));
+        Group group = new Group(new Name("Soc Friends"), new PlaceList(new ArrayList<>()),
+                new ActivityList(new ArrayList<>()));
         uniqueGroupList.addGroup(group);
-        Group group1 = new Group(new Name("Cinnamon Friends"), new PlaceList(new ArrayList<String>()),
-                new ActivityList(new ArrayList<String>()));
+        Group group1 = new Group(new Name("Cinnamon Friends"), new PlaceList(new ArrayList<>()),
+                new ActivityList(new ArrayList<>()));
         uniqueGroupList.addGroup(group1);
         assertThrows(DuplicateGroupException.class, () -> uniqueGroupList.setGroup(group, group1));
     }
 
     @Test
     public void setGroupEditedGroupIsSameGroupSuccess() {
-        Group group = new Group(new Name("Soc Friends"), new PlaceList(new ArrayList<String>()),
-                new ActivityList(new ArrayList<String>()));
+        Group group = new Group(new Name("Soc Friends"), new PlaceList(new ArrayList<>()),
+                new ActivityList(new ArrayList<>()));
         uniqueGroupList.addGroup(group);
         uniqueGroupList.setGroup(group, group);
         UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
