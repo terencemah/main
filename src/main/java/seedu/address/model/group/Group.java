@@ -143,7 +143,7 @@ public class Group {
         } else {
             return "Name: "
                     + this.name
-                    + ". With members: \n"
+                    + ". "
                     + printMemberList();
         }
     }
