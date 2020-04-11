@@ -15,7 +15,7 @@ import seedu.address.model.group.Group;
  * Shows the user the places visited, activities done or last 5 events
  * with a chosen person from the Address Book.
  */
-public class ViewCommand_group extends Command {
+public class ViewGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "view_group";
 
@@ -40,7 +40,7 @@ public class ViewCommand_group extends Command {
     private final String parameter;
     private final int type;
 
-    public ViewCommand_group(Index index, String parameter, int type) {
+    public ViewGroupCommand(Index index, String parameter, int type) {
         requireNonNull(index);
         requireNonNull(parameter);
 
@@ -84,10 +84,10 @@ public class ViewCommand_group extends Command {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof ViewCommand_group)) {
+        if (!(other instanceof ViewGroupCommand)) {
             return false;
         }
-        ViewCommand_group e = (ViewCommand_group) other;
+        ViewGroupCommand e = (ViewGroupCommand) other;
         return this.index.equals(e.index)
                 && this.parameter.equals(e.parameter)
                 && this.type == e.type;

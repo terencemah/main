@@ -8,12 +8,12 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ViewCommand_group;
+import seedu.address.logic.commands.ViewGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class ViewCommand_groupParserTest {
+public class ViewGroupCommand_ParserTest {
 
-    private ViewCommand_groupParser parser = new ViewCommand_groupParser();
+    private ViewGroupCommandParser parser = new ViewGroupCommandParser();
 
     @Test
     public void parse_emptyIndex_failure() {
@@ -26,14 +26,14 @@ public class ViewCommand_groupParserTest {
     public void parse_emptyParameter_failure() {
         String userInput = " " + PREFIX_GROUP + "1";
         assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ViewCommand_group.MESSAGE_USAGE));
+                ViewGroupCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidParameter_failure() {
         String userInput = "test" + PREFIX_GROUP + "1";
         assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ViewCommand_group.MESSAGE_USAGE));
+                ViewGroupCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class ViewCommand_groupParserTest {
         String idx = "1";
         String userInput = parameter + " " + PREFIX_GROUP + idx;
         Index index = ParserUtil.parseIndex(idx);
-        ViewCommand_group expectedCommand = new ViewCommand_group(index, parameter, ViewCommand_group.TYPE_PERSON);
+        ViewGroupCommand expectedCommand = new ViewGroupCommand(index, parameter, ViewGroupCommand.TYPE_PERSON);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
