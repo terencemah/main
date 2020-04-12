@@ -50,7 +50,7 @@ public class ViewCommand extends Command {
             + "to indicate either a person or group.\n";
     public static final String MESSAGE_INDEX_FORBIDDEN = "This insight parameter cannot be "
             + "accompanied by a person or group.\n";
-    public static final int NUM_EVENTS = 5;
+    public static final int MAX_EVENTS = 5;
 
     private final Index index;
     private final String parameter;
@@ -70,12 +70,12 @@ public class ViewCommand extends Command {
         requireNonNull(model);
 
         if (type.equals(InsightType.ALL)) {
-            return parseTypeAll(model);
+            return processTypeAll(model);
         } else if (type.equals(InsightType.PERSON)) {
-            return parseTypePerson(model);
+            return processTypePerson(model);
         } else {
             assert type.equals(InsightType.GROUP);
-            return parseTypeGroup(model);
+            return processTypeGroup(model);
         }
     }
 
@@ -87,11 +87,20 @@ public class ViewCommand extends Command {
         return parameter;
     }
 
-    private CommandResult parseTypeAll(Model model) {
+    public InsightType getType() {
+        return type;
+    }
+
+    /**
+     * This method processes the command execution for the scenario
+     * where the InsightType is ALL.
+     */
+    private CommandResult processTypeAll(Model model) {
         switch (parameter) {
 
         case KEYWORD_ALL:
             ObservableList<RecentEvent> eventList = FXCollections.observableArrayList();
+            eventList.clear();
             ObservableList<Event> filteredList = model.getFilteredEventList();
             int size1 = filteredList.size();
             for (int i = 0; i < size1; i++) {
@@ -106,9 +115,10 @@ public class ViewCommand extends Command {
 
         case KEYWORD_RECENT:
             ObservableList<RecentEvent> recentEventList = FXCollections.observableArrayList();
+            recentEventList.clear();
             ObservableList<Event> filteredRecentList = model.getFilteredEventList();
             int size2 = filteredRecentList.size();
-            if (size2 < NUM_EVENTS) {
+            if (size2 < MAX_EVENTS) {
                 for (int i = size2 - 1; i >= 0; i--) {
                     recentEventList.add(new RecentEvent(
                             Integer.toString(model.getFilteredEventList().get(i).getEventId()),
@@ -117,7 +127,7 @@ public class ViewCommand extends Command {
                             model.getFilteredEventList().get(i).getTime().toString()));
                 }
             } else {
-                for (int i = 0; i < NUM_EVENTS; i++) {
+                for (int i = 0; i < MAX_EVENTS; i++) {
                     recentEventList.add(new RecentEvent(
                             Integer.toString(model.getFilteredEventList().get(size2 - 1 - i).getEventId()),
                             model.getFilteredEventList().get(size2 - 1 - i).getPlace(),
@@ -135,7 +145,11 @@ public class ViewCommand extends Command {
         }
     }
 
-    private CommandResult parseTypePerson(Model model) throws CommandException {
+    /**
+     * This method processes the command execution for the scenario
+     * where the InsightType is PERSON.
+     */
+    private CommandResult processTypePerson(Model model) throws CommandException {
         List<Person> lastShownPersonList = model.getFilteredPersonList();
         if (index.getZeroBased() >= lastShownPersonList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -169,7 +183,11 @@ public class ViewCommand extends Command {
         return new CommandResult(message, vt);
     }
 
-    private CommandResult parseTypeGroup(Model model) throws CommandException {
+    /**
+     * This method processes the command execution for the scenario
+     * where the InsightType is GROUP.
+     */
+    private CommandResult processTypeGroup(Model model) throws CommandException {
         List<Group> lastShownGroupList = model.getFilteredGroupList();
         if (index.getZeroBased() >= lastShownGroupList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
@@ -212,6 +230,7 @@ public class ViewCommand extends Command {
             return false;
         }
         return ((ViewCommand) o).getIndex().equals(this.getIndex())
-                && ((ViewCommand) o).getParam().equals(this.getParam());
+                && ((ViewCommand) o).getParam().equals(this.getParam())
+                && ((ViewCommand) o).getType().equals(this.getType());
     }
 }

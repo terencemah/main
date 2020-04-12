@@ -5,7 +5,7 @@ import javafx.beans.property.StringProperty;
 
 /**
  * This class is used to encompass a recent event,
- * consisting of a place and activity for display.
+ * consisting of an ID, place, activity and duration for display.
  */
 public class RecentEvent {
 
@@ -63,6 +63,7 @@ public class RecentEvent {
         }
         return ((RecentEvent) o).getPlace().equals(this.getPlace())
                 && ((RecentEvent) o).getActivity().equals(this.getActivity())
-                && ((RecentEvent) o).getTime().equals(this.getTime());
+                && ((RecentEvent) o).getTime().equals(this.getTime())
+                && ((RecentEvent) o).getEventId().equals(this.getEventId());
     }
 }
