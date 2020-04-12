@@ -1004,23 +1004,31 @@ Use case resumes at step 2.
 
 _{More to be added}_
 
-=== Use case: Add person
+=== Use case: Add group
 
 *MSS*
 
-1. User requests to add person
-2. CoderLifeInsights adds the person and displays their details
+1. User requests to add group
+2. CoderLifeInsights adds the group and displays its details
 +
 Use case ends.
 
 *Extensions*
 
 * 1a.
-No details of the person provided as arguments.
+Group name not provided
 +
-[none]
 ** 1a1. CoderLifeInsights shows an error message.
 +
+Step 1 continues until name is provided +
+Use case resumes at step 2.
+
+* 1b.
+Member indexes provided are invalid (don't exist in the app)
++
+** 1b1. CoderLifeInsights shows an error message.
++
+Step 1 continues until valid member indexes are supplied or no indexes are supplied (member indexes are optional) +
 Use case resumes at step 2.
 
 === Use case: Export data
