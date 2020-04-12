@@ -217,7 +217,7 @@ Eg:
 Imports the entire Csv file, converts all the rows into a list of `Person`, `Group` and
 `Event` objects and add the list into the spending list.
 
-*Pros:* + 
+*Pros:* +
 Better performance.
 
 *Cons:* +
@@ -226,7 +226,7 @@ Requires additional methods to implement the features.
 Imports the Csv file, converts all the rows into a list of `Person`, `Group` and `Event`
 objects respectively and add each object accordingly.
 
-*Pros:* + 
+*Pros:* +
 Easy to implement.
 Re-use existing methods.
 
