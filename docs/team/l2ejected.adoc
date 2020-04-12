@@ -63,6 +63,11 @@ It required an in-depth analysis of design alternatives.
 ** Justification: This feature allows the user to add events with groups, on top of persons. The relevant information saved to the hard disk is required for other functions to generate their output.
 ** Highlights: This enhancement functions well with existing commands. It required an in-depth analysis of design alternatives.
 
+* *Minor enhancement #2*: Implementation of Insights feature for groups `view_groups`
+** What it does: This enhancement allows the user to view the places visited and the activities done with a particular group. It also lists the number of times been to each place and number of times each activity is carried out with the group.
+** Justification: This feature gives the user insights on the favourite places and activities of each group of friends in CoderLifeInsights.
+** Highlights: This enhancement functions well with existing commands. It required an in-depth analysis of design alternatives.
+
 * *Code contributed*:[https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=l2ejected&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false[RepoSense]]
 
 * *Other contributions*:
@@ -94,6 +99,7 @@ It required an in-depth analysis of design alternatives.
 |===
 
 include::../UserGuide.adoc[tag=addEvent]
+include::../UserGuide.adoc[tag=viewGroup]
 
 == Contributions to the Developer Guide
 

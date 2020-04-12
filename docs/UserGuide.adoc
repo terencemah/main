@@ -256,17 +256,21 @@ Examples:
 // tag::view[]
 === Insights: `view`
 
-Lists insights about the user's interactions with a particular friend or group, in the form of a pie chart.
-These include places visited, time spent, and/or activities done with the friend or group.
-Format: `view INSIGHT_PARAMETER`
+Lists insights about the user's interactions with a particular friend, in the form of a pie chart.
+These include places visited, time spent, and/or activities done with the friend.
+Format: `view [INDEX] INSIGHT_PARAMETER`
 
 ****
 * Insight parameters include `places`, `time`, `activities`, or `all`
-* CoderLifeInsights will list, with frequencies in the form of a pie chart:
+* CoderLifeInsights will list, with frequencies:
 ** All or any one of the following:
 *** Places user has visited with friend/group
 *** Activities user has done with friend/group
-*** Time spent with friend/group
+*** Time spent with individuals vs group in pie chart form
+**** Places and Activities are case-sensitive:
+***** `Swimming Pool` and `swimming pool` are considered different places
+***** `SWIMMING` and `swimming` are considered different activities
+
 
 Examples:
 
@@ -278,8 +282,36 @@ Coder Life Insights shows a table of places and the frequency of visits for the 
 |Get insights of time spent with groups and individuals| `view time` | Coder Life Insights shows a pie chart comparing time spent with groups vs time spent with individuals.
 |Get insights of the last 5 events |`view recent` | Coder Life Insights shows the last 5 events. Info shows: places, activity done and time spent.
 |Get insights of places, time and activities | `view all` | Returns the output of 'view places', 'view time', and 'view activities', in that order.
+|=======================================================================
 ****
 // end::view[]
+
+// tag::viewGroup[]
+=== Insights: `view_group`
+
+Lists insights about the user's interactions with a particular group.
+These include places visited and activities done with that group.
+Format: `view_group INSIGHT_PARAMETER g/INDEX
+
+* Remarks:
+** INSIGHT_PARAMETERS include `places` and `activities`.
+** INDEX must be an unsigned non-zero integer.
+** Places and Activities are case-sensitive:
+*** `Swimming Pool` and `swimming pool` are considered different places
+*** `SWIMMING` and `swimming` are considered different activities
+
+Examples:
+
+[width="80%",cols="30%,<30%,<40%",options="header"]
+|=======================================================================
+| Example | Command | Result
+| View insights of places visited with first group | view_group places g/1
+| CoderLifeInsights will return a table on the GUI displaying the places visited with the first group and the number of times the user has been there with the group
+| View insights of activities done with the second group | view_group activities g/2
+| CoderLifeInsights will return a table on the GUI displaying the activities done with the second group and the number of times each activity has been done
+|=======================================================================
+
+// end::viewGroup[]
 
 === Locating persons by name: `find`
 
@@ -470,7 +502,7 @@ Exports your event data to `events.csv`
 // tag::delete[]
 === Deleting an object : `delete`
 
-Deletes an entity, such as Person, Group, or Event from the CoderLifeInsights +
+Deletes an entity, such as a Person or Group from the CoderLifeInsights +
 Format: `delete_person ID` (for person) +
 `delete_group ID` (for group)
 //        `delete event ID` (for event)
