@@ -16,7 +16,7 @@ end box
 [-> LogicManager : execute(add_group n/group_name ...)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(String)
+LogicManager -> AddressBookParser : parseCommand(add_group n/group_name ...)
 activate AddressBookParser
 
 create AddGroupCommandParser
@@ -25,7 +25,7 @@ activate AddGroupCommandParser
 AddGroupCommandParser -> AddressBookParser
 deactivate
 
-AddressBookParser -> AddGroupCommandParser : parse(String)
+AddressBookParser -> AddGroupCommandParser : parse(n/group_name ...)
 activate AddGroupCommandParser
 create AddGroupCommand
 AddGroupCommandParser -> AddGroupCommand : AddGroupCommand(group)

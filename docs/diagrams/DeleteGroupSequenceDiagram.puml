@@ -20,7 +20,7 @@ LogicManager -> AddressBookParser : parseCommand("delete_group 1")
 activate AddressBookParser
 
 create DeleteGroupCommandParser
-AddressBookParser -> DeleteGroupCommandParser
+AddressBookParser -> DeleteGroupCommandParser : DeleteGroupCommandParser()
 activate DeleteGroupCommandParser
 
 DeleteGroupCommandParser --> AddressBookParser
@@ -30,32 +30,36 @@ AddressBookParser -> DeleteGroupCommandParser : parse("1")
 activate DeleteGroupCommandParser
 
 create DeleteGroupCommand
-DeleteGroupCommandParser -> DeleteGroupCommand
+DeleteGroupCommandParser -> DeleteGroupCommand : DeleteGroupCommand(Index)
 activate DeleteGroupCommand
 
-DeleteGroupCommand --> DeleteGroupCommandParser : d
+DeleteGroupCommand --> DeleteGroupCommandParser : Command
 deactivate DeleteGroupCommand
 
-DeleteGroupCommandParser --> AddressBookParser : d
+DeleteGroupCommandParser --> AddressBookParser : Command
 deactivate DeleteGroupCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 DeleteGroupCommandParser -[hidden]-> AddressBookParser
 destroy DeleteGroupCommandParser
 
-AddressBookParser --> LogicManager : d
+AddressBookParser --> LogicManager : Command
 deactivate AddressBookParser
 
 LogicManager -> DeleteGroupCommand : execute()
 activate DeleteGroupCommand
 
-DeleteGroupCommand -> Model : deletePerson(1)
+DeleteGroupCommand -> Model : getFilteredGroupList()
 activate Model
 
-Model --> DeleteGroupCommand
+Model --> DeleteGroupCommand : FilteredGroupList
 deactivate Model
 
+DeleteGroupCommand -> Model : deleteGroup(groupToDelete)
+activate Model
+Model --> DeleteGroupCommand
+
 create CommandResult
-DeleteGroupCommand -> CommandResult
+DeleteGroupCommand -> CommandResult : CommandResult(SuccessMessage)
 activate CommandResult
 
 CommandResult --> DeleteGroupCommand
