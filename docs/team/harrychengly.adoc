@@ -73,7 +73,6 @@ compared to the dark theme provided in AddressBook - Level3.
 ** Highlights: This enhancement functions well with existing commands. It required an in-depth analysis of design alternatives.
 
 * *Code contributed*:[https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=harrychengly&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false[RepoSense]]
-
 * *Other contributions*:
 
 ** Project management:
