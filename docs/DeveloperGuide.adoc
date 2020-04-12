@@ -246,8 +246,8 @@ image::ExportFileClassDiagram.png[][pdfwidth="30%",width="30%"]
 
 The `add_group` feature is implemented to allow users to track social activities with a group of people
 (instead of just one person). The feature is mainly supported by the `AddGroupCommand` class, which extends the abstract
-class `Command` and `AddGroupCommandParser`, which implements the `Parser` interface. The command creates a new `Group` instance, which is then stored in an instance of `UniqueGroupList`, which
-in turn is stored in the `AddressBook`.
+class `Command` and `AddGroupCommandParser`, which implements the `Parser` interface. The command creates a new `Group`
+instance, which is then stored in an instance of `UniqueGroupList`, which in turn is stored in the `AddressBook`.
 
 The following class diagram showcases the relationship between the main classes that support this command:
 
