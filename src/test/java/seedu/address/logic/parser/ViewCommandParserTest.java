@@ -5,7 +5,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -32,14 +31,14 @@ public class ViewCommandParserTest {
     @Test
     public void parse_emptyIndex_failure() {
         String userInput = " places";
-        assertParseFailure(vcp, userInput, String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(vcp, userInput, String.format(ViewCommand.MESSAGE_INDEX_REQUIRED,
                 ViewCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyParameter_failure() {
         String userInput = "1";
-        assertParseFailure(vcp, userInput, ViewCommand.MESSAGE_INVALID_PARAMETER + " "
+        assertParseFailure(vcp, userInput, ViewCommand.MESSAGE_INVALID_PARAMETER
                 + ViewCommand.MESSAGE_USAGE);
     }
 

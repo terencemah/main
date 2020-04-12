@@ -20,14 +20,14 @@ public class ViewCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
     public void equals() {
-        ViewCommand firstViewCommand = new ViewCommand(INDEX_FIRST_PERSON, "places", 1);
-        ViewCommand secondViewCommand = new ViewCommand(INDEX_FIRST_PERSON, "recent", 1);
+        ViewCommand firstViewCommand = new ViewCommand(INDEX_FIRST_PERSON, "places", InsightType.ALL);
+        ViewCommand secondViewCommand = new ViewCommand(INDEX_FIRST_PERSON, "recent", InsightType.ALL);
 
         // same object -> returns true
         assertTrue(firstViewCommand.equals(firstViewCommand));
 
         // same values -> returns true
-        ViewCommand firstViewCommandCopy = new ViewCommand(INDEX_FIRST_PERSON, "places", 1);
+        ViewCommand firstViewCommandCopy = new ViewCommand(INDEX_FIRST_PERSON, "places", InsightType.ALL);
         assertTrue(firstViewCommand.equals(firstViewCommandCopy));
 
         // different types -> returns false
@@ -47,7 +47,7 @@ public class ViewCommandTest {
 
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        ViewCommand command = new ViewCommand(outOfBoundIndex, "places", 1);
+        ViewCommand command = new ViewCommand(outOfBoundIndex, "places", InsightType.ALL);
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }

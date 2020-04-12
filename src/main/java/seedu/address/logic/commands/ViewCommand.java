@@ -10,12 +10,14 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.RecentEvent;
 
 /**
- * Shows the user the places visited, activities done or last 5 events
- * with a chosen person from the Address Book.
+ * Displays various insights regarding the persons, groups
+ * and events in the AddressBook.
  */
 public class ViewCommand extends Command {
 
@@ -27,30 +29,34 @@ public class ViewCommand extends Command {
     public static final String KEYWORD_ALL = "all";
     public static final String KEYWORD_TIME = "time";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays insights about the places visited, "
-            + "activities done, or time spent with the person identified "
-            + "by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer) [INSIGHT_PARAMETER]\n"
-            + "[INSIGHT_PARAMETER] can be [" + KEYWORD_PLACE + "], [" + KEYWORD_ACTIVITY
-            + "], or [" + KEYWORD_RECENT + "].\n"
-            + "Example: " + COMMAND_WORD + " 1 " + KEYWORD_PLACE;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays various insights "
+            + "regarding the persons, groups and events in the AddressBook.\n"
+            + "Parameters: INSIGHT_PARAMETER [m/INDEX] [g/INDEX]\n"
+            + "Whether [m/INDEX] or [g/INDEX] are required depends on the insight parameter.\n"
+            + "Possible insight parameters: \"" + KEYWORD_PLACE + "\", \"" + KEYWORD_ACTIVITY
+            + "\", \"" + KEYWORD_RECENT + "\", \"" + KEYWORD_ALL + "\", or \"" + KEYWORD_TIME + "\".\n"
+            + "Examples:\n" + COMMAND_WORD + " " + KEYWORD_PLACE + " 1\n"
+            + COMMAND_WORD + " " + KEYWORD_RECENT;
 
-    public static final String MESSAGE_ALL_TIME = "Displaying time spent comparison ";
-    public static final String MESSAGE_ALL_EVENTS = "Displaying all events ";
+    public static final String MESSAGE_ALL_TIME = "Displaying total group time vs individual time spent.\n";
+    public static final String MESSAGE_ALL_EVENTS = "Displaying all events.\n";
     public static final String MESSAGE_PLACE = "Displaying places visited with ";
     public static final String MESSAGE_ACTIVITY = "Displaying activities done with ";
     public static final String MESSAGE_RECENT_ALL = "Listing last 5 events.";
     public static final String MESSAGE_RECENT_PERSON = "Listing last 5 events with ";
-    public static final String MESSAGE_INVALID_PARAMETER = "The entered parameter is invalid.\n";
+    public static final String MESSAGE_INVALID_PARAMETER = "You have entered an invalid insight parameter.\n";
+    public static final String MESSAGE_EXTRA_PREFIX = "Please choose either a member OR a group to view.\n";
+    public static final String MESSAGE_INDEX_REQUIRED = "This insight parameter requires you "
+            + "to indicate either a person or group.\n";
+    public static final String MESSAGE_INDEX_FORBIDDEN = "This insight parameter cannot be "
+            + "accompanied by a person or group.\n";
     public static final int NUM_EVENTS = 5;
-    public static final int TYPE_ALL = 0;
-    public static final int TYPE_PERSON = 1;
 
     private final Index index;
     private final String parameter;
-    private final int type;
+    private final InsightType type;
 
-    public ViewCommand(Index index, String parameter, int type) {
+    public ViewCommand(Index index, String parameter, InsightType type) {
         requireNonNull(index);
         requireNonNull(parameter);
 
@@ -62,34 +68,48 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (type == TYPE_ALL && parameter.equals(KEYWORD_TIME)) {
-            model.showTime();
-            return new CommandResult(MESSAGE_ALL_TIME, ViewType.TIME);
+        if (type.equals(InsightType.ALL)) {
+            return parseTypeAll(model);
+        } else if (type.equals(InsightType.PERSON)) {
+            return parseTypePerson(model);
+        } else {
+            assert type.equals(InsightType.GROUP);
+            return parseTypeGroup(model);
         }
+    }
 
-        if (type == TYPE_ALL && parameter.equals(KEYWORD_ALL)) {
-            ObservableList<RecentEvent> recentEventList = FXCollections.observableArrayList();
-            recentEventList.clear();
-            int size = model.getFilteredEventList().size();
-            for (int i = 0; i < size; i++) {
-                recentEventList.add(new RecentEvent(
-                        Integer.toString(model.getFilteredEventList().get(i).getEventId()),
-                        model.getFilteredEventList().get(i).getPlace(),
-                        model.getFilteredEventList().get(i).getActivity(),
-                        model.getFilteredEventList().get(i).getTime().toString()));
+    public Index getIndex() {
+        return index;
+    }
+
+    public String getParam() {
+        return parameter;
+    }
+
+    private CommandResult parseTypeAll(Model model) {
+        switch (parameter) {
+
+        case KEYWORD_ALL:
+            ObservableList<RecentEvent> eventList = FXCollections.observableArrayList();
+            ObservableList<Event> filteredList = model.getFilteredEventList();
+            int size1 = filteredList.size();
+            for (int i = 0; i < size1; i++) {
+                eventList.add(new RecentEvent(
+                        Integer.toString(filteredList.get(i).getEventId()),
+                        filteredList.get(i).getPlace(),
+                        filteredList.get(i).getActivity(),
+                        filteredList.get(i).getTime().toString()));
             }
-
-            model.copyRecent(recentEventList);
+            model.copyRecent(eventList);
             return new CommandResult(MESSAGE_ALL_EVENTS, ViewType.ALL);
-        }
 
-        if (type == TYPE_ALL && parameter.equals(KEYWORD_RECENT)) {
-            int size = model.getFilteredEventList().size();
+        case KEYWORD_RECENT:
             ObservableList<RecentEvent> recentEventList = FXCollections.observableArrayList();
-            if (size < NUM_EVENTS) {
-                for (int i = size - 1; i >= 0; i--) {
+            ObservableList<Event> filteredRecentList = model.getFilteredEventList();
+            int size2 = filteredRecentList.size();
+            if (size2 < NUM_EVENTS) {
+                for (int i = size2 - 1; i >= 0; i--) {
                     recentEventList.add(new RecentEvent(
                             Integer.toString(model.getFilteredEventList().get(i).getEventId()),
                             model.getFilteredEventList().get(i).getPlace(),
@@ -99,21 +119,29 @@ public class ViewCommand extends Command {
             } else {
                 for (int i = 0; i < NUM_EVENTS; i++) {
                     recentEventList.add(new RecentEvent(
-                            Integer.toString(model.getFilteredEventList().get(size - 1 - i).getEventId()),
-                            model.getFilteredEventList().get(size - 1 - i).getPlace(),
-                            model.getFilteredEventList().get(size - 1 - i).getActivity(),
-                            model.getFilteredEventList().get(size - 1 - i).getTime().toString()));
+                            Integer.toString(model.getFilteredEventList().get(size2 - 1 - i).getEventId()),
+                            model.getFilteredEventList().get(size2 - 1 - i).getPlace(),
+                            model.getFilteredEventList().get(size2 - 1 - i).getActivity(),
+                            model.getFilteredEventList().get(size2 - 1 - i).getTime().toString()));
                 }
             }
             model.copyRecent(recentEventList);
             return new CommandResult(MESSAGE_RECENT_ALL, ViewType.RECENT);
-        }
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        default:
+            assert parameter.equals(KEYWORD_TIME);
+            model.showTime();
+            return new CommandResult(MESSAGE_ALL_TIME, ViewType.TIME);
+        }
+    }
+
+    private CommandResult parseTypePerson(Model model) throws CommandException {
+        List<Person> lastShownPersonList = model.getFilteredPersonList();
+        if (index.getZeroBased() >= lastShownPersonList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToView = lastShownList.get(index.getZeroBased());
+        Person personToView = lastShownPersonList.get(index.getZeroBased());
         ViewType vt;
         String message;
 
@@ -132,21 +160,47 @@ public class ViewCommand extends Command {
             break;
 
         default:
+            assert parameter.equals(KEYWORD_RECENT);
             model.showRecentList(personToView);
             message = MESSAGE_RECENT_PERSON + personToView.getName() + ".";
             vt = ViewType.RECENT;
         }
 
-
         return new CommandResult(message, vt);
     }
 
-    public Index getIndex() {
-        return index;
-    }
+    private CommandResult parseTypeGroup(Model model) throws CommandException {
+        List<Group> lastShownGroupList = model.getFilteredGroupList();
+        if (index.getZeroBased() >= lastShownGroupList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+        }
 
-    public String getParam() {
-        return parameter;
+        Group groupToView = lastShownGroupList.get(index.getZeroBased());
+        ViewType vt;
+        String message;
+
+        switch (parameter) {
+
+        case KEYWORD_PLACE:
+            model.showGroupPlaceList(groupToView);
+            message = MESSAGE_PLACE + groupToView.getName() + ".";
+            vt = ViewType.PLACES;
+            break;
+
+        case KEYWORD_ACTIVITY:
+            model.showGroupActivityList(groupToView);
+            message = MESSAGE_ACTIVITY + groupToView.getName() + ".";
+            vt = ViewType.ACTIVITIES;
+            break;
+
+        default:
+            assert parameter.equals(KEYWORD_RECENT);
+            model.showGroupRecentList(groupToView);
+            message = MESSAGE_RECENT_PERSON + groupToView.getName() + ".";
+            vt = ViewType.RECENT;
+        }
+
+        return new CommandResult(message, vt);
     }
 
     @Override
@@ -158,6 +212,6 @@ public class ViewCommand extends Command {
             return false;
         }
         return ((ViewCommand) o).getIndex().equals(this.getIndex())
-                && ((ViewCommand) o).getParam() == this.getParam();
+                && ((ViewCommand) o).getParam().equals(this.getParam());
     }
 }

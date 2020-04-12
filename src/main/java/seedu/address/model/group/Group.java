@@ -9,7 +9,10 @@ import seedu.address.model.person.EventDescriptor;
 import seedu.address.model.person.FrequencyList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PlaceList;
+import seedu.address.model.person.RecentEvent;
+import seedu.address.model.person.RecentEventList;
 import seedu.address.model.person.Time;
+import seedu.address.model.person.TimeList;
 
 /**
  * Represents the Social Group that a person is part of and spends time with.
@@ -22,20 +25,25 @@ public class Group {
     private ArrayList<Integer> eventIDs;
     private final ActivityList activityList = new ActivityList(new ArrayList<>());
     private final PlaceList placeList = new PlaceList(new ArrayList<>());
+    private final TimeList timeList = new TimeList(new ArrayList<>());
     private final FrequencyList activityList2;
     private final FrequencyList placeList2;
+    private final RecentEventList recentEventList;
 
-    public Group(Name name, PlaceList placeList, ActivityList activityList) {
+    public Group(Name name, PlaceList placeList, ActivityList activityList, TimeList timeList) {
         this.name = name;
         this.memberIDs = new ArrayList<>();
         this.eventIDs = new ArrayList<>();
         this.timeSpent = new Time(0, 0);
         this.placeList.setPlaceList(placeList.getPlaceList());
         this.activityList.setActivityList(activityList.getActivityList());
+        this.timeList.setTimeList(timeList.getTimeList());
         activityList2 = new FrequencyList();
         activityList2.generate(this.activityList.getActivityList());
         placeList2 = new FrequencyList();
         placeList2.generate(this.placeList.getPlaceList());
+        recentEventList = new RecentEventList();
+        recentEventList.generate(this.placeList, this.activityList, this.timeList);
     }
 
     public Name getName() {
@@ -84,6 +92,14 @@ public class Group {
 
     public ActivityList getActivityList() {
         return activityList;
+    }
+
+    public TimeList getTimeList() {
+        return timeList;
+    }
+
+    public ObservableList<RecentEvent> getRecentEventList() {
+        return recentEventList.getList();
     }
 
     /**

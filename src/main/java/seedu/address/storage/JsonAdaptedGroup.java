@@ -13,6 +13,7 @@ import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
+import seedu.address.model.person.TimeList;
 
 /**
  * Jackson-friendly version of {@link Group}.
@@ -27,6 +28,7 @@ public class JsonAdaptedGroup {
     private final List<String> eventIDs = new ArrayList<>();
     private final List<String> places = new ArrayList<>();
     private final List<String> activities = new ArrayList<>();
+    private final List<String> times = new ArrayList<>();
 
     @JsonCreator
     public JsonAdaptedGroup(@JsonProperty("name") String name,
@@ -98,7 +100,9 @@ public class JsonAdaptedGroup {
 
         final ActivityList modelActivityList = new ActivityList(activities);
 
-        Group group = new Group(new Name(name), modelPlaceList, modelActivityList);
+        final TimeList modelTimeList = new TimeList(times);
+
+        Group group = new Group(new Name(name), modelPlaceList, modelActivityList, modelTimeList);
         Time time = ParserUtil.parseTime(timeSpent);
         group.setTimeSpent(time);
 

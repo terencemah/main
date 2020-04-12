@@ -14,6 +14,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PlaceList;
+import seedu.address.model.person.TimeList;
 
 /**
  * Parses the input argument to create a new AddGroupCommand instance
@@ -38,9 +39,11 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
         PlaceList placeList = new PlaceList(new ArrayList<>());
         ActivityList activityList = new ActivityList(new ArrayList<>());
+        TimeList timeList = new TimeList(new ArrayList<>());
 
         try {
-            Group group = new Group(new Name(argMultimap.getValue(PREFIX_NAME).get()), placeList, activityList);
+            Group group = new Group(new Name(argMultimap.getValue(PREFIX_NAME).get()),
+                    placeList, activityList, timeList);
 
             if (arePrefixesPresent(argMultimap, PREFIX_MEMBER)) {
                 List<String> members = argMultimap.getAllValues(PREFIX_MEMBER);
