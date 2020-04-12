@@ -1,0 +1,29 @@
+package seedu.address.logic.parser;
+
+import static seedu.address.logic.commands.CommandTestUtil.MEMBER_DESC_1;
+import static seedu.address.logic.commands.CommandTestUtil.MEMBER_DESC_2;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_RC;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalGroups.RC_NO_TIME;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.AddGroupCommand;
+import seedu.address.model.group.Group;
+import seedu.address.testutil.GroupBuilder;
+
+public class AddGroupCommandParserTest {
+
+    private AddGroupCommandParser parser = new AddGroupCommandParser();
+
+    @Test
+    public void parse_allFields_success() {
+        Group expectedGroup = new GroupBuilder(RC_NO_TIME).build();
+
+        assertParseSuccess(parser,
+                PREAMBLE_WHITESPACE + NAME_DESC_RC + MEMBER_DESC_1 + MEMBER_DESC_2,
+                new AddGroupCommand(expectedGroup)
+        );
+    }
+}

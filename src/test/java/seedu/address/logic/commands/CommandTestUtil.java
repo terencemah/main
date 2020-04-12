@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -27,6 +28,8 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
+
+    //constants for person
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -67,6 +70,19 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    //constants for group
+
+    public static final String VALID_GROUP_NAME_SOC = "SoC Friends";
+    public static final String VALID_GROUP_NAME_RC = "RC Friends";
+    public static final String VALID_MEMBER_INDEX_1 = "1";
+    public static final String VALID_MEMBER_INDEX_2 = "2";
+
+    public static final String NAME_DESC_SOC = " " + PREFIX_NAME + VALID_GROUP_NAME_SOC;
+    public static final String NAME_DESC_RC = " " + PREFIX_NAME + VALID_GROUP_NAME_RC;
+    public static final String MEMBER_DESC_1 = " " + PREFIX_MEMBER + VALID_MEMBER_INDEX_1;
+    public static final String MEMBER_DESC_2 = " " + PREFIX_MEMBER + VALID_MEMBER_INDEX_2;
+
 
     static {
         DESC_AMY =
