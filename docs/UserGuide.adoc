@@ -235,11 +235,11 @@ Format: `suggest SUGGESTION_PARAMETER`
 ** A place to go to.
 *** Suggestion is based on frequency of place visited from events added.
 *** CoderLifeInsights will return the events that happened at the suggested place which the user has visited the least in terms of frequency.
-*** If there are multiple places with the same amount of frequency, CoderLifeInsights will return the first place based on chronological order.
+*** If there are multiple places with the same frequency, CoderLifeInsights will return a random selection among the places with the same frequency.
 ** An activity to do.
 *** Suggestion is based on frequency of activity done from events added.
 *** CoderLifeInsights will return the events that happened with the suggested activity which the user has done the least in terms of frequency.
-*** If there are multiple activities with the same amount of frequency, CoderLifeInsights will return the first activity based on chronological order.
+*** If there are multiple activities with the same frequency, CoderLifeInsights will return a random selection among the activities with the same frequency.
 ****
 
 Examples:

@@ -314,7 +314,7 @@ A similar approach would apply to `place` and `activity` where instead of `Model
 `Model#suggestPlace` or `Model#suggestActivity` where an ObservableList of filteredEvents would be iterated to get
 suggested place or activity based on the least frequency of the place visited or activity done.
 
-If there are multiple place visited or activity done has the same frequency, a tie breaker would be introduced where the first place/activity would be suggested based on chronological order.
+If there are multiple place visited or activity done has the same frequency, a tie breaker would be introduced where a random place/activity would be suggested among the same frequencies.
 
 Given below is an activity diagram to summarise the steps above.
 
