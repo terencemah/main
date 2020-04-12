@@ -429,19 +429,28 @@ It will also create an Event with the following attributes:
 * Place: `Gardens by the Bay`
 * Time: `2h 30m`
 
-Depicted below is the class diagram of the Event class:
-
-image::EventClassDiagram.png[pdfwidth="100%",width="92.5%"]
-The Event created is stored in an UniqueEventList, which is saved to the Json file as well. The Events saved are used to generate output for features.
-
 The sequence diagram below showcases how the command works with a valid input:
 
 image::addEventSequence.png[pdfwidth="100%",width="92.5%"]
 
-The following class diagram shows how the Time, PlaceList and ActivityList are associated with a Person object:
+***
+Depicted below is the class diagram of the Event class, displaying how the UniqueEventList and Event classes are associated to the AddressBook class:
 
-image::AddEventClassDiagram.png[pdfwidth="100%",width="92.5%"]
+image::EventClassDiagram.png[pdfwidth="100%",width="100%"]
+The Event created is stored in an UniqueEventList, which is saved to the Json file as well.
+The Events saved are used to generate output for features.
 
+The following class diagram shows how the Time, PlaceList and ActivityList are associated with a Person object.
+The Person class only displays relevant information to the Time, PlaceList and ActivityList classes:
+
+image::AddEventClassDiagram.png[pdfwidth="100%",width="100%"]
+The Time, ActivityList and PlaceList classes were implemented similar to a Person's Name or Address. A Person's Time is displayed on the GUI as well for users to know how much time they have spent with that Person.
+The reason behind this implementation was to ensure that information added from the AddEventCommand would be saved through changes to Persons or Groups in CoderLifeInsights.
+The pertinent information would then be used in following features which require these data to generate output. +
+A Group object also has the same implementation of Time, PlaceList and ActivityList and its class diagram is similar to the diagram above, with the Person class being substituted by the Group class.
+These information are also saved for the Group object when an Event is added to a Group object.
+
+***
 The following activity diagram depicts the following scenario:
 
 1. User enters `add_event date night m/1 time/230 place/Gardens by the Bay` into the command prompt.

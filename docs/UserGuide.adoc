@@ -18,7 +18,8 @@ By: `Team CoderLifeInsights`      Since: `Mar 2020`      Licence: `MIT`
 
 == Introduction
 
-CoderLifeInsights (CLI) is a desktop application that provides you insights and suggestions to your social life as a programmer using a CLI (Command Line Interface).
+CoderLifeInsights is a CLI (Command Line Interface) driven desktop application that a programmer can use to record his or her social interactions with individual friends, or group of friends. +
+CoderLifeInsights gives the programmer insights into his or her social life, and provides suggestions to liven up their social life by analysing the social events recorded in CoderLifeInsight through the CLI.
 
 == Quick Start
 
