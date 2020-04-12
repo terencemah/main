@@ -9,8 +9,8 @@ import seedu.address.model.person.Time;
 
 public class EventTest {
 
-    Event firstEvent = new Event("something", "somewhere", new Time(11, 11));
-    Event secondEvent = new Event("something", "somewhere", new Time(11, 11));
+    private Event firstEvent = new Event("something", "somewhere", new Time(11, 11));
+    private Event secondEvent = new Event("something", "somewhere", new Time(11, 11));
 
     @Test
     public void equals() {
@@ -31,8 +31,8 @@ public class EventTest {
 
     @Test
     public void sameTime() {
-        Event thirdEvent = new Event("something", "somewhere", new Time(22,22));
-        thirdEvent.setTime(new Time(11,11));
+        Event thirdEvent = new Event("something", "somewhere", new Time(22, 22));
+        thirdEvent.setTime(new Time(11, 11));
         assertTrue(thirdEvent.getTime().equals(new Time(11, 11)));
     }
 
