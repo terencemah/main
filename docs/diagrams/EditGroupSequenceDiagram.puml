@@ -5,6 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":EditGroupCommandParser" as EditGroupCommandParser LOGIC_COLOR
+participant "<<class>> \n :EditGroupCommand" as EditGroupCommandClass LOGIC_COLOR
 participant ":EditGroupCommand" as EditGroupCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -27,6 +28,11 @@ deactivate
 
 AddressBookParser -> EditGroupCommandParser : parse(index ...)
 activate EditGroupCommandParser
+create EditGroupCommandClass
+EditGroupCommandParser -> EditGroupCommandClass : new EditGroupDescriptor()
+activate EditGroupCommandClass
+EditGroupCommandClass --> EditGroupCommandParser : editGroupDescriptor
+deactivate EditGroupCommandClass
 create EditGroupCommand
 EditGroupCommandParser -> EditGroupCommand : EditGroupCommand(index, editGroupDescriptor)
 activate EditGroupCommand
@@ -46,16 +52,44 @@ Model --> EditGroupCommand : FilteredPersonList
 deactivate Model
 
 note left
-this checks whether
+FilteredPersonList is
+used to
+check whether
 member indexes
-provided
-are in the app
+supplied as arguments
+are in ModelManager
 end note
 
-EditGroupCommand -> Model : addGroup()
+EditGroupCommand -> Model : getFilteredGroupList()
+activate Model
+Model -> EditGroupCommand : FilteredGroupList
+deactivate Model
+
+note left
+FilteredGroupList is
+used to
+check whether
+the editted group
+is the same as before
+or already exits
+in the ModelManager
+end note
+
+
+EditGroupCommand -> Model : setGroup(groupToEdit, editedGroup)
 activate Model
 Model --> EditGroupCommand
 deactivate
+
+EditGroupCommand -> Model : updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS)
+activate Model
+Model --> EditGroupCommand
+deactivate Model
+
+note left
+update filteredGroupList to refresh view
+and show edited group
+end note
 
 create CommandResult
 EditGroupCommand -> CommandResult : CommandResult(SuccessMessage, ViewType.GROUPS)
