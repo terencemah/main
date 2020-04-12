@@ -409,7 +409,7 @@ image::DeleteGroupSequenceDiagram.png[]
 
 ==== Implementation
 
-The list feature allows users to view all the social groups currently in Coder Life Insights.
+The list feature allows users to view all the social `Group` instances currently stored in CoderLifeInsights.
 
 Here below is a sequence diagram showcasing how the command works.
 
@@ -1113,19 +1113,31 @@ Use case ends
 
 [[mainstream-os]]
 Mainstream OS::
-Windows, Linux, Unix, OS-X
+Windows, Linux, Unix, macOS
 
 [[private-contact-detail]]
 Private contact detail::
 A contact detail that is not meant to be shared with others
 
-[[social-group]]
-Social Group::
-A cluster of people with a commonality as identified by the user (eg same JC, same OG, etc)
-
 [[coderlifeinsights]]
 CoderLifeInsights::
 An application.
+
+[[social-group]]
+(Social) Group::
+A cluster of 0 or more other people with a commonality as identified by the user (eg same JC, same OG, etc).
+An empty `Group`is allowed since it is assumed that the user themselves is a member of the social group (which is why
+they would want to track it.)
+
+[[event]]
+Event::
+An event is an event that the user took part in, either with another individual or group. An event has an activity
+(what the user engaged in), a place, time spent and the person/group.
+
+[[time]]
+Time::
+Time represents the time spent in an event. It is represented by number of hours (0 or greater) and
+number of minutes (between 0 and 59 inclusive).
 
 == Instructions for Manual Testing
 
