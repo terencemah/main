@@ -51,7 +51,7 @@ public class EditGroupCommand extends Command {
                     + "7";
 
     public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one edit field must be provided";
+    public static final String MESSAGE_NOT_EDITED = "At least one edit field must be provided to edit a group";
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in Coder Life Insights";
     public static final String MESSAGE_DUPLICATE_MEMBERS = "Group contains duplicate member indexes. Please try again "
             + "with unique member indexes.";
