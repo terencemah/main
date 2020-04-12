@@ -30,8 +30,12 @@ public class RecentEventPanel extends UiPart<Region> {
     @FXML
     private TableColumn<RecentEvent, String> timeColumn;
 
+    @FXML
+    private TableColumn<RecentEvent, String> eventId;
+
     public RecentEventPanel(ObservableList<RecentEvent> list) {
         super(FXML);
+        eventId.setCellValueFactory(cellData-> cellData.getValue().eventIdProperty());
         placeColumn.setCellValueFactory(cellData -> cellData.getValue().placeProperty());
         activityColumn.setCellValueFactory(cellData -> cellData.getValue().activityProperty());
         timeColumn.setCellValueFactory(cellData -> cellData.getValue().timeProperty());

@@ -36,9 +36,11 @@ public class MainWindow extends UiPart<Stage> {
     private RecentEventPanel recentEventPanel;
     private PersonListPanel personListPanel;
     private GroupListPanel groupListPanel;
+    private SuggestListPanel suggestListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private TimePieChart timePieChart;
+    private AllEventPanel allEventPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -132,9 +134,6 @@ public class MainWindow extends UiPart<Stage> {
                 logic.getFilteredPersonList());
         timePieChartPanelPlaceholder.getChildren().add(timePieChart.getRoot());
 
-        //        frequencyListPanel = new FrequencyListPanel(logic.getFrequencyList());
-        //        frequencyListPanelPlaceholder.getChildren().add(frequencyListPanel.getRoot());
-
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
         groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
 
@@ -210,6 +209,12 @@ public class MainWindow extends UiPart<Stage> {
         timePieChartPanelPlaceholder.getChildren().add(recentEventPanel.getRoot());
     }
 
+    private void handleViewAll() {
+        allEventPanel = new AllEventPanel(logic.getRecentList());
+        timePieChartPanelPlaceholder.getChildren().clear();
+        timePieChartPanelPlaceholder.getChildren().add(allEventPanel.getRoot());
+    }
+
     /**
      * Displays pie chart
      */
@@ -220,16 +225,44 @@ public class MainWindow extends UiPart<Stage> {
         timePieChartPanelPlaceholder.getChildren().add(timePieChart.getRoot());
     }
 
+    /**
+     * Displays suggest activity
+     */
+    private void handleSuggestActivity() {
+        suggestListPanel = new SuggestListPanel(logic.getFilteredEventList());
+        timePieChartPanelPlaceholder.getChildren().clear();
+        timePieChartPanelPlaceholder.getChildren().add(suggestListPanel.getRoot());
+    }
 
+    /**
+     * Displays suggest place
+     */
+    private void handleSuggestPlace() {
+        suggestListPanel = new SuggestListPanel(logic.getFilteredEventList());
+        timePieChartPanelPlaceholder.getChildren().clear();
+        timePieChartPanelPlaceholder.getChildren().add(suggestListPanel.getRoot());
+    }
+
+
+    /**
+     * Displays group list
+     */
     private void handleGroup() {
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
         groupListPanelPlaceholder.getChildren().clear();
         groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        handleViewTime();
     }
 
+    /**
+     * Displays normal display
+     */
     private void handleNormal() {
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        groupListPanelPlaceholder.getChildren().clear();
+        groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        handleViewTime();
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -269,10 +302,16 @@ public class MainWindow extends UiPart<Stage> {
                 handleViewRecent();
                 break;
             case ALL:
-                handleViewRecent();
+                handleViewAll();
                 break;
             case GROUPS:
                 handleGroup();
+                break;
+            case SUGGEST_ACTIVITY:
+                handleSuggestActivity();
+                break;
+            case SUGGEST_PLACE:
+                handleSuggestPlace();
                 break;
             default:
                 handleNormal();

@@ -29,6 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_PATH = "testing123.csv";
     private static final String INVALID_SUGGEST = "invalid parameter";
+    private static final String INVALID_PLACES = "ORCHARD";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -253,9 +254,33 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseSuggest_validValueWithWhitespace_returnsTrimmedPath() throws Exception {
+    public void parseSuggest_validValueWithWhitespace_returnsTrimmedPathPerson() throws Exception {
         String suggestWithWhitespace = WHITESPACE + "person" + WHITESPACE;
         String expectedSuggest = "person";
+        assertEquals(expectedSuggest, ParserUtil.parseSuggest(suggestWithWhitespace));
+    }
+
+    @Test
+    public void parseSuggest_validValueWithoutWhitespace_returnsPlace() throws Exception {
+        assertEquals("place", ParserUtil.parseSuggest("place"));
+    }
+
+    @Test
+    public void parseSuggest_validValueWithWhitespace_returnsTrimmedPathPlace() throws Exception {
+        String suggestWithWhitespace = WHITESPACE + "place" + WHITESPACE;
+        String expectedSuggest = "place";
+        assertEquals(expectedSuggest, ParserUtil.parseSuggest(suggestWithWhitespace));
+    }
+
+    @Test
+    public void parseSuggest_validValueWithoutWhitespace_returnsActivity() throws Exception {
+        assertEquals("activity", ParserUtil.parseSuggest("activity"));
+    }
+
+    @Test
+    public void parseSuggest_validValueWithWhitespace_returnsTrimmedPathActivity() throws Exception {
+        String suggestWithWhitespace = WHITESPACE + "activity" + WHITESPACE;
+        String expectedSuggest = "activity";
         assertEquals(expectedSuggest, ParserUtil.parseSuggest(suggestWithWhitespace));
     }
 }

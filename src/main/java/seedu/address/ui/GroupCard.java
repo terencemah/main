@@ -25,14 +25,14 @@ public class GroupCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label timeSpent;
-
     @FXML
     private Label memberLabel;
-
     @FXML
     private FlowPane members;
     @FXML
-    private Label events;
+    private Label eventLabel;
+    @FXML
+    private FlowPane events;
 
     public GroupCard(Group group, int displayedIndex) {
         super(FXML);
@@ -41,13 +41,16 @@ public class GroupCard extends UiPart<Region> {
         name.setText(group.getName().fullName);
         String text = group.getTimeSpent().toString();
         timeSpent.setText("Total Time Spent: " + text);
-        memberLabel.setText("Member IDs: ");
+        memberLabel.setText("Members: ");
         group
                 .getMembers()
                 .stream()
                 .forEach(member -> members.getChildren().add(new Label(member.toString())));
-        //        members.setText(group.printMemberList());
-        events.setText(group.printEventIds());
+        eventLabel.setText("Events: ");
+        group
+                .getEvents()
+                .stream()
+                .forEach(event -> events.getChildren().add(new Label(event.toString())));
     }
 
     @Override

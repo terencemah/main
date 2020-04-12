@@ -71,9 +71,12 @@ public class ViewCommand extends Command {
 
         if (type == TYPE_ALL && parameter.equals(KEYWORD_ALL)) {
             ObservableList<RecentEvent> recentEventList = FXCollections.observableArrayList();
+            recentEventList.clear();
             int size = model.getFilteredEventList().size();
             for (int i = 0; i < size; i++) {
-                recentEventList.add(new RecentEvent(model.getFilteredEventList().get(i).getPlace(),
+                recentEventList.add(new RecentEvent(
+                        Integer.toString(model.getFilteredEventList().get(i).getEventId()),
+                        model.getFilteredEventList().get(i).getPlace(),
                         model.getFilteredEventList().get(i).getActivity(),
                         model.getFilteredEventList().get(i).getTime().toString()));
             }
@@ -87,13 +90,17 @@ public class ViewCommand extends Command {
             ObservableList<RecentEvent> recentEventList = FXCollections.observableArrayList();
             if (size < NUM_EVENTS) {
                 for (int i = size - 1; i >= 0; i--) {
-                    recentEventList.add(new RecentEvent(model.getFilteredEventList().get(i).getPlace(),
+                    recentEventList.add(new RecentEvent(
+                            Integer.toString(model.getFilteredEventList().get(i).getEventId()),
+                            model.getFilteredEventList().get(i).getPlace(),
                             model.getFilteredEventList().get(i).getActivity(),
                             model.getFilteredEventList().get(i).getTime().toString()));
                 }
             } else {
                 for (int i = 0; i < NUM_EVENTS; i++) {
-                    recentEventList.add(new RecentEvent(model.getFilteredEventList().get(size - 1 - i).getPlace(),
+                    recentEventList.add(new RecentEvent(
+                            Integer.toString(model.getFilteredEventList().get(size - 1 - i).getEventId()),
+                            model.getFilteredEventList().get(size - 1 - i).getPlace(),
                             model.getFilteredEventList().get(size - 1 - i).getActivity(),
                             model.getFilteredEventList().get(size - 1 - i).getTime().toString()));
                 }

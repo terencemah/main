@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
@@ -30,10 +31,12 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListGroupCommand;
+import seedu.address.logic.commands.ViewGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Time;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -108,7 +111,7 @@ public class AddressBookParserTest {
                 + " " + PREFIX_MEMBER + index
                 + " " + PREFIX_PLACE + place
                 + " " + PREFIX_TIME + time);
-        Event event = new Event(activity, place, 11, 11);
+        Event event = new Event(activity, place, new Time(11, 11));
         event.setWithPerson(Integer.parseInt(index));
         assertEquals(new AddEventCommand(event), command);
     }
@@ -132,7 +135,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_import() throws Exception {
-        assertTrue(parser.parseCommand(ImportCommand.COMMAND_WORD + " l/src/test/data/CsvFilesTest/life.csv")
+        assertTrue(parser.parseCommand(ImportCommand.COMMAND_WORD + " l/src/test/data/CsvFilesTest/life.csv "
+                + "g/src/test/data/CsvFilesTest/group.csv e/src/test/data/CsvFilesTest/event.csv")
                 instanceof ImportCommand);
     }
 
@@ -160,5 +164,11 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(
                 ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_view_group() throws Exception {
+        assertTrue(parser.parseCommand(ViewGroupCommand.COMMAND_WORD + " places " + PREFIX_GROUP + "1")
+            instanceof ViewGroupCommand);
     }
 }

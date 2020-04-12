@@ -2,7 +2,7 @@
 
 image:https://api.codacy.com/project/badge/Grade/3dd835e750584121bf94b97532fc5763[link="https://app.codacy.com/gh/AY1920S2-CS2103-W14-4/main?utm_source=github.com&utm_medium=referral&utm_content=AY1920S2-CS2103-W14-4/main&utm_campaign=Badge_Grade_Settings"]
 ifdef::env-github,env-browser[:relfileprefix: docs/]
-
+https://app.netlify.com/sites/coderlifeinsights/deploys[image:https://api.netlify.com/api/v1/badges/b5a97d95-6703-47d5-a236-60572231fb30/deploy-status[![Netlify Status]]
 https://travis-ci.org/AY1920S2-CS2103-W14-4/main[image:https://travis-ci.org/AY1920S2-CS2103-W14-4/main.svg?branch=master[Build Status]]
 https://ci.appveyor.com/project/harrychengly/main/branch/master[image:https://ci.appveyor.com/api/projects/status/jfbm08f7kf5r999b/branch/master?svg=true[Build status]]
 https://coveralls.io/github/AY1920S2-CS2103-W14-4/main?branch=master[image:https://coveralls.io/repos/github/AY1920S2-CS2103-W14-4/main/badge.svg?branch=master[Coverage Status]]
@@ -24,10 +24,10 @@ Looking for insights in your social life as a programmer?Look no further!
 
 == Site Map
 
-* <<UserGuide#, User Guide>>
-* <<DeveloperGuide#, Developer Guide>>
-* <<AboutUs#, About Us>>
-* <<ContactUs#, Contact Us>>
+* https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/docs/UserGuide.adoc[User Guide]
+* https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/docs/DeveloperGuide.adoc[Developer Guide]
+* https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/docs/AboutUs.adoc[About Us]
+* https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/docs/ContactUs.adoc[Contact Us]
 
 == Acknowledgements
 

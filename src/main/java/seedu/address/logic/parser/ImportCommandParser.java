@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LIFE;
 
@@ -22,9 +23,10 @@ public class ImportCommandParser implements Parser<ImportCommand> {
      */
     public ImportCommand parse(String args) throws ParseException {
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LIFE, PREFIX_GROUP);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LIFE, PREFIX_GROUP, PREFIX_EVENT);
 
-        if (!argMultimap.getPreamble().isEmpty()) {
+        if ((!arePrefixesPresent(argMultimap, PREFIX_LIFE, PREFIX_GROUP, PREFIX_EVENT))
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
         }
@@ -32,20 +34,24 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         try {
             String lifePath = "";
             String groupPath = "";
+            String eventPath = "";
 
-            if (arePrefixesPresent(argMultimap, PREFIX_LIFE) && !arePrefixesPresent(argMultimap, PREFIX_GROUP)) {
+            if (argMultimap.getValue(PREFIX_LIFE).isPresent()) {
                 lifePath = ParserUtil.parsePath(argMultimap.getValue(PREFIX_LIFE).get());
-            } else if (arePrefixesPresent(argMultimap, PREFIX_GROUP) && !arePrefixesPresent(argMultimap, PREFIX_LIFE)) {
-                groupPath = ParserUtil.parsePath(argMultimap.getValue(PREFIX_GROUP).get());
-            } else if (arePrefixesPresent(argMultimap, PREFIX_LIFE) && arePrefixesPresent(argMultimap, PREFIX_GROUP)) {
-                lifePath = ParserUtil.parsePath(argMultimap.getValue(PREFIX_LIFE).get());
+            }
+            if (argMultimap.getValue(PREFIX_GROUP).isPresent()) {
                 groupPath = ParserUtil.parsePath(argMultimap.getValue(PREFIX_GROUP).get());
             }
-            return new ImportCommand(lifePath, groupPath);
+
+            if (argMultimap.getValue(PREFIX_EVENT).isPresent()) {
+                eventPath = ParserUtil.parsePath(argMultimap.getValue(PREFIX_EVENT).get());
+            }
+
+            return new ImportCommand(lifePath, groupPath, eventPath);
 
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE), pe);
+                    String.format(ParserUtil.MESSAGE_INVALID_PATH + "\n" + ImportCommand.MESSAGE_USAGE), pe);
         }
     }
 

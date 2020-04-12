@@ -36,17 +36,26 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
         }
 
 
-        PlaceList placeList = new PlaceList(new ArrayList<String>());
-        ActivityList activityList = new ActivityList(new ArrayList<String>());
+        PlaceList placeList = new PlaceList(new ArrayList<>());
+        ActivityList activityList = new ActivityList(new ArrayList<>());
 
-        Group group = new Group(new Name(argMultimap.getValue(PREFIX_NAME).get()), placeList, activityList);
-        if (arePrefixesPresent(argMultimap, PREFIX_MEMBER)) {
-            List<String> members = argMultimap.getAllValues(PREFIX_MEMBER);
-            for (int i = 0; i < members.size(); i++) {
-                group.addPerson(Integer.parseInt(members.get(i)));
+        try {
+            Group group = new Group(new Name(argMultimap.getValue(PREFIX_NAME).get()), placeList, activityList);
+
+            if (arePrefixesPresent(argMultimap, PREFIX_MEMBER)) {
+                List<String> members = argMultimap.getAllValues(PREFIX_MEMBER);
+                for (int i = 0; i < members.size(); i++) {
+                    try {
+                        group.addPerson(Integer.parseInt(members.get(i)));
+                    } catch (NumberFormatException e) {
+                        throw new ParseException("Member index supplied must be an integer");
+                    }
+                }
             }
+            return new AddGroupCommand(group);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
         }
-        return new AddGroupCommand(group);
     }
 
     /**

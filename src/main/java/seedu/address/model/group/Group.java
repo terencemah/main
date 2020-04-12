@@ -3,7 +3,10 @@ package seedu.address.model.group;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.person.ActivityList;
+import seedu.address.model.person.EventDescriptor;
+import seedu.address.model.person.FrequencyList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
@@ -13,40 +16,34 @@ import seedu.address.model.person.Time;
  */
 public class Group {
 
-    /**
-     * Represents the groupID for the next created group.
-     */
-    private static int groups = 1;
-
     private Name name;
-    private int groupId;
     private Time timeSpent;
     private ArrayList<Integer> memberIDs;
     private ArrayList<Integer> eventIDs;
-    private final ActivityList activityList = new ActivityList(new ArrayList<String>());
-    private final PlaceList placeList = new PlaceList(new ArrayList<String>());
+    private final ActivityList activityList = new ActivityList(new ArrayList<>());
+    private final PlaceList placeList = new PlaceList(new ArrayList<>());
+    private final FrequencyList activityList2;
+    private final FrequencyList placeList2;
 
     public Group(Name name, PlaceList placeList, ActivityList activityList) {
         this.name = name;
         this.memberIDs = new ArrayList<>();
         this.eventIDs = new ArrayList<>();
         this.timeSpent = new Time(0, 0);
-        this.groupId = groups;
-        groups += 1;
         this.placeList.setPlaceList(placeList.getPlaceList());
         this.activityList.setActivityList(activityList.getActivityList());
+        activityList2 = new FrequencyList();
+        activityList2.generate(this.activityList.getActivityList());
+        placeList2 = new FrequencyList();
+        placeList2.generate(this.placeList.getPlaceList());
     }
 
     public Name getName() {
         return this.name;
     }
 
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
-    }
-
-    public int getGroupId() {
-        return this.groupId;
+    public void setName(Name name) {
+        this.name = name;
     }
 
     public Time getTimeSpent() {
@@ -95,7 +92,7 @@ public class Group {
      * @return string representation
      */
     public String printEventIds() {
-        String result = "Event IDs: ";
+        String result = "Events: ";
         for (int i = 0; i < this.eventIDs.size(); i++) {
             result += this.eventIDs.get(i) + " ";
         }
@@ -142,14 +139,21 @@ public class Group {
     @Override
     public String toString() {
         if (this.memberIDs.isEmpty()) {
-            return "group ID: " + this.groupId + ". Name: " + this.name;
+            return "Name: " + this.name;
         } else {
-            return "group ID: "
-                    + this.groupId
-                    + ". Name: "
+            return "Name: "
                     + this.name
-                    + ". With members: \n"
+                    + ". "
                     + printMemberList();
         }
     }
+
+    public ObservableList<EventDescriptor> getPlaceList2() {
+        return placeList2.getFrequencyList();
+    }
+
+    public ObservableList<EventDescriptor> getActivityList2() {
+        return activityList2.getFrequencyList();
+    }
+
 }

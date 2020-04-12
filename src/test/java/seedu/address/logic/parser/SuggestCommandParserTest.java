@@ -19,7 +19,7 @@ public class SuggestCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsSuggestCommand() {
+    public void parse_validArgs_returnsSuggestPersonCommand() {
         // no leading and trailing whitespaces
         SuggestCommand expectedSuggestCommand =
                 new SuggestCommand("person");
@@ -28,4 +28,28 @@ public class SuggestCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " person", expectedSuggestCommand);
     }
+
+    @Test
+    public void parse_validArgs_returnsSuggestPlaceCommand() {
+        // no leading and trailing whitespaces
+        SuggestCommand expectedSuggestCommand =
+                new SuggestCommand("place");
+        assertParseSuccess(parser, " place", expectedSuggestCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "  place   ", expectedSuggestCommand);
+    }
+
+    @Test
+    public void parse_validArgs_returnsSuggestActivityCommand() {
+        // no leading and trailing whitespaces
+        SuggestCommand expectedSuggestCommand =
+                new SuggestCommand("activity");
+        assertParseSuccess(parser, " activity", expectedSuggestCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " activity   ", expectedSuggestCommand);
+    }
+
+
 }

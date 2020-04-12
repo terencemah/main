@@ -6,8 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PLACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -26,7 +29,8 @@ public class AddEventCommand extends Command {
 
     public static final String COMMAND_WORD = "add_event";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an event with a group or an individual"
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an event with a group or an individual "
             + "that adds an activity, place and time to the subject. \n"
             + "Parameters: [ACTIVITY] "
             + "["
@@ -43,10 +47,10 @@ public class AddEventCommand extends Command {
             + "Example: "
             + COMMAND_WORD
             + " Dancing "
-            + PREFIX_MEMBER
-            + "1 "
             + PREFIX_PLACE
             + "SCAPE "
+            + PREFIX_MEMBER
+            + "1 "
             + PREFIX_TIME
             + "300";
 
@@ -55,10 +59,12 @@ public class AddEventCommand extends Command {
             + "[5 minutes = 05]; "
             + "[1 hour = 100]; "
             + "[10 hours and 30 minutes = 1030]";
+    public static final String MESSAGE_INVALID_TIME = "Time parameter has to be greater than 0 minutes.";
     public static final String MESSAGE_SUCCESS = "New event successfully added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "Event with given arguments already exists. Please try again.";
     public static final String MESSAGE_ARGUMENTS = "Activity: %1$s, Index: %2$d, Place: %3$s, Time: %4$s";
 
+    private static final Logger logger = LogsCenter.getLogger(AddEventCommand.class);
     private final Event toAdd;
 
     public AddEventCommand(Event event) {
@@ -66,13 +72,13 @@ public class AddEventCommand extends Command {
         this.toAdd = event;
     }
 
-    public Event getToAdd() {
-        return this.toAdd;
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
+
+        if (toAdd.getTime().equals(new Time(0, 0))) {
+            throw new CommandException(MESSAGE_INVALID_TIME);
+        }
 
         if (model.hasEvent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
@@ -86,9 +92,10 @@ public class AddEventCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             Person toEdit = lastShownList.get(index - 1);
+            logger.info("Person to edit is " + toEdit.getName().toString());
 
             Time curr = toEdit.getTime();
-            curr.addTime(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
+            Time newTime = curr.addTime2(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
 
             PlaceList currentPlaceList = toEdit.getPlaceList2();
             PlaceList newPlaceList = currentPlaceList.addPlace(toAdd.getPlace());
@@ -100,7 +107,8 @@ public class AddEventCommand extends Command {
             TimeList newTimeList = currentTimeList.addTime(toAdd.getTime().toString());
 
             Person editedPerson = new Person(toEdit.getName(), toEdit.getPhone(), toEdit.getEmail(),
-                    toEdit.getAddress(), toEdit.getTags(), curr, newPlaceList, newActivityList, newTimeList);
+                    toEdit.getAddress(), toEdit.getTags(), newTime, newPlaceList, newActivityList, newTimeList);
+            logger.info("Edited person is " + editedPerson.getName().toString());
             model.setPerson(toEdit, editedPerson);
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             model.addEvent(toAdd);
@@ -115,9 +123,8 @@ public class AddEventCommand extends Command {
             Group toEdit = lastShownList.get(index - 1);
 
             Time curr = toEdit.getTimeSpent();
-            curr.addTime(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
+            Time newTime = curr.addTime2(toAdd.getTime().getMinutes(), toAdd.getTime().getHours());
 
-            // % TODO: Add to activity and place lists
             PlaceList currentPlaceList = toEdit.getPlaceList();
             PlaceList newPlaceList = currentPlaceList.addPlace(toAdd.getPlace());
 
@@ -125,7 +132,12 @@ public class AddEventCommand extends Command {
             ActivityList newActivityList = currentActivityList.addActivity(toAdd.getActivity());
 
             Group editedGroup = new Group(toEdit.getName(), newPlaceList, newActivityList);
-            editedGroup.setTimeSpent(curr);
+            editedGroup.setMemberIDs(toEdit.getMembers());
+            editedGroup.setTimeSpent(newTime);
+            editedGroup.setMemberIDs(toEdit.getMembers());
+            ArrayList<Integer> events = toEdit.getEvents();
+            events.add(toAdd.getEventId());
+            editedGroup.setEventIDs(events);
             model.setGroup(toEdit, editedGroup);
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             model.addEvent(toAdd);

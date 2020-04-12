@@ -58,7 +58,7 @@ public class SuggestCommandTest {
     @Test
     public void execute_person_personSuggested() {
         SuggestCommand suggestCommand = new SuggestCommand("person");
-        String expectedMessage = SuggestCommand.MESSAGE_SUCCESS;
+        String expectedMessage = SuggestCommand.MESSAGE_PERSON_SUGGEST_SUCCESS;
         expectedModel.suggestPerson();
         assertCommandSuccess(suggestCommand, model, expectedMessage, expectedModel);
     }

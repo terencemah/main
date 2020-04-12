@@ -7,8 +7,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -17,6 +19,9 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    //logger
+    private static final Logger logger = LogsCenter.getLogger(Person.class);
+
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -24,14 +29,14 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<Tag>();
+    private final Set<Tag> tags = new HashSet<>();
     private final Time time;
 
-    private final ActivityList activityList = new ActivityList(new ArrayList<String>());
+    private final ActivityList activityList = new ActivityList(new ArrayList<>());
     private final FrequencyList placeList2;
     private final FrequencyList activityList2;
-    private final PlaceList placeList = new PlaceList(new ArrayList<String>());
-    private final TimeList timeList = new TimeList(new ArrayList<String>());
+    private final PlaceList placeList = new PlaceList(new ArrayList<>());
+    private final TimeList timeList = new TimeList(new ArrayList<>());
     private final RecentEventList recentEventList;
 
     /**
@@ -109,7 +114,6 @@ public class Person {
         if (otherPerson == this) {
             return true;
         }
-
         return otherPerson != null
                 && otherPerson.getName().equals(getName())
                 && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));

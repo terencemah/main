@@ -163,10 +163,11 @@ public class ParserUtil {
         requireNonNull(path);
         String trimmedPath = path.strip();
         File file = new File(trimmedPath);
-        if (!file.exists()) {
-            file.createNewFile();
-        } else {
-            throw new ParseException(MESSAGE_FILE_ALREADY_EXIST);
+        if (trimmedPath.isEmpty()) {
+            throw new ParseException(String.format("Empty file name to export provided."));
+        }
+        if (file.exists()) {
+            throw new ParseException(String.format(MESSAGE_FILE_ALREADY_EXIST + trimmedPath));
         }
         return trimmedPath;
     }

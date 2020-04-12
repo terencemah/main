@@ -153,7 +153,7 @@ Classes used by multiple components are in the `seedu.coderlifeinsights.commons`
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::undoredo[]
+// tag::importexport[]
 === Import feature
 ==== Implementation
 
@@ -239,21 +239,27 @@ The following class diagram illustrates the summary of the ExportFile class.
 .Export feature class diagram.
 [#ExportFileClassDiagram,align="center"]
 image::ExportFileClassDiagram.png[][pdfwidth="30%",width="30%"]
+//end::importexport[]
 
 === Add Group Feature
 ==== Implementation
 
-The add group features allows users to add a new social group to Coder Life Insights.
+To allow users to track social activities with a group of people, the `add_group` feature is implemented.
+The feature uses the `AddressBook` class stored in `ModelManager` instance of the app.
 
-Here below is a sequence diagram showcasing how the add group command works.
+Here below is a sequence diagram showcasing the process of this command.
+
+
+
 [#AddGroupSequenceDiagam,align="center"]
 image::AddGroupSequenceDiagram.png[]
 
+==== Design Considerations
 
 
 === Delete Group Feature
 ==== Implementation
-
+//tag::list_group[]
 === List Group Feature
 ==== Implementation
 
@@ -275,29 +281,46 @@ The following activity diagram depicts the step-by-step scenario when a user exe
 
 [#ListGroupCommandActivity,align="center"]
 image::ListGroupCommandActivity.png[pdfwidth="50%", width="50%"]
-
+//end::list_group[]
+//tag::addEvent[]
 === Add Event Feature
 The add event feature allows users to add an event to a saved contact or group in CoderLifeInsights specified using the member `m/` tag or the group `g/` tag.
 
 ==== Implementation
-Command: `add_event [ACTIVITY] m/[INDEX] time/[TIME] place/[PLACE]`
+Command: `add_event ACTIVITY m/INDEX time/TIME place/PLACE` or `add_event ACTIVITY g/INDEX time/TIME place/PLACE`
 
 Remarks:
 
-* [TIME] is the variable used to store the time the user has spent with a saved contact or group.
-* [TIME] parameter must contain at least 2 digits. For example: A time of 1 hour and 30 minutes will be input as `130`.
+* TIME is the variable used to store the time the user has spent with a saved contact or group.
+* TIME parameter must contain at least 2 digits. For example: A time of 1 hour and 30 minutes will be input as `130`.
+* An event added must have time of at least 1 minute. e.g. time/01
+* Place and Activity are case-sensitive
 
 Example usage: `add_event date night m/1 time/230 place/Gardens by the Bay`
 
 The command above will add the following to the Person whose index is `1` on the filtered or unfiltered list:
 
-* Activity `date night` into the Person's activity list.
-* Place `Gardens by the Bay` into the Person's place list.
+* Activity `date night` into the Person's activityList.
+* Place `Gardens by the Bay` into the Person's placeList.
 * Time `230` which equals 2 hours and 30 minutes, will be added to the Person's time.
+
+It will also create an Event with the following attributes:
+* Activity: `date night`
+* Place: `Gardens by the Bay`
+* Time: `2h 30m`
+
+Depicted below is the class diagram of the Event class:
+
+image::EventClassDiagram.png[]
+The Event created is stored in an UniqueEventList, which is saved to the Json file as well. The Events saved are used to generate output for features.
 
 The sequence diagram below showcases how the command works with a valid input:
 
 image::addEventSequence.png[pdfwidth="100%", width="92.5%"]
+
+The following class diagram shows how the Time, PlaceList and ActivityList are associated with a Person object:
+
+image::addEventClassDiagram.png[]
 
 The following activity diagram depicts the following scenario:
 
@@ -310,18 +333,21 @@ The following activity diagram depicts the following scenario:
 7. `AddEventCommand#execute()` retrieves the filtered list with the call to `model#getFilteredPersonList()`.
 8. `AddEventCommand#execute()` then retrieves the Person object to be edited with the call to `model#getFilteredPersonList()#get()`.
 9. `AddEventCommand#execute()` then computes the new Time by retrieving the Person's current Time with the call to `person#getTime()` ,then adding it to the input Time.
-10. `AddEventCommand#execute()` then creates a new Person object with all the same attributes except for the Time which is replaced by the new Time computed, with the call to the Person constructor.
-11. `AddEventCommand#execute()` then replaces the existing Person object with the new Person object with the call to `model#setPerson()`.
-12. `AddEventCommand#execute()` then updates the filtered list with the call to `model#updateFilteredPersonList()`.
-13. `AddEventCommand#execute()` then calls the new Person object and adds `date night` into its frequencyList with the call to `person#addActivity`.
-14. `AddEventCommand#execute()` then calls the new Person object and adds `Gardens by the Bay` into its frequencyList with the call to `person#addPlace`.
+10. `AddEventCommand#execute()` then creates a new ActivityList by retrieving the Person's ActivityList with the call to `person#getActivityList2()`, followed by `ActivityList#addActivity()`, which returns a new ActivityList with the new activity added.
+11. `AddEventCommand#execute()` then creates a new PlaceList by retrieving the Person's PlaceList with the call to `person#getPlaceList2()`, followed by `PlaceList#addPlace()`, which returns a new PlaceList with the new place added.
+12. `AddEventCommand#execute()` then creates a new Person object with all the same attributes except for the Time, PlaceList, and ActivityList which is replaced by the new Time computed, the new PlaceList and the new ActivityList with the call to the Person constructor.
+13. `AddEventCommand#execute()` then replaces the existing Person object with the new Person object with the call to `model#setPerson()`.
+14. `AddEventCommand#execute()` then updates the filtered list with the call to `model#updateFilteredPersonList()`.
 15. `AddEventCommand` returns the `CommandResult` to `AddressBookParser`.
 16. `AddressBookParser` returns the `CommandResult` to `LogicManager`.
 
 image::addEventActivity.png[pdfwidth="100%", width="75%"]
 
+==== Justification
+The Add Event feature and the relevant classes were added and implemented to add and store Events with relevant data that are used to generate output for other features such as insights.
 
 
+//end::addEvent[]
 
 === Insights feature
 ==== Implementation

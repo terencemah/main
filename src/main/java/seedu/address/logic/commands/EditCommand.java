@@ -13,7 +13,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -71,7 +73,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON =
             "This person already exists in the Coder Life Insights.";
-
+    //logger
+    private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
@@ -98,7 +101,8 @@ public class EditCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
+        logger.info("edited person's phone is " + editedPerson.getPhone().value);
+        logger.info("edited person's email is " + editedPerson.getEmail().value);
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
@@ -126,7 +130,6 @@ public class EditCommand extends Command {
         ActivityList updatedActivityList = editPersonDescriptor.getActivityList().orElse(personToEdit
                 .getActivityList2());
         TimeList updatedTimeList = editPersonDescriptor.getTimeList().orElse(personToEdit.getTimeList());
-
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedTime,
                 updatedPlaceList, updatedActivityList, updatedTimeList);
     }
