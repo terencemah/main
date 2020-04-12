@@ -244,8 +244,14 @@ image::ExportFileClassDiagram.png[][pdfwidth="30%",width="30%"]
 === Add Group Feature
 ==== Implementation
 
-To allow users to track social activities with a group of people, the `add_group` feature is implemented.
-The feature uses the `AddressBook` class stored in `ModelManager` instance of the app.
+The `add_group` feature is implemented to allow users to track social activities with a group of people
+(instead of just one person). The feature is mainly supported by the `AddGroupCommand` class, which extends the abstract
+class `Command` and `AddGroupCommandParser`, which implements the `Parser` interface. The command creates a new `Group` instance, which is then stored in an instance of `UniqueGroupList`, which
+in turn is stored in the `AddressBook`.
+
+The following class diagram showcases the relationship between the main classes that support this command:
+
+
 
 Here below is a sequence diagram showcasing the process of this command.
 
@@ -301,7 +307,8 @@ image::EditGroupSequenceDiagram.png[]
 //end::edit_group[]
 //tag::addEvent[]
 === Add Event Feature
-The add event feature allows users to add an event to a saved contact or group in CoderLifeInsights specified using the member `m/` tag or the group `g/` tag.
+The add event feature allows users to add an event to a saved contact or group in CoderLifeInsights specified
+using the member `m/` tag or the group `g/` prefix.
 
 ==== Implementation
 Command: `add_event ACTIVITY m/INDEX time/TIME place/PLACE` or `add_event ACTIVITY g/INDEX time/TIME place/PLACE`
