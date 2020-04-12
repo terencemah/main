@@ -1334,6 +1334,32 @@ specified is invalid.
 
 === Edit a Group
 
+. Editing all fields possible of an existing group
+.. Prerequisites: the group to be edited must exist in CoderLifeInsights. Follow `8.9` to create a group in the app if
+one doesn't exit already. Note down the index of the group either when it is created or using the group list on the
+right in the GUI. The new members to be included in the group must also exist in the app.
+.. Test case: If you want to edit the group with index 1 and change member list to only have person with index 1,
+enter `edit_group 1 n/new_name m/1`.
+Expected: Group at index 1 is changed. Name is `new_name` whereas `members` now only has `1` (instead of the indexes
+that existed earlier).
+
+. Editing the name of an existing group
+.. Prerequisites: the group to be edited must exist in CoderLifeInsights.
+.. Test case: `edit_group 1 n/another_name`.
+Expected: The name of group at index 1 is changed of `another_name`. Success message displayed to the user. The
+member list of the group at index 1 remains unchanged.
+
+. Editing the member indexes of an existing group
+.. Prerequisites: the new member indexes must exist in CoderLifeInsights.
+.. Test case: `edit_group 1 m/1 ..`.
+Expected: The member list of the group at index 1 is changed to the new member indexes supplied. The name of the group
+at index 1 remains unchanged. Success message is displayed to the user.
+
+. Editing a non-existent group
+.. Prerequisites: the group at specified index must not exist in CoderLifeInsights. Pick an index that is larger than
+the current largest index of groups in the app. If 99 is the largest index, choose 100.
+.. Test case: `edit_group 100`.
+Expected: Error message saying group index is invalid is displayed to the user.
 
 === List all Groups
 
