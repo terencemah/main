@@ -49,7 +49,12 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         if (input.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         } else {
-            char[] time = argMultimap.getValue(PREFIX_TIME).get().toCharArray();
+            String[] process = argMultimap.getValue(PREFIX_TIME).get().split(" ");
+            if (process.length > 1) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddEventCommand.MESSAGE_USAGE));
+            }
+            char[] time = process[0].toCharArray();
             if (time.length < 2) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddEventCommand.MESSAGE_INVALID_TIME_INPUT));
@@ -65,6 +70,13 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
                     hours += "0";
                 }
             }
+        }
+
+        try {
+            Integer.parseInt(mins);
+            Integer.parseInt(hours);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(AddEventCommand.MESSAGE_INVALID_TIME_INPUT);
         }
 
         try {
