@@ -300,6 +300,11 @@ image::AddGroupSequenceDiagram.png[]
 === Delete Group Feature
 
 ==== Implementation
+
+[#DeleteGroupSequenceDiagram, align="center"]
+image::DeleteGroupSequenceDiagram.png[]
+
+
 //tag::list_group[]
 === List Group Feature
 
@@ -324,6 +329,18 @@ The following activity diagram depicts the step-by-step scenario when a user exe
 [#ListGroupCommandActivity,align="center"]
 image::ListGroupCommandActivity.png[pdfwidth="50%",width="50%"]
 //end::list_group[]
+
+//tag::edit_group[]
+=== Edit Group Feature
+
+==== Implementation
+
+[#EditGroupSequenceDiagram, align="center"]
+image::EditGroupSequenceDiagram.png[]
+
+
+
+//end::edit_group[]
 //tag::addEvent[]
 === Add Event Feature
 
