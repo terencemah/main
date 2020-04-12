@@ -21,11 +21,18 @@ public class EventTest {
         //same Event -> return true
         assertTrue(firstEvent.equals(firstEvent));
         assertTrue(secondEvent.equals(secondEvent));
+
+        //same EventId, different Time -> return true
+        Event test = firstEvent;
+        assertTrue(test.equals(firstEvent));
     }
 
     @Test
     public void isSameEvent() {
         assertTrue(firstEvent.isSameEvent(firstEvent));
+        Event test = firstEvent;
+        test.setTime(new Time(22, 22));
+        assertTrue(test.isSameEvent(firstEvent));
         assertFalse(firstEvent.isSameEvent(secondEvent));
     }
 
@@ -38,6 +45,6 @@ public class EventTest {
 
     @Test
     public void toString_success() {
-        firstEvent.toString().equals("Event: something place: somewhere for 11h 11m");
+        assertTrue(firstEvent.toString().equals("Event: something place: somewhere for 11h 11m"));
     }
 }
