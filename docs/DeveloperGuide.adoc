@@ -1363,6 +1363,12 @@ Expected: Error message saying group index is invalid is displayed to the user.
 
 === List all Groups
 
+. List all groups
+.. Prerequisites: None.
+.. Test Case: `list_groups`
+Expected: the group panel will show all the groups currently in the app. If there are no groups, it will be blank.
+A success message will be shown to the user. 
+
 === Saving data
 
 . Dealing with missing/corrupted data files
