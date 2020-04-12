@@ -354,7 +354,7 @@ It will also create an Event with the following attributes:
 
 Depicted below is the class diagram of the Event class:
 
-image::EventClassDiagram.png[]
+image::EventClassDiagram.png[pdfwidth="100%",width="92.5%"]
 The Event created is stored in an UniqueEventList, which is saved to the Json file as well. The Events saved are used to generate output for features.
 
 The sequence diagram below showcases how the command works with a valid input:
@@ -363,7 +363,7 @@ image::addEventSequence.png[pdfwidth="100%",width="92.5%"]
 
 The following class diagram shows how the Time, PlaceList and ActivityList are associated with a Person object:
 
-image::addEventClassDiagram.png[]
+image::addEventClassDiagram.png[pdfwidth="100%",width="92.5%"]
 
 The following activity diagram depicts the following scenario:
 
