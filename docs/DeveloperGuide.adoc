@@ -356,6 +356,30 @@ image::AddGroupSequenceDiagram.png[]
 
 ==== Design Considerations
 
+Aspect: How the `add_group` command executes
+
+* Alternative 1 (current choice): Separate parsing from code execution
+** Pros: Clear distinction between class responsibilities.
+** Cons: More code, may increase coupling as objects are passed around between the classes.
+
+* Alternative 2: Parse and Execute in the same class
+** Pros: Less code, less variables/object to pass between classes.
+** Cons: No separate classes so maybe harder to trace bugs. It maybe harder to understand for future developers, as the
+design would be different to the `add_person` command (adapted from AddressBookLevel 3).
+
+Aspect: How to store the `group` instances
+
+* Alternative 1 (current choice): Store in a separate `UniqueGroupList`
+** Pros: Separate List is easier to manage and edit. Thus, this option is also advantageous as there is an `edit_group`
+command as well.
+** Cons: Another list to be stored in AddressBook, which might lead to more memory usage. Since the target user is
+may keep the app running in the background, this can be disadvantageous.
+
+* Alternative 2: Store inside Person Objects, which are stored in `UniquePersonList`
+** Pros: No need of a separate list, one list to store all essential data. This might be better from a memory standpoint.
+** Cons: Harder to maintain group instances inside person as there will be multiple copies and for most users,
+the number of groups of people will be less than the number of people. This alternative would also make the Person class
+depend upon the Group class, which can be error-prone.
 
 === Delete Group Feature
 
