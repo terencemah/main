@@ -393,12 +393,16 @@ is omitted for conciseness.
 
 Here below is an example workflow, which is shown using an activity diagram:
 
+[#DeleteGroupSequenceDiagram, align="center"]
+image::DeleteGroupActivityDiagram.png[]
 
-
+The above workflow is achieved due to the interlinked classes. Their behaviour during an execution of the DeleteGroup
+feature is shown using the following Sequence Diagram.
 
 [#DeleteGroupSequenceDiagram, align="center"]
 image::DeleteGroupSequenceDiagram.png[]
 
+=== Design Considerations
 
 //tag::list_group[]
 === List Group Feature
