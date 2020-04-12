@@ -13,12 +13,11 @@ ifdef::env-github[]
 endif::[]
 
 == PROJECT: CoderLifeInsights
-CoderLifeInsights (CLI) is a desktop application that provides you insights and suggestions to your social life as a programmer using a CLI (Command Line Interface)
-
----
+CoderLifeInsights is a CLI (Command Line Interface) driven desktop application that a programmer can use to record his or her social interactions with individual friends, or group of friends. +
+CoderLifeInsights gives the programmer insights into his or her social life, and provides suggestions to liven up their social life by analysing the social events recorded in CoderLifeInsight through the CLI.
 
 == My Role
-I was tasked to implement the AddEventCommand with its relevant classes, and making the inputs from the aforementioned command savable to the hard disk.
+I was tasked to implement the AddEventCommand with its relevant classes, namely the Time, PlaceList and ActivityList classes. I also made the inputs from the aforementioned command savable to the hard disk.
 This command and its implementation is the backbone of all our relevant features.
 I also made minor changes to the GUI displays, as well as contributions to the Developers' Guide and User Guide.
 
@@ -73,8 +72,9 @@ It required an in-depth analysis of design alternatives.
 * *Other contributions*:
 
 ** Project management:
+*** Tasked to ensure deliverables were submitted and deadlines were met by all members of the group.
 *** Tasked to test and discover potential bugs in the software.
-*** Tasked to ensure documentation for all code written, as well as ensuring the User Guide understandable and not confusing.
+*** Tasked to ensure documentation for all code written, as well as ensuring that the User Guide is understandable and not confusing.
 
 ** Enhancements to existing features:
 *** Created the interim Event container class
@@ -85,11 +85,11 @@ It required an in-depth analysis of design alternatives.
 *** Added the PlaceList and ActivityList variables to groups and made them savable for each Group object through updates via the AddEventCommand
 
 ** Documentation:
-*** Added and revised contents of the User Guide (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/53[#53], https://github.com/AY1920S2-CS2103-W14-4/main/pull/94[#94], https://github.com/AY1920S2-CS2103-W14-4/main/pull/128[#128])
-*** Added contents of the Developer Guide (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/79[#79])
+*** Added and revised contents of the User Guide (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/53[#53], https://github.com/AY1920S2-CS2103-W14-4/main/pull/94[#94], https://github.com/AY1920S2-CS2103-W14-4/main/pull/128[#128], https://github.com/AY1920S2-CS2103-W14-4/main/pull/160[#160], https://github.com/AY1920S2-CS2103-W14-4/main/pull/172[#172])
+*** Added contents of the Developer Guide (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/79[#79], https://github.com/AY1920S2-CS2103-W14-4/main/pull/160[#160], https://github.com/AY1920S2-CS2103-W14-4/main/pull/172[#172])
 
 ** Community:
-*** PRs reviewed:
+*** PRs reviewed: (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/86[#86], https://github.com/AY1920S2-CS2103-W14-4/main/pull/131[#131], https://github.com/AY1920S2-CS2103-W14-4/main/pull/136[#136])
 
 ** Tools:
 
