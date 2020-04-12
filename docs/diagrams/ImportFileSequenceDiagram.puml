@@ -31,7 +31,7 @@ activate ImportCommandParser
 create Model
 create ImportCommand
 ImportCommandParser -> ImportCommand
-activate ImportCommand 
+activate ImportCommand
 ImportCommand --> ImportCommandParser : i
 deactivate ImportCommand
 ImportCommandParser --> AddressBookParser : i
@@ -49,15 +49,15 @@ ImportFile --> ImportCommand
 deactivate ImportFile
 ImportCommand -> ImportFile :importCsv(life.csv)
 activate ImportFile
-ImportFile --> ImportCommand 
+ImportFile --> ImportCommand
 deactivate ImportFile
 ImportCommand -> ImportFile : importGroupCsv(group.csv)
 activate ImportFile
-ImportFile --> ImportCommand 
+ImportFile --> ImportCommand
 deactivate ImportFile
 ImportCommand -> ImportFile : importGroupCsv(event.csv)
 activate ImportFile
-ImportFile --> ImportCommand 
+ImportFile --> ImportCommand
 destroy ImportFile
 deactivate ImportFile
 

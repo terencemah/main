@@ -30,7 +30,7 @@ activate SuggestCommandParser
 create Model
 create SuggestCommand
 SuggestCommandParser -> SuggestCommand
-activate SuggestCommand 
+activate SuggestCommand
 SuggestCommand --> SuggestCommandParser : s
 deactivate SuggestCommand
 SuggestCommandParser --> AddressBookParser : s
