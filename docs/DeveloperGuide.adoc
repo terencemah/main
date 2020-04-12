@@ -385,6 +385,17 @@ depend upon the Group class, which can be error-prone.
 
 ==== Implementation
 
+The Delete Group feature allows the user to delete a previously `Group`. This feature is implemented using the
+`DeleteGroupCommand`, which extends the abstract class `Command` and the `DeleteGroupCommandParser`, which implements
+the `Parser` interface.The feature is also supported by `UniqueGroupList`,
+which stores the `Group` instances. The relationship between classes is similar to the one seen in diagram x.x and hence
+is omitted for conciseness.
+
+Here below is an example workflow, which is shown using an activity diagram:
+
+
+
+
 [#DeleteGroupSequenceDiagram, align="center"]
 image::DeleteGroupSequenceDiagram.png[]
 
