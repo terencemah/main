@@ -83,6 +83,8 @@ public class CommandTestUtil {
     public static final String MEMBER_DESC_1 = " " + PREFIX_MEMBER + VALID_MEMBER_INDEX_1;
     public static final String MEMBER_DESC_2 = " " + PREFIX_MEMBER + VALID_MEMBER_INDEX_2;
 
+    public static final String INVALID_NAME_SPECIALCHAR = " " + PREFIX_NAME + "!@#FIP^";
+    public static final String INVALID_MEMBER_NOT_INT = " " + PREFIX_MEMBER + "sdfdsfds";
 
     static {
         DESC_AMY =
