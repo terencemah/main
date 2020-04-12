@@ -19,6 +19,9 @@ import seedu.address.model.person.PlaceList;
  * Parses the input argument to create a new AddGroupCommand instance
  */
 public class AddGroupCommandParser implements Parser<AddGroupCommand> {
+
+    public static final String MEMBER_NOT_INT = "Member index supplied must be an integer";
+
     /**
      * Parses the input args to create an AddGroupCommand instance.
      *
@@ -48,7 +51,7 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
                     try {
                         group.addPerson(Integer.parseInt(members.get(i)));
                     } catch (NumberFormatException e) {
-                        throw new ParseException("Member index supplied must be an integer");
+                        throw new ParseException(MEMBER_NOT_INT);
                     }
                 }
             }
