@@ -30,6 +30,7 @@ image::ArchitectureDiagram.png[]
 
 The *_Architecture Diagram_* given above explains the high-level design of the App.
 Given below is a quick overview of each component.
+The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 [TIP]
 The `.puml` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder.
@@ -170,7 +171,7 @@ This section describes some noteworthy details on how certain features are imple
 The import feature allows users to import data from a comma-separated values (CSV) file.
 It allows users to bulk import their contacts, groups and events from a previously exported data from CoderLifeInsights application.
 
-Given below is a sequence diagram to illustrate how the import operation interacts with the command `import l/life.csv g/group.csv e/event.csv` :
+Given below is the sequence diagram to illustrate how the import operation interacts with the command `import l/life.csv g/group.csv e/event.csv` :
 
 .Import feature sequence diagram.
 [#ImportFileSequenceDiagram, align="center"]
@@ -309,12 +310,46 @@ image::SuggestPersonActivityDiagram.png[][pdfwidth="40%",width="40%"]
 
 ==== Implementation
 
-To allow users to track social activities with a group of people, the `add_group` feature is implemented.
-The feature uses the `AddressBook` class stored in `ModelManager` instance of the app.
+The `add_group` feature is implemented to allow users to track social activities with a group of people
+(instead of just one person). A `Group` represents a social group containing
+1 or more `Person`. To avoid dependencies, a `Group` class stores the index of `Person` instead of the `Person` object
+itself. A `Group` can be created with or without `Person` as member(s), but have a `Name`.
 
-Here below is a sequence diagram showcasing the process of this command.
+This feature creates a new `Group` instance, which is then stored in an instance of `UniqueGroupList`,
+which in turn is stored in the `AddressBook`.These classes are part of the `model` package.
 
+The feature is supported by the `AddGroupCommand` class, which extends the abstract
+class `Command` and `AddGroupCommandParser`, which implements the `Parser` interface. These classes are part of the
+`logic` package.
 
+The following class diagram showcases the relationship between the main classes that support this command and
+key attributes and methods:
+
+[#AddGroupClassDiagram, align="center"]
+image::AddGroupClassDiagram.png[]
+
+Here below is an example usage scenario and how the `add_group` feature works at each step:
+
+1. User adds a group called `group_name` by typing `add_group n/group_name`
+2. The request is handled by the `Logic Manager`, which then directs it to the `AddressBookParser`
+for parsing.
+3. `AddressBookParser` detects the `Command Word` *add_group* and creates an `AddGroupCommandParser` to parse inputs
+according to the format specified for `AddGroupCommand`.
+4. `AddGroupCommandParser` parses the input and also performs input validation to check for correct types
+(eg alphanumeric characters for `Name` and `Integer` for memberIDs).
+5. If the inputs are valid,`AddressBookParser` calls the constructor of `Group` and creates a new `Group` instance with
+the inputs from the user. It creates a new `AddGroupCommand` and passes to it the newly created `Group`
+6. `AddressBookParser` returns the new `Command` object to the `AddressBookParser`, which in turn returns it to
+`LogicManager`.
+7. `LogicManager` calls the `execute` method with the `AddGroupCommand`.
+8. The `AddGroupCommand` instance obtains a copy of the `filteredPersonList` from `Model` using the `getFilteredList()`
+method. Using the list, the command verifies if the member indexes in the `Group` instance exist in the `Person` list.
+9. If the indexes are valid, the `AddGroupCommand` adds the group to the app by calling the `addGroup` method of
+`Model`.
+10. As a last step, the `AddGroupCommand` creates a `CommandResult` with `SuccessMessage` and `ViewType` and returns it
+to `LogicManager`.
+
+The process is shown in the following sequence diagram:
 
 [#AddGroupSequenceDiagam,align="center"]
 image::AddGroupSequenceDiagram.png[]
