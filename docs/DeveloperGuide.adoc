@@ -1299,7 +1299,7 @@ Expected: All valid life, group and event data will be exported to the respectiv
 Expected: CoderLifeInsights will return error message showing that files already exist.
 Another naming convention is required.
 
-=== Add a Social Group
+=== Add a Group
 
 . Adding an empty group
 .. Prerequisites: None
@@ -1314,6 +1314,28 @@ to the user.
 .. Test case: `add_group n/new_group_name m/1 m/2 ...`
 Expected: New group added to CoderLifeInsights, new group displayed in groups panel and success message displayed
 to the user.
+
+=== Delete a Group
+
+. Deleting an existing group
+.. Prerequisites: the group to be removed must exist in CoderLifeInsights.
+... If for example the app contains no groups, add a group using `add_group n/delete_demo`. It should have index 1.
+.. Test case: `delete_group 1`
+Expected: Group deleted from the app and success message shown to the user.
+
+. Deleting a non-existent group
+.. Prerequisites: the group to be deleted (referenced by the index) must not exist in CoderLifeInsights. To be safe,
+use the index that is 1 more than the largest index of the current groups. You can find the largest index using
+`list_groups` and observing the last group entry. If the app has 99 groups, choose 100 as the index of the group to be
+deleted.
+.. Test case: `delete group 100`
+Expected: Group not deleted as there is no group at given index. Error message shown to user saying Group Index
+specified is invalid.
+
+=== Edit a Group
+
+
+=== List all Groups
 
 === Saving data
 
