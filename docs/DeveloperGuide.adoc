@@ -363,7 +363,7 @@ image::addEventSequence.png[pdfwidth="100%",width="92.5%"]
 
 The following class diagram shows how the Time, PlaceList and ActivityList are associated with a Person object:
 
-image::addEventClassDiagram.png[pdfwidth="100%",width="92.5%"]
+image::AddEventClassDiagram.png[pdfwidth="100%",width="92.5%"]
 
 The following activity diagram depicts the following scenario:
 
