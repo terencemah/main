@@ -1069,6 +1069,16 @@ If member indexes are provided, they are invalid (don't exist in the app)
 Step 1 continues until all member indexes provided are correct or no new member indexes are provided at all. +
 Use case resumes at step 2
 
+=== Use case: List Group
+
+*MSS*
+
+1. User requests to list all groups
+2. CoderLifeInsights displays all the groups in a list format with their indexes, time spent, member indexes, and
+event ids.
++
+Use case ends. 
+
 === Use case: Export data
 
 *MSS*
