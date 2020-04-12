@@ -1367,7 +1367,7 @@ Expected: Error message saying group index is invalid is displayed to the user.
 .. Prerequisites: None.
 .. Test Case: `list_groups`
 Expected: the group panel will show all the groups currently in the app. If there are no groups, it will be blank.
-A success message will be shown to the user. 
+A success message will be shown to the user.
 
 === Saving data
 
@@ -1375,3 +1375,4 @@ A success message will be shown to the user.
 
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 _{ more test cases ... }_
+
