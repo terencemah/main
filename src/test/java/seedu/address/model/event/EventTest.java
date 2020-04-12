@@ -24,6 +24,7 @@ public class EventTest {
 
         //same EventId, different Time -> return true
         Event test = firstEvent;
+        test.setTime(new Time(22, 22));
         assertTrue(test.equals(firstEvent));
     }
 
