@@ -28,10 +28,10 @@ public class PlaceList {
         return new PlaceList(current);
     }
 
-    public void setPlaceList(List<String> xs) {
+    public void setPlaceList(List<String> oldList) {
         List<String> newList = new ArrayList<>();
         newList.addAll(this.placeList);
-        newList.addAll(xs);
+        newList.addAll(oldList);
         this.placeList.clear();
         this.placeList.addAll(newList);
     }
