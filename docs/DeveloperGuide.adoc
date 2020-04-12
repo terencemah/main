@@ -282,7 +282,7 @@ Given below is an sequence diagram illustrating how the suggestion operation wor
 .Suggest person feature sequence diagram.
 [#SuggestPersonSequenceDiagram, align="center"]
 image::SuggestPersonSequenceDiagram.png[][pdfwidth="70%", width="70%"]
-                                         
+
 1. User enters `suggest person`.
 2. `SuggestCommandParser` would then check if keyword entered corresponds to `person`, `place` or `activity`.
 3. Upon valid keyword entered, `SuggestCommand` would call `Model#suggestPerson` to return a suggested person.
@@ -302,7 +302,7 @@ Given below is an activity diagram to summarise the steps above.
 .Suggest person feature activity diagram.
 [#SuggestPersonActivityDiagram, align="center"]
 image::SuggestPersonActivityDiagram.png[][pdfwidth="40%",width="40%"]
-                                         
+
 //end::suggest[]
 
 
