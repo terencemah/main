@@ -24,7 +24,7 @@ public class SuggestCommand extends Command {
                     + "/"
                     + KEYWORD_ACTIVITY
                     + "/"
-                    + KEYWORD_PLACE 
+                    + KEYWORD_PLACE
                     + "\nExample: "
                     + COMMAND_WORD
                     + " person";
