@@ -13,6 +13,9 @@ public class RecentEventListTest {
     private ActivityList activities = new ActivityList(new ArrayList<>());
     private TimeList times = new TimeList(new ArrayList<>());
 
+    /**
+     * Fills all the list fields with an arbitrary string.
+     */
     private void fillLists() {
         strings.add("abc");
         places.setPlaceList(strings);
