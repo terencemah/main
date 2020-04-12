@@ -173,8 +173,7 @@ public class AddEventCommandParserTest {
                 + PREFIX_GROUP + targetIndex + " "
                 + PREFIX_PLACE + place + " "
                 + PREFIX_TIME + time;
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddEventCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, String.format(ParserUtil.MESSAGE_INVALID_INDEX));
     }
 
     @Test
@@ -207,6 +206,10 @@ public class AddEventCommandParserTest {
         userInput = activity + " "
                 + PREFIX_GROUP + targetIndex + " "
                 + PREFIX_PLACE + place + " ";
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddEventCommand.MESSAGE_USAGE));
+
+        userInput = "";
         assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddEventCommand.MESSAGE_USAGE));
     }

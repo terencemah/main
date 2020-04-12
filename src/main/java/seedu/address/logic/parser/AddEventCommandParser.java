@@ -33,10 +33,9 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MEMBER, PREFIX_GROUP, PREFIX_TIME,
                 PREFIX_PLACE);
-        if (!arePrefixesPresent(argMultimap, PREFIX_PLACE, PREFIX_TIME)
-                && (!arePrefixesPresent(argMultimap, PREFIX_GROUP)
-                || !arePrefixesPresent(argMultimap, PREFIX_MEMBER))
-                || !argMultimap.getPreamble().isEmpty()) {
+        if ((!arePrefixesPresent(argMultimap, PREFIX_PLACE, PREFIX_TIME, PREFIX_GROUP)
+                && !arePrefixesPresent(argMultimap, PREFIX_PLACE, PREFIX_TIME, PREFIX_MEMBER))
+                || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
         String activity = argMultimap.getPreamble();
@@ -90,9 +89,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
             Event event = new Event(activity, place, time);
 
             Index index;
-            /*if (argMultimap.getValue(PREFIX_MEMBER).isEmpty() && argMultimap.getValue(PREFIX_GROUP).isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
-            } else */if (argMultimap.getValue(PREFIX_MEMBER).isEmpty()) {
+            if (argMultimap.getValue(PREFIX_MEMBER).isEmpty()) {
                 index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_GROUP).get());
                 int idx = index.getOneBased();
                 event.setWithGroup(idx);
