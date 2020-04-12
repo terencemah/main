@@ -149,7 +149,7 @@ Creates a group named `RC Friends` and assigns a group ID and the given memberID
 to the user after creation.
 |=======================================================================
 // end::add_group[]
-// start::edit_group[]
+// tag::edit_group[]
 === Edit Group: `edit_group`
 
 Edit a given person id with a given group id +
@@ -171,7 +171,6 @@ before. Name overwritten, memberIDs remain the same as before.
 it was before. Member list overwritten, Name stays the same.
 |Change the name and members of the first group| `edit_group 1 n/new_name m/1` | Changes both the name and members of the group with index 1 in Coder Life Insights. Both values overwritten.
 |=======================================================================
-
 // end::edit_group[]
 
 // tag::addEvent[]
@@ -236,11 +235,11 @@ Format: `suggest SUGGESTION_PARAMETER`
 ** A place to go to.
 *** Suggestion is based on frequency of place visited from events added.
 *** CoderLifeInsights will return the events that happened at the suggested place which the user has visited the least in terms of frequency.
-*** If there are multiple places with the same amount of frequency, CoderLifeInsights will return the first place based on chronological order.
+*** If there are multiple places with the same frequency, CoderLifeInsights will return a random selection among the places with the same frequency.
 ** An activity to do.
 *** Suggestion is based on frequency of activity done from events added.
 *** CoderLifeInsights will return the events that happened with the suggested activity which the user has done the least in terms of frequency.
-*** If there are multiple activities with the same amount of frequency, CoderLifeInsights will return the first activity based on chronological order.
+*** If there are multiple activities with the same frequency, CoderLifeInsights will return a random selection among the activities with the same frequency.
 ****
 
 Examples:
@@ -254,7 +253,7 @@ Examples:
 |=======================================================================
 // end::suggest[]
 
-// start::view[]
+// tag::view[]
 === Insights: `view`
 
 Lists insights about the user's interactions with a particular friend, in the form of a pie chart.
@@ -385,7 +384,7 @@ For Windows:
 * Refer to the diagram below for reference.
 
 .File path finding in Windows
-[#RetrievingFilePath, align="center"]
+[#RetrievingFilePathWindows, align="center"]
 image::windowsPathFinding.png[]
 
 [pdfwidth="50%",width="50%"]
@@ -395,7 +394,7 @@ For Mac:
 * Refer to the diagram below for reference.
 
 .File path finding in MacOS
-[#RetrievingFilePath, align="center"]
+[#RetrievingFilePathMac, align="center"]
 image::macPathFinding.png[pdfwidth="50%",width="50%"]
 
 ==== CSV File Constraints
@@ -416,7 +415,7 @@ Before using the `import` command with `Life.csv`, please ensure the following h
 Refer to image below for reference:
 
 .Example Life.csv format
-[#CSVFileConstraints, align="center"]
+[#CSVFileConstraintsLife, align="center"]
 image::lifeCSVFormat.png[pdfwidth="70%",width="70%"]
 
 ====
@@ -442,7 +441,7 @@ Before using the `import` command with `Groups.csv`, please ensure the following
 * `activities`
 
 .Example Groups.csv format
-[#CSVFileConstraints, align="center"]
+[#CSVFileConstraintsGroups, align="center"]
 image::eventCSVFormat.png[pdfwidth="70%",width="70%"]
 
 ====
@@ -466,7 +465,7 @@ Before using the `import` command with `Events.csv`, please ensure the following
 * `time`
 
 .Example Events.csv format
-[#CSVFileConstraints, align="center"]
+[#CSVFileConstraintsEvents, align="center"]
 image::eventCSVFormat.png[pdfwidth="70%",width="70%"]
 // end::import[]
 
@@ -500,6 +499,7 @@ Exports your event data to `events.csv`
 |=======================================================================
 // end::export[]
 
+// tag::delete[]
 === Deleting an object : `delete`
 
 Deletes an entity, such as a Person or Group from the CoderLifeInsights +
@@ -526,7 +526,7 @@ Examples:
 |Find a person and delete the person from the list returned|`find Betsy` +
 `delete_person 1` | Deletes the 1st person in the results of the `find` command.
 |=========================================================================
-
+//end::delete[]
 === Clearing all entries : `clear`
 
 Clears all entries from the CoderLifeInsights. +

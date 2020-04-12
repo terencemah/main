@@ -18,9 +18,13 @@ import seedu.address.model.person.Person;
 public class TypicalGroups {
 
     public static final Group SOC = new GroupBuilder()
-            .withName("SoC Friends").withId(1).withTime("1h 1m").build();
-    public static final Group RC = new GroupBuilder().withName("RC Friends").withId(2).withTime("2h 2m").build();
-    public static final Group NS = new GroupBuilder().withName("NS Friends").withId(3).withTime("0h 30m").build();
+            .withName("SoC Friends").withTime("1h 1m").build();
+    public static final Group RC = new GroupBuilder().withName("RC Friends").withTime("2h 2m").build();
+    public static final Group NS = new GroupBuilder().withName("NS Friends").withTime("0h 30m").build();
+
+    public static final Group SOC_NO_TIME = new GroupBuilder().withName("SoC Friends").build();
+    public static final Group RC_NO_TIME = new GroupBuilder().withName("RC Friends")
+            .withMembers(new ArrayList<>(Arrays.asList(1, 2))).build();
 
     private TypicalGroups() {
     }

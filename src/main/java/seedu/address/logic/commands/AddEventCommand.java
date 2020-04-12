@@ -54,7 +54,8 @@ public class AddEventCommand extends Command {
             + PREFIX_TIME
             + "300";
 
-    public static final String MESSAGE_INVALID_TIME_INPUT = "Time parameter needs to be at least 2 digits.\n"
+    public static final String MESSAGE_INVALID_TIME_INPUT =
+            "Time parameter needs to be unsigned integers of at least 2 digits.\n"
             + "For example: "
             + "[5 minutes = 05]; "
             + "[1 hour = 100]; "

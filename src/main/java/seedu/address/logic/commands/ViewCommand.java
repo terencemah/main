@@ -78,7 +78,7 @@ public class ViewCommand extends Command {
             return processTypeGroup(model);
         }
     }
-
+    
     public Index getIndex() {
         return index;
     }
