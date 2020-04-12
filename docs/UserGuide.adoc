@@ -256,38 +256,80 @@ Examples:
 // tag::view[]
 === Insights: `view`
 
-Lists insights about the user's interactions with a particular friend, in the form of a pie chart.
-These include places visited, time spent, and/or activities done with the friend.
-Format: `view [INDEX] INSIGHT_PARAMETER`
+Displays various insights about the person's, groups and events stored in Coder Life Insights.
+(You might need to enlarge the application window for the best view.)
+
+This feature encompasses a range of functions which share the following format:
+`view INSIGHT_PARAMETER [m/PERSON_INDEX] [g/GROUP_INDEX]`
+Note that the application will only accept EITHER a person index OR a group index, never both.
+Also, whether an index is required or possibly not allowed depends on the insight parameter.
 
 ****
-* Insight parameters include `places`, `time`, `activities`, or `all`
-* CoderLifeInsights will list, with frequencies:
-** All or any one of the following:
-*** Places user has visited with friend/group
-*** Activities user has done with friend/group
-*** Time spent with individuals vs group in pie chart form
-**** Places and Activities are case-sensitive:
-***** `Swimming Pool` and `swimming pool` are considered different places
-***** `SWIMMING` and `swimming` are considered different activities
+* The available insight parameters are: `places`, `activities`, `recent`, `all`, and `time`.
+** `Places` (must enter an index)
+*** This function lists all the places that the user has visited with the target person or target group, and their frequencies, in descending order of frequency.
+
+.View Places example
+[#ViewPlacesExample, align="center"]
+image::viewplacesexample.png[]
+
+** `Activities` (must enter an index)
+*** This function lists all the activities that the user has done with the target person or target group, and their frequencies, in descending order of frequency.
+
+.View Activities example
+[#ViewActivitiesExample, align="center"]
+image::viewactivitiesexample.png[]
+
+** `Recent` (can have an index or no index)
+*** If an index is entered, this function lists the user's last 5 events with the target person or target group, in reverse chronological order.
+*** If no index is entered, this function lists the user's last 5 events overall, in reverse chronological order.
+*** The event display features each event's place, activity, duration, and serial number.
+
+.View Recent example
+[#ViewRecentExample, align="center"]
+image::viewrecentexample.png[]
+
+** 'All' (cannot have an index)
+*** This function lists all events that the user has added, in chronological order.
+*** The event display features each event's place, activity, duration, and serial number.
+
+.View All example
+[#ViewAllExample, align="center"]
+image::viewallexample.png[]
+
+** `Time` (cannot have an index)
+*** This function compares the user's total time spent with individuals against his/her total time spent with groups, in the form of a pie chart.
+
+.View Time example
+[#ViewTimeExample, align="center"]
+image::viewtimeexample.png[]
 
 
-Examples:
+Take note that Places and Activities are case-sensitive:
+* `Swimming Pool` and `swimming pool` are considered different places
+* `SWIMMING` and `swimming` are considered different activities
 
-[width="80%",cols="30%,<30%,<40%",options="header"]
+
+The examples below provide an exhaustive list of permissible command formats:
+
+[width="80%",cols="30%,<70%",options="header"]
 |=======================================================================
-| Example | Command | Result
-| Get insights of places been with the 1st person| `view 1 places` |
-Coder Life Insights shows a table of places and the frequency of visits for the person with index 1.
-|Get insights of time spent with groups and individuals| `view time` | Coder Life Insights shows a pie chart comparing time spent with groups vs time spent with individuals.
-|Get insights of the last 5 events |`view recent` | Coder Life Insights shows the last 5 events. Info shows: places, activity done and time spent.
-|Get insights of places, time and activities | `view all` | Returns the output of 'view places', 'view time', and 'view activities', in that order.
+| Command | Result
+|`view places m/1`|View places visited with person 1 from the active person list.
+|`view places g/1`|View places visited with group 1 from the active group list.
+|`view activities m/1`|View activities done with person 1 from the active person list.
+|`view activities g/1`|View activities done with group 1 from the active group list.
+|`view recent`|View the last 5 events overall.
+|`view recent m/1`|View the last 5 events with person 1 from the active person list.
+|`view recent g/1`|View the last 5 events with group 1 from the active group list.
+|`view all`|View all events the user has added to Coder Life Insights.
+|`view time`|View a pie chart displaying the proportion of individual time vs group time spent.
 |=======================================================================
 ****
 // end::view[]
 
 // tag::viewGroup[]
-=== Insights: `view_group`
+=== Insights: `view_group` (This command is no longer in use.)
 
 Lists insights about the user's interactions with a particular group.
 These include places visited and activities done with that group.
