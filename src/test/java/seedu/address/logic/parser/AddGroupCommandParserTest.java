@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEMBER_NOT_INT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_SPECIALCHAR;
 import static seedu.address.logic.commands.CommandTestUtil.MEMBER_DESC_1;
 import static seedu.address.logic.commands.CommandTestUtil.MEMBER_DESC_2;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_RC;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.Name;
 import seedu.address.testutil.GroupBuilder;
 
 public class AddGroupCommandParserTest {
@@ -48,5 +50,11 @@ public class AddGroupCommandParserTest {
     public void parse_withInvalidMemberIds_fail() {
         String expectedMessage = AddGroupCommandParser.MEMBER_NOT_INT;
         assertParseFailure(parser, NAME_DESC_RC + INVALID_MEMBER_NOT_INT, expectedMessage);
+    }
+
+    @Test
+    public void parse_withInvalidName_fail() {
+        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        assertParseFailure(parser, INVALID_NAME_SPECIALCHAR, expectedMessage);
     }
 }
