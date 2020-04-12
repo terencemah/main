@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute(edit_group index ...)
+[-> LogicManager : execute("edit_group 1 ...")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(edit_group index ...)
+LogicManager -> AddressBookParser : parseCommand("edit_group 1 ...")
 activate AddressBookParser
 
 create EditGroupCommandParser
@@ -26,10 +26,13 @@ activate EditGroupCommandParser
 EditGroupCommandParser -> AddressBookParser
 deactivate
 
-AddressBookParser -> EditGroupCommandParser : parse(index ...)
+AddressBookParser -> EditGroupCommandParser : parse("1 ...")
 activate EditGroupCommandParser
 create EditGroupCommandClass
 EditGroupCommandParser -> EditGroupCommandClass : new EditGroupDescriptor()
+note left
+Input Validation
+end note
 activate EditGroupCommandClass
 EditGroupCommandClass --> EditGroupCommandParser : editGroupDescriptor
 deactivate EditGroupCommandClass
