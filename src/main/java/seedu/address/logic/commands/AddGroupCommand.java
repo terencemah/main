@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
@@ -50,7 +48,6 @@ public class AddGroupCommand extends Command {
     public static final String MESSAGE_PERSON_DOES_NOT_EXIST = "Person(s) with given index does not exist";
     public static final String MESSAGE_DUPLICATE_MEMBERS = "Group contains duplicate member indexes. Please try again "
             + "with unique member indexes.";
-    private static final Logger logger = LogsCenter.getLogger(AddGroupCommand.class);
     private final Group toAdd;
 
     public AddGroupCommand(Group group) {

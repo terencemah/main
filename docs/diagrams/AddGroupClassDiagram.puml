@@ -1,26 +1,53 @@
 @startuml
+left to right direction
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
+package Model <<Folder>> {
+    class AddressBook {
+           + addGroup(group: Group)
+           {method} ...
+    }
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
+    class UniqueGroupList {
+            - internalList : ObservableList<Group>
+            - internalUnmodifiableList : ObservableList<Group>
+            + addGroup(toAdd: Group)
+            + contains(toCheck: Group) : boolean
+            {method} ...
+    }
 
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+    class Group {
+        - name: Name[1]
+        - timeSpent: Time[1]
+        - membersIDs: ArrayList<Integer>[1]
+        - eventIDs: ArrayList<Integer>[1]
+        - activityList: ActivityList
+        - placeList: PlaceList
+        ...
+        + Group(name: Name, placeList: PlaceList, activityList: ActivityList)
+        {method} ...
+    }
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+package Logic <<Folder>> {
+    class AddGroupCommand {
+        {static} + COMMAND_WORD : String
+        - toAdd : Group
+        ...
+
+        + AddGroupCommand(group: Group)
+        + execute(model: Model) : CommandResult
+        ...
+    }
+
+    class AddGroupCommandParser {
+        + parse(args: String) : AddGroupCommand
+        {static} - arePrefixesPresent(argMultimap: ArgumentMultiMap, prefixes..: Prefix): boolean
+    }
 }
 
+
+AddressBook - UniqueGroupList : contains >
+UniqueGroupList - Group : contains >
+
+AddGroupCommandParser - AddGroupCommand
 @enduml
