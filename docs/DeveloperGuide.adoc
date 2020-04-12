@@ -328,7 +328,7 @@ image::SuggestPersonActivityDiagram.png[][pdfwidth="40%",width="40%"]
 
 ==== Implementation
 
-The `add_group` feature is implemented to allow users to track social activities with a group of people
+The Add Group feature is implemented to allow users to track social activities with a group of people
 (instead of just one person). A `Group` represents a social group containing
 1 or more `Person`. To avoid dependencies, a `Group` class stores the index of `Person` instead of the `Person` object
 itself. A `Group` can be created with or without `Person` as member(s), but have a `Name`.
@@ -421,6 +421,17 @@ feature is shown using the following Sequence Diagram.
 image::DeleteGroupSequenceDiagram.png[]
 
 ==== Design Considerations
+
+Aspect: how the delete group feature executes
+
+* Alternative 1: Separate `DeleteGroupCommand` and `DeleteGroup` classes to support the feature. +
+    Pros: clear class responsibility, easier to trace bugs. Since this follows the design of most other commands,
+    intuitive to understand for new developers +
+    Cons: increases the amount of code, which might introduce more errors.
+
+* Alternative 2: The `DeleteGroupCommand` class parses the inputted index +
+    Pros: Since only one argument to parse, this eliminates the need for another class. Less code.
+    Cons: Can cause confusion among developers regarding the class responsibility.
 
 //tag::list_group[]
 === List Group Feature
