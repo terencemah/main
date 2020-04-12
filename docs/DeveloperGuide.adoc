@@ -302,7 +302,6 @@ Given below is an activity diagram to summarise the steps above.
 .Suggest person feature activity diagram.
 [#SuggestPersonActivityDiagram, align="center"]
 image::SuggestPersonActivityDiagram.png[][pdfwidth="40%",width="40%"]
-
 //end::suggest[]
 
 
