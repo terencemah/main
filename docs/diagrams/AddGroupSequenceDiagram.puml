@@ -27,6 +27,13 @@ deactivate
 
 AddressBookParser -> AddGroupCommandParser : parse("n/group_name ...")
 activate AddGroupCommandParser
+AddGroupCommandParser -> Model : Group(name, activityList, placeList)
+note left
+Input Validation
+end note
+activate Model
+Model --> AddGroupCommandParser : Group
+deactivate Model
 create AddGroupCommand
 AddGroupCommandParser -> AddGroupCommand : AddGroupCommand(group)
 activate AddGroupCommand
@@ -54,7 +61,7 @@ supplied as arguments
 are in the app
 end note
 
-AddGroupCommand -> Model : addGroup()
+AddGroupCommand -> Model : addGroup(toAdd)
 activate Model
 Model --> AddGroupCommand
 deactivate
