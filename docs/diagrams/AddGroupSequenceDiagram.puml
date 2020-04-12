@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute(add_group n/group_name ...)
+[-> LogicManager : execute("add_group n/group_name ...")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(add_group n/group_name ...)
+LogicManager -> AddressBookParser : parseCommand("add_group n/group_name ...")
 activate AddressBookParser
 
 create AddGroupCommandParser
@@ -25,7 +25,7 @@ activate AddGroupCommandParser
 AddGroupCommandParser -> AddressBookParser
 deactivate
 
-AddressBookParser -> AddGroupCommandParser : parse(n/group_name ...)
+AddressBookParser -> AddGroupCommandParser : parse("n/group_name ...")
 activate AddGroupCommandParser
 create AddGroupCommand
 AddGroupCommandParser -> AddGroupCommand : AddGroupCommand(group)
@@ -46,9 +46,11 @@ Model --> AddGroupCommand : FilteredPersonList
 deactivate Model
 
 note left
-this checks whether
+FilteredPersonList is
+used to
+check whether
 member indexes
-provided
+supplied as arguments
 are in the app
 end note
 
