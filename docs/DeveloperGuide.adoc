@@ -32,7 +32,7 @@ their data, show insights and error messages whenever applicable.
 
 We're delighted that you're interested in the development of CoderLifeInsights and reading this guide is a great first
 step to get upto speed with the codebase and how it is organised. This guide also serves as reference for all current
-developers when needed. 
+developers when needed.
 
 == Setting up
 
@@ -1298,6 +1298,22 @@ Expected: All valid life, group and event data will be exported to the respectiv
 .. Test case: `export l/life.csv g/group.csv e/event.csv`
 Expected: CoderLifeInsights will return error message showing that files already exist.
 Another naming convention is required.
+
+=== Add a Social Group
+
+. Adding an empty group
+.. Prerequisites: None
+.. Test case: `add_group n/empty_group_name` +
+Expected: New group added to CoderLifeInsights, new group displayed in groups panel and success message displayed
+to the user.
+
+. Adding a group with members (Persons)
+.. Prerequisites: Member indexes must exist in the app. Hence, add as many members you want as `Person' before.
+... For example, add a Person using the command `add_person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
+... Note down the person indexes for persons whom you want as members of the new group
+.. Test case: `add_group n/new_group_name m/1 m/2 ...`
+Expected: New group added to CoderLifeInsights, new group displayed in groups panel and success message displayed
+to the user.
 
 === Saving data
 
