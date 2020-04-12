@@ -113,3 +113,6 @@ include::../UserGuide.adoc[tag=suggest]
 |===
 
 include::../DeveloperGuide.adoc[tag=importexport]
+
+include::../DeveloperGuide.adoc[tag=suggest]
+
