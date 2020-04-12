@@ -1031,6 +1031,44 @@ Member indexes provided are invalid (don't exist in the app)
 Step 1 continues until valid member indexes are supplied or no indexes are supplied (member indexes are optional) +
 Use case resumes at step 2.
 
+=== Use case: Delete Group
+
+Preconditions: group to be deleted exists in the app +
+*MSS*
+
+1. User requests to delete group with specified index
+2. CodeLifeInsights deletes the group and displays its details
++
+Use case ends.
+
+=== Use case: Edit Group
+
+Preconditions: group to be deleted exists in the app +
+*MSS*
+
+1. User requests to edit group with specified index
+2. CodeLifeInsights deletes the group and displays its details
++
+Use case ends.
+
+*Extensions*
+
+* 1a.
+No values to edit are provided
++
+** 1a1. CoderLifeInsights shows an error message telling the user a group can't be edited with no new info.
++
+Step 1 continues until at least one new value is provided. +
+Use case resumes at step 2
+
+* 1b.
+If member indexes are provided, they are invalid (don't exist in the app)
++
+** 1b1. CoderLifeInsights shows an error message telling the user that one or more member indexes are invalid.
++
+Step 1 continues until all member indexes provided are correct or no new member indexes are provided at all. +
+Use case resumes at step 2
+
 === Use case: Export data
 
 *MSS*
