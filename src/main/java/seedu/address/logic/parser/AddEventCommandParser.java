@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PLACE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
@@ -32,7 +33,11 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MEMBER, PREFIX_GROUP, PREFIX_TIME,
                 PREFIX_PLACE);
-
+        if ((!arePrefixesPresent(argMultimap, PREFIX_PLACE, PREFIX_TIME, PREFIX_GROUP)
+                && !arePrefixesPresent(argMultimap, PREFIX_PLACE, PREFIX_TIME, PREFIX_MEMBER))
+                || argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
+        }
         String activity = argMultimap.getPreamble();
         if (activity.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
@@ -49,7 +54,12 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         if (input.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         } else {
-            char[] time = argMultimap.getValue(PREFIX_TIME).get().toCharArray();
+            String[] process = argMultimap.getValue(PREFIX_TIME).get().split(" ");
+            if (process.length > 1) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddEventCommand.MESSAGE_USAGE));
+            }
+            char[] time = process[0].toCharArray();
             if (time.length < 2) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddEventCommand.MESSAGE_INVALID_TIME_INPUT));
@@ -68,13 +78,18 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         }
 
         try {
+            Integer.parseInt(mins);
+            Integer.parseInt(hours);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(AddEventCommand.MESSAGE_INVALID_TIME_INPUT);
+        }
+
+        try {
             Time time = new Time(Integer.parseInt(mins), Integer.parseInt(hours));
             Event event = new Event(activity, place, time);
 
             Index index;
-            if (argMultimap.getValue(PREFIX_MEMBER).isEmpty() && argMultimap.getValue(PREFIX_GROUP).isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
-            } else if (argMultimap.getValue(PREFIX_MEMBER).isEmpty()) {
+            if (argMultimap.getValue(PREFIX_MEMBER).isEmpty()) {
                 index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_GROUP).get());
                 int idx = index.getOneBased();
                 event.setWithGroup(idx);
@@ -89,7 +104,14 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());
         }
+    }
 
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given {@code
+     * ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
 
