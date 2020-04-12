@@ -170,18 +170,26 @@ This section describes some noteworthy details on how certain features are imple
 The import feature allows users to import data from a comma-separated values (CSV) file.
 It allows users to bulk import their contacts, groups and events from a previously exported data from CoderLifeInsights application.
 
-Given below is an activity diagram shows how the import operation works with the command `import l/life.csv g/group.csv e/event.csv`:
+Given below is a sequence diagram to illustrate how the import operation interacts with the command `import l/life.csv g/group.csv e/event.csv` :
 
-.Import feature activity diagram.
-[#ImportFileActivityDiagram,align="center"]
-image::ImportFileActivityDiagram.png[][pdfwidth="40%",width="40%"]
+.Import feature sequence diagram.
+[#ImportFileSequenceDiagram, align="center"]
+image::ImportFileSequenceDiagram.png[][pdfwidth="70%",width="70%"]
 1. User enters `import l/life.csv g/group.csv e/event.csv`.
 2. All 3 files would then be parsed by `ImportCommandParser` to check if the files exist with the path specified.
 3. On successful check, `ImportCommand` would be created and calls `ImportFile#importCsv`, `ImportFile#importGroupCsv` and
 `ImportFile#importEventCsv`to check if the CSV file headers are valid.
- qq4. `ImportCommand` would then call `Model#hasPersons`, `Model#hasGroups` and `Model#hasEvents` to check if the persons, groups and events are duplicates of the current CoderLifeInsights.
-4. If the imported data are not duplicates, it will then create a valid list of persons, groups and events to be added to CoderLifeInsights.
-5. CoderLifeInsights will then populate the 3 lists to the current data.
+4. `ImportCommand` would then call `Model#importCsvToAddressBook`, `Model#importCsvGroupsToAddressBook` and `Model#importCsvEventsToAddressBook`
+to check if the persons, groups and events are duplicates of the current CoderLifeInsights.
+5. If the imported data are not duplicates, it will then create a valid list of persons, groups and events to be added to CoderLifeInsights.
+6. CoderLifeInsights will then populate the 3 lists to the current data.
+
+Given below is an activity diagram to summarise the steps above.
+
+.Import feature activity diagram.
+[#ImportFileActivityDiagram,align="center"]
+image::ImportFileActivityDiagram.png[][pdfwidth="40%",width="40%"]
+
 
 ==== Csv file format and constraints
 
@@ -243,17 +251,23 @@ There would be risk of the application stop responding if the second alternative
 
 The export feature allows users to export their current data into a comma-separated value file with file name specified.
 
-Given below is an activity diagram illustrating how the export operation works with the command `export l/life.csv g/group.csv e/event.csv`
+Given below is a sequence diagram to illustrate how the export operation interacts with the command `export l/life.csv g/group.csv e/event.csv` :
 
 .Export feature activity diagram.
-[#ExportFileActivityDiagram,align="center"]
-image::ExportFileActivityDiagram.png[][pdfwidth="40%",width="40%"]
+[#ExportFileSequenceDiagram,align="center"]
+image::ExportFileSequenceDiagram.png[][pdfwidth="70%",width="70%"]
 1. User enters `export l/life.csv g/group.csv e/event.csv`
 2. All 3 files would then be parsed by `ExportCommandParser` to check if the files specified exist within the specified file path.
 3. This is necessary to avoid existing files being overwritten.
 4. If files do not exist, `ExportCommand` would then be created and calls `ExportFile#exportCsv`, `ExportFile#exportGroupCsv`
 and `ExportFile#exportEventCsv`.
 5. Life, groups and events data would then be exported `life.csv`, `group.csv` and `event.csv` respectively.
+
+Given below is an activity diagram to summarise the steps above.
+
+.Export feature activity diagram.
+[#ExportFileActivityDiagram,align="center"]
+image::ExportFileActivityDiagram.png[][pdfwidth="40%",width="40%"]
 //end::importexport[]
 
 // tag::suggest[]
@@ -263,20 +277,32 @@ and `ExportFile#exportEventCsv`.
 
 The suggestion feature allows users to get a person to hangout with, a place to hangout or an activity to do.
 
-Given below is an activity diagram illustrating how the suggestion operation works with the command `suggest person`.
-.Suggest person feature activity diagram.
-[#SuggestPersonActivityDiagram, align="center"]
-image::SuggestPersonActivityDiagram.png[][pdfwidth="40%",width="40%"]
+Given below is an sequence diagram illustrating how the suggestion operation works with the command `suggest person`.
+
+.Suggest person feature sequence diagram.
+[#SuggestPersonSequenceDiagram, align="center"]
+image::SuggestPersonSequenceDiagram.png[][pdfwidth="70%", width="70%"]
+                                         
 1. User enters `suggest person`.
-2. `SuggestCommand` would then check if keyword entered corresponds to `person`, `place` or `activity`.
+2. `SuggestCommandParser` would then check if keyword entered corresponds to `person`, `place` or `activity`.
 3. Upon valid keyword entered, `SuggestCommand` would call `Model#suggestPerson` to return a suggested person.
-4. ObservableList of filteredPersons would be iterated to get suggested person based on least time spent and reverse lexicographical order of name as a tie breaker.
+4. ObservableList of filteredPersons would be iterated to get suggested person based on least time spent and reverse
+lexicographical order of name as a tie breaker. `Model` would self-invoke the method `Model#updateFilteredPersonList`
+to update filteredPersonList.
 5. filteredPersonList would then be updated to reflect on the GUI as a suggestion.
 
 A similar approach would apply to `place` and `activity` where instead of `Model#suggestPerson`, it would be
-`Model#suggestPlace` or `Model#suggestActivity` where an ObservableList of filteredEvents would be iterated to get suggested place or activity based on the least frequency of the place visited or activity done.
+`Model#suggestPlace` or `Model#suggestActivity` where an ObservableList of filteredEvents would be iterated to get
+suggested place or activity based on the least frequency of the place visited or activity done.
 
 If there are multiple place visited or activity done has the same frequency, a tie breaker would be introduced where the first place/activity would be suggested based on chronological order.
+
+Given below is an activity diagram to summarise the steps above.
+
+.Suggest person feature activity diagram.
+[#SuggestPersonActivityDiagram, align="center"]
+image::SuggestPersonActivityDiagram.png[][pdfwidth="40%",width="40%"]
+                                         
 //end::suggest[]
 
 
