@@ -46,7 +46,7 @@ deactivate EditGroupCommandParser
 EditGroupCommandParser -[hidden]-> AddressBookParser
 destroy EditGroupCommandParser
 AddressBookParser --> LogicManager : Command
-
+deactivate AddressBookParser
 LogicManager -> EditGroupCommand : execute(model)
 activate EditGroupCommand
 EditGroupCommand -> Model : getFilteredPersonList()
