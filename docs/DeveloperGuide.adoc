@@ -16,6 +16,24 @@ endif::[]
 
 By: `CoderLifeInsights`      Since: `March 2020`      Licence: `MIT`
 
+
+== Introduction
+
+CoderLifeInsights is a desktop application that provides you insights and suggestions to your social life as
+a programmer using a CLI (Command Line Interface).
+
+Managing social life as a programmer can be difficult since you spend most of the in front of the screen,
+probably coding. And thus, it is easy to lose track of people who you spend time with or need to spend time with.
+CoderLifeInsights helps you track and gain insights on your social life off the screen.
+
+CoderLifeInsights is a Command Line Interface (CLI) application that also has a Graphical User Interface (GUI). Thus,
+the users are expected to use CoderLifeInsights mainly through CLI, but the GUI is used to give the user a glimpse of
+their data, show insights and error messages whenever applicable.
+
+We're delighted that you're interested in the development of CoderLifeInsights and reading this guide is a great first
+step to get upto speed with the codebase and how it is organised. This guide also serves as reference for all current
+developers when needed. 
+
 == Setting up
 
 Refer to the guide <<SettingUp#, here>>.
@@ -402,7 +420,7 @@ feature is shown using the following Sequence Diagram.
 [#DeleteGroupSequenceDiagram, align="center"]
 image::DeleteGroupSequenceDiagram.png[]
 
-=== Design Considerations
+==== Design Considerations
 
 //tag::list_group[]
 === List Group Feature
@@ -881,7 +899,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user | create a new social group | track a cluster of people together, e.g. secondary school friends, JC friends, family, university friends etc.
 
-|`* * *` |user | assign group(s) to a person | track people I know from multiple places (Eg workplace and school both).
+|`* * *` |user | assign persons to different groups | track people I know from multiple places (Eg workplace and school both).
+
+|`* * *` |user | edit group | change the name of a social circle. Add or remove people.
 
 |`* * *` |user | delete group | remove social circles that are no longer needed.
 
