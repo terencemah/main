@@ -44,13 +44,17 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
         }
         if (arePrefixesPresent(argumentMultimap, PREFIX_MEMBER)) {
             List<String> members = argumentMultimap.getAllValues(PREFIX_MEMBER);
-            List<Integer> memberIDs = members.stream()
-                                                  .map(s -> Integer.valueOf(s))
-                                                  .collect(Collectors.toList());
-            ArrayList<Integer> memberIds = new ArrayList<>(memberIDs);
-            editGroupDescriptor.setMemberIds(memberIds);
-        }
+            try {
+                List<Integer> memberIDs = members.stream()
+                        .map(s -> Integer.valueOf(s))
+                        .collect(Collectors.toList());
+                ArrayList<Integer> memberIds = new ArrayList<>(memberIDs);
+                editGroupDescriptor.setMemberIds(memberIds);
+            } catch (NumberFormatException e) {
+                throw new ParseException("Member indexes provided must be an integer.");
+            }
 
+        }
         if (!editGroupDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditGroupCommand.MESSAGE_NOT_EDITED);
         }
