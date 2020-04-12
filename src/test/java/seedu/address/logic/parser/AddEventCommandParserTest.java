@@ -65,7 +65,7 @@ public class AddEventCommandParserTest {
                 AddEventCommand.MESSAGE_INVALID_TIME_INPUT));
     }
 
-    @Test //need fix
+    @Test
     public void parse_emptyHourField_success () {
         String targetIndex = "1";
         String activity = "Some activity";
@@ -119,6 +119,97 @@ public class AddEventCommandParserTest {
                 + PREFIX_GROUP + targetIndex + " "
                 + PREFIX_PLACE + place + " "
                 + PREFIX_TIME + time;
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddEventCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidTime_failure() {
+        String targetIndex = "1";
+        String activity = "Some activity";
+        String place = "Some place";
+        String time = "15s";
+        String userInput = activity + " "
+                + PREFIX_GROUP + targetIndex + " "
+                + PREFIX_PLACE + place + " "
+                + PREFIX_TIME + time;
+        assertParseFailure(parser, userInput, String.format(AddEventCommand.MESSAGE_INVALID_TIME_INPUT));
+    }
+
+    @Test
+    public void parse_stringAsTime_failure() {
+        String targetIndex = "1";
+        String activity = "Some activity";
+        String place = "Some place";
+        String time = "15 s";
+        String userInput = activity + " "
+                + PREFIX_GROUP + targetIndex + " "
+                + PREFIX_PLACE + place + " "
+                + PREFIX_TIME + time;
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddEventCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidIndex_failure() {
+        String targetIndex = "s";
+        String activity = "Some activity";
+        String place = "Some place";
+        String time = "15";
+        String userInput = activity + " "
+                + PREFIX_GROUP + targetIndex + " "
+                + PREFIX_PLACE + place + " "
+                + PREFIX_TIME + time;
+        assertParseFailure(parser, userInput, String.format(ParserUtil.MESSAGE_INVALID_INDEX));
+    }
+
+    @Test
+    public void parse_emptyIndex_failure() {
+        String targetIndex = "";
+        String activity = "Some activity";
+        String place = "Some place";
+        String time = "15";
+        String userInput = activity + " "
+                + PREFIX_GROUP + targetIndex + " "
+                + PREFIX_PLACE + place + " "
+                + PREFIX_TIME + time;
+        assertParseFailure(parser, userInput, String.format(ParserUtil.MESSAGE_INVALID_INDEX));
+    }
+
+    @Test
+    public void parse_requiredFieldsMissing_failure() {
+        String targetIndex = "1";
+        String activity = "Some activity";
+        String place = "Some place";
+        String time = "15";
+        String userInput = " "
+                + PREFIX_GROUP + targetIndex + " "
+                + PREFIX_PLACE + place + " "
+                + PREFIX_TIME + time;
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddEventCommand.MESSAGE_USAGE));
+
+        userInput = activity + " "
+                + " "
+                + PREFIX_PLACE + place + " "
+                + PREFIX_TIME + time;
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddEventCommand.MESSAGE_USAGE));
+
+        userInput = activity + " "
+                + PREFIX_MEMBER + targetIndex + " "
+                + " "
+                + PREFIX_TIME + time;
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddEventCommand.MESSAGE_USAGE));
+
+        userInput = activity + " "
+                + PREFIX_GROUP + targetIndex + " "
+                + PREFIX_PLACE + place + " ";
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddEventCommand.MESSAGE_USAGE));
+
+        userInput = "";
         assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddEventCommand.MESSAGE_USAGE));
     }

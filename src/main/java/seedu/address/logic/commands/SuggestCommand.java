@@ -18,16 +18,16 @@ public class SuggestCommand extends Command {
     public static final String MESSAGE_USAGE =
             COMMAND_WORD
                     + ": Suggests a person based on time spent/ "
-                    + "place or activity based on frequency"
+                    + "place or activity based on frequency \n"
                     + "Parameters: "
                     + KEYWORD_PERSON
                     + "/"
                     + KEYWORD_ACTIVITY
                     + "/"
                     + KEYWORD_PLACE
-                    + "Example: "
+                    + "\nExample: "
                     + COMMAND_WORD
-                    + "person";
+                    + " person";
 
     public static final String MESSAGE_PERSON_SUGGEST_SUCCESS = "Person suggestion provided.";
     public static final String MESSAGE_ACTIVITY_SUGGEST_SUCCESS = "Activity suggestion provided.";

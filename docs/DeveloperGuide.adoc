@@ -28,13 +28,17 @@ Refer to the guide <<SettingUp#, here>>.
 .Architecture Diagram
 image::ArchitectureDiagram.png[]
 
+The *_Architecture Diagram_* given above explains the high-level design of the App.
+Given below is a quick overview of each component.
 The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 [TIP]
 The `.puml` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder.
 Refer to the <<UsingPlantUml#, Using PlantUML guide>> to learn how to create and edit diagrams.
 
-`Main` has two classes called link:{repoURL}/src/main/java/seedu/address/Main.java[`Main`] and link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
+`Main` has two classes called link:https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/Main.java[`Main`]
+and link:https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/MainApp.java[`MainApp`].
+It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -77,11 +81,15 @@ The sections below give more details of each component.
 .Structure of the UI Component
 image::UiClassDiagram.png[]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
+*API* : link:https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc.
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
+The `UI` component uses JavaFx UI framework.
+The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
+For example, the layout of the link:https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`]
+is specified in link:https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
 The `UI` component,
 
@@ -96,13 +104,13 @@ The `UI` component,
 image::LogicClassDiagram.png[]
 
 *API* :
-link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
+link:https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
-.  This results in a `Command` object which is executed by the `LogicManager`.
-.  The command execution can affect the `Model` (e.g. adding a person).
-.  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
-.  In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
+. `Logic` uses the `AddressBookParser` class to parse the user command.
+. This results in a `Command` object which is executed by the `LogicManager`.
+. The command execution can affect the `Model` (e.g. adding a person).
+. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -117,7 +125,7 @@ NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X
 .Structure of the Model Component
 image::ModelClassDiagram.png[]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
+*API* : link:https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
 The `Model`,
 
@@ -127,8 +135,10 @@ The `Model`,
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
+As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference.
+This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.
+An example of how such a model may look like is given below. +
++
 image:BetterModelClassDiagram.png[]
 
 [[Design-Storage]]
@@ -137,7 +147,7 @@ image:BetterModelClassDiagram.png[]
 .Structure of the Storage Component
 image::StorageClassDiagram.png[]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
+*API* : link:https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
@@ -147,7 +157,7 @@ The `Storage` component,
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.coderlifeinsights.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 == Implementation
 
@@ -155,93 +165,149 @@ This section describes some noteworthy details on how certain features are imple
 
 // tag::importexport[]
 === Import feature
+
 ==== Implementation
 
 The import feature allows users to import data from a comma-separated values (CSV) file.
-It allows users to bulk import their contacts from a previously exported data from CoderLifeInsights application.
+It allows users to bulk import their contacts, groups and events from a previously exported data from CoderLifeInsights application.
 
-Given below is the sequence diagram shows how the import operation works with the command `import life.csv`:
+Given below is the sequence diagram to illustrate how the import operation interacts with the command `import l/life.csv g/group.csv e/event.csv` :
 
-.Interaction for `import` Command operation between Logic Component and Model Component.
-[#ImportFileSequenceDiagram,align="center"]
-image::ImportFileSequenceDiagram.png[]
+.Import feature sequence diagram.
+[#ImportFileSequenceDiagram, align="center"]
+image::ImportFileSequenceDiagram.png[][pdfwidth="70%",width="70%"]
+1. User enters `import l/life.csv g/group.csv e/event.csv`.
+2. All 3 files would then be parsed by `ImportCommandParser` to check if the files exist with the path specified.
+3. On successful check, `ImportCommand` would be created and calls `ImportFile#importCsv`, `ImportFile#importGroupCsv` and
+`ImportFile#importEventCsv`to check if the CSV file headers are valid.
+4. `ImportCommand` would then call `Model#importCsvToAddressBook`, `Model#importCsvGroupsToAddressBook` and `Model#importCsvEventsToAddressBook`
+to check if the persons, groups and events are duplicates of the current CoderLifeInsights.
+5. If the imported data are not duplicates, it will then create a valid list of persons, groups and events to be added to CoderLifeInsights.
+6. CoderLifeInsights will then populate the 3 lists to the current data.
 
-The following is a brief explanation of <<ImportFileSequenceDiagram>> :
-
-1. User enters `import life.csv`.
-2. `AddressBookParser#parseCommand()` is being called by `LogicManager`.
-3. This would create `ImportCommand` and checks if the input is valid.
-4. Feedback would be returned to `AddressBookParser` and then to `LogicManager`.
-5. `LogicManager` would then call `execute()` and creates `ImportFile`.
-6. `ImportFile` would then call `importCsv()` to return a `List<Person>`.
-7. `Model#importCsvToAddressBook(importedPeople)` is then being called by `LogicManager`
-passing on `List<Person>` to call `VersionedAddressBook#addPersons(importedPeople)`
-8. `VersionedAddressBook` would call the method `addAll` and populate the data accordingly.
-9. On successful import with no duplicates of person, it would return a success message to `LogicManager`
-
-The following is an activity diagram when a user executes the import command:
+Given below is an activity diagram to summarise the steps above.
 
 .Import feature activity diagram.
 [#ImportFileActivityDiagram,align="center"]
-image::ImportFileActivityDiagram.png[]
+image::ImportFileActivityDiagram.png[][pdfwidth="40%",width="40%"]
 
-When a user executes the `import` command, a parser would check if the CSV is valid or not. That means it would check
-if the CSV file exists within the specified file path and whether the CSV file is valid for import in the application's
-directory.
 
-If valid, the rows in the CSV file would then parsed and then creates a list of person to be imported.
-
-Following that, the list would then update the current data and saves into the CoderLifeInsights.
-
-The following class diagram illustrates the summary of the ImportFile class.
-
-.Import feature class diagram.
-[#ImportFileClassDiagram,align="center"]
-image::ImportFileClassDiagram.png[][pdfwidth="30%",width="30%"]
 ==== Csv file format and constraints
+
 In order for data to be imported into CoderLifeInsights, the CSV file provided must be in the exact format.
-There are 9 columns specified for `name`, `phone`, `email`, `address`, `tagged`, `time`, `places` , `activities` and
+
+For `life.csv`:
+
+Headers required:
+
+* `name`
+* `phone`
+* `email`
+* `address`
+* `tagged`
+* `time`
+* `places`
+* `activities`
+
+Cell Formatting
+
+* No leading and trailing spaces in a cell.
+* To specify a comma within a cell, the value of the cell should be inside double quotes.
+Eg:
+** "Friends, Family"
+** "High School, Colleague"
+
+==== Design Considerations
+
+[width="80%",cols="30%,<30%,<40%",options="header"]
+|=======================================================================
+| Aspect | Alternative 1 (current choice) | Alternative 2
+| How import executes |
+Imports the entire Csv file, converts all the rows into a list of `Person`, `Group` and
+`Event` objects and add the list into the spending list.
+
+*Pros:* +
+Better performance.
+
+*Cons:* +
+Requires additional methods to implement the features.
+|
+Imports the Csv file, converts all the rows into a list of `Person`, `Group` and `Event`
+objects respectively and add each object accordingly.
+
+*Pros:* +
+Easy to implement.
+Re-use existing methods.
+
+*Cons:* +
+May cause performance issues regarding memory issues.
+|=======================================================================
+
+The first alternative was chosen as performance of the application is prioritised over ease of implementation.
+There would be risk of the application stop responding if the second alternative was chosen.
+
 === Export feature
+
 ==== Implementation
 
 The export feature allows users to export their current data into a comma-separated value file with file name specified.
 
-Given below is the sequence diagram illustrates how the export operation works with the command `export life.csv`:
-.Interaction for `export` Command operation between Logic Component and Model Component.
+Given below is a sequence diagram to illustrate how the export operation interacts with the command `export l/life.csv g/group.csv e/event.csv` :
+
+.Export feature activity diagram.
 [#ExportFileSequenceDiagram,align="center"]
-image::ExportFileSequenceDiagram.png[]
+image::ExportFileSequenceDiagram.png[][pdfwidth="70%",width="70%"]
+1. User enters `export l/life.csv g/group.csv e/event.csv`
+2. All 3 files would then be parsed by `ExportCommandParser` to check if the files specified exist within the specified file path.
+3. This is necessary to avoid existing files being overwritten.
+4. If files do not exist, `ExportCommand` would then be created and calls `ExportFile#exportCsv`, `ExportFile#exportGroupCsv`
+and `ExportFile#exportEventCsv`.
+5. Life, groups and events data would then be exported `life.csv`, `group.csv` and `event.csv` respectively.
 
-The following is an activity diagram when a user executes the export command:
-
-1. User enters `export life.csv`
-2. `AddressBookParser#parseCommand()` is being called by `LogicManager`.
-3. This would create `ExportCommand` and checks if the input is valid.
-4. Feedback would be returned to `AddressBookParser` and then to `LogicManager`.
-5. `LogicManager` would then call `execute()` and creates `ExportFile`.
-6. `ExportFile` would then call `exportCsv()` with `Model#getAddressBookFilePath()` to return the current address
-book's file path.
-7. On successful export, it would return a success message to `LogicManager`.
-
-
-The following is an activity diagram when a user executes the export command:
+Given below is an activity diagram to summarise the steps above.
 
 .Export feature activity diagram.
 [#ExportFileActivityDiagram,align="center"]
-image::ExportFileActivityDiagram.png[][pdfwidth="60%",width="60%"]
-
-When a user executes `export` command, a parser would check if the CSV file name is valid.
-
-If valid, it would then proceed to export the current JSON data to the application's directory with the
-CSV file name provided.
-
-The following class diagram illustrates the summary of the ExportFile class.
-
-.Export feature class diagram.
-[#ExportFileClassDiagram,align="center"]
-image::ExportFileClassDiagram.png[][pdfwidth="30%",width="30%"]
+image::ExportFileActivityDiagram.png[][pdfwidth="40%",width="40%"]
 //end::importexport[]
 
+// tag::suggest[]
+=== Suggestion Feature
+
+==== Implementation
+
+The suggestion feature allows users to get a person to hangout with, a place to hangout or an activity to do.
+
+Given below is an sequence diagram illustrating how the suggestion operation works with the command `suggest person`.
+
+.Suggest person feature sequence diagram.
+[#SuggestPersonSequenceDiagram, align="center"]
+image::SuggestPersonSequenceDiagram.png[][pdfwidth="70%", width="70%"]
+
+1. User enters `suggest person`.
+2. `SuggestCommandParser` would then check if keyword entered corresponds to `person`, `place` or `activity`.
+3. Upon valid keyword entered, `SuggestCommand` would call `Model#suggestPerson` to return a suggested person.
+4. ObservableList of filteredPersons would be iterated to get suggested person based on least time spent and reverse
+lexicographical order of name as a tie breaker. `Model` would self-invoke the method `Model#updateFilteredPersonList`
+to update filteredPersonList.
+5. filteredPersonList would then be updated to reflect on the GUI as a suggestion.
+
+A similar approach would apply to `place` and `activity` where instead of `Model#suggestPerson`, it would be
+`Model#suggestPlace` or `Model#suggestActivity` where an ObservableList of filteredEvents would be iterated to get
+suggested place or activity based on the least frequency of the place visited or activity done.
+
+If there are multiple place visited or activity done has the same frequency, a tie breaker would be introduced where the first place/activity would be suggested based on chronological order.
+
+Given below is an activity diagram to summarise the steps above.
+
+.Suggest person feature activity diagram.
+[#SuggestPersonActivityDiagram, align="center"]
+image::SuggestPersonActivityDiagram.png[][pdfwidth="40%",width="40%"]
+//end::suggest[]
+
+
 === Add Group Feature
+
 ==== Implementation
 
 The `add_group` feature is implemented to allow users to track social activities with a group of people
@@ -292,6 +358,7 @@ image::AddGroupSequenceDiagram.png[]
 
 
 === Delete Group Feature
+
 ==== Implementation
 
 [#DeleteGroupSequenceDiagram, align="center"]
@@ -300,6 +367,7 @@ image::DeleteGroupSequenceDiagram.png[]
 
 //tag::list_group[]
 === List Group Feature
+
 ==== Implementation
 
 The list feature allows users to view all the social groups currently in Coder Life Insights.
@@ -319,7 +387,7 @@ The following activity diagram depicts the step-by-step scenario when a user exe
 6. The `AddressBookParser` returns the `CommandResult` to `LogicManager`.
 
 [#ListGroupCommandActivity,align="center"]
-image::ListGroupCommandActivity.png[pdfwidth="50%", width="50%"]
+image::ListGroupCommandActivity.png[pdfwidth="50%",width="50%"]
 //end::list_group[]
 
 //tag::edit_group[]
@@ -335,8 +403,8 @@ image::EditGroupSequenceDiagram.png[]
 //end::edit_group[]
 //tag::addEvent[]
 === Add Event Feature
-The add event feature allows users to add an event to a saved contact or group in CoderLifeInsights specified
-using the member `m/` tag or the group `g/` prefix.
+
+The add event feature allows users to add an event to a saved contact or group in CoderLifeInsights specified using the member `m/` tag or the group `g/` tag.
 
 ==== Implementation
 Command: `add_event ACTIVITY m/INDEX time/TIME place/PLACE` or `add_event ACTIVITY g/INDEX time/TIME place/PLACE`
@@ -363,16 +431,16 @@ It will also create an Event with the following attributes:
 
 Depicted below is the class diagram of the Event class:
 
-image::EventClassDiagram.png[]
+image::EventClassDiagram.png[pdfwidth="100%",width="92.5%"]
 The Event created is stored in an UniqueEventList, which is saved to the Json file as well. The Events saved are used to generate output for features.
 
 The sequence diagram below showcases how the command works with a valid input:
 
-image::addEventSequence.png[pdfwidth="100%", width="92.5%"]
+image::addEventSequence.png[pdfwidth="100%",width="92.5%"]
 
 The following class diagram shows how the Time, PlaceList and ActivityList are associated with a Person object:
 
-image::addEventClassDiagram.png[]
+image::AddEventClassDiagram.png[pdfwidth="100%",width="92.5%"]
 
 The following activity diagram depicts the following scenario:
 
@@ -393,7 +461,7 @@ The following activity diagram depicts the following scenario:
 15. `AddEventCommand` returns the `CommandResult` to `AddressBookParser`.
 16. `AddressBookParser` returns the `CommandResult` to `LogicManager`.
 
-image::addEventActivity.png[pdfwidth="100%", width="75%"]
+image::addEventActivity.png[pdfwidth="100%",width="75%"]
 
 ==== Justification
 The Add Event feature and the relevant classes were added and implemented to add and store Events with relevant data that are used to generate output for other features such as insights.
@@ -402,17 +470,19 @@ The Add Event feature and the relevant classes were added and implemented to add
 //end::addEvent[]
 
 === Insights feature
+
 ==== Implementation
 
 The Insights feature is facilitated by `FrequencyList`, which contains an `ObservableList`
 backed by an `ArrayList`, and uses a `HashMap` to ensure the uniqueness of each list.
 Each `Person` object contains two `FrequencyList` objects, a `placeList` and an `activityList`.
-At the same time, the `model` also has its own `FrequencyList`. When the View Command is
-activated, the `model` updates its own `FrequencyList` with the contents of the selected
-Person's `placeList` or `activityList`. The View Command then switches the application
-display to show the model's `FrequencyList`.
+At the same time, the `model` also has its own `FrequencyList`.
+When the View Command is activated, the `model` updates its own `FrequencyList` with the contents of the selected Person's `placeList` or `activityList`.
+The View Command then switches the application display to show the model's `FrequencyList`.
 
+//tag::undoredo[]
 === [Proposed] Undo/Redo feature
+
 ==== Proposed Implementation
 
 The undo/redo mechanism is facilitated by `VersionedAddressBook`.
@@ -428,27 +498,33 @@ These operations are exposed in the `Model` interface as `Model#commitAddressBoo
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial CoderLifeInsights state, and the `currentStatePointer` pointing to that single CoderLifeInsights state.
+Step 1. The user launches the application for the first time.
+The `VersionedAddressBook` will be initialized with the initial CoderLifeInsights state, and the `currentStatePointer` pointing to that single CoderLifeInsights state.
 
 image::UndoRedoState0.png[]
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the CoderLifeInsights. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the CoderLifeInsights after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the CoderLifeInsights.
+The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the CoderLifeInsights after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 image::UndoRedoState1.png[]
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified CoderLifeInsights state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David ...` to add a new person.
+The `add` command also calls `Model#commitAddressBook()`, causing another modified CoderLifeInsights state to be saved into the `addressBookStateList`.
 
 image::UndoRedoState2.png[]
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitAddressBook()`, so the CoderLifeInsights state will not be saved into the `addressBookStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous CoderLifeInsights state, and restores the CoderLifeInsights to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command.
+The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous CoderLifeInsights state, and restores the CoderLifeInsights to that state.
 
 image::UndoRedoState3.png[]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial CoderLifeInsights state, then there are no previous CoderLifeInsights states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the `currentStatePointer` is at index 0, pointing to the initial CoderLifeInsights state, then there are no previous CoderLifeInsights states to restore.
+The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case.
+If so, it will return an error to the user rather than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
@@ -459,13 +535,20 @@ NOTE: The lifeline for `UndoCommand` should end at the destroy marker (X) but du
 The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the CoderLifeInsights to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest CoderLifeInsights state, then there are no undone CoderLifeInsights states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest CoderLifeInsights state, then there are no undone CoderLifeInsights states to restore.
+The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case.
+If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the CoderLifeInsights, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`.
+Commands that do not modify the CoderLifeInsights, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
+Thus, the `addressBookStateList` remains unchanged.
 
 image::UndoRedoState4.png[]
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all CoderLifeInsights states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`.
+Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all CoderLifeInsights states after the `currentStatePointer` will be purged.
+We designed it this way because it no longer makes sense to redo the `add n/David ...` command.
+This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoState5.png[]
 
@@ -488,10 +571,12 @@ image::CommitActivityDiagram.png[]
 
 * **Alternative 1 (current choice):** Use a list to store the history of CoderLifeInsights states.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
+** Cons: Logic is duplicated twice.
+For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
 * **Alternative 2:** Use `HistoryManager` for undo/redo
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
-** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
+** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands.
+Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
 // tag::dataencryption[]
@@ -503,7 +588,8 @@ _{Explain here how the data encryption feature will be implemented}_
 
 === Logging
 
-We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
+We are using `java.util.logging` package for logging.
+The `LogsCenter` class is used to manage the logging levels and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file (See <<Implementation-Configuration>>)
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to the specified logging level
@@ -523,15 +609,192 @@ Certain properties of the application can be controlled (e.g user prefs file loc
 
 == Documentation
 
-Refer to the guide <<Documentation#, here>>.
+We use asciidoc for writing documentation.
+
+[NOTE]
+We chose asciidoc over Markdown because asciidoc, although a bit more complex than Markdown, provides more flexibility in formatting.
+
+=== Editing Documentation
+
+See <<UsingGradle#rendering-asciidoc-files, UsingGradle.adoc>> to learn how to render `.adoc` files locally to preview the end result of your edits.
+Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows you to preview the changes you have made to your `.adoc` files in real-time.
+
+=== Editing Diagrams
+
+See <<UsingPlantUml#, UsingPlantUml.adoc>> to find out how to create and update the UML diagrams in the developer guide.
+
+=== Publishing Documentation
+
+See <<UsingTravis#deploying-github-pages, UsingTravis.adoc>> to learn how to deploy GitHub Pages using Travis.
+
+==== Converting Documentation to PDF format
+
+We use https://www.google.com/chrome/browser/desktop/[Google Chrome] for converting documentation to PDF format, as Chrome's PDF engine preserves hyperlinks used in webpages.
+
+Here are the steps to convert the project documentation files to PDF format.
+
+. Follow the instructions in <<UsingGradle#rendering-asciidoc-files, UsingGradle.adoc>> to convert the AsciiDoc files in the `docs/` directory to HTML format.
+. Go to your generated HTML files in the `build/docs` folder, right click on them and select `Open with` -> `Google Chrome`.
+. Within Chrome, click on the `Print` option in Chrome's menu.
+. Set the destination to `Save as PDF`, then click `Save` to save a copy of the file in PDF format.
+For best results, use the settings indicated in the screenshot below.
+
+.Saving documentation as PDF files in Chrome
+image::chrome_save_as_pdf.png[width="300"]
+
+[[Docs-SiteWideDocSettings]]
+=== Site-wide Documentation Settings
+
+The link:{repoURL}/build.gradle[`build.gradle`] file specifies some project-specific https://asciidoctor.org/docs/user-manual/#attributes[asciidoc attributes] which affects how all documentation files within this project are rendered.
+
+[TIP]
+Attributes left unset in the `build.gradle` file will use their *default value*, if any.
+
+[cols="1,2a,1",options="header"]
+.List of site-wide attributes
+|===
+|Attribute name |Description |Default value
+
+|`site-name`
+|The name of the website.
+If set, the name will be displayed near the top of the page.
+|_not set_
+
+|`site-githuburl`
+|URL to the site's repository on https://github.com[GitHub].
+Setting this will add a "View on GitHub" link in the navigation bar.
+|_not set_
+
+|`site-seedu`
+|Define this attribute if the project is an official SE-EDU project.
+This will render the SE-EDU navigation bar at the top of the page, and add some SE-EDU-specific navigation items.
+|_not set_
+
+|===
+
+[[Docs-PerFileDocSettings]]
+=== Per-file Documentation Settings
+
+Each `.adoc` file may also specify some file-specific https://asciidoctor.org/docs/user-manual/#attributes[asciidoc attributes] which affects how the file is rendered.
+
+Asciidoctor's https://asciidoctor.org/docs/user-manual/#builtin-attributes[built-in attributes] may be specified and used as well.
+
+[TIP]
+Attributes left unset in `.adoc` files will use their *default value*, if any.
+
+[cols="1,2a,1",options="header"]
+.List of per-file attributes, excluding Asciidoctor's built-in attributes
+|===
+|Attribute name |Description |Default value
+
+|`site-section`
+|Site section that the document belongs to.
+This will cause the associated item in the navigation bar to be highlighted.
+One of: `UserGuide`, `DeveloperGuide`, ``LearningOutcomes``{asterisk}, `AboutUs`, `ContactUs`
+
+_{asterisk} Official SE-EDU projects only_
+|_not set_
+
+|`no-site-header`
+|Set this attribute to remove the site navigation bar.
+|_not set_
+
+|===
+
+=== Site Template
+
+The files in link:{repoURL}/docs/stylesheets[`docs/stylesheets`] are the https://developer.mozilla.org/en-US/docs/Web/CSS[CSS stylesheets] of the site.
+You can modify them to change some properties of the site's design.
+
+The files in link:{repoURL}/docs/templates[`docs/templates`] controls the rendering of `.adoc` files into HTML5. These template files are written in a mixture of https://www.ruby-lang.org[Ruby] and http://slim-lang.com[Slim].
+
+[WARNING]
+====
+Modifying the template files in link:{repoURL}/docs/templates[`docs/templates`] requires some knowledge and experience with Ruby and Asciidoctor's API.
+You should only modify them if you need greater control over the site's layout than what stylesheets can provide.
+The SE-EDU team does not provide support for modified template files.
+====
 
 == Testing
 
-Refer to the guide <<Testing#, here>>.
+=== Running Tests
+
+There are two ways to run tests.
+
+*Method 1: Using IntelliJ JUnit test runner*
+
+* To run all tests, right-click on the `src/test/java` folder and choose `Run 'All Tests'`
+* To run a subset of tests, you can right-click on a test package, test class, or a test and choose `Run 'ABC'`
+
+*Method 2: Using Gradle*
+
+* Open a console and run the command `gradlew clean test` (Mac/Linux: `./gradlew clean test`)
+
+[NOTE]
+See <<UsingGradle#, UsingGradle.adoc>> for more info on how to run tests using Gradle.
+
+=== Types of tests
+
+We have three types of tests:
+
+. _Unit tests_ targeting the lowest level methods/classes. +
+e.g. `seedu.address.commons.StringUtilTest`
+. _Integration tests_ that are checking the integration of multiple code units (those code units are assumed to be working). +
+e.g. `seedu.address.storage.StorageManagerTest`
+. Hybrids of unit and integration tests.
+These test are checking multiple code units as well as how the are connected together. +
+e.g. `seedu.address.logic.LogicManagerTest`
+
+=== Troubleshooting Testing
+
+**Problem: Keyboard and mouse movements are not simulated on macOS Mojave, resulting in GUI Tests failure.**
+
+* Reason: From macOS Mojave onwards, applications without `Accessibility` permission cannot simulate certain keyboard and mouse movements.
+* Solution: Open `System Preferences`, click `Security and Privacy` -> `Privacy` -> `Accessibility`, and check the box beside `Intellij IDEA`.
+
+.`Accessibility` permission is granted to `IntelliJ IDEA`
+image::testfx-idea-accessibility-permissions.png[width="600"]
 
 == Dev Ops
 
-Refer to the guide <<DevOps#, here>>.
+=== Build Automation
+
+See <<UsingGradle#, UsingGradle.adoc>> to learn how to use Gradle for build automation.
+
+=== Continuous Integration
+
+We use https://travis-ci.org/[Travis CI] and https://www.appveyor.com/[AppVeyor] to perform _Continuous Integration_ on our projects.
+See <<UsingTravis#, UsingTravis.adoc>> and <<UsingAppVeyor#, UsingAppVeyor.adoc>> for more details.
+
+=== Coverage Reporting
+
+We use https://coveralls.io/[Coveralls] to track the code coverage of our projects.
+See <<UsingCoveralls#, UsingCoveralls.adoc>> for more details.
+
+=== Documentation Previews
+
+When a pull request has changes to asciidoc files, you can use https://www.netlify.com/[Netlify] to see a preview of how the HTML version of those asciidoc files will look like when the pull request is merged.
+See <<UsingNetlify#, UsingNetlify.adoc>> for more details.
+
+=== Making a Release
+
+Here are the steps to create a new release.
+
+. Update the version number in link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp.java`].
+. Generate a JAR file <<UsingGradle#creating-the-jar-file, using Gradle>>.
+. Tag the repo with the version number. e.g. `v0.1`
+. https://help.github.com/articles/creating-releases/[Create a new release using GitHub] and upload the JAR file you created.
+
+=== Managing Dependencies
+
+A project often depends on third-party libraries.
+For example, Address Book depends on the https://github.com/FasterXML/jackson[Jackson library] for JSON parsing.
+Managing these _dependencies_ can be automated using Gradle.
+For example, Gradle can download the dependencies automatically, which is better than these alternatives:
+
+[loweralpha]
+. Include those libraries in the repo (this bloats the repo size)
+. Require developers to download those libraries manually (this creates extra work for developers)
 
 [appendix]
 == Product Scope
@@ -593,23 +856,19 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user | randomly select person | get a person to hangout with.
 
-|`* *` |user | get suggestions on an activity to do with a person | to know which activity is best to with that specific person.
+|`* *` |user | get suggestions on a person based time spent | know who to hangout with.
 
-|`* *` |user | get suggestions on an activity based on my recent activities | to know which activity to do.
+|`* *` |user | get suggestions on an activity based on my activities done | to know which activity to do.
 
-|`* *` |user | get suggestions on a place to go based on a person | know which place is best to with person specified.
+|`* *` |user | get suggestions on a place based on my places visited | know which place to go to.
 
-|`* *` |user | get suggestions on a place based on my recent places visited | know which place to go to.
+|`* *` |user | get insights on places I have been to. | get a glimpse of all the places I have been to.
 
-|`* *` |user | get suggestions on a person based on group time spent | know which person to hang out with from a specific group.
+|`* *` |user | get insights on time spent with all groups  | know time spent distribution within a group.
 
-|`* *` |user | get insights on places I have been to (pie chart) | get a glimpse of all the places I have been to.
+|`* *` |user | get insights on all activities done.  | know which activities I have done and their frequency.
 
-|`* *` |user | get insights on time spent with a specific group  | know time spent distribution within a group.
-
-|`* *` |user | get insights on all activities done (pie chart)  | know which activities I have done and their frequency.
-
-|`* *` |user | get insights on time spent with different groups (pie chart)  | know the spread of time with respect to different social groups.
+|`* *` |user | get insights on time spent with individuals  | know the spread of time with all individuals.
 
 |`* *` |user | get the last 5 events that happened  | get a glimpse of what I did the last 5 events.
 
@@ -627,30 +886,41 @@ _{More to be added}_
 
 *MSS*
 
-1.  User requests to list persons
-2.  CoderLifeInsights shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  CoderLifeInsights deletes the person
+1. User requests to list persons
+2. CoderLifeInsights shows a list of persons
+3. User requests to delete a specific person in the list
+4. CoderLifeInsights deletes the person
 +
 Use case ends.
 
 *Extensions*
+
+* 2a.
+The list is empty.
++
+Use case ends.
+
+* 3a.
+Specific person selected to be deleted not in list.
++
+Use case resumes at step 2.
 
 === Use case: Add person
 
 *MSS*
 
-1.  User requests to add person
-2.  CoderLifeInsights adds the person and displays their details
+1. User requests to add person
+2. CoderLifeInsights adds the person and displays their details
 +
 Use case ends.
 
 *Extensions*
 
-* 3a. No details of the person provided as arguments.
+* 1a.
+No details of the person provided as arguments.
 +
 [none]
-** 3a1. CoderLifeInsights shows an error message.
+** 1a1. CoderLifeInsights shows an error message.
 +
 Use case resumes at step 2.
 
@@ -658,85 +928,166 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.  User requests to search a person with specified keyword
-2.  CoderLifeInsights displays a list of people matching the keyword specified
+1. User requests to search a person with specified keyword
+2. CoderLifeInsights displays a list of people matching the keyword specified
 +
 Use case ends.
 
 *Extensions*
 
-* 3a. No details of the person provided as arguments.
+* 1a.
+No details of the person provided as arguments.
 +
 [none]
-** 3a1. CoderLifeInsights shows an error message.
+** 1a1. CoderLifeInsights shows an error message.
 +
 Use case resumes at step 2.
 
 _{More to be added}_
-
 
 === Use case: Add person
 
 *MSS*
 
-1.  User requests to add person
-2.  CoderLifeInsights adds the person and displays their details
+1. User requests to add person
+2. CoderLifeInsights adds the person and displays their details
 +
 Use case ends.
 
 *Extensions*
 
-* 3a. No details of the person provided as arguments.
+* 1a.
+No details of the person provided as arguments.
 +
 [none]
-** 3a1. CoderLifeInsights shows an error message.
+** 1a1. CoderLifeInsights shows an error message.
 +
 Use case resumes at step 2.
 
-_{More to be added}_
+=== Use case: Export data
+
+*MSS*
+
+1. User requests to export life, group and event data to specified CSV file path.
+2. CoderLifeInsights exports data to specified CSV files.
++
+Use case ends.
+
+*Extensions*
+
+* 1a.
+No file path specified.
+** 1a1. CoderLifeInsights shows an error message.
++
+Use case resumes at step 2.
+
+=== Use case: Import data
+
+*MSS*
+
+1. User requests to import life, group and event data from specified CSV file path.
+2. CoderLifeInsights imports data from specified CSV files.
++
+Use case ends
+
+*Extensions*
+* 1a.
+No file path specified.
+** 1a1. CoderLifeInsights shows an error message.
++
+Use case resumes at step 2.
+
+=== Use case: Suggest person
+
+*MSS*
+
+1. User requests for suggestion of person.
+2. CoderLifeInsights suggests a person to hangout with.
++
+Use case ends
+
+*Extensions*
+* 1a.
+No person available in CoderLifeInsights to suggest
++
+Use case ends.
+
+=== Use case: Suggest place
+
+*MSS*
+
+1. User requests for suggestion of place.
+2. CoderLifeInsights suggests a place to visit.
++
+Use case ends
+
+*Extensions*
+* 1a.
+No place available in CoderLifeInsights to suggest
++
+Use case ends.
+
+=== Use case: Suggest activity
+
+*MSS*
+
+1. User requests for suggestion of activity.
+2. CoderLifeInsights suggests an activity to do.
++
+Use case ends
+
+*Extensions*
+* 1a.
+No activity available in CoderLifeInsights to suggest
++
+Use case ends.
+
+=== Use case: View time
+
+*MSS*
+1. User requests to view time comparison between individuals and groups.
+2. CoderLifeInsights displays pie char of Individual time spent vs Group time spent.
++
+Use case ends
+
+*Extensions*
+
+* 1a.
+No event data for group or individual available for comparison.
++
+Use case ends
 
 [appendix]
 == Non Functional Requirements
 
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-.  Should be easy to log info onto the application. This can be achieved using dropdown menus and suggestive text.
-
-
-_{More to be added}_
+. Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
+. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+. Should be easy to log info onto the application.
+. Should not require user to install
+. Features implemented should be testable using automated and manual testing.
+. Should work for a single user only.
+. Should be able to run with or without internet connection.
 
 [appendix]
 == Glossary
 
-[[mainstream-os]] Mainstream OS::
+[[mainstream-os]]
+Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[private-contact-detail]] Private contact detail::
+[[private-contact-detail]]
+Private contact detail::
 A contact detail that is not meant to be shared with others
 
-[[social-group]] Social Group::
+[[social-group]]
+Social Group::
 A cluster of people with a commonality as identified by the user (eg same JC, same OG, etc)
 
+[[coderlifeinsights]]
+CoderLifeInsights::
+An application.
 
-[appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
-
-[appendix]
 == Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
@@ -766,18 +1117,120 @@ _{ more test cases ... }_
 
 .. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 .. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+Expected: First contact is deleted from the list.
+Details of the deleted contact shown in the status message.
+Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+Expected: No person is deleted.
+Error details shown in the status message.
+Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
-   Expected: Similar to previous.
+Expected: Similar to previous.
 
 _{ more test cases ... }_
+
+=== Finding a person
+
+. Finding a person with keywords
+
+.. Prerequisites: Have person data containing keyword available for search.
+.. Test case: `find betty`
+Expected: Details of betty shown in GUI.
+.. Test case: `find jjjjjjjj`
+Expected: No detail of jjjjjjjj shown in GUI.
+0 persons listed! shown in status message.
+Nothing displayed in Person column.
+.. Other incorrect find commands to try: `find`, `find ukloiuj` +
+Expected: Similar to previous.
+
+===  Suggest a person
+
+. Suggest a person to hangout with
+
+.. Prerequisites: Have person data with event added for suggestion.
+.. Test case: `suggest person`
+Expected: Details of person with the least time spent shown in People column
+
+. Suggest person with no events added.
+
+.. Prerequisites: Have person data with no events added.
+.. Test case: `suggest person`
+Expected: The last People alphabetically in CoderlifeInsights shown in People column.
+
+. Suggest person with no person data.
+
+.. Prerequisites: Have no person data in CoderLifeInsights
+.. Test case: `suggest person`
+Expected: Nothing shown in People column.
+Person suggestion provided shown in status message.
+
+===  Suggest a place
+
+. Suggest a place to visit
+
+.. Prerequisites: Have events added for suggestion.
+.. Test case: `suggest place`
+Expected: Details of place with the least frequency visited shown in Insights column
+
+. Suggest place with no events added.
+
+.. Prerequisites: Have data with no events added.
+.. Test case: `suggest place`
+Expected: Nothing shown in Insights column.
+Place suggestion provided shown in status message.
+
+=== Suggest an activity
+
+. Suggest an activity to do.
+
+.. Prerequisites: Have events added for suggestion.
+.. Test case: `suggest activity`
+Expected: Details of activity with the least frequency visited shown in Insights column
+
+. Suggest activity with no events added.
+
+.. Prerequisites: Have data with no events added.
+.. Test case: `suggest activity`
+Expected: Nothing shown in Insights column.
+Activity suggestion provided shown in status message.
+
+=== Import CoderLifeInsights data
+
+. Import life, group and event data.
+
+.. Prerequisites: CSV files containing named `life.csv`, `group.csv`
+and `event.csv` data available in specified path.
+No duplicates of person, group and events available in CoderLifeInsights.
+.. Test case: `import l/life.csv g/group.csv e/event.csv`
+Expected: People column populated with person data. +
+Insights column populated with time data. +
+Groups column populated with group data. +
+Files imported: life.csv groups.csv events.csv shown in status message.
+
+. Import life, group and event data with non-existent file.
+
+.. Prerequisites: CSV files of provided path does not exist.
+.. Test case: `import l/test.csv g/grouptest.csv e/eventtest.csv
+Expected: CoderLifeInsights will return error message showing that path provided does not exist.
+
+=== Export CoderLifeInsights data
+
+. Export life, group and event data.
+
+.. Prerequisites: CSV files of provided file name must not exist.
+.. Test case: `export l/life.csv g/group.csv e/event.csv`
+Expected: All valid life, group and event data will be exported to the respective CSV files.
+
+. Export life, group and event data with CSV files that exist in path provided.
+
+.. Prerequisites: CSV files of provided file name must exist.
+.. Test case: `export l/life.csv g/group.csv e/event.csv`
+Expected: CoderLifeInsights will return error message showing that files already exist.
+Another naming convention is required.
 
 === Saving data
 
 . Dealing with missing/corrupted data files
 
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
-
 _{ more test cases ... }_
