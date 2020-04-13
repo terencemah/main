@@ -157,4 +157,6 @@ public interface Model {
     void showGroupPlaceList(Group groupToView);
 
     void showGroupActivityList(Group groupToView);
+
+    void showGroupRecentList(Group groupToView);
 }

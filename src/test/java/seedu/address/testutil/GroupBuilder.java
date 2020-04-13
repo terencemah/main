@@ -9,6 +9,7 @@ import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
+import seedu.address.model.person.TimeList;
 
 /**
  * A utility class to help with building Group Objects.
@@ -21,6 +22,7 @@ public class GroupBuilder {
     public static final ArrayList<Integer> DEFAULT_LIST = new ArrayList<>();
     public static final List<String> DEFAULT_PLACELIST = new ArrayList<>();
     public static final List<String> DEFAULT_ACTIVITYLIST = new ArrayList<>();
+    public static final List<String> DEFAULT_TIMELIST = new ArrayList<>();
 
     private Name name;
     private Time timeSpent;
@@ -28,6 +30,7 @@ public class GroupBuilder {
     private ArrayList<Integer> eventIDs;
     private PlaceList places;
     private ActivityList activities;
+    private TimeList times;
 
     public GroupBuilder() {
         this.name = new Name(DEFAULT_NAME);
@@ -36,6 +39,7 @@ public class GroupBuilder {
         this.eventIDs = DEFAULT_LIST;
         places = new PlaceList(DEFAULT_PLACELIST);
         activities = new ActivityList(DEFAULT_ACTIVITYLIST);
+        times = new TimeList(DEFAULT_TIMELIST);
     }
 
     public GroupBuilder(Group groupToCopy) {
@@ -45,6 +49,7 @@ public class GroupBuilder {
         eventIDs = groupToCopy.getEvents();
         places = groupToCopy.getPlaceList();
         activities = groupToCopy.getActivityList();
+        times = groupToCopy.getTimeList();
     }
 
     /**
@@ -117,7 +122,7 @@ public class GroupBuilder {
      * @return
      */
     public Group build() {
-        Group group = new Group(name, places, activities);
+        Group group = new Group(name, places, activities, times);
         group.setTimeSpent(timeSpent);
         group.setMemberIDs(memberIds);
         group.setEventIDs(eventIDs);

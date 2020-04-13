@@ -13,7 +13,7 @@ public class Event {
     /**
      * Represents the eventID for the next created group
      */
-    private static int events = 0;
+    private static int events = 1;
 
     private int eventId;
     private String activity;

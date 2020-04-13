@@ -17,7 +17,7 @@ import seedu.address.model.person.EventDescriptor;
  */
 public class ActivityListPanel extends UiPart<Region> {
     private static final String FXML = "ActivityListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(seedu.address.ui.ActivityListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(ActivityListPanel.class);
 
     @FXML
     private TableView<EventDescriptor> frequencyTable;
