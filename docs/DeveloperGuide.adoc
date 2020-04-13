@@ -485,8 +485,34 @@ member indexes are supplied by the user.
 * `EditGroupCommand#createEditedGroup(Group groupToEdit, EditGroupDescriptor editGroupDescriptor)` - Modifies the given
 `groupToEdit` with the details given in `editGroupDescriptor`.
 
+The following is an example usage scenario and how the edit group mechanism behaves at each step:
+
+1. User types `edit_group index n/new_name` or `edit_group index m/index ...` into the app.
+2. The request is handled by `LogicManager#execute(String)`, which then calls and passes the input to
+the `AddressBookParser#parseCommand(String)` method.
+3. `AddressBookParser` detects the command word `edit_group` in the input string and creates a new
+`EditGroupCommandParser` to parse inputs according to the format specified for `EditGroupCommand`.
+4. Input is parsed using the `EditGroupCommandParser#parse(String)` method, which also performs input validation. The
+method creates a `EditGroupDescriptor` using the parsed inputs by calling the static constructor inside `EditGroupCommand`.
+5. The `EditGroupCommandParser` creates a new `EditGroupCommand` instance with the given `index` and newly created
+`EditGroupDescriptor` object and returns it to `AddressBookParser`, which in turn returns it to `LogicManager`.
+6. `LogicManager` calls the `EditGroupCommand#execute(model)` method.
+7. `EditGroupCommand` obtains a copy of the `FilteredPersonList` by calling the `Model#getFilteredPersonList()` method.
+This is used to check if the member indexes supplied by the user exist in the app and that there are no duplicate person
+indexes in the command.
+8. `EditGroupCommand` edits the group at given index by calling its own private static method
+`EditGroupCommand#createEditGroup(Group, EditGroupDescriptor)`.
+9. `EditGroupCommand` obtains a copy of the `FilteredGroupList` by calling the `Model#getFilteredGroupList()` method.
+This is used to check if the edited group already exits in the app.
+10. As a last step, `EditGroupCommand` creates a `CommandResult` with `SuccessMessage` and `ViewType` and returns it to
+`LogicManager`.
+
+The above process is shown in the following sequence diagram:
+
 [#EditGroupSequenceDiagram, align="center"]
 image::EditGroupSequenceDiagram.png[]
+
+==== Design Considerations
 
 //end::edit_group[]
 //tag::addEvent[]
