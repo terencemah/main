@@ -42,6 +42,21 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
         if (argumentMultimap.getValue(PREFIX_NAME).isPresent()) {
             editGroupDescriptor.setName(ParserUtil.parseName(argumentMultimap.getValue(PREFIX_NAME).get()));
         }
+        parseIndexes(argumentMultimap, editGroupDescriptor);
+        if (!editGroupDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditGroupCommand.MESSAGE_NOT_EDITED);
+        }
+        return new EditGroupCommand(index, editGroupDescriptor);
+    }
+
+    /**
+     * Parses the member indexes if present and modifies the Edit Group Descriptor accordingly.
+     * @param argumentMultimap
+     * @param editGroupDescriptor
+     * @throws ParseException
+     */
+    private void parseIndexes(ArgumentMultimap argumentMultimap,
+                              EditGroupDescriptor editGroupDescriptor) throws ParseException {
         if (arePrefixesPresent(argumentMultimap, PREFIX_MEMBER)) {
             List<String> members = argumentMultimap.getAllValues(PREFIX_MEMBER);
             try {
@@ -55,10 +70,6 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
             }
 
         }
-        if (!editGroupDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditGroupCommand.MESSAGE_NOT_EDITED);
-        }
-        return new EditGroupCommand(index, editGroupDescriptor);
     }
 
     /**
