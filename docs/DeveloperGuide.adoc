@@ -329,7 +329,7 @@ Given below is an activity diagram to summarise the steps above.
 image::SuggestPersonActivityDiagram.png[][pdfwidth="40%",width="40%"]
 //end::suggest[]
 
-
+//tag::add_group[]
 === Add Group Feature
 `[written by: Raivat Bhupesh Shah]`
 
@@ -378,7 +378,7 @@ The process is shown in the following sequence diagram:
 
 [#AddGroupSequenceDiagam,align="center"]
 image::AddGroupSequenceDiagram.png[]
-
+//end::add_group[]
 ==== Design Considerations
 
 Aspect: How the `add_group` command executes
@@ -406,6 +406,7 @@ may keep the app running in the background, this can be disadvantageous.
 the number of groups of people will be less than the number of people. This alternative would also make the Person class
 depend upon the Group class, which can be error-prone.
 
+//tag::delete_group[]
 === Delete Group Feature
 `[written by: Raivat Bhupesh Shah]`
 
@@ -440,6 +441,7 @@ Aspect: how the delete group feature executes
 * Alternative 2: The `DeleteGroupCommand` class parses the inputted index +
     Pros: Since only one argument to parse, this eliminates the need for another class. Less code.
     Cons: Can cause confusion among developers regarding the class responsibility.
+//end::delete_group[]
 
 //tag::list_group[]
 === List Group Feature
