@@ -615,7 +615,7 @@ The following activity diagram depicts the following scenario:
 image::addEventActivity.png[pdfwidth="100%",width="75%"]
 
 ==== Justification
-The Add Event feature and the relevant classes were added and implemented to add and store Events with relevant data that are used to generate output for other features such as insights.
+The Add Event feature and the relevant classes were added and implemented to add and store Events and relevant data that are used to generate output for other features such as insights.
 
 
 //end::addEvent[]
@@ -1276,6 +1276,7 @@ No event data for group or individual available for comparison.
 +
 Use case ends
 
+// tag::useCaseAddEvent[]
 === Use case: Add an event with a person
 
 *MSS*
@@ -1331,6 +1332,7 @@ Use case resumes at 3.
 ** 2c2. User re-enters command with correct and valid group index +
 Use case resumes at 3.
 
+// end::useCaseAddEvent[]
 === Use case: View the places or activities visited with a group
 *MSS*
 
