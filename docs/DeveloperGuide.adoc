@@ -512,6 +512,11 @@ The above process is shown in the following sequence diagram:
 [#EditGroupSequenceDiagram, align="center"]
 image::EditGroupSequenceDiagram.png[]
 
+The following activity diagram summarises the general workflow for the Edit Group Feature
+
+[#EditGroupActivityDiagram, align="center"]
+image::EditGroupActivityDiagram.png[]
+
 ==== Design Considerations
 
 Aspect: What and how to edit
