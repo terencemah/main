@@ -38,8 +38,6 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE));
         }
-
-
         PlaceList placeList = new PlaceList(new ArrayList<>());
         ActivityList activityList = new ActivityList(new ArrayList<>());
         TimeList timeList = new TimeList(new ArrayList<>());
