@@ -63,6 +63,13 @@ supplied as arguments
 are in ModelManager
 end note
 
+
+EditGroupCommand -> EditGroupCommand : <<static>> \n createEditGroupDescriptor
+activate EditGroupCommand
+EditGroupCommand --> EditGroupCommand : Group
+deactivate EditGroupCommand
+
+
 EditGroupCommand -> Model : getFilteredGroupList()
 activate Model
 Model -> EditGroupCommand : FilteredGroupList
