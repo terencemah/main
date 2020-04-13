@@ -32,7 +32,7 @@ package Model <<Folder>> {
 
 Model <|-right- ModelManager
 Logic <|-right- LogicManager
-MainWindow -left- LogicManager : contains >
-LogicManager -down- ModelManager : contains >
+MainWindow *-left-> LogicManager
+LogicManager *-down-> ModelManager
 
 @enduml
