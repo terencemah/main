@@ -45,12 +45,13 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 == Features
 
 ====
-*Command Format*
+*Command Format and Specifications*
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`,`p/PHONE_NUMBER n/NAME` is also acceptable.
+* `PERSON_INDEX` refers to the `INDEX` of a `Person` in CoderLifeInsights and similarly, `GROUP_INDEX` refers to the `INDEX` of a `Group`.
 ====
 
 === Viewing help : `help`
@@ -576,7 +577,7 @@ _{explain how the user can enable/disable data encryption}_
 | Feature | Usage | Example |
 *Add Person* | `add_person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` |
 `add_person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` |
-*List* | `list_LIST_PARAMETER` | `list_persons`|
+*List* | `list_LIST_PARAMETER` | `list_persons`, `list_groups`|
 *Edit* | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`|
 `edit 1 p/91234567 e/johndoe@example.com`|
 *Add Group*| `add_group n/GROUP_NAME m/MEMBER_INDEX`| `add_group n/SoC Friends` +
