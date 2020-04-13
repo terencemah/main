@@ -908,6 +908,12 @@ We also use https://www.codacy.com/[Codeacy] to automate code quality reviews.
 See https://support.codacy.com/hc/en-us/articles/360010263540-Getting-started-with-Codacy[Getting Started with Codacy]
 for more details.
 
+=== Continuous Deployment
+
+We maintain a site for this project https://ay1920s2-cs2103-w14-4.github.io/main/[here]. To ensure that each PR complies
+with our site requirements for auto-deploy, we use Netlify for Continuous Deployment. Read
+https://docs.netlify.com/configure-builds/get-started/#basic-build-settings[this guide] to get upto speed with Netlify CD.
+
 === Coverage Reporting
 
 We use https://coveralls.io/[Coveralls] to track the code coverage of our projects.
