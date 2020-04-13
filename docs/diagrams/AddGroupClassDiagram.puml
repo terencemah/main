@@ -48,6 +48,6 @@ package Logic <<Folder>> {
 
 AddressBook - UniqueGroupList : contains >
 UniqueGroupList - Group : contains >
-
 AddGroupCommandParser - AddGroupCommand
+AddGroupCommandParser - Group
 @enduml
