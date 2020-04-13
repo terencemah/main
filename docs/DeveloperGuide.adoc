@@ -424,7 +424,7 @@ image::DeleteGroupSequenceDiagram.png[]
 
 Aspect: how the delete group feature executes
 
-* Alternative 1: Separate `DeleteGroupCommand` and `DeleteGroup` classes to support the feature. +
+* Alternative 1 (current choice) : Separate `DeleteGroupCommand` and `DeleteGroup` classes to support the feature. +
     Pros: clear class responsibility, easier to trace bugs. Since this follows the design of most other commands,
     intuitive to understand for new developers +
     Cons: increases the amount of code, which might introduce more errors.
@@ -513,6 +513,25 @@ The above process is shown in the following sequence diagram:
 image::EditGroupSequenceDiagram.png[]
 
 ==== Design Considerations
+
+Aspect: What and how to edit
+
+* Alternative 1 (current choice): Only edit parameters that are supplied. For the parameters that are supplied,
+overwrite the existing entry.
+** Pros: The single edit group feature can achieve both addition and deletion of members
+as well as renaming of the group. Better maintainability of code.
+** Cons: Overwriting all existing entries might affect usability as the user will have to re-enter the current member
+indexes if they want to add to member indexes rather than delete.
+
+* Alternative 2: Only edit parameters that are supplied. For the parameters that are supplied, add to the existing
+entries instead of overwriting.
+** Pros: The user will not have to re-enter member indexes if they choose to retain members inside a group.
+** Cons: Will require implementing a separate command to then delete member indexes from a group. This can also confuse
+the user if there are too many commands.
+
+* Alternative 3: Edit all parameters. Overwrite all existing entries.
+** Pros: Simplest to implement in terms of code. Will require less code than alternative 1 and 2.
+** Cons: Cumbersome for the user as they have to enter an attribute value even if they don't want to change it.
 
 //end::edit_group[]
 //tag::addEvent[]
