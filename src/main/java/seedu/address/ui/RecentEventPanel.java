@@ -16,7 +16,7 @@ import seedu.address.model.person.RecentEvent;
  */
 public class RecentEventPanel extends UiPart<Region> {
     private static final String FXML = "RecentEventPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PlaceListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(RecentEventPanel.class);
 
     @FXML
     private TableView<RecentEvent> eventTable;

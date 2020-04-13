@@ -59,7 +59,7 @@ public class PersonCard extends UiPart<Region> {
                 .stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        time.setText("Total Time Spent: " + person.getTime().toString());
+        time.setText("Individual Time Spent: " + person.getTime().toString());
     }
 
     @Override

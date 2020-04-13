@@ -1,12 +1,13 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
-import java.util.NoSuchElementException;
-import java.util.StringTokenizer;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.InsightType;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -23,43 +24,55 @@ public class ViewCommandParser implements Parser<ViewCommand> {
      */
     public ViewCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        StringTokenizer st = new StringTokenizer(args);
-        Index index;
-        String parameter;
-        String token = "";
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GROUP, PREFIX_MEMBER);
 
-        try {
-            token = st.nextToken();
-            index = ParserUtil.parseIndex(token);
-        } catch (NoSuchElementException | ParseException pe) {
-            if (token.equals(ViewCommand.KEYWORD_TIME)) {
-                index = ParserUtil.parseIndex("1");
-                parameter = ViewCommand.KEYWORD_TIME;
-                return new ViewCommand(index, parameter, ViewCommand.TYPE_ALL);
-            } else if (token.equals(ViewCommand.KEYWORD_ALL)) {
-                index = ParserUtil.parseIndex("1");
-                parameter = ViewCommand.KEYWORD_ALL;
-                return new ViewCommand(index, parameter, ViewCommand.TYPE_ALL);
-            } else if (token.equals(ViewCommand.KEYWORD_RECENT)) {
-                index = ParserUtil.parseIndex("1");
-                parameter = ViewCommand.KEYWORD_RECENT;
-                return new ViewCommand(index, parameter, ViewCommand.TYPE_ALL);
-            } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), pe);
-            }
+        boolean groupIndicated = !(argMultimap.getValue(PREFIX_GROUP).isEmpty());
+        boolean personIndicated = !(argMultimap.getValue(PREFIX_MEMBER).isEmpty());
+        if (groupIndicated && personIndicated) {
+            throw new ParseException(ViewCommand.MESSAGE_EXTRA_PREFIX);
         }
 
-        if (st.hasMoreTokens()) {
-            parameter = st.nextToken();
-        } else {
-            throw new ParseException(ViewCommand.MESSAGE_INVALID_PARAMETER + " " + ViewCommand.MESSAGE_USAGE);
-        }
-
+        String parameter = argMultimap.getPreamble();
         if (!parameter.equals(ViewCommand.KEYWORD_PLACE) && !parameter.equals(ViewCommand.KEYWORD_ACTIVITY)
-                && !parameter.equals(ViewCommand.KEYWORD_RECENT) && !parameter.equals(ViewCommand.KEYWORD_ALL)) {
+                && !parameter.equals(ViewCommand.KEYWORD_RECENT) && !parameter.equals(ViewCommand.KEYWORD_ALL)
+                && !parameter.equals(ViewCommand.KEYWORD_TIME)) {
             throw new ParseException(ViewCommand.MESSAGE_INVALID_PARAMETER + ViewCommand.MESSAGE_USAGE);
         }
 
-        return new ViewCommand(index, parameter, ViewCommand.TYPE_PERSON);
+        boolean indexRequired = parameter.equals(ViewCommand.KEYWORD_PLACE)
+                || parameter.equals(ViewCommand.KEYWORD_ACTIVITY);
+        boolean indexForbidden = parameter.equals(ViewCommand.KEYWORD_ALL)
+                || parameter.equals(ViewCommand.KEYWORD_TIME);
+        if (indexRequired && (!groupIndicated && !personIndicated)) {
+            throw new ParseException(ViewCommand.MESSAGE_INDEX_REQUIRED);
+        } else if (indexForbidden && (groupIndicated || personIndicated)) {
+            throw new ParseException(ViewCommand.MESSAGE_INDEX_FORBIDDEN);
+        }
+
+        String indexString;
+        InsightType insightType;
+        if (groupIndicated) {
+            indexString = argMultimap.getValue(PREFIX_GROUP).get();
+            insightType = InsightType.GROUP;
+        } else if (personIndicated) {
+            indexString = argMultimap.getValue(PREFIX_MEMBER).get();
+            insightType = InsightType.PERSON;
+        } else {
+            indexString = "1"; //default index when index not required
+            insightType = InsightType.ALL;
+        }
+
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(indexString);
+        } catch (ParseException pe) {
+            if (groupIndicated) {
+                throw new ParseException(MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+            } else {
+                throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+        }
+
+        return new ViewCommand(index, parameter, insightType);
     }
 }

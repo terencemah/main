@@ -186,6 +186,8 @@ public class ImportFile {
                 String[] places = onePlaceList.split(";");
                 String oneActivityList = oneGroup.get("activities");
                 String[] activities = oneActivityList.split(";");
+                String oneTimeList = oneGroup.get("times");
+                String[] times = oneTimeList.split(";");
 
                 ArrayList<Integer> members = new ArrayList<>();
                 if (!oneMemberIds.isEmpty()) {
@@ -222,7 +224,18 @@ public class ImportFile {
                     activityList = new ActivityList(xs);
                 }
 
-                Group group = new Group(name, placeList, activityList);
+                TimeList timeList;
+                if (oneTimeList.isEmpty()) {
+                    timeList = new TimeList(new ArrayList<String>());
+                } else {
+                    List<String> xs = new ArrayList<>();
+                    for (String s : times) {
+                        xs.add(s);
+                    }
+                    timeList = new TimeList(xs);
+                }
+
+                Group group = new Group(name, placeList, activityList, timeList);
                 group.setTimeSpent(time);
                 group.setMemberIDs(members);
                 group.setEventIDs(events);

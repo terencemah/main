@@ -26,6 +26,7 @@ import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PlaceList;
+import seedu.address.model.person.TimeList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -92,7 +93,7 @@ public class AddressBookTest {
     @Test
     public void hasGroup_groupNotInAddressBook_returnsFalse() {
         Group g1 = new Group(new Name("SoC Friends"), new PlaceList(new ArrayList<String>()),
-                new ActivityList(new ArrayList<String>()));
+                new ActivityList(new ArrayList<String>()), new TimeList(new ArrayList<String>()));
         assertFalse(addressBook.hasGroup(g1));
     }
 
@@ -105,7 +106,7 @@ public class AddressBookTest {
     @Test
     public void hasGroup_groupInAddressBook_returnsTrue() {
         Group group = new Group(new Name("SoC Friends"), new PlaceList(new ArrayList<String>()),
-                new ActivityList(new ArrayList<String>()));
+                new ActivityList(new ArrayList<String>()), new TimeList(new ArrayList<String>()));
         addressBook.addGroup(group);
     }
 
@@ -143,7 +144,8 @@ public class AddressBookTest {
     @Test
     public void removeGroup_test_returnFalse() {
         assertThrows(GroupNotFoundException.class, () -> addressBook.removeGroup((new Group(new Name("SoC Friend"),
-                new PlaceList(new ArrayList<String>()), new ActivityList(new ArrayList<String>())))));
+                new PlaceList(new ArrayList<String>()), new ActivityList(new ArrayList<String>()),
+                new TimeList(new ArrayList<String>())))));
     }
 
     /**

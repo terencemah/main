@@ -10,6 +10,7 @@ import seedu.address.model.person.ActivityList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PlaceList;
 import seedu.address.model.person.Time;
+import seedu.address.model.person.TimeList;
 
 public class TimeTest {
 
@@ -48,7 +49,7 @@ public class TimeTest {
     public void timeAnotherObjectEqualsFalse() {
         Time time = new Time(50, 2);
         Group group = new Group(new Name("Dummy"), new PlaceList(new ArrayList<String>()),
-                new ActivityList(new ArrayList<String>()));
+                new ActivityList(new ArrayList<String>()), new TimeList(new ArrayList<String>()));
         Assertions.assertFalse(time.equals(group));
     }
 
