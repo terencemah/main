@@ -102,14 +102,14 @@ public class ViewCommand extends Command {
         case KEYWORD_ALL:
             ObservableList<RecentEvent> eventList = FXCollections.observableArrayList();
             eventList.clear();
-            ObservableList<Event> filteredList = model.getFilteredEventList();
-            int size1 = filteredList.size();
+            ObservableList<Event> fullList = model.getAddressBook().getEventList();
+            int size1 = fullList.size();
             for (int i = 0; i < size1; i++) {
                 eventList.add(new RecentEvent(
-                        Integer.toString(filteredList.get(i).getEventId()),
-                        filteredList.get(i).getPlace(),
-                        filteredList.get(i).getActivity(),
-                        filteredList.get(i).getTime().toString()));
+                        Integer.toString(fullList.get(i).getEventId()),
+                        fullList.get(i).getPlace(),
+                        fullList.get(i).getActivity(),
+                        fullList.get(i).getTime().toString()));
             }
             model.copyRecent(eventList);
             return new CommandResult(MESSAGE_ALL_EVENTS, ViewType.ALL);
