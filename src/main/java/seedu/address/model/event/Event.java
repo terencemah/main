@@ -59,6 +59,8 @@ public class Event {
     public void setWithPerson(int personId) {
         this.withPerson = Optional.of(personId);
     }
+    
+    public void setEventId(int eventId) {this.eventId = eventId;}
 
     public int getEventId() {
         return this.eventId;
