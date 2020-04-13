@@ -46,12 +46,13 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 == Features
 
 ====
-*Command Format*
+*Command Format and Specifications*
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`,`p/PHONE_NUMBER n/NAME` is also acceptable.
+* `PERSON_INDEX` refers to the `INDEX` of a `Person` in CoderLifeInsights and similarly, `GROUP_INDEX` refers to the `INDEX` of a `Group`.
 ====
 
 === Viewing help : `help`
@@ -121,7 +122,7 @@ Edits the phone number and email address of the 1st person to be `91234567` and 
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 |=========================================================================
 // tag::add_group[]
-=== Social Group: `add_group`
+=== Adding a Group: `add_group`
 
 Creates an empty social group with given name. +
 Format: `add_group n/GROUP_NAME m/MEMBER_IDs ...`
@@ -147,14 +148,14 @@ to the user after creation.
 |=======================================================================
 // end::add_group[]
 // tag::edit_group[]
-=== Edit Group: `edit_group`
+=== Editing a Group: `edit_group`
 
-Edit a given person id with a given group id +
-Format: `edit_group GROUP_ID n/GROUP_NAME m/MEMBER_IDs`
+Edit a group with a given group index +
+Format: `edit_group GROUP_INDEX n/GROUP_NAME m/MEMBER_IDs`
 
 ****
-* CoderLifeInsight will edit the group with given id to change the name to supplied name and change the list of members to the ones supplied.
-One parameter is required to edit the group.
+* CoderLifeInsights will edit the group with given index to change the name to supplied name and change the list of members to the ones supplied.
+Either a new name or new member(s) is required to edit the group.
 ****
 
 Examples:
@@ -497,12 +498,12 @@ Exports your event data to `events.csv`
 // end::export[]
 
 // tag::delete[]
-=== Deleting an object : `delete`
+=== Deleting a Person or a Group : `delete`
 
 Deletes an entity, such as a Person or Group from the CoderLifeInsights +
-Format: `delete_person ID` (for person) +
-`delete_group ID` (for group)
-//        `delete event ID` (for event)
+Format: `delete_person PERSON_INDEX` (for person) +
+`delete_group GROUP_INDEX` (for group)
+
 
 ****
 * Deletes the person at the specified `INDEX`.
@@ -561,26 +562,26 @@ Returns the name of a random person saved in CoderLifeInsights.
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
-=== FAQ
+== FAQ
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CoderLifeInsights folder.
 
-=== Command Summary
+== Command Summary
 
 [width="90%",cols="30%,<30%,<40%",options="header"]
 |=======================================================================
 | Feature | Usage | Example |
 *Add Person* | `add_person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` |
 `add_person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` |
-*List* | `list_LIST_PARAMETER` | `list_persons`|
+*List* | `list_LIST_PARAMETER` | `list_persons`, `list_groups`|
 *Edit* | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`|
 `edit 1 p/91234567 e/johndoe@example.com`|
-*Add Group*| `add_group n/GROUP_NAME m/MEMBER_IDs`| `add_group n/SoC Friends` +
+*Add Group*| `add_group n/GROUP_NAME m/MEMBER_INDEX`| `add_group n/SoC Friends` +
 
 `add_group n/RC Friends m/1 m/2 m/3`|
 
-*Edit Group* | `edit_group GROUP_ID n/GROUP_NAME m/MEMBER_IDs` |
+*Edit Group* | `edit_group GROUP_INDEX n/GROUP_NAME m/MEMBER_INDEXs` |
 `edit_group 1 n/FOS` +
 
 `edit_group 1 m/1 m/5` +
@@ -621,11 +622,11 @@ or +
  e/events.csv`|
 *Export* | `export l/LIFE_FILE_NAME g/GROUP_FILE_NAME e/EVENT_FILE_NAME` |
 `export l/life.csv g/groups.csv e/events.csv` |
-*Delete* | `delete_person ID`
+*Delete* | `delete_person PERSON_INDEX`
 
 or +
 
-`delete_group ID`| `list_persons` +
+`delete_group GROUP_INDEX`| `list_persons` +
 
 `delete_person 2` +
 
