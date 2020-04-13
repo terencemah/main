@@ -56,7 +56,8 @@ public class DeleteCommand extends Command {
             logger.info("Index to remove is " + targetIndex.getZeroBased());
             boolean groupChanged = currMembers.remove(Integer.valueOf(targetIndex.getOneBased()));
             if (groupChanged) {
-                Group editedGroup = new Group(group.getName(), group.getPlaceList(), group.getActivityList());
+                Group editedGroup = new Group(group.getName(), group.getPlaceList(),
+                        group.getActivityList(), group.getTimeList());
                 editedGroup.setTimeSpent(group.getTimeSpent());
                 ArrayList<Integer> newMembers = new ArrayList<>(currMembers);
                 editedGroup.setMemberIDs(newMembers);

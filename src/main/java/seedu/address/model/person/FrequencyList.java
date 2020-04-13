@@ -7,9 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * An observable list of EventDescriptor objects whose uniqueness is
- * enforced by a HashMap. This allows the list to be displayed
- * and updated instantly on the GUI.
+ * An observable list of EventDescriptor objects whose uniqueness is enforced by a
+ * HashMap. This allows the list to be displayed and updated instantly on the GUI.
  */
 public class FrequencyList {
 

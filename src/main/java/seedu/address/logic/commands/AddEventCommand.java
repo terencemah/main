@@ -135,7 +135,10 @@ public class AddEventCommand extends Command {
             ActivityList currentActivityList = toEdit.getActivityList();
             ActivityList newActivityList = currentActivityList.addActivity(toAdd.getActivity());
 
-            Group editedGroup = new Group(toEdit.getName(), newPlaceList, newActivityList);
+            TimeList currentTimeList = toEdit.getTimeList();
+            TimeList newTimeList = currentTimeList.addTime(toAdd.getTime().toString());
+
+            Group editedGroup = new Group(toEdit.getName(), newPlaceList, newActivityList, newTimeList);
             editedGroup.setMemberIDs(toEdit.getMembers());
             editedGroup.setTimeSpent(newTime);
             editedGroup.setMemberIDs(toEdit.getMembers());
