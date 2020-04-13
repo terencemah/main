@@ -1530,12 +1530,59 @@ Another naming convention is required.
 === Adding an event
 . Add an event to a person or group saved in CoderLifeInsights
 .. Prerequisites: Have a person or group saved in CoderLifeInsights
-.. Test case 1 (adding an event to a person): `add_event anything place/anywhere time/30 m/1`
-.. Test case 2 (adding an event to a group): `add_event anything place/anywhere time/30 g/1`
+.. Test case 1 (adding an event to a person): `add_event anything place/anywhere time/30 m/1` +
+Expected: New event successfully added: Event: anything place: anywhere for 0h 30m
+.. Test case 2 (adding an event to a group): `add_event anything place/anywhere time/30 g/1` +
+Expected: New event successfully added: Event: anything place: anywhere for 0h 30m
 . Adding an event to a person or group not saved in CoderLifeInsights
 .. Prerequisites: Choose an index that is greater than the number of persons and groups saved in CoderLifeInsights, for example, 100 for the sample test data
-.. Test case 1(adding an event to a person): `add_event anything place/anywhere time/30 m/100`
-.. Test case 2 (adding an event to a group): `add_event anything place/anywhere time/30 g/100`
+.. Test case 1(adding an event to a person): `add_event anything place/anywhere time/30 m/100` +
+Expected: The person index provided is invalid
+.. Test case 2 (adding an event to a group): `add_event anything place/anywhere time/30 g/100` +
+Expected: The group index provided is invalid
+. Adding an event to a person or group with time spent of 0 hours and 0 minutes:
+.. Prerequisites: Have a person or group saved in CoderLifeInsights
+.. Test case 1 (adding an event to a person): `add_event anything place/anywhere time/00 m/1`+
+Expected: Time parameter has to be greater than 0 minutes
+.. Test case 2 (adding an event to a group): `add_event anything place/anywhere time/00 g/1` +
+Expected: Time parameter has to be greater than 0 minutes
+. Adding an event with required fields missing:
+.. Prerequisites: Have a person or group saved in CoderLifeInsights
+.. Testcase 1: `add_event place/anywhere time/30 m/1`
+.. Testcase 2: `add_event anything place/ time/30 m/1`
+.. Testcase 3: `add_event anything time/30 m/1`
+.. Testcase 4: `add_event anything place/anywhere time/ m/1`
+.. Testcase 5: `add_event anything place/anywhere m/1`
+.. Testcase 6: `add_event anything place/anywhere time/30`
+.. Testcase 7: `add_event` +
+Expected: Invalid command format! +
+add_event: Creates an event with a group or an individual that adds an activity, place and time to the subject. +
+Parameters: ACTIVITY place/PLACE m/INDEX time/TIME +
+OR +
+Parameters: ACTIVITY place/PLACE g/INDEX time/TIME +
+Example: add_event Dancing place/SCAPE m/1 time/300
+. Adding an event with an invalid person or group index
+.. Prerequisites: Have a person or group saved in CoderLifeInsights
+.. Testcase 1: `add_event anything place/anywhere time/30 m/`
+.. Testcase 2: `add_event anything place/anywhere time/30 m/s`
+.. Testcase 3: `add_event anything place/anywhere time/30 m/1 s` +
+Expected: Index is not a non-zero unsigned integer.
+. Adding an event with an invalid time
+.. Prerequisites: Have a person or group saved in CoderLifeInsights
+.. Testcase 1: `add_event anything place/anywhere time/0 m/s`
+.. Testcase 2: `add_event anything place/anywhere time/30s m/s`
+.. Testcase 3: `add_event anything place/anywhere time/test m/s` +
+Expected: Time parameter needs to be unsigned integers of at least 2 digits. +
+For example: [5 minutes = 05]; [1 hour = 100]; [10 hours and 30 minutes = 1030]
+. Adding an event to both group and member at the same time
+.. Prerequisites: None
+.. Testcase 1: `add_event anything place/anywhere time/30s m/1 g/1` +
+Expected: Invalid command format! +
+add_event: Creates an event with a group or an individual that adds an activity, place and time to the subject. +
+Parameters: ACTIVITY place/PLACE m/INDEX time/TIME +
+OR +
+Parameters: ACTIVITY place/PLACE g/INDEX time/TIME +
+Example: add_event Dancing place/SCAPE m/1 time/300
 //=== Viewing places visited or activities carried out with a group
 //. Obtain insights on the number of times an activity has been done with a specific group or the number of times a place has been visited with that same group.
 //.. Prerequisites: Have a group saved in CoderLifeInsights and add an event with that group
