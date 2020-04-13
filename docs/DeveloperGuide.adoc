@@ -16,6 +16,24 @@ endif::[]
 
 By: `CoderLifeInsights`      Since: `March 2020`      Licence: `MIT`
 
+
+== Introduction
+
+CoderLifeInsights is a desktop application that provides you insights and suggestions to your social life as
+a programmer using a CLI (Command Line Interface).
+
+Managing social life as a programmer can be difficult since you spend most of the in front of the screen,
+probably coding. And thus, it is easy to lose track of people who you spend time with or need to spend time with.
+CoderLifeInsights helps you track and gain insights on your social life off the screen.
+
+CoderLifeInsights is a Command Line Interface (CLI) application that also has a Graphical User Interface (GUI). Thus,
+the users are expected to use CoderLifeInsights mainly through CLI, but the GUI is used to give the user a glimpse of
+their data, show insights and error messages whenever applicable.
+
+We're delighted that you're interested in the development of CoderLifeInsights and reading this guide is a great first
+step to get upto speed with the codebase and how it is organised. This guide also serves as reference for all current
+developers when needed.
+
 == Setting up
 
 Refer to the guide <<SettingUp#, here>>.
@@ -310,7 +328,7 @@ image::SuggestPersonActivityDiagram.png[][pdfwidth="40%",width="40%"]
 
 ==== Implementation
 
-The `add_group` feature is implemented to allow users to track social activities with a group of people
+The Add Group feature is implemented to allow users to track social activities with a group of people
 (instead of just one person). A `Group` represents a social group containing
 1 or more `Person`. To avoid dependencies, a `Group` class stores the index of `Person` instead of the `Person` object
 itself. A `Group` can be created with or without `Person` as member(s), but have a `Name`.
@@ -356,21 +374,71 @@ image::AddGroupSequenceDiagram.png[]
 
 ==== Design Considerations
 
+Aspect: How the `add_group` command executes
+
+* Alternative 1 (current choice): Separate parsing from code execution
+** Pros: Clear distinction between class responsibilities.
+** Cons: More code, may increase coupling as objects are passed around between the classes.
+
+* Alternative 2: Parse and Execute in the same class
+** Pros: Less code, less variables/object to pass between classes.
+** Cons: No separate classes so maybe harder to trace bugs. It maybe harder to understand for future developers, as the
+design would be different to the `add_person` command (adapted from AddressBookLevel 3).
+
+Aspect: How to store the `group` instances
+
+* Alternative 1 (current choice): Store in a separate `UniqueGroupList`
+** Pros: Separate List is easier to manage and edit. Thus, this option is also advantageous as there is an `edit_group`
+command as well.
+** Cons: Another list to be stored in AddressBook, which might lead to more memory usage. Since the target user is
+may keep the app running in the background, this can be disadvantageous.
+
+* Alternative 2: Store inside Person Objects, which are stored in `UniquePersonList`
+** Pros: No need of a separate list, one list to store all essential data. This might be better from a memory standpoint.
+** Cons: Harder to maintain group instances inside person as there will be multiple copies and for most users,
+the number of groups of people will be less than the number of people. This alternative would also make the Person class
+depend upon the Group class, which can be error-prone.
 
 === Delete Group Feature
 
 ==== Implementation
 
+The Delete Group feature allows the user to delete a previously `Group`. This feature is implemented using the
+`DeleteGroupCommand`, which extends the abstract class `Command` and the `DeleteGroupCommandParser`, which implements
+the `Parser` interface.The feature is also supported by `UniqueGroupList`,
+which stores the `Group` instances. The relationship between classes is similar to the one seen in diagram x.x and hence
+is omitted for conciseness.
+
+Here below is an example workflow, which is shown using an activity diagram:
+
+[#DeleteGroupSequenceDiagram, align="center"]
+image::DeleteGroupActivityDiagram.png[]
+
+The above workflow is achieved due to the interlinked classes. Their behaviour during an execution of the DeleteGroup
+feature is shown using the following Sequence Diagram.
+
 [#DeleteGroupSequenceDiagram, align="center"]
 image::DeleteGroupSequenceDiagram.png[]
 
+==== Design Considerations
+
+Aspect: how the delete group feature executes
+
+* Alternative 1: Separate `DeleteGroupCommand` and `DeleteGroup` classes to support the feature. +
+    Pros: clear class responsibility, easier to trace bugs. Since this follows the design of most other commands,
+    intuitive to understand for new developers +
+    Cons: increases the amount of code, which might introduce more errors.
+
+* Alternative 2: The `DeleteGroupCommand` class parses the inputted index +
+    Pros: Since only one argument to parse, this eliminates the need for another class. Less code.
+    Cons: Can cause confusion among developers regarding the class responsibility.
 
 //tag::list_group[]
 === List Group Feature
 
 ==== Implementation
 
-The list feature allows users to view all the social groups currently in Coder Life Insights.
+The list feature allows users to view all the social `Group` instances currently stored in CoderLifeInsights.
 
 Here below is a sequence diagram showcasing how the command works.
 
@@ -777,6 +845,10 @@ See <<UsingGradle#, UsingGradle.adoc>> to learn how to use Gradle for build auto
 We use https://travis-ci.org/[Travis CI] and https://www.appveyor.com/[AppVeyor] to perform _Continuous Integration_ on our projects.
 See <<UsingTravis#, UsingTravis.adoc>> and <<UsingAppVeyor#, UsingAppVeyor.adoc>> for more details.
 
+We also use https://www.codacy.com/[Codeacy] to automate code quality reviews.
+See https://support.codacy.com/hc/en-us/articles/360010263540-Getting-started-with-Codacy[Getting Started with Codacy]
+for more details.
+
 === Coverage Reporting
 
 We use https://coveralls.io/[Coveralls] to track the code coverage of our projects.
@@ -853,7 +925,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user | create a new social group | track a cluster of people together, e.g. secondary school friends, JC friends, family, university friends etc.
 
-|`* * *` |user | assign group(s) to a person | track people I know from multiple places (Eg workplace and school both).
+|`* * *` |user | assign persons to different groups | track people I know from multiple places (Eg workplace and school both).
+
+|`* * *` |user | edit group | change the name of a social circle. Add or remove people.
 
 |`* * *` |user | delete group | remove social circles that are no longer needed.
 
@@ -956,24 +1030,80 @@ Use case resumes at step 2.
 
 _{More to be added}_
 
-=== Use case: Add person
+=== Use case: Add group
 
 *MSS*
 
-1. User requests to add person
-2. CoderLifeInsights adds the person and displays their details
+1. User requests to add group
+2. CoderLifeInsights adds the group and displays its details
 +
 Use case ends.
 
 *Extensions*
 
 * 1a.
-No details of the person provided as arguments.
+Group name not provided
 +
-[none]
 ** 1a1. CoderLifeInsights shows an error message.
 +
+Step 1 continues until name is provided +
 Use case resumes at step 2.
+
+* 1b.
+Member indexes provided are invalid (don't exist in the app)
++
+** 1b1. CoderLifeInsights shows an error message.
++
+Step 1 continues until valid member indexes are supplied or no indexes are supplied (member indexes are optional) +
+Use case resumes at step 2.
+
+=== Use case: Delete Group
+
+Preconditions: group to be deleted exists in the app +
+*MSS*
+
+1. User requests to delete group with specified index
+2. CodeLifeInsights deletes the group and displays its details
++
+Use case ends.
+
+=== Use case: Edit Group
+
+Preconditions: group to be deleted exists in the app +
+*MSS*
+
+1. User requests to edit group with specified index
+2. CodeLifeInsights deletes the group and displays its details
++
+Use case ends.
+
+*Extensions*
+
+* 1a.
+No values to edit are provided
++
+** 1a1. CoderLifeInsights shows an error message telling the user a group can't be edited with no new info.
++
+Step 1 continues until at least one new value is provided. +
+Use case resumes at step 2
+
+* 1b.
+If member indexes are provided, they are invalid (don't exist in the app)
++
+** 1b1. CoderLifeInsights shows an error message telling the user that one or more member indexes are invalid.
++
+Step 1 continues until all member indexes provided are correct or no new member indexes are provided at all. +
+Use case resumes at step 2
+
+=== Use case: List Group
+
+*MSS*
+
+1. User requests to list all groups
+2. CoderLifeInsights displays all the groups in a list format with their indexes, time spent, member indexes, and
+event ids.
++
+Use case ends.
 
 === Use case: Export data
 
@@ -1155,19 +1285,31 @@ Use case resumes at 3.
 
 [[mainstream-os]]
 Mainstream OS::
-Windows, Linux, Unix, OS-X
+Windows, Linux, Unix, macOS
 
 [[private-contact-detail]]
 Private contact detail::
 A contact detail that is not meant to be shared with others
 
-[[social-group]]
-Social Group::
-A cluster of people with a commonality as identified by the user (eg same JC, same OG, etc)
-
 [[coderlifeinsights]]
 CoderLifeInsights::
 An application.
+
+[[social-group]]
+(Social) Group::
+A cluster of 0 or more other people with a commonality as identified by the user (eg same JC, same OG, etc).
+An empty `Group`is allowed since it is assumed that the user themselves is a member of the social group (which is why
+they would want to track it.)
+
+[[event]]
+Event::
+An event is an event that the user took part in, either with another individual or group. An event has an activity
+(what the user engaged in), a place, time spent and the person/group.
+
+[[time]]
+Time::
+Time represents the time spent in an event. It is represented by number of hours (0 or greater) and
+number of minutes (between 0 and 59 inclusive).
 
 == Instructions for Manual Testing
 
@@ -1314,12 +1456,85 @@ Another naming convention is required.
 .. Prerequisites: Have a person or group saved in CoderLifeInsights
 .. Test case 1 (adding an event to a person): `add_event anything place/anywhere time/30 m/1`
 .. Test case 2 (adding an event to a group): `add_event anything place/anywhere time/30 g/1`
-
+. Adding an event to a person or group not saved in CoderLifeInsights
+.. Prerequisites: Choose an index that is greater than the number of persons and groups saved in CoderLifeInsights, for example, 100 for the sample test data
+.. Test case 1(adding an event to a person): `add_event anything place/anywhere time/30 m/100`
+.. Test case 2 (adding an event to a group): `add_event anything place/anywhere time/30 g/100`
 //=== Viewing places visited or activities carried out with a group
 //. Obtain insights on the number of times an activity has been done with a specific group or the number of times a place has been visited with that same group.
 //.. Prerequisites: Have a group saved in CoderLifeInsights and add an event with that group
 //.. Test case 1 (view places visited with group): `view_group places g/1`
 //.. Test case 2 (view activities done with group): `view_group activities g/1`
+
+=== Add a Group
+
+. Adding an empty group
+.. Prerequisites: None
+.. Test case: `add_group n/empty_group_name` +
+Expected: New group added to CoderLifeInsights, new group displayed in groups panel and success message displayed
+to the user.
+
+. Adding a group with members (Persons)
+.. Prerequisites: Member indexes must exist in the app. Hence, add as many members you want as `Person' before.
+... For example, add a Person using the command `add_person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
+... Note down the person indexes for persons whom you want as members of the new group
+.. Test case: `add_group n/new_group_name m/1 m/2 ...`
+Expected: New group added to CoderLifeInsights, new group displayed in groups panel and success message displayed
+to the user.
+
+=== Delete a Group
+
+. Deleting an existing group
+.. Prerequisites: the group to be removed must exist in CoderLifeInsights.
+... If for example the app contains no groups, add a group using `add_group n/delete_demo`. It should have index 1.
+.. Test case: `delete_group 1`
+Expected: Group deleted from the app and success message shown to the user.
+
+. Deleting a non-existent group
+.. Prerequisites: the group to be deleted (referenced by the index) must not exist in CoderLifeInsights. To be safe,
+use the index that is 1 more than the largest index of the current groups. You can find the largest index using
+`list_groups` and observing the last group entry. If the app has 99 groups, choose 100 as the index of the group to be
+deleted.
+.. Test case: `delete group 100`
+Expected: Group not deleted as there is no group at given index. Error message shown to user saying Group Index
+specified is invalid.
+
+=== Edit a Group
+
+. Editing all fields possible of an existing group
+.. Prerequisites: the group to be edited must exist in CoderLifeInsights. Follow `8.9` to create a group in the app if
+one doesn't exit already. Note down the index of the group either when it is created or using the group list on the
+right in the GUI. The new members to be included in the group must also exist in the app.
+.. Test case: If you want to edit the group with index 1 and change member list to only have person with index 1,
+enter `edit_group 1 n/new_name m/1`.
+Expected: Group at index 1 is changed. Name is `new_name` whereas `members` now only has `1` (instead of the indexes
+that existed earlier).
+
+. Editing the name of an existing group
+.. Prerequisites: the group to be edited must exist in CoderLifeInsights.
+.. Test case: `edit_group 1 n/another_name`.
+Expected: The name of group at index 1 is changed of `another_name`. Success message displayed to the user. The
+member list of the group at index 1 remains unchanged.
+
+. Editing the member indexes of an existing group
+.. Prerequisites: the new member indexes must exist in CoderLifeInsights.
+.. Test case: `edit_group 1 m/1 ..`.
+Expected: The member list of the group at index 1 is changed to the new member indexes supplied. The name of the group
+at index 1 remains unchanged. Success message is displayed to the user.
+
+. Editing a non-existent group
+.. Prerequisites: the group at specified index must not exist in CoderLifeInsights. Pick an index that is larger than
+the current largest index of groups in the app. If 99 is the largest index, choose 100.
+.. Test case: `edit_group 100`.
+Expected: Error message saying group index is invalid is displayed to the user.
+
+=== List all Groups
+
+. List all groups
+.. Prerequisites: None.
+.. Test Case: `list_groups`
+Expected: the group panel will show all the groups currently in the app. If there are no groups, it will be blank.
+A success message will be shown to the user.
 
 === Saving data
 
@@ -1327,3 +1542,4 @@ Another naming convention is required.
 
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 _{ more test cases ... }_
+
