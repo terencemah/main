@@ -62,7 +62,7 @@ It required an in-depth analysis of design alternatives.
 ** Justification: This feature allows the user to add events with groups, on top of persons. The relevant information saved to the hard disk is required for other functions to generate their output.
 ** Highlights: This enhancement functions well with existing commands. It required an in-depth analysis of design alternatives.
 
-* *Minor enhancement #3*: Implementation of Insights feature for groups `view_groups`
+* *Minor enhancement #3*: Implementation of Insights feature for groups `view_groups` [Refactored into the view command by @terencemah in PR: https://github.com/AY1920S2-CS2103-W14-4/main/pull/173[#173]]
 ** What it does: This enhancement allows the user to view the places visited and the activities done with a particular group. It also lists the number of times been to each place and number of times each activity is carried out with the group.
 ** Justification: This feature gives the user insights on the favourite places and activities of each group of friends in CoderLifeInsights.
 ** Highlights: This enhancement functions well with existing commands. It required an in-depth analysis of design alternatives.
@@ -74,7 +74,7 @@ It required an in-depth analysis of design alternatives.
 ** Project management:
 *** Tasked to ensure deliverables were submitted and deadlines were met by all members of the group.
 *** Tasked to test and discover potential bugs in the software.
-*** Tasked to ensure documentation for all code written, as well as ensuring that the User Guide is understandable and not confusing.
+*** Tasked to ensure documentation for all code is written, as well as ensuring that the User Guide is understandable and not confusing.
 
 ** Enhancements to existing features:
 *** Created the interim Event container class
