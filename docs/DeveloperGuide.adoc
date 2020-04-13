@@ -436,23 +436,27 @@ Aspect: how the delete group feature executes
 //tag::list_group[]
 === List Group Feature
 
+The list group feature allows users to view all the `Group` instances currently stored in CoderLifeInsights.
+
 ==== Implementation
 
-The list feature allows users to view all the social `Group` instances currently stored in CoderLifeInsights.
+This feature is mainly supported by the `ListGroupCommand`, which extends the abstract class `Command`.
 
 Here below is a sequence diagram showcasing how the command works.
 
 [#ListGroupSequenceDiagram, align="center"]
 image::ListGroupSequenceDiagram.png[]
 
-The following activity diagram depicts the step-by-step scenario when a user executes the `list_groups` command:
+The following is an example usage scenario and how the list group mechanism behaves at each step.
 
 1. User enters `list_groups` into the command prompt
-2. The `LogicManager` calls `AddressBookParser#parseCommand()`
-3. The method `AddressBookParser#parseCommand()` creates a `ListGroupCommand` and checks if the input is valid.
+2. The `LogicManager` calls `AddressBookParser#parseCommand()` with the arguments supplied by the user
+3. The method `AddressBookParser#parseCommand()` checks if the input is valid and if yes, creates a `ListGroupCommand`.
 4. The `ListGroupCommand` calls the `updateFilteredGroupList` method of `Model` to update the GUI.
 5. The `ListGroupCommand` returns the `CommandResult` to AddressBookParser
 6. The `AddressBookParser` returns the `CommandResult` to `LogicManager`.
+
+The following activity diagram summarises the workflow for the list group feature.
 
 [#ListGroupCommandActivity,align="center"]
 image::ListGroupCommandActivity.png[pdfwidth="50%",width="50%"]
@@ -461,12 +465,28 @@ image::ListGroupCommandActivity.png[pdfwidth="50%",width="50%"]
 //tag::edit_group[]
 === Edit Group Feature
 
+The Edit Group Feature allows the user to edit an existing `Group` in the app.
+
 ==== Implementation
+
+The Edit Group Feature is facilitated by the `EditGroupCommand`, which extends the abstract class `Command`, and
+the `EditGroupCommandParser`, which implements the `Parser` interface. Both of these classes are part of the `Logic`
+package. Additionally, a private and static `EditGroupDescriptor` class is present in `EditGroupCommand` as a container
+class to encapsulate attributes to be edited for a `Group`.
+
+he following operations are implemented and used for accomplishing this feature:
+
+* `EditGroupCommandParser#parser(String args)` - Parses the input to obtain the arguments and returns an
+`EditGroupCommand` instance with the arguments.
+* `EditGroupCommandParser#arePrefixesPresent(ArgumentMultimap argumentMultiMap, Prefix... prefixes)` - checks if the
+member indexes are supplied by the user.
+* `EditGroupCommand#EditGroupCommand(Index index, EditGroupDescriptor editGroupDescriptor)` - Creates a new
+`EditGroupCommand` instance with the supplied index and editGroupDescriptor.
+* `EditGroupCommand#createEditedGroup(Group groupToEdit, EditGroupDescriptor editGroupDescriptor)` - Modifies the given
+`groupToEdit` with the details given in `editGroupDescriptor`.
 
 [#EditGroupSequenceDiagram, align="center"]
 image::EditGroupSequenceDiagram.png[]
-
-
 
 //end::edit_group[]
 //tag::addEvent[]
