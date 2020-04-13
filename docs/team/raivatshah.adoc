@@ -22,24 +22,6 @@ I am responsible to complete the features related to group and overall system de
 developed the JSON implementations for group and event classes.
 I have also made notable contributions to the User Guide and Developer Guide.
 
-
-Listed in the table below are some notations that are used throughout the document.
-
-.Legend table
-[#Legend]
-[width="100%",cols="^15%,85%",options="header"]
-|===
-a| *Icon* | *Description*
-a| `command` | Command that can be executed, or a component, class or object in the architecture of the application
-a| icon:lightbulb-o[role="icon-tip", size="2x"] | Tips that might be helpful in navigating the application
-a| icon:info-circle[role="icon-note blue", size="2x"] | Important information that should be noted
-a| ====
-==== | Useful information for a deeper understanding of the command
-|===
-
-As shown in <<Legend>>, these icons associated to their following descriptions, such as commands, tips, important information and useful information, enable greater clarity in understanding the document. Note that useful information will have text enclosed in its box.
-
-
 == Summary of contributions
 === Major enhancements:
 * *Major enhancement #1*: Implemented group features - `add_group`, `delete_group`, `edit_group` and `list_groups`
@@ -52,10 +34,12 @@ features of the addressbook3 due to the robust design and defensive programming 
 ** Highlights: This enhancement functions well with existing commands as it adds more CoderLifeInsights into the list,
 all the other features such as groups, and events are updated as well. It required an in-depth analysis
 of design alternatives.
+** Credits: As highlighted above, the group features take inspiration from the person features of addressbook3. Thus,
+credits go to the previous developers of addressbook3 for the system design and class structures.
 
-* *Major enhancement #2*: Implemented storage features - JSON Implementations
+* *Major enhancement #2*: Implemented storage features - JSON Implementations for Event and Group
 ** What it does: JSON implementations allow the app to store and retrieve data from file. This is crucial as the app is
-not expected to always run.
+not expected to always run and needs to store data in the hard disk.
 ** Justification: Using the JSON implementations, the app can go back to its last state when a user
 re-launches the app.
 ** Highlights: This enhancement required an in-depth understanding of JSON and Java Data structures in order to convert
@@ -73,15 +57,26 @@ compared to the dark theme provided in AddressBook - Level3.
 ** Justification: The constraints the in the class allow for efficient management of time format, which suites the
 customised need of the app.
 ** Highlights: This enhancement functions well with all the classes that depend upon it and use it. This required an
-thorough understanding of the different time use cases.
+thorough understanding of the different use cases.
 
-* *Code contributed*:[https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=raivatshah&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false[RepoSense]]
+* *Code contributed*:[https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=raivatshah&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false[tP Dashboard]]
+
+* *Functional Code Contributed:*
+
+** Model:
+** UI:
+** Storage:
+** Logic:
+
+* *Test Code Contributed*
+
+
 
 * *Other contributions*:
 
 ** Project management:
 *** Initiated group meetings and set policies for Pull Requests
-*** Opened issues on Github repo to account for bugs
+*** Opened issues on Github repo to account for bugs.
 
 ** Enhancements to existing features:
 *** Updated the GUI color scheme and layout (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/95[#95], https://github.com/AY1920S2-CS2103-W14-4/main/pull/69[#69])
@@ -114,4 +109,7 @@ include::../UserGuide.adoc[tag=view]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+include::../DeveloperGuide.adoc[tag=add_group]
+include::../DeveloperGuide.adoc[tag=delete_group]
 include::../DeveloperGuide.adoc[tag=list_group]
+include::../DeveloperGuide.adoc[tag=edit_group]
