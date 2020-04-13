@@ -553,7 +553,7 @@ Remarks:
 * TIME is the variable used to store the time the user has spent with a saved contact or group.
 * TIME parameter must contain at least 2 digits. For example: A time of 1 hour and 30 minutes will be input as `130`.
 * An event added must have time of at least 1 minute. e.g. time/01
-* Place and Activity are case-sensitive
+* PLACE and ACTIVITY are case-sensitive
 
 Example usage: `add_event date night m/1 time/230 place/Gardens by the Bay`
 
@@ -564,6 +564,7 @@ The command above will add the following to the Person whose index is `1` on the
 * Time `230` which equals 2 hours and 30 minutes, will be added to the Person's time.
 
 It will also create an Event with the following attributes:
+
 * Activity: `date night`
 * Place: `Gardens by the Bay`
 * Time: `2h 30m`
@@ -614,7 +615,7 @@ The following activity diagram depicts the following scenario:
 image::addEventActivity.png[pdfwidth="100%",width="75%"]
 
 ==== Justification
-The Add Event feature and the relevant classes were added and implemented to add and store Events with relevant data that are used to generate output for other features such as insights.
+The Add Event feature and the relevant classes were added and implemented to add and store Events and relevant data that are used to generate output for other features such as insights.
 
 
 //end::addEvent[]
@@ -1275,6 +1276,7 @@ No event data for group or individual available for comparison.
 +
 Use case ends
 
+// tag::useCaseAddEvent[]
 === Use case: Add an event with a person
 
 *MSS*
@@ -1330,6 +1332,7 @@ Use case resumes at 3.
 ** 2c2. User re-enters command with correct and valid group index +
 Use case resumes at 3.
 
+// end::useCaseAddEvent[]
 === Use case: View the places or activities visited with a group
 *MSS*
 
