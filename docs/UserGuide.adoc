@@ -150,13 +150,13 @@ to the user after creation.
 |=======================================================================
 // end::add_group[]
 // tag::edit_group[]
-=== Edit Group: `edit_group`
+=== Editing a Group: `edit_group`
 
 Edit a group with a given group index +
 Format: `edit_group GROUP_INDEX n/GROUP_NAME m/MEMBER_IDs`
 
 ****
-* CoderLifeInsight will edit the group with given index to change the name to supplied name and change the list of members to the ones supplied.
+* CoderLifeInsights will edit the group with given index to change the name to supplied name and change the list of members to the ones supplied.
 Either a new name or new member(s) is required to edit the group.
 ****
 
@@ -500,12 +500,12 @@ Exports your event data to `events.csv`
 // end::export[]
 
 // tag::delete[]
-=== Deleting an object : `delete`
+=== Deleting a Person or a Group : `delete`
 
 Deletes an entity, such as a Person or Group from the CoderLifeInsights +
-Format: `delete_person ID` (for person) +
-`delete_group ID` (for group)
-//        `delete event ID` (for event)
+Format: `delete_person PERSON_INDEX` (for person) +
+`delete_group GROUP_INDEX` (for group)
+
 
 ****
 * Deletes the person at the specified `INDEX`.
@@ -579,11 +579,11 @@ _{explain how the user can enable/disable data encryption}_
 *List* | `list_LIST_PARAMETER` | `list_persons`|
 *Edit* | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`|
 `edit 1 p/91234567 e/johndoe@example.com`|
-*Add Group*| `add_group n/GROUP_NAME m/MEMBER_IDs`| `add_group n/SoC Friends` +
+*Add Group*| `add_group n/GROUP_NAME m/MEMBER_INDEX`| `add_group n/SoC Friends` +
 
 `add_group n/RC Friends m/1 m/2 m/3`|
 
-*Edit Group* | `edit_group GROUP_ID n/GROUP_NAME m/MEMBER_IDs` |
+*Edit Group* | `edit_group GROUP_INDEX n/GROUP_NAME m/MEMBER_INDEXs` |
 `edit_group 1 n/FOS` +
 
 `edit_group 1 m/1 m/5` +
@@ -624,11 +624,11 @@ or +
  e/events.csv`|
 *Export* | `export l/LIFE_FILE_NAME g/GROUP_FILE_NAME e/EVENT_FILE_NAME` |
 `export l/life.csv g/groups.csv e/events.csv` |
-*Delete* | `delete_person ID`
+*Delete* | `delete_person PERSON_INDEX`
 
 or +
 
-`delete_group ID`| `list_persons` +
+`delete_group GROUP_INDEX`| `list_persons` +
 
 `delete_person 2` +
 
