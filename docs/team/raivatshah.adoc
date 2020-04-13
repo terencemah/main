@@ -22,24 +22,6 @@ I am responsible to complete the features related to group and overall system de
 developed the JSON implementations for group and event classes.
 I have also made notable contributions to the User Guide and Developer Guide.
 
-
-Listed in the table below are some notations that are used throughout the document.
-
-.Legend table
-[#Legend]
-[width="100%",cols="^15%,85%",options="header"]
-|===
-a| *Icon* | *Description*
-a| `command` | Command that can be executed, or a component, class or object in the architecture of the application
-a| icon:lightbulb-o[role="icon-tip", size="2x"] | Tips that might be helpful in navigating the application
-a| icon:info-circle[role="icon-note blue", size="2x"] | Important information that should be noted
-a| ====
-==== | Useful information for a deeper understanding of the command
-|===
-
-As shown in <<Legend>>, these icons associated to their following descriptions, such as commands, tips, important information and useful information, enable greater clarity in understanding the document. Note that useful information will have text enclosed in its box.
-
-
 == Summary of contributions
 === Major enhancements:
 * *Major enhancement #1*: Implemented group features - `add_group`, `delete_group`, `edit_group` and `list_groups`
@@ -52,43 +34,63 @@ features of the addressbook3 due to the robust design and defensive programming 
 ** Highlights: This enhancement functions well with existing commands as it adds more CoderLifeInsights into the list,
 all the other features such as groups, and events are updated as well. It required an in-depth analysis
 of design alternatives.
+** Credits: As highlighted above, the group features take inspiration from the person features of addressbook3. Thus,
+credits go to the previous developers of addressbook3 for the system design and class structures.
 
-* *Major enhancement #2*: Implemented storage features - JSON Implementations
+* *Major enhancement #2*: Implemented storage features - JSON Implementations for Event and Group
 ** What it does: JSON implementations allow the app to store and retrieve data from file. This is crucial as the app is
-not expected to always run.
+not expected to always run and needs to store data in the hard disk.
 ** Justification: Using the JSON implementations, the app can go back to its last state when a user
 re-launches the app.
 ** Highlights: This enhancement required an in-depth understanding of JSON and Java Data structures in order to convert
 between Java Classes such as `Group` and `Event` and JSON implementations which stored strings.
 
 === Minor enhancements:
-* *Minor enhancement #1*: Designed Initial System
-** What it does: I designed the initial architecture of the system using
-** Justification: To better fit and light up the social life as a Coder, it would be more pleasing to view the application in a brighter color as
-compared to the dark theme provided in AddressBook - Level3.
-** Highlights: Window size is adjustable to fit all components in to the desired smaller window size. It allows the user to use the application in full screen mode or as a smaller window without disruption of coding productivity.
+* *Minor enhancement #1*: Implemented Unique Event List
+** What it does: Stores unique Event instances
+** Justification: Since events are crucial to social interactions, storing events is important for the purpose of tracking.
+** Highlights: This enhancement required an in-depth understanding of the JavaFX Observable class.
 
 * *Minor enhancement #2*: Implemented Time Class
 ** What is does: Allows the user to store a specific time spent in terms of number of hours and minutes.
 ** Justification: The constraints the in the class allow for efficient management of time format, which suites the
 customised need of the app.
 ** Highlights: This enhancement functions well with all the classes that depend upon it and use it. This required an
-thorough understanding of the different time use cases.
+thorough understanding of the different use cases.
 
-* *Code contributed*:[https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=raivatshah&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false[RepoSense]]
+* *Code contributed*:[https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=raivatshah&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false[tP Dashboard]]
 
-* *Other contributions*:
+* *Functional Code Contributed:*
+
+** Model: [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/model/group/Group.java[Group]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/model/group/UniqueGroupList.java[UniqueGroupList]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/model/person/Time.java[Time]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/model/event/UniqueEventList.java[UniqeEventList]],
+** UI: [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/ui/GroupCard.java[GroupCard]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/ui/GroupListPanel.java[GroupListPanel]]
+** Storage: [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/storage/JsonAdaptedEvent.java[JsonAdaptedEvent]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/storage/JsonAdaptedGroup.java[JsonAdaptedGroup]].
+** Logic: [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/logic/commands/AddGroupCommand.java[AddGroupCommand]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/logic/commands/DeleteGroupCommand.java[DeleteGroupCommand]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/logic/commands/EditGroupCommand.java[EditGroupCommand]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/logic/commands/ListGroupCommand.java[ListGroupCommand]] and their parsers.
+
+* *Test Code Contributed:*
+
+** Model: [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/test/java/seedu/address/model/group/GroupTest.java[GroupTest], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/test/java/seedu/address/model/group/UniqueGroupListTest.java[UniqueGroupList]].
+** Logic: [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/test/java/seedu/address/logic/commands/AddGroupCommandTest.java[AddCommandTest]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/test/java/seedu/address/logic/commands/ListGroupCommandTest.java[ListGroupCommandTest]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/test/java/seedu/address/logic/commands/DeleteGroupCommandTest.java[DeleteGroupCommandTest]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/test/java/seedu/address/logic/commands/EditGroupCommandTest.java[EditGroupCommandTest]] and parser tests.
+** TestUtil: [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/test/java/seedu/address/testutil/GroupBuilder.java[GroupBuilder]],
+
+
+* *Other contributions:*
 
 ** Project management:
 *** Initiated group meetings and set policies for Pull Requests
-*** Opened issues on Github repo to account for bugs
+*** Opened issues on Github repo to account for bugs and enhancements. Some relevant/important issues:
+https://github.com/AY1920S2-CS2103-W14-4/main/issues/162[#162],
+https://github.com/AY1920S2-CS2103-W14-4/main/issues/161[#161],
+https://github.com/AY1920S2-CS2103-W14-4/main/issues/129[#129],
+https://github.com/AY1920S2-CS2103-W14-4/main/issues/130[#130].
+
 
 ** Enhancements to existing features:
-*** Updated the GUI color scheme and layout (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/95[#95], https://github.com/AY1920S2-CS2103-W14-4/main/pull/69[#69])
+*** Updated command words for existing features in order distinguish between person and group commands.
 
 ** Documentation:
-*** Added contents of the User Guide (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/12[#96], https://github.com/AY1920S2-CS2103-W14-4/main/pull/13[#97])
-*** Added contents of the Developer Guide (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/74[#76])
+*** Added contents of the User Guide (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/96[#96], https://github.com/AY1920S2-CS2103-W14-4/main/pull/54[#54], https://github.com/AY1920S2-CS2103-W14-4/main/pull/175[#175])
+*** Added contents of the Developer Guide (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/26[#26], https://github.com/AY1920S2-CS2103-W14-4/main/pull/76[#76], https://github.com/AY1920S2-CS2103-W14-4/main/pull/167[#167], https://github.com/AY1920S2-CS2103-W14-4/main/pull/174[#174])
 
 ** Community:
 *** PRs reviewed: https://github.com/AY1920S2-CS2103-W14-4/main/pull/132[#132],
@@ -96,7 +98,12 @@ https://github.com/AY1920S2-CS2103-W14-4/main/pull/95[#95]
 
 ** Tools:
 *** Integrated Codeacy to automate code quality checks
-*** Used Creately to create UML class diagrams.
+*** Used Creately to create initial class diagrams to visualise the relationship between Objects (Person, Group, Event)
+and their UniqueLists. The diagram can be viewed https://app.creately.com/diagram/SaOxsebie1n/[here.]
+
+** Rough UI:
+*** To visualise the app UI before actually creating it, I used https://www.sketch.com/[Sketch App] to create a
+rough UI of the app. The team used the rough UI as a guide. The UI can be viewed https://www.raivat.dev/UI.pdf[here.]
 
 == Contributions to the User Guide
 
@@ -106,7 +113,6 @@ https://github.com/AY1920S2-CS2103-W14-4/main/pull/95[#95]
 
 include::../UserGuide.adoc[tag=add_group]
 include::../UserGuide.adoc[tag=edit_group]
-include::../UserGuide.adoc[tag=view]
 
 == Contributions to the Developer Guide
 
@@ -114,4 +120,7 @@ include::../UserGuide.adoc[tag=view]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
+include::../DeveloperGuide.adoc[tag=add_group]
+include::../DeveloperGuide.adoc[tag=delete_group]
 include::../DeveloperGuide.adoc[tag=list_group]
+include::../DeveloperGuide.adoc[tag=edit_group]
