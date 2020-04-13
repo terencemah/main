@@ -124,7 +124,7 @@ Edits the phone number and email address of the 1st person to be `91234567` and 
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 |=========================================================================
 // tag::add_group[]
-=== Social Group: `add_group`
+=== Adding a Group: `add_group`
 
 Creates an empty social group with given name. +
 Format: `add_group n/GROUP_NAME m/MEMBER_IDs ...`
@@ -152,12 +152,12 @@ to the user after creation.
 // tag::edit_group[]
 === Edit Group: `edit_group`
 
-Edit a given person id with a given group id +
-Format: `edit_group GROUP_ID n/GROUP_NAME m/MEMBER_IDs`
+Edit a group with a given group index +
+Format: `edit_group GROUP_INDEX n/GROUP_NAME m/MEMBER_IDs`
 
 ****
-* CoderLifeInsight will edit the group with given id to change the name to supplied name and change the list of members to the ones supplied.
-One parameter is required to edit the group.
+* CoderLifeInsight will edit the group with given index to change the name to supplied name and change the list of members to the ones supplied.
+Either a new name or new member(s) is required to edit the group.
 ****
 
 Examples:
