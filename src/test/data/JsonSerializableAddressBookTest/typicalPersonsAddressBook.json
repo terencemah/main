@@ -71,7 +71,8 @@
     "memberIDs" : [ ],
     "eventIDs" : [ ],
     "places" : [ ],
-    "activities" : [ ]
+    "activities" : [ ],
+    "times" : [ ]
   }, {
     "name" : "rc people",
     "groupId" : "2",
@@ -79,7 +80,8 @@
     "memberIDs" : [1, 2, 3],
     "eventIDs" : [ ],
     "places" : [ ],
-    "activities" : [ ]
+    "activities" : [ ],
+    "times" : [ ]
   }, {
     "name" : "NS friends",
     "groupId" : "2",
@@ -87,7 +89,8 @@
     "memberIDs" : [5, 6, 7],
     "eventIDs" : [ ],
     "places" : [ ],
-    "activities" : [ ]
+    "activities" : [ ],
+    "times" : [ ]
   } ],
   "events" : []
 }

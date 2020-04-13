@@ -35,7 +35,8 @@ public class ViewCommand extends Command {
             + "Whether [m/INDEX] or [g/INDEX] are required depends on the insight parameter.\n"
             + "Possible insight parameters: \"" + KEYWORD_PLACE + "\", \"" + KEYWORD_ACTIVITY
             + "\", \"" + KEYWORD_RECENT + "\", \"" + KEYWORD_ALL + "\", or \"" + KEYWORD_TIME + "\".\n"
-            + "Examples:\n" + COMMAND_WORD + " " + KEYWORD_PLACE + " 1\n"
+            + "Examples:\n" + COMMAND_WORD + " " + KEYWORD_PLACE + " m/1\n"
+            + COMMAND_WORD + " " + KEYWORD_ACTIVITY + " g/1\n"
             + COMMAND_WORD + " " + KEYWORD_RECENT;
 
     public static final String MESSAGE_ALL_TIME = "Displaying total group time vs individual time spent.\n";
