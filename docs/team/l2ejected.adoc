@@ -111,3 +111,4 @@ include::../UserGuide.adoc[tag=viewGroup]
 |===
 
 include::../DeveloperGuide.adoc[tag=addEvent]
+include::../DeveloperGuide.adoc[tag=useCaseAddEvent]

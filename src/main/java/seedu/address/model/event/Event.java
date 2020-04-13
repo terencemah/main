@@ -60,6 +60,10 @@ public class Event {
         this.withPerson = Optional.of(personId);
     }
 
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
+
     public int getEventId() {
         return this.eventId;
     }
@@ -71,6 +75,7 @@ public class Event {
     /**
      * Checks that this event is the same event and has the same
      * event ID as the event parameter.
+     *
      * @param other Event to be compared against.
      * @return True if the two events are the same, false otherwise.
      */

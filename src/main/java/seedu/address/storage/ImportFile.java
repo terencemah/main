@@ -147,6 +147,7 @@ public class ImportFile {
                 int withPerson = Integer.valueOf(oneWithPerson);
                 int withGroup = Integer.valueOf(oneWithGroup);
                 Event event = new Event(oneActivity, onePlace, time);
+                event.setEventId(Integer.valueOf(eventId));
                 event.setWithPerson(withPerson);
                 event.setWithGroup(withGroup);
                 events.add(event);

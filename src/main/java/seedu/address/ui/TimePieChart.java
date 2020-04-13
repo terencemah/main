@@ -48,8 +48,8 @@ public class TimePieChart extends UiPart<Region> {
         double individualTotalTime = 0.0;
         double groupTotalTime = 0.0;
 
-        individualTotalTime = timeList.get(0).getHours() + (double) (timeList.get(0).getMinutes() / 10);
-        groupTotalTime = timeList.get(1).getHours() + (double) (timeList.get(1).getMinutes() / 10);
+        individualTotalTime = timeList.get(0).getHours() + (double) (timeList.get(0).getMinutes() / 100);
+        groupTotalTime = timeList.get(1).getHours() + (double) (timeList.get(1).getMinutes() / 100);
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
                         new PieChart.Data("Individual Time", individualTotalTime),
