@@ -327,7 +327,7 @@ The examples below provide an exhaustive list of permissible command formats:
 // end::view[]
 
 // tag::viewGroup[]
-=== Insights: `view_group` (This command is no longer in use.)
+=== Insights: `view_group` [Refactored into view command]
 
 Lists insights about the user's interactions with a particular group.
 These include places visited and activities done with that group.
