@@ -106,9 +106,6 @@ public class AddressBookParser {
         case SuggestCommand.COMMAND_WORD:
             return new SuggestCommandParser().parse(arguments);
 
-        case ViewGroupCommand.COMMAND_WORD:
-            return new ViewGroupCommandParser().parse(arguments);
-
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
