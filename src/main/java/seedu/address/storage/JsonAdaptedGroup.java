@@ -36,7 +36,8 @@ public class JsonAdaptedGroup {
                             @JsonProperty("memberIDs") List<String> memberIDs,
                             @JsonProperty("eventIDs") List<String> eventIDs,
                             @JsonProperty("places") List<String> places,
-                            @JsonProperty("activities") List<String> activities) {
+                            @JsonProperty("activities") List<String> activities,
+                            @JsonProperty("times") List<String> times) {
         this.name = name;
         this.timeSpent = timeSpent;
 
@@ -53,6 +54,9 @@ public class JsonAdaptedGroup {
         }
         if (!activities.isEmpty()) {
             this.activities.addAll(activities);
+        }
+        if (!times.isEmpty()) {
+            this.times.addAll(times);
         }
     }
 
@@ -75,6 +79,7 @@ public class JsonAdaptedGroup {
 
         places.addAll(source.getPlaceList().placeList);
         activities.addAll(source.getActivityList().activityList);
+        times.addAll(source.getTimeList().timeList);
     }
 
     /**
