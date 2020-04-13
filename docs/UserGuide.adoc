@@ -17,6 +17,7 @@ endif::[]
 By: `Team CoderLifeInsights`      Since: `Mar 2020`      Licence: `MIT`
 
 == Introduction
+`[written by Cheng Lit Yaw]`
 
 CoderLifeInsights is a CLI (Command Line Interface) driven desktop application that a programmer can use to record his or her social interactions with individual friends, or group of friends. +
 CoderLifeInsights gives the programmer insights into his or her social life, and provides suggestions to liven up their social life by analysing the social events recorded in CoderLifeInsight through the CLI.
@@ -48,6 +49,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format and Specifications*
 
+* ALL commands are case sensitive.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -60,6 +62,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 Format: `help`
 
 === Adding a person: `add_person`
+`[written by: Ernest Lian Qi Quan]`
 
 Adds a person to the CoderLifeInsights +
 Format: `add_person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
@@ -78,6 +81,7 @@ Examples:
 
 // tag::list[]
 === Listing saved data : `list`
+`[written by: Ernest Lian Qi Quan]`
 
 Shows a list of recorded information in CoderLifeInsights. +
 Format: `list_LIST_PARAMETER`
@@ -97,6 +101,7 @@ Examples:
 |=========================================================================
 // end::list[]
 === Editing a person : `edit`
+`[written by: Ernest Lian Qi Quan]`
 
 Edits an existing person in the CoderLifeInsights. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
@@ -123,6 +128,7 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 |=========================================================================
 // tag::add_group[]
 === Adding a Group: `add_group`
+`[written by: Raivat Bhupesh Shah]`
 
 Creates an empty social group with given name. +
 Format: `add_group n/GROUP_NAME m/MEMBER_IDs ...`
@@ -149,6 +155,7 @@ to the user after creation.
 // end::add_group[]
 // tag::edit_group[]
 === Editing a Group: `edit_group`
+`[written by: Raivat Bhupesh Shah]`
 
 Edit a group with a given group index +
 Format: `edit_group GROUP_INDEX n/GROUP_NAME m/MEMBER_IDs`
@@ -173,6 +180,7 @@ it was before. Member list overwritten, Name stays the same.
 
 // tag::addEvent[]
 === Adding an Event: `add_event`
+`[written by: Ernest Lian Qi Quan]`
 
 Adds an event to a person or a group at the specified INDEX. +
 Format for adding to a person: `add_event ACTIVITY_NAME place/PLACE_NAME time/TIME m/INDEX` +
@@ -219,6 +227,7 @@ Creates an Event Date Night at MBS with a time spent of 3 hours and adds it to t
 // end::addEvent[]
 // tag::suggest[]
 === Suggestions: `suggest`
+`[written by: Cheng Lit Yaw]`
 
 Suggests a person to hang out with, a place to go or an activity to do. +
 Format: `suggest SUGGESTION_PARAMETER`
@@ -251,8 +260,10 @@ Examples:
 |=======================================================================
 // end::suggest[]
 
+// tag::viewGroup[]
 // tag::view[]
 === Insights: `view`
+`[written by: Ernest Lian Qi Quan and Mah Cai Jun, Terence]`
 
 Displays various insights about the person's, groups and events stored in Coder Life Insights.
 (You might need to enlarge the application window for the best view.)
@@ -269,14 +280,14 @@ Also, whether an index is required or possibly not allowed depends on the insigh
 
 .View Places example
 [#ViewPlacesExample, align="center"]
-image::viewplacesexample.png[]
+image::viewplacesexample.png[][pdfwidth="50%",width="50%"]
 
 ** `Activities` (must enter an index)
 *** This function lists all the activities that the user has done with the target person or target group, and their frequencies, in descending order of frequency.
 
 .View Activities example
 [#ViewActivitiesExample, align="center"]
-image::viewactivitiesexample.png[]
+image::viewactivitiesexample.png[][pdfwidth="50%",width="50%"]
 
 ** `Recent` (can have an index or no index)
 *** If an index is entered, this function lists the user's last 5 events with the target person or target group, in reverse chronological order.
@@ -285,7 +296,7 @@ image::viewactivitiesexample.png[]
 
 .View Recent example
 [#ViewRecentExample, align="center"]
-image::viewrecentexample.png[]
+image::viewrecentexample.png[][pdfwidth="50%",width="50%"]
 
 ** 'All' (cannot have an index)
 *** This function lists all events that the user has added, in chronological order.
@@ -293,14 +304,14 @@ image::viewrecentexample.png[]
 
 .View All example
 [#ViewAllExample, align="center"]
-image::viewallexample.png[]
+image::viewallexample.png[][pdfwidth="50%",width="50%"]
 
 ** `Time` (cannot have an index)
 *** This function compares the user's total time spent with individuals against his/her total time spent with groups, in the form of a pie chart.
 
 .View Time example
 [#ViewTimeExample, align="center"]
-image::viewtimeexample.png[]
+image::viewtimeexample.png[][pdfwidth="50%",width="50%"]
 
 
 Take note that Places and Activities are case-sensitive:
@@ -325,35 +336,10 @@ The examples below provide an exhaustive list of permissible command formats:
 |=======================================================================
 ****
 // end::view[]
-
-// tag::viewGroup[]
-=== Insights: `view_group` [Refactored into view command]
-
-Lists insights about the user's interactions with a particular group.
-These include places visited and activities done with that group.
-Format: `view_group INSIGHT_PARAMETER g/INDEX
-
-* Remarks:
-** INSIGHT_PARAMETERS include `places` and `activities`.
-** INDEX must be an unsigned non-zero integer.
-** Places and Activities are case-sensitive:
-*** `Swimming Pool` and `swimming pool` are considered different places
-*** `SWIMMING` and `swimming` are considered different activities
-
-Examples:
-
-[width="80%",cols="30%,<30%,<40%",options="header"]
-|=======================================================================
-| Example | Command | Result
-| View insights of places visited with first group | view_group places g/1
-| CoderLifeInsights will return a table on the GUI displaying the places visited with the first group and the number of times the user has been there with the group
-| View insights of activities done with the second group | view_group activities g/2
-| CoderLifeInsights will return a table on the GUI displaying the activities done with the second group and the number of times each activity has been done
-|=======================================================================
-
 // end::viewGroup[]
 
 === Locating persons by name: `find`
+`[written by: Ernest Lian Qi Quan]`
 
 Finds persons whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -377,6 +363,7 @@ Examples:
 
 // tag::import[]
 === Import Life CSV: `import`
+`[written by: Cheng Lit Yaw]`
 
 Imports your existing Life CSV into the application +
 Format: `import l/LIFE_FILE_PATH g/GROUP_FILE_PATH e/EVENT_FILE_PATH`
@@ -512,6 +499,7 @@ image::eventCSVFormat.png[pdfwidth="70%",width="70%"]
 
 // tag::export[]
 === Export Life CSV: `export`
+`[written by: Cheng Lit Yaw]`
 
 Exports your existing Life into a CSV file. +
 Format: `export l/LIFE_FILE_NAME g/GROUP_FILE_NAME e/EVENT_FILE_NAME`
@@ -541,6 +529,7 @@ Exports your event data to `events.csv`
 
 // tag::delete[]
 === Deleting a Person or a Group : `delete`
+`[written by: Raivat Bhupesh Shah]`
 
 Deletes an entity, such as a Person or Group from the CoderLifeInsights +
 Format: `delete_person PERSON_INDEX` (for person) +
@@ -583,6 +572,7 @@ CoderLifeInsights data are saved in the hard disk automatically after any comman
 There is no need to save manually.
 
 === Getting a random person: `random` `[coming in v2.0]`
+`[written by: Ernest Lian Qi Quan]`
 
 Finds a random person from contacts saved in CoderLifeInsights. +
 Format: `random`
@@ -599,21 +589,25 @@ Example:
 Returns the name of a random person saved in CoderLifeInsights.
 
 === Deleting an event: `delete_event` `[coming in v2.0]`
+`[written by: Ernest Lian Qi Quan]`
 
 Deletes an event from a person or group saved in CoderLifeInsights. +
 Format: `delete_event EVENTID m/INDEX` or `delete_event EVENTID g/INDEX`
 
 === Editing an event: `edit_event` `[coming in v2.0]`
+`[written by: Ernest Lian Qi Quan]`
 
 Edit the information of an event with a person or group saved in CoderLifeInsights. +
 Format: `edit_event EVENTID m/INDEX [activity/ACTIVITY] [place/PLACE] [time/TIME]` or `edit_event EVENTID g/INDEX [activity/ACTIVITY] [place/PLACE] [time/TIME]` +
 Edits the event's respective details to the one specified in the command.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+=== Toggle command shortcuts : `toggle shortcuts` `[coming in v2.0]`
+`[written by: Cheng Lit Yaw]`
 
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
+Enable toggle command shortcuts to have commands shortened.
+Instead of `add_group`, `ag` would suffice when adding groups to CoderLifeInsights +
+
+Format `toggle shortcuts`
 
 == FAQ
 
@@ -621,6 +615,7 @@ _{explain how the user can enable/disable data encryption}_
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CoderLifeInsights folder.
 
 == Command Summary
+`[written by: Cheng Lit Yaw]`
 
 [width="90%",cols="30%,<30%,<40%",options="header"]
 |=======================================================================
@@ -661,7 +656,9 @@ or +
 `suggest activity`|
 
 
-*View* | `view INSIGHT_PARAMETER` | `view 1 places` +
+*View* | `view INSIGHT_PARAMETER [m/PERSON_INDEX] [g/GROUP_INDEX]` | `view places m/1` +
+
+`view activity g/1` +
 
 `view time` +
 
