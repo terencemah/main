@@ -32,18 +32,21 @@ public class AddEventCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an event with a group or an individual "
             + "that adds an activity, place and time to the subject. \n"
-            + "Parameters: [ACTIVITY] "
-            + "["
+            + "Parameters: ACTIVITY "
             + PREFIX_PLACE
-            + "PLACE] "
-            + "["
+            + "PLACE "
             + PREFIX_MEMBER
-            + "/"
-            + PREFIX_GROUP
-            + "INDEX] "
-            + "["
+            + "INDEX "
             + PREFIX_TIME
-            + "TIME] \n"
+            + "TIME \n"
+            + "OR \n"
+            + "Parameters: ACTIVITY "
+            + PREFIX_PLACE
+            + "PLACE "
+            + PREFIX_GROUP
+            + "INDEX "
+            + PREFIX_TIME
+            + "TIME \n"
             + "Example: "
             + COMMAND_WORD
             + " Dancing "

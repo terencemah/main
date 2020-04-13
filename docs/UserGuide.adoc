@@ -18,7 +18,8 @@ By: `Team CoderLifeInsights`      Since: `Mar 2020`      Licence: `MIT`
 
 == Introduction
 
-CoderLifeInsights (CLI) is a desktop application that provides you insights and suggestions to your social life as a programmer using a CLI (Command Line Interface).
+CoderLifeInsights is a CLI (Command Line Interface) driven desktop application that a programmer can use to record his or her social interactions with individual friends, or group of friends. +
+CoderLifeInsights gives the programmer insights into his or her social life, and provides suggestions to liven up their social life by analysing the social events recorded in CoderLifeInsight through the CLI.
 
 == Quick Start
 
@@ -74,6 +75,7 @@ Examples:
 |Add a person Betsy Crowe to CoderLifeInsights| `add_person n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` | Betsy Crowe is added to CoderLifeInsights with the input information.
 |=========================================================================
 
+// tag::list[]
 === Listing saved data : `list`
 
 Shows a list of recorded information in CoderLifeInsights. +
@@ -81,7 +83,6 @@ Format: `list_LIST_PARAMETER`
 
 ****
 * LIST_PARAMETER include `persons`,`groups`.
-//`places`, `activities`
 * CoderLifeInsights will display an indexed list of the saved `LIST_PARAMATER`.
 ****
 
@@ -90,14 +91,10 @@ Examples:
 [width="75%",cols="30%,<20%,<60%",options="header"]
 |=========================================================================
 |Example | Command | Result
-| Show all persons| `list_persons` | Returns a list of the saved persons in CoderLifeInsights.
-//* `list activities` +
-//Returns a list of the saved activities in CoderLifeInsights.
+|Show all persons| `list_persons` | Returns a list of the saved persons in CoderLifeInsights.
 |Show all groups | `list_groups` | Returns a list of the saved groups in CoderLifeInsights.
-//* `list places`
-//Returns a list of the saved places in CoderLifeInsights.
 |=========================================================================
-
+// end::list[]
 === Editing a person : `edit`
 
 Edits an existing person in the CoderLifeInsights. +

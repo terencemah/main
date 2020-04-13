@@ -567,37 +567,48 @@ It will also create an Event with the following attributes:
 * Place: `Gardens by the Bay`
 * Time: `2h 30m`
 
-Depicted below is the class diagram of the Event class:
-
-image::EventClassDiagram.png[pdfwidth="100%",width="92.5%"]
-The Event created is stored in an UniqueEventList, which is saved to the Json file as well. The Events saved are used to generate output for features.
-
 The sequence diagram below showcases how the command works with a valid input:
 
 image::addEventSequence.png[pdfwidth="100%",width="92.5%"]
 
-The following class diagram shows how the Time, PlaceList and ActivityList are associated with a Person object:
+***
+Depicted below is the class diagram of the Event class, displaying how the UniqueEventList and Event classes are associated to the AddressBook class:
 
-image::AddEventClassDiagram.png[pdfwidth="100%",width="92.5%"]
+image::EventClassDiagram.png[pdfwidth="100%",width="100%"]
+The Event created is stored in an UniqueEventList, which is saved to the Json file as well.
+The Events saved are used to generate output for features.
 
+The following class diagram shows how the Time, PlaceList and ActivityList are associated with a Person object.
+The Person class only displays relevant information to the Time, PlaceList and ActivityList classes:
+
+image::AddEventClassDiagram.png[pdfwidth="100%",width="100%"]
+The Time, ActivityList and PlaceList classes were implemented similar to a Person's Name or Address. A Person's Time is displayed on the GUI as well for users to know how much time they have spent with that Person.
+The reason behind this implementation was to ensure that information added from the AddEventCommand would be saved through changes to Persons or Groups in CoderLifeInsights.
+The pertinent information would then be used in following features which require these data to generate output. +
+A Group object also has the same implementation of Time, PlaceList and ActivityList and its class diagram is similar to the diagram above, with the Person class being substituted by the Group class.
+These information are also saved for the Group object when an Event is added to a Group object.
+
+***
 The following activity diagram depicts the following scenario:
 
 1. User enters `add_event date night m/1 time/230 place/Gardens by the Bay` into the command prompt.
 2. The `LogicManager` calls `AddressBookParser#parseCommand()`.
 3. The method `AddressBookParser#parseCommand()` creates a `AddEventCommandParser` and calls the `AddEventCommandParser#parse()` method.
 4. `AddEventCommandParser#parse()` checks if input is valid.
-5. `AddEventCommandParser#parse()` then creates a new instance of `AddEventCommand`.
-6. `AddEventCommand` calls the `AddEventCommand#execute()` method.
-7. `AddEventCommand#execute()` retrieves the filtered list with the call to `model#getFilteredPersonList()`.
-8. `AddEventCommand#execute()` then retrieves the Person object to be edited with the call to `model#getFilteredPersonList()#get()`.
-9. `AddEventCommand#execute()` then computes the new Time by retrieving the Person's current Time with the call to `person#getTime()` ,then adding it to the input Time.
-10. `AddEventCommand#execute()` then creates a new ActivityList by retrieving the Person's ActivityList with the call to `person#getActivityList2()`, followed by `ActivityList#addActivity()`, which returns a new ActivityList with the new activity added.
-11. `AddEventCommand#execute()` then creates a new PlaceList by retrieving the Person's PlaceList with the call to `person#getPlaceList2()`, followed by `PlaceList#addPlace()`, which returns a new PlaceList with the new place added.
-12. `AddEventCommand#execute()` then creates a new Person object with all the same attributes except for the Time, PlaceList, and ActivityList which is replaced by the new Time computed, the new PlaceList and the new ActivityList with the call to the Person constructor.
-13. `AddEventCommand#execute()` then replaces the existing Person object with the new Person object with the call to `model#setPerson()`.
-14. `AddEventCommand#execute()` then updates the filtered list with the call to `model#updateFilteredPersonList()`.
-15. `AddEventCommand` returns the `CommandResult` to `AddressBookParser`.
-16. `AddressBookParser` returns the `CommandResult` to `LogicManager`.
+5. `AddEventCommandParser#parse()` then creates a new instance of an `Event`.
+6. `AddEventCommandParser#parse()` then creates a new instance of `AddEventCommand`, with the created `Event` as it's parameter.
+7. `AddEventCommand` calls the `AddEventCommand#execute()` method.
+8. `AddEventCommand#execute()` retrieves the filtered list with the call to `model#getFilteredPersonList()`.
+9. `AddEventCommand#execute()` then retrieves the Person object to be edited with the call to `model#getFilteredPersonList()#get()`.
+10. `AddEventCommand#execute()` then computes the new Time by retrieving the Person's current Time with the call to `person#getTime()` ,then adding it to the input Time.
+11. `AddEventCommand#execute()` then creates a new ActivityList by retrieving the Person's ActivityList with the call to `person#getActivityList2()`, followed by `ActivityList#addActivity()`, which returns a new ActivityList with the new activity added.
+12. `AddEventCommand#execute()` then creates a new PlaceList by retrieving the Person's PlaceList with the call to `person#getPlaceList2()`, followed by `PlaceList#addPlace()`, which returns a new PlaceList with the new place added.
+13. `AddEventCommand#execute()` then creates a new Person object with all the same attributes except for the Time, PlaceList, and ActivityList which is replaced by the new Time computed, the new PlaceList and the new ActivityList with the call to the Person constructor.
+14. `AddEventCommand#execute()` then replaces the existing Person object with the new Person object with the call to `model#setPerson()`.
+15. `AddEventCommand#execute()` then updates the filtered list with the call to `model#updateFilteredPersonList()`.
+16. `AddEventCommand#execute()` then updates the UniqueEventList with the call to `model#addEvent()`, which adds the created `Event` to the UniqueEventList.
+17. `AddEventCommand` returns the `CommandResult` to `AddressBookParser`.
+18. `AddressBookParser` returns the `CommandResult` to `LogicManager`.
 
 image::addEventActivity.png[pdfwidth="100%",width="75%"]
 
@@ -1252,7 +1263,7 @@ Use case ends.
 
 *MSS*
 1. User requests to view time comparison between individuals and groups.
-2. CoderLifeInsights displays pie char of Individual time spent vs Group time spent.
+2. CoderLifeInsights displays pie chart of Individual time spent vs Group time spent.
 +
 Use case ends
 
@@ -1262,6 +1273,76 @@ Use case ends
 No event data for group or individual available for comparison.
 +
 Use case ends
+
+=== Use case: Add an event with a person
+
+*MSS*
+
+1. User wants to add an Event with the following details to the first person displayed on the Person List on CoderLifeInsights: +
+Activity: `swimming` Place: `pool` Time: `1 hour and 30 minutes`
+2. User enters correct command with valid input and prefixes
+3. Event is created and added to the Person +
+*Use case ends*
+
+*Extensions*
+
+* 2a. User enters incorrect command
+
+** 2a1. Invalid command error is displayed
+** 2a2. User re-enters valid command with valid input +
+Use case resumes at 3.
+
+* 2b. User enters correct command but invalid input
+** 2b1. Invalid command error is displayed
+** 2b2. User re-enters valid and correct command with valid input +
+Use case resumes at 3.
+
+* 2c. Person index specified is out of bounds
+** 2c1. Invalid person index error message is displayed
+** 2c2. User re-enters command with correct and valid person index +
+Use case resumes at 3.
+
+=== Use case: Add an event with a group
+*MSS*
+
+1. User wants to add an Event with the following details to the first group displayed on the Group List on CoderLifeInsights: +
+Activity: `dancing` Place: `dance studio` Time: `1 hour and 30 minutes`
+2. User enters correct command with valid input and prefixes
+3. Event is created and added to the Group +
+*Use case ends*
+
+*Extensions*
+
+* 2a. User enters incorrect command
+
+** 2a1. Invalid command error is displayed
+** 2a2. User re-enters valid command with valid input +
+Use case resumes at 3.
+
+* 2b. User enters correct command but invalid input
+** 2b1. Invalid command error is displayed
+** 2b2. User re-enters valid and correct command with valid input +
+Use case resumes at 3.
+
+* 2c. Group index specified is out of bounds
+** 2c1. Invalid group index error message is displayed
+** 2c2. User re-enters command with correct and valid group index +
+Use case resumes at 3.
+
+=== Use case: View the places or activities visited with a group
+*MSS*
+
+1. User wants to view insights on the places or activities been to or carried out with a group.
+2. User enters view group command
+3. CoderLifeInsights displays the requested information in table form for the user. +
+*Use case ends*
+
+*Extensions*
+
+* 2a. User enters valid command with invalid group index
+** 2a1. Invalid group index error message is displayed
+** 2a2. User re-enters command with a valid group index +
+Use case resumes at 3.
 
 [appendix]
 == Non Functional Requirements
@@ -1445,6 +1526,68 @@ Expected: All valid life, group and event data will be exported to the respectiv
 .. Test case: `export l/life.csv g/group.csv e/event.csv`
 Expected: CoderLifeInsights will return error message showing that files already exist.
 Another naming convention is required.
+
+=== Adding an event
+. Add an event to a person or group saved in CoderLifeInsights
+.. Prerequisites: Have a person or group saved in CoderLifeInsights
+.. Test case 1 (adding an event to a person): `add_event anything place/anywhere time/30 m/1` +
+Expected: New event successfully added: Event: anything place: anywhere for 0h 30m
+.. Test case 2 (adding an event to a group): `add_event anything place/anywhere time/30 g/1` +
+Expected: New event successfully added: Event: anything place: anywhere for 0h 30m
+. Adding an event to a person or group not saved in CoderLifeInsights
+.. Prerequisites: Choose an index that is greater than the number of persons and groups saved in CoderLifeInsights, for example, 100 for the sample test data
+.. Test case 1(adding an event to a person): `add_event anything place/anywhere time/30 m/100` +
+Expected: The person index provided is invalid
+.. Test case 2 (adding an event to a group): `add_event anything place/anywhere time/30 g/100` +
+Expected: The group index provided is invalid
+. Adding an event to a person or group with time spent of 0 hours and 0 minutes:
+.. Prerequisites: Have a person or group saved in CoderLifeInsights
+.. Test case 1 (adding an event to a person): `add_event anything place/anywhere time/00 m/1`+
+Expected: Time parameter has to be greater than 0 minutes
+.. Test case 2 (adding an event to a group): `add_event anything place/anywhere time/00 g/1` +
+Expected: Time parameter has to be greater than 0 minutes
+. Adding an event with required fields missing:
+.. Prerequisites: Have a person or group saved in CoderLifeInsights
+.. Testcase 1: `add_event place/anywhere time/30 m/1`
+.. Testcase 2: `add_event anything place/ time/30 m/1`
+.. Testcase 3: `add_event anything time/30 m/1`
+.. Testcase 4: `add_event anything place/anywhere time/ m/1`
+.. Testcase 5: `add_event anything place/anywhere m/1`
+.. Testcase 6: `add_event anything place/anywhere time/30`
+.. Testcase 7: `add_event` +
+Expected: Invalid command format! +
+add_event: Creates an event with a group or an individual that adds an activity, place and time to the subject. +
+Parameters: ACTIVITY place/PLACE m/INDEX time/TIME +
+OR +
+Parameters: ACTIVITY place/PLACE g/INDEX time/TIME +
+Example: add_event Dancing place/SCAPE m/1 time/300
+. Adding an event with an invalid person or group index
+.. Prerequisites: Have a person or group saved in CoderLifeInsights
+.. Testcase 1: `add_event anything place/anywhere time/30 m/`
+.. Testcase 2: `add_event anything place/anywhere time/30 m/s`
+.. Testcase 3: `add_event anything place/anywhere time/30 m/1 s` +
+Expected: Index is not a non-zero unsigned integer.
+. Adding an event with an invalid time
+.. Prerequisites: Have a person or group saved in CoderLifeInsights
+.. Testcase 1: `add_event anything place/anywhere time/0 m/s`
+.. Testcase 2: `add_event anything place/anywhere time/30s m/s`
+.. Testcase 3: `add_event anything place/anywhere time/test m/s` +
+Expected: Time parameter needs to be unsigned integers of at least 2 digits. +
+For example: [5 minutes = 05]; [1 hour = 100]; [10 hours and 30 minutes = 1030]
+. Adding an event to both group and member at the same time
+.. Prerequisites: None
+.. Testcase 1: `add_event anything place/anywhere time/30s m/1 g/1` +
+Expected: Invalid command format! +
+add_event: Creates an event with a group or an individual that adds an activity, place and time to the subject. +
+Parameters: ACTIVITY place/PLACE m/INDEX time/TIME +
+OR +
+Parameters: ACTIVITY place/PLACE g/INDEX time/TIME +
+Example: add_event Dancing place/SCAPE m/1 time/300
+//=== Viewing places visited or activities carried out with a group
+//. Obtain insights on the number of times an activity has been done with a specific group or the number of times a place has been visited with that same group.
+//.. Prerequisites: Have a group saved in CoderLifeInsights and add an event with that group
+//.. Test case 1 (view places visited with group): `view_group places g/1`
+//.. Test case 2 (view activities done with group): `view_group activities g/1`
 
 === Add a Group
 
