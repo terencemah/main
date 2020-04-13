@@ -24,7 +24,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListGroupCommand;
 import seedu.address.logic.commands.SuggestCommand;
 import seedu.address.logic.commands.ViewCommand;
-import seedu.address.logic.commands.ViewGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
