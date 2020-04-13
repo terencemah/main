@@ -552,7 +552,7 @@ Remarks:
 * TIME is the variable used to store the time the user has spent with a saved contact or group.
 * TIME parameter must contain at least 2 digits. For example: A time of 1 hour and 30 minutes will be input as `130`.
 * An event added must have time of at least 1 minute. e.g. time/01
-* Place and Activity are case-sensitive
+* PLACE and ACTIVITY are case-sensitive
 
 Example usage: `add_event date night m/1 time/230 place/Gardens by the Bay`
 
@@ -563,6 +563,7 @@ The command above will add the following to the Person whose index is `1` on the
 * Time `230` which equals 2 hours and 30 minutes, will be added to the Person's time.
 
 It will also create an Event with the following attributes:
+
 * Activity: `date night`
 * Place: `Gardens by the Bay`
 * Time: `2h 30m`
