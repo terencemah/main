@@ -631,18 +631,40 @@ The Add Event feature and the relevant classes were added and implemented to add
 
 
 //end::addEvent[]
-
+//tag::insights[]
 === Insights feature
 `[written by: Mah Cai Jun, Terence]`
 
+The Insights feature displays various insights about the persons, groups and events stored in Coder Life Insights.
+It is activated by the command word `view`.
+
 ==== Implementation
 
-The Insights feature is facilitated by `FrequencyList`, which contains an `ObservableList`
-backed by an `ArrayList`, and uses a `HashMap` to ensure the uniqueness of each list.
-Each `Person` object contains two `FrequencyList` objects, a `placeList` and an `activityList`.
-At the same time, the `model` also has its own `FrequencyList`.
-When the View Command is activated, the `model` updates its own `FrequencyList` with the contents of the selected Person's `placeList` or `activityList`.
-The View Command then switches the application display to show the model's `FrequencyList`.
+[#ViewCommandCondensedGenericSequenceDiagram, align="center"]
+image::ViewCommandCondensedGenericSequenceDiagram.png[pdfwidth="100%",width="100%"]
+
+There are 4 key steps, as labelled in the diagram above, that are essential to how the Insights feature
+and `view` functionality are implemented. Rather than updating the model with incoming information, this
+command is concerned with retrieving updated information from the model, and displaying the right information
+by switching between the various possible view panels on the GUI.
+
+To ensure that up-to-date information is retrieved, the Model contains `ObservableLists` which allow
+listeners to be updated whenever the list contents are updated.
+
+In Step 1, the `ViewCommand` object updates the relevant `ObservableList` in the `ModelManager`
+with the user's desired information. It checks the appropriate view panel for displaying the desired
+information, represented as a `ViewType` Enum within the returned `CommandResult`. In Step 2,
+the `MainWindow` retrieves the appropriate `ViewType` from the `CommandResult`, thus knowing which
+view panel to use. In Step 3, it retrieves the appropriate `ObservableList` from the Model, previously
+updated by the `ViewCommand`. In Step 4, it displays, on the view panel determined in Step 2, the
+information retrieved from Step 3.
+
+The class diagram below depicts the key relationships between the important features.
+The main GUI controller, `MainWindow`, composes the Logic component, which in turn composes
+the Model component. This allows `MainWindow` to access the `ObservableLists` in the Model.
+
+[#ViewCommandClassDiagram, align="center"]
+image::ViewCommandClassDiagram.png[pdfwidth="100%",width="100%"]
 
 //tag::undoredo[]
 === [Proposed] Undo/Redo feature
