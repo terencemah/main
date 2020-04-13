@@ -424,7 +424,7 @@ image::DeleteGroupSequenceDiagram.png[]
 
 Aspect: how the delete group feature executes
 
-* Alternative 1: Separate `DeleteGroupCommand` and `DeleteGroup` classes to support the feature. +
+* Alternative 1 (current choice) : Separate `DeleteGroupCommand` and `DeleteGroup` classes to support the feature. +
     Pros: clear class responsibility, easier to trace bugs. Since this follows the design of most other commands,
     intuitive to understand for new developers +
     Cons: increases the amount of code, which might introduce more errors.
@@ -436,23 +436,27 @@ Aspect: how the delete group feature executes
 //tag::list_group[]
 === List Group Feature
 
+The list group feature allows users to view all the `Group` instances currently stored in CoderLifeInsights.
+
 ==== Implementation
 
-The list feature allows users to view all the social `Group` instances currently stored in CoderLifeInsights.
+This feature is mainly supported by the `ListGroupCommand`, which extends the abstract class `Command`.
 
 Here below is a sequence diagram showcasing how the command works.
 
 [#ListGroupSequenceDiagram, align="center"]
 image::ListGroupSequenceDiagram.png[]
 
-The following activity diagram depicts the step-by-step scenario when a user executes the `list_groups` command:
+The following is an example usage scenario and how the list group mechanism behaves at each step.
 
 1. User enters `list_groups` into the command prompt
-2. The `LogicManager` calls `AddressBookParser#parseCommand()`
-3. The method `AddressBookParser#parseCommand()` creates a `ListGroupCommand` and checks if the input is valid.
+2. The `LogicManager` calls `AddressBookParser#parseCommand()` with the arguments supplied by the user
+3. The method `AddressBookParser#parseCommand()` checks if the input is valid and if yes, creates a `ListGroupCommand`.
 4. The `ListGroupCommand` calls the `updateFilteredGroupList` method of `Model` to update the GUI.
 5. The `ListGroupCommand` returns the `CommandResult` to AddressBookParser
 6. The `AddressBookParser` returns the `CommandResult` to `LogicManager`.
+
+The following activity diagram summarises the workflow for the list group feature.
 
 [#ListGroupCommandActivity,align="center"]
 image::ListGroupCommandActivity.png[pdfwidth="50%",width="50%"]
@@ -461,12 +465,78 @@ image::ListGroupCommandActivity.png[pdfwidth="50%",width="50%"]
 //tag::edit_group[]
 === Edit Group Feature
 
+The Edit Group Feature allows the user to edit an existing `Group` in the app.
+
 ==== Implementation
+
+The Edit Group Feature is facilitated by the `EditGroupCommand`, which extends the abstract class `Command`, and
+the `EditGroupCommandParser`, which implements the `Parser` interface. Both of these classes are part of the `Logic`
+package. Additionally, a private and static `EditGroupDescriptor` class is present in `EditGroupCommand` as a container
+class to encapsulate attributes to be edited for a `Group`.
+
+he following operations are implemented and used for accomplishing this feature:
+
+* `EditGroupCommandParser#parser(String args)` - Parses the input to obtain the arguments and returns an
+`EditGroupCommand` instance with the arguments.
+* `EditGroupCommandParser#arePrefixesPresent(ArgumentMultimap argumentMultiMap, Prefix... prefixes)` - checks if the
+member indexes are supplied by the user.
+* `EditGroupCommand#EditGroupCommand(Index index, EditGroupDescriptor editGroupDescriptor)` - Creates a new
+`EditGroupCommand` instance with the supplied index and editGroupDescriptor.
+* `EditGroupCommand#createEditedGroup(Group groupToEdit, EditGroupDescriptor editGroupDescriptor)` - Modifies the given
+`groupToEdit` with the details given in `editGroupDescriptor`.
+
+The following is an example usage scenario and how the edit group mechanism behaves at each step:
+
+1. User types `edit_group index n/new_name` or `edit_group index m/index ...` into the app.
+2. The request is handled by `LogicManager#execute(String)`, which then calls and passes the input to
+the `AddressBookParser#parseCommand(String)` method.
+3. `AddressBookParser` detects the command word `edit_group` in the input string and creates a new
+`EditGroupCommandParser` to parse inputs according to the format specified for `EditGroupCommand`.
+4. Input is parsed using the `EditGroupCommandParser#parse(String)` method, which also performs input validation. The
+method creates a `EditGroupDescriptor` using the parsed inputs by calling the static constructor inside `EditGroupCommand`.
+5. The `EditGroupCommandParser` creates a new `EditGroupCommand` instance with the given `index` and newly created
+`EditGroupDescriptor` object and returns it to `AddressBookParser`, which in turn returns it to `LogicManager`.
+6. `LogicManager` calls the `EditGroupCommand#execute(model)` method.
+7. `EditGroupCommand` obtains a copy of the `FilteredPersonList` by calling the `Model#getFilteredPersonList()` method.
+This is used to check if the member indexes supplied by the user exist in the app and that there are no duplicate person
+indexes in the command.
+8. `EditGroupCommand` edits the group at given index by calling its own private static method
+`EditGroupCommand#createEditGroup(Group, EditGroupDescriptor)`.
+9. `EditGroupCommand` obtains a copy of the `FilteredGroupList` by calling the `Model#getFilteredGroupList()` method.
+This is used to check if the edited group already exits in the app.
+10. As a last step, `EditGroupCommand` creates a `CommandResult` with `SuccessMessage` and `ViewType` and returns it to
+`LogicManager`.
+
+The above process is shown in the following sequence diagram:
 
 [#EditGroupSequenceDiagram, align="center"]
 image::EditGroupSequenceDiagram.png[]
 
+The following activity diagram summarises the general workflow for the Edit Group Feature
 
+[#EditGroupActivityDiagram, align="center"]
+image::EditGroupActivityDiagram.png[]
+
+==== Design Considerations
+
+Aspect: What and how to edit
+
+* Alternative 1 (current choice): Only edit parameters that are supplied. For the parameters that are supplied,
+overwrite the existing entry.
+** Pros: The single edit group feature can achieve both addition and deletion of members
+as well as renaming of the group. Better maintainability of code.
+** Cons: Overwriting all existing entries might affect usability as the user will have to re-enter the current member
+indexes if they want to add to member indexes rather than delete.
+
+* Alternative 2: Only edit parameters that are supplied. For the parameters that are supplied, add to the existing
+entries instead of overwriting.
+** Pros: The user will not have to re-enter member indexes if they choose to retain members inside a group.
+** Cons: Will require implementing a separate command to then delete member indexes from a group. This can also confuse
+the user if there are too many commands.
+
+* Alternative 3: Edit all parameters. Overwrite all existing entries.
+** Pros: Simplest to implement in terms of code. Will require less code than alternative 1 and 2.
+** Cons: Cumbersome for the user as they have to enter an attribute value even if they don't want to change it.
 
 //end::edit_group[]
 //tag::addEvent[]
@@ -837,6 +907,12 @@ See <<UsingTravis#, UsingTravis.adoc>> and <<UsingAppVeyor#, UsingAppVeyor.adoc>
 We also use https://www.codacy.com/[Codeacy] to automate code quality reviews.
 See https://support.codacy.com/hc/en-us/articles/360010263540-Getting-started-with-Codacy[Getting Started with Codacy]
 for more details.
+
+=== Continuous Deployment
+
+We maintain a site for this project https://ay1920s2-cs2103-w14-4.github.io/main/[here]. To ensure that each PR complies
+with our site requirements for auto-deploy, we use Netlify for Continuous Deployment. Read
+https://docs.netlify.com/configure-builds/get-started/#basic-build-settings[this guide] to get upto speed with Netlify CD.
 
 === Coverage Reporting
 
