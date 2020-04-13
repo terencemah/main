@@ -1397,6 +1397,7 @@ Time::
 Time represents the time spent in an event. It is represented by number of hours (0 or greater) and
 number of minutes (between 0 and 59 inclusive).
 
+[appendix]
 == Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
@@ -1676,3 +1677,52 @@ Expected: Error message saying group index is invalid is displayed to the user.
 .. Test Case: `list_groups`
 Expected: the group panel will show all the groups currently in the app. If there are no groups, it will be blank.
 A success message will be shown to the user.
+
+
+=== Exiting the program
+`[written by: Cheng Lit Yaw]`
+
+. Exit the program
+.. Test Case: `exit` +
+Expected: Exits the program.
+
+[appendix]
+== Effort
+
+To develop and implement the features we have for CoderLifeInsights was difficult and time consuming. For a project
+of this size, effective communication was required amongst the team members and the situation was made worse due to quarantine
+measures of the COVID-19. As a result, conflicts arose in the group but was quickly resolved for the better of the project.
+All of us dealt with the situation professionally and was determined to complete and deliver CoderLifeInsights as a working application.
+
+Some difficulties that we face during implementation of CoderLifeInsights:
+
+1. Multiple entity implementation:
+
+* Designing `Event` and `Group` class was challenging as we had to consider the data being stored in each class that would be independent
+of the existing `Person` class. A great deal architecture analysis was done to avoid dependency between classes. At the same time,
+we enhanced the `Person` class to store additional information according to our user's needs.
+
+2. JSON Implementation
+
+* We have to learn about the JSON packages that were available and apply it to not only existing `Person` class but also `Event`
+in the form of `UniqueEventList` and `Group` class similar to `Person`. This also required an in-depth understanding of Java
+data structures and `Optional` class.
+
+* With this implementation, we were able to develop the `import` and `export` features to enable the user to transfer data from
+one computer to another. This is crucial to our user as programmers would work between multiple computers and would want to keep
+a backup and keep their data in sync across computers.
+
+3. Redesigning UI of AB3
+
+* Considering our lack of knowledge in UI designs and JavaFX, we had to learn to implement the PanelLists as well as the Pie Chart class
+to display meaningful information to our users. In total we had more than 3 PanelLists and all of which had to interact with each of the
+features implemented. The flow of the application in between each command was also well thought out and seamless.
+
+* We further enhanced the UI from AB3 from a single column application to a resizable multiple column application. In order for
+the application columns to fit the desired window size of the user, each column size was carefully measured and well thought out to
+fit our user's need as a programmer. The colors were carefully selected to brighten up the user's mood after a long day of work.
+As it is a social application, bright color scheme would be ideal.
+
+After going through this project, we not only learnt good Software Engineering practices but also communication skills between
+team members that was crucial to the success of CoderLifeInsights. As we have invested a significant amount of time towards this project,
+we aim to continue developing the application during the summer holidays to further enhance the features of the project.
