@@ -113,7 +113,6 @@ rough UI of the app. The team used the rough UI as a guide. The UI can be viewed
 
 include::../UserGuide.adoc[tag=add_group]
 include::../UserGuide.adoc[tag=edit_group]
-include::../UserGuide.adoc[tag=view]
 
 == Contributions to the Developer Guide
 
