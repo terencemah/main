@@ -102,7 +102,8 @@ image::UiClassDiagram.png[]
 *API* : link:https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc.
-All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The `ResultDisplay`, in turn, is made up of further component parts, such as `AllEventPanel`.
+All these components, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework.
 The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
