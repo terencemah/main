@@ -190,7 +190,7 @@ Remarks:
 * TIME has to be in entered in the format `HHMM`: +
 Input for a time of 1 hour and 5 minutes would be: `time/105` +
 Input for a time of 9 minutes would be: `time/09`
-* MM entered has to be between 0 and 60 (1 to 59).
+* MM entered has to be between 00 and 60 (01 to 59).
 * The INDEX refers to the index number shown in the displayed person list.
 The INDEX must be a positive integer.
 * CoderLifeInsights uses 1-indexing.
