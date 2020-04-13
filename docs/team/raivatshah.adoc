@@ -46,11 +46,10 @@ re-launches the app.
 between Java Classes such as `Group` and `Event` and JSON implementations which stored strings.
 
 === Minor enhancements:
-* *Minor enhancement #1*: Designed Initial System
-** What it does: I designed the initial architecture of the system using
-** Justification: To better fit and light up the social life as a Coder, it would be more pleasing to view the application in a brighter color as
-compared to the dark theme provided in AddressBook - Level3.
-** Highlights: Window size is adjustable to fit all components in to the desired smaller window size. It allows the user to use the application in full screen mode or as a smaller window without disruption of coding productivity.
+* *Minor enhancement #1*: Implemented Unique Event List
+** What it does: Stores unique Event instances
+** Justification: Since events are crucial to social interactions, storing events is important for the purpose of tracking.
+** Highlights: This enhancement required an in-depth understanding of the JavaFX Observable class.
 
 * *Minor enhancement #2*: Implemented Time Class
 ** What is does: Allows the user to store a specific time spent in terms of number of hours and minutes.
@@ -63,16 +62,19 @@ thorough understanding of the different use cases.
 
 * *Functional Code Contributed:*
 
-** Model:
-** UI:
-** Storage:
-** Logic:
+** Model: [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/model/group/Group.java[Group]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/model/group/UniqueGroupList.java[UniqueGroupList]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/model/person/Time.java[Time]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/model/event/UniqueEventList.java[UniqeEventList]],
+** UI: [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/ui/GroupCard.java[GroupCard]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/ui/GroupListPanel.java[GroupListPanel]]
+** Storage: [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/storage/JsonAdaptedEvent.java[JsonAdaptedEvent]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/storage/JsonAdaptedGroup.java[JsonAdaptedGroup]].
+** Logic: [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/logic/commands/AddGroupCommand.java[AddGroupCommand]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/logic/commands/DeleteGroupCommand.java[DeleteGroupCommand]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/logic/commands/EditGroupCommand.java[EditGroupCommand]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/main/java/seedu/address/logic/commands/ListGroupCommand.java[ListGroupCommand]] and their parsers.
 
-* *Test Code Contributed*
+* *Test Code Contributed:*
+
+** Model: [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/test/java/seedu/address/model/group/GroupTest.java[GroupTest], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/test/java/seedu/address/model/group/UniqueGroupListTest.java[UniqueGroupList]].
+** Logic: [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/test/java/seedu/address/logic/commands/AddGroupCommandTest.java[AddCommandTest]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/test/java/seedu/address/logic/commands/ListGroupCommandTest.java[ListGroupCommandTest]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/test/java/seedu/address/logic/commands/DeleteGroupCommandTest.java[DeleteGroupCommandTest]], [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/test/java/seedu/address/logic/commands/EditGroupCommandTest.java[EditGroupCommandTest]] and parser tests.
+** TestUtil: [https://github.com/AY1920S2-CS2103-W14-4/main/blob/master/src/test/java/seedu/address/testutil/GroupBuilder.java[GroupBuilder]],
 
 
-
-* *Other contributions*:
+* *Other contributions:*
 
 ** Project management:
 *** Initiated group meetings and set policies for Pull Requests
@@ -84,11 +86,11 @@ https://github.com/AY1920S2-CS2103-W14-4/main/issues/130[#130].
 
 
 ** Enhancements to existing features:
-*** Updated the GUI color scheme and layout (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/95[#95], https://github.com/AY1920S2-CS2103-W14-4/main/pull/69[#69])
+*** Updated command words for existing features in order distinguish between person and group commands.
 
 ** Documentation:
-*** Added contents of the User Guide (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/12[#96], https://github.com/AY1920S2-CS2103-W14-4/main/pull/13[#97])
-*** Added contents of the Developer Guide (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/74[#76])
+*** Added contents of the User Guide (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/96[#96], https://github.com/AY1920S2-CS2103-W14-4/main/pull/54[#54], https://github.com/AY1920S2-CS2103-W14-4/main/pull/175[#175])
+*** Added contents of the Developer Guide (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/26[#26], https://github.com/AY1920S2-CS2103-W14-4/main/pull/76[#76], https://github.com/AY1920S2-CS2103-W14-4/main/pull/167[#167], https://github.com/AY1920S2-CS2103-W14-4/main/pull/174[#174])
 
 ** Community:
 *** PRs reviewed: https://github.com/AY1920S2-CS2103-W14-4/main/pull/132[#132],
