@@ -38,6 +38,9 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
                 || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
+        if (arePrefixesPresent(argMultimap, PREFIX_MEMBER, PREFIX_GROUP)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
+        }
         String activity = argMultimap.getPreamble();
         if (activity.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));

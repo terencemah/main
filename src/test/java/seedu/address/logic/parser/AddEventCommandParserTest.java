@@ -213,4 +213,19 @@ public class AddEventCommandParserTest {
         assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddEventCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_bothMemberAndGroupPrefixPresent_failure() {
+        String targetIndex = "1";
+        String activity = "Some activity";
+        String place = "Some place";
+        String time = "15";
+        String userInput = activity + " "
+                + PREFIX_GROUP + targetIndex + " "
+                + PREFIX_MEMBER + targetIndex + " "
+                + PREFIX_PLACE + place + " "
+                + PREFIX_TIME + time;
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddEventCommand.MESSAGE_USAGE));
+    }
 }
