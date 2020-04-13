@@ -18,6 +18,7 @@ By: `CoderLifeInsights`      Since: `March 2020`      Licence: `MIT`
 
 
 == Introduction
+`[written by: Raivat Bhupesh Shah]`
 
 CoderLifeInsights is a desktop application that provides you insights and suggestions to your social life as
 a programmer using a CLI (Command Line Interface).
@@ -139,6 +140,7 @@ NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X
 
 [[Design-Model]]
 === Model component
+`[written by: Raivat Bhupesh Shah]`
 
 .Structure of the Model Component
 image::ModelClassDiagram.png[]
@@ -184,6 +186,7 @@ This section describes some noteworthy details on how certain features are imple
 
 // tag::importexport[]
 === Import feature
+`[written by: Cheng Lit Yaw]`
 
 ==== Implementation
 
@@ -266,6 +269,7 @@ The first alternative was chosen as performance of the application is prioritise
 There would be risk of the application stop responding if the second alternative was chosen.
 
 === Export feature
+`[written by: Cheng Lit Yaw]`
 
 ==== Implementation
 
@@ -292,6 +296,7 @@ image::ExportFileActivityDiagram.png[][pdfwidth="40%",width="40%"]
 
 // tag::suggest[]
 === Suggestion Feature
+`[written by: Cheng Lit Yaw]`
 
 ==== Implementation
 
@@ -326,6 +331,7 @@ image::SuggestPersonActivityDiagram.png[][pdfwidth="40%",width="40%"]
 
 
 === Add Group Feature
+`[written by: Raivat Bhupesh Shah]`
 
 ==== Implementation
 
@@ -345,7 +351,7 @@ The following class diagram showcases the relationship between the main classes 
 key attributes and methods:
 
 [#AddGroupClassDiagram, align="center"]
-image::AddGroupClassDiagram.png[]
+image::AddGroupClassDiagram.png[][pdfwidth="50%",width="50%"]
 
 Here below is an example usage scenario and how the `add_group` feature works at each step:
 
@@ -401,6 +407,7 @@ the number of groups of people will be less than the number of people. This alte
 depend upon the Group class, which can be error-prone.
 
 === Delete Group Feature
+`[written by: Raivat Bhupesh Shah]`
 
 ==== Implementation
 
@@ -412,8 +419,8 @@ is omitted for conciseness.
 
 Here below is an example workflow, which is shown using an activity diagram:
 
-[#DeleteGroupSequenceDiagram, align="center"]
-image::DeleteGroupActivityDiagram.png[]
+[#DeleteGroupActivityDiagram, align="center"]
+image::DeleteGroupActivityDiagram.png[[pdfwidth="50%",width="50%"]
 
 The above workflow is achieved due to the interlinked classes. Their behaviour during an execution of the DeleteGroup
 feature is shown using the following Sequence Diagram.
@@ -436,6 +443,7 @@ Aspect: how the delete group feature executes
 
 //tag::list_group[]
 === List Group Feature
+`[written by: Raivat Bhupesh Shah]`
 
 The list group feature allows users to view all the `Group` instances currently stored in CoderLifeInsights.
 
@@ -460,11 +468,12 @@ The following is an example usage scenario and how the list group mechanism beha
 The following activity diagram summarises the workflow for the list group feature.
 
 [#ListGroupCommandActivity,align="center"]
-image::ListGroupCommandActivity.png[pdfwidth="50%",width="50%"]
+image::ListGroupCommandActivity.png[pdfwidth="30%",width="30%"]
 //end::list_group[]
 
 //tag::edit_group[]
 === Edit Group Feature
+`[written by: Raivat Bhupesh Shah]`
 
 The Edit Group Feature allows the user to edit an existing `Group` in the app.
 
@@ -516,7 +525,7 @@ image::EditGroupSequenceDiagram.png[]
 The following activity diagram summarises the general workflow for the Edit Group Feature
 
 [#EditGroupActivityDiagram, align="center"]
-image::EditGroupActivityDiagram.png[]
+image::EditGroupActivityDiagram.png[][pdfwidth="60%",width="60%"]
 
 ==== Design Considerations
 
@@ -542,6 +551,7 @@ the user if there are too many commands.
 //end::edit_group[]
 //tag::addEvent[]
 === Add Event Feature
+`[written by: Ernest Lian Qi Quan]`
 
 The add event feature allows users to add an event to a saved contact or group in CoderLifeInsights specified using the member `m/` tag or the group `g/` tag.
 
@@ -620,6 +630,7 @@ The Add Event feature and the relevant classes were added and implemented to add
 //end::addEvent[]
 
 === Insights feature
+`[written by: Mah Cai Jun, Terence]`
 
 ==== Implementation
 
@@ -728,13 +739,6 @@ For example, when a new command is executed, we must remember to update both `Hi
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands.
 Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
-
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
 
 === Logging
 
@@ -921,6 +925,7 @@ See https://support.codacy.com/hc/en-us/articles/360010263540-Getting-started-wi
 for more details.
 
 === Continuous Deployment
+`[written by: Raivat Bhupesh Shah]`
 
 We maintain a site for this project https://ay1920s2-cs2103-w14-4.github.io/main/[here]. To ensure that each PR complies
 with our site requirements for auto-deploy, we use Netlify for Continuous Deployment. Read
@@ -958,6 +963,7 @@ For example, Gradle can download the dependencies automatically, which is better
 
 [appendix]
 == Product Scope
+`[written by: Raivat Bhupesh Shah]`
 
 *Target user profile*:
 
@@ -972,6 +978,7 @@ For example, Gradle can download the dependencies automatically, which is better
 
 [appendix]
 == User Stories
+`[written by: Raivat Bhupesh Shah]`
 
 Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
 
@@ -1036,8 +1043,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |=======================================================================
 
-_{More to be added}_
-
 [appendix]
 == Use Cases
 
@@ -1045,6 +1050,7 @@ _{More to be added}_
 
 [discrete]
 === Use case: Delete person
+`[written by: Cheng Lit Yaw]`
 
 *MSS*
 
@@ -1087,6 +1093,7 @@ No details of the person provided as arguments.
 Use case resumes at step 2.
 
 === Use case: Find a person by name
+`[written by: Cheng Lit Yaw]`
 
 *MSS*
 
@@ -1105,9 +1112,8 @@ No details of the person provided as arguments.
 +
 Use case resumes at step 2.
 
-_{More to be added}_
-
 === Use case: Add group
+`[written by: Raivat Bhupesh Shah]`
 
 *MSS*
 
@@ -1135,6 +1141,7 @@ Step 1 continues until valid member indexes are supplied or no indexes are suppl
 Use case resumes at step 2.
 
 === Use case: Delete Group
+`[written by: Raivat Bhupesh Shah]`
 
 Preconditions: group to be deleted exists in the app +
 *MSS*
@@ -1145,13 +1152,13 @@ Preconditions: group to be deleted exists in the app +
 Use case ends.
 
 === Use case: Edit Group
+`[written by: Raivat Bhupesh Shah]`
 
 Preconditions: group to be deleted exists in the app +
 *MSS*
 
 1. User requests to edit group with specified index
-2. CodeLifeInsights deletes the group and displays its details
-+
+2. CodeLifeInsights deletes the group and displays its details +
 Use case ends.
 
 *Extensions*
@@ -1159,30 +1166,28 @@ Use case ends.
 * 1a.
 No values to edit are provided
 +
-** 1a1. CoderLifeInsights shows an error message telling the user a group can't be edited with no new info.
-+
+** 1a1. CoderLifeInsights shows an error message telling the user a group can't be edited with no new info. +
 Step 1 continues until at least one new value is provided. +
 Use case resumes at step 2
 
 * 1b.
-If member indexes are provided, they are invalid (don't exist in the app)
-+
-** 1b1. CoderLifeInsights shows an error message telling the user that one or more member indexes are invalid.
-+
+If member indexes are provided, they are invalid (don't exist in the app) +
+** 1b1. CoderLifeInsights shows an error message telling the user that one or more member indexes are invalid. +
 Step 1 continues until all member indexes provided are correct or no new member indexes are provided at all. +
 Use case resumes at step 2
 
 === Use case: List Group
+`[written by: Raivat Bhupesh Shah]`
 
 *MSS*
 
 1. User requests to list all groups
 2. CoderLifeInsights displays all the groups in a list format with their indexes, time spent, member indexes, and
-event ids.
-+
+event ids. +
 Use case ends.
 
 === Use case: Export data
+`[written by: Cheng Lit Yaw]`
 
 *MSS*
 
@@ -1200,12 +1205,12 @@ No file path specified.
 Use case resumes at step 2.
 
 === Use case: Import data
+`[written by: Cheng Lit Yaw]`
 
 *MSS*
 
 1. User requests to import life, group and event data from specified CSV file path.
-2. CoderLifeInsights imports data from specified CSV files.
-+
+2. CoderLifeInsights imports data from specified CSV files. +
 Use case ends
 
 *Extensions*
@@ -1216,66 +1221,63 @@ No file path specified.
 Use case resumes at step 2.
 
 === Use case: Suggest person
+`[written by: Cheng Lit Yaw]`
 
 *MSS*
 
 1. User requests for suggestion of person.
-2. CoderLifeInsights suggests a person to hangout with.
-+
+2. CoderLifeInsights suggests a person to hangout with. +
 Use case ends
 
 *Extensions*
 * 1a.
-No person available in CoderLifeInsights to suggest
-+
+No person available in CoderLifeInsights to suggest +
 Use case ends.
 
 === Use case: Suggest place
+`[written by: Cheng Lit Yaw]`
 
 *MSS*
 
 1. User requests for suggestion of place.
-2. CoderLifeInsights suggests a place to visit.
-+
+2. CoderLifeInsights suggests a place to visit. +
 Use case ends
 
 *Extensions*
 * 1a.
-No place available in CoderLifeInsights to suggest
-+
+No place available in CoderLifeInsights to suggest +
 Use case ends.
 
 === Use case: Suggest activity
+`[written by: Cheng Lit Yaw]`
 
 *MSS*
 
 1. User requests for suggestion of activity.
-2. CoderLifeInsights suggests an activity to do.
-+
+2. CoderLifeInsights suggests an activity to do. +
 Use case ends
 
 *Extensions*
 * 1a.
-No activity available in CoderLifeInsights to suggest
-+
+No activity available in CoderLifeInsights to suggest +
 Use case ends.
 
 === Use case: View time
+`[written by: Cheng Lit Yaw]`
 
 *MSS*
 1. User requests to view time comparison between individuals and groups.
-2. CoderLifeInsights displays pie chart of Individual time spent vs Group time spent.
-+
+2. CoderLifeInsights displays pie chart of Individual time spent vs Group time spent. +
 Use case ends
 
 *Extensions*
 
 * 1a.
-No event data for group or individual available for comparison.
-+
+No event data for group or individual available for comparison. +
 Use case ends
 
 === Use case: Add an event with a person
+`[written by: Ernest Lian Qi Quan]`
 
 *MSS*
 
@@ -1304,6 +1306,8 @@ Use case resumes at 3.
 Use case resumes at 3.
 
 === Use case: Add an event with a group
+`[written by: Ernest Lian Qi Quan]`
+
 *MSS*
 
 1. User wants to add an Event with the following details to the first group displayed on the Group List on CoderLifeInsights: +
@@ -1331,6 +1335,8 @@ Use case resumes at 3.
 Use case resumes at 3.
 
 === Use case: View the places or activities visited with a group
+`[written by: Ernest Lian Qi Quan]`
+
 *MSS*
 
 1. User wants to view insights on the places or activities been to or carried out with a group.
@@ -1409,8 +1415,6 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
-
 === Deleting a person
 
 . Deleting a person while all persons are listed
@@ -1427,9 +1431,8 @@ Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
 Expected: Similar to previous.
 
-_{ more test cases ... }_
-
 === Finding a person
+`[written by: Cheng Lit Yaw]`
 
 . Finding a person with keywords
 
@@ -1444,6 +1447,7 @@ Nothing displayed in Person column.
 Expected: Similar to previous.
 
 ===  Suggest a person
+`[written by: Cheng Lit Yaw]`
 
 . Suggest a person to hangout with
 
@@ -1465,6 +1469,7 @@ Expected: Nothing shown in People column.
 Person suggestion provided shown in status message.
 
 ===  Suggest a place
+`[written by: Cheng Lit Yaw]`
 
 . Suggest a place to visit
 
@@ -1480,6 +1485,7 @@ Expected: Nothing shown in Insights column.
 Place suggestion provided shown in status message.
 
 === Suggest an activity
+`[written by: Cheng Lit Yaw]`
 
 . Suggest an activity to do.
 
@@ -1495,6 +1501,7 @@ Expected: Nothing shown in Insights column.
 Activity suggestion provided shown in status message.
 
 === Import CoderLifeInsights data
+`[written by: Cheng Lit Yaw]`
 
 . Import life, group and event data.
 
@@ -1514,6 +1521,7 @@ Files imported: life.csv groups.csv events.csv shown in status message.
 Expected: CoderLifeInsights will return error message showing that path provided does not exist.
 
 === Export CoderLifeInsights data
+`[written by: Cheng Lit Yaw]`
 
 . Export life, group and event data.
 
@@ -1529,6 +1537,8 @@ Expected: CoderLifeInsights will return error message showing that files already
 Another naming convention is required.
 
 === Adding an event
+`[written by: Ernest Lian Qi Quan]`
+
 . Add an event to a person or group saved in CoderLifeInsights
 .. Prerequisites: Have a person or group saved in CoderLifeInsights
 .. Test case 1 (adding an event to a person): `add_event anything place/anywhere time/30 m/1` +
@@ -1591,6 +1601,7 @@ Example: add_event Dancing place/SCAPE m/1 time/300
 //.. Test case 2 (view activities done with group): `view_group activities g/1`
 
 === Add a Group
+`[written by: Raivat Bhupesh Shah]`
 
 . Adding an empty group
 .. Prerequisites: None
@@ -1607,6 +1618,7 @@ Expected: New group added to CoderLifeInsights, new group displayed in groups pa
 to the user.
 
 === Delete a Group
+`[written by: Raivat Bhupesh Shah]`
 
 . Deleting an existing group
 .. Prerequisites: the group to be removed must exist in CoderLifeInsights.
@@ -1624,6 +1636,7 @@ Expected: Group not deleted as there is no group at given index. Error message s
 specified is invalid.
 
 === Edit a Group
+`[written by: Raivat Bhupesh Shah]`
 
 . Editing all fields possible of an existing group
 .. Prerequisites: the group to be edited must exist in CoderLifeInsights. Follow `8.9` to create a group in the app if
@@ -1653,17 +1666,10 @@ the current largest index of groups in the app. If 99 is the largest index, choo
 Expected: Error message saying group index is invalid is displayed to the user.
 
 === List all Groups
+`[written by: Raivat Bhupesh Shah]`
 
 . List all groups
 .. Prerequisites: None.
 .. Test Case: `list_groups`
 Expected: the group panel will show all the groups currently in the app. If there are no groups, it will be blank.
 A success message will be shown to the user.
-
-=== Saving data
-
-. Dealing with missing/corrupted data files
-
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
-_{ more test cases ... }_
-
