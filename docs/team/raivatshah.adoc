@@ -76,7 +76,12 @@ thorough understanding of the different use cases.
 
 ** Project management:
 *** Initiated group meetings and set policies for Pull Requests
-*** Opened issues on Github repo to account for bugs.
+*** Opened issues on Github repo to account for bugs and enhancements. Some relevant/important issues:
+https://github.com/AY1920S2-CS2103-W14-4/main/issues/162[#162],
+https://github.com/AY1920S2-CS2103-W14-4/main/issues/161[#161],
+https://github.com/AY1920S2-CS2103-W14-4/main/issues/129[#129],
+https://github.com/AY1920S2-CS2103-W14-4/main/issues/130[#130].
+
 
 ** Enhancements to existing features:
 *** Updated the GUI color scheme and layout (Pull requests: https://github.com/AY1920S2-CS2103-W14-4/main/pull/95[#95], https://github.com/AY1920S2-CS2103-W14-4/main/pull/69[#69])
@@ -91,7 +96,12 @@ https://github.com/AY1920S2-CS2103-W14-4/main/pull/95[#95]
 
 ** Tools:
 *** Integrated Codeacy to automate code quality checks
-*** Used Creately to create UML class diagrams.
+*** Used Creately to create initial class diagrams to visualise the relationship between Objects (Person, Group, Event)
+and their UniqueLists. The diagram can be viewed https://app.creately.com/diagram/SaOxsebie1n/[here.]
+
+** Rough UI:
+*** To visualise the app UI before actually creating it, I used https://www.sketch.com/[Sketch App] to create a
+rough UI of the app. The team used the rough UI as a guide. The UI can be viewed https://www.raivat.dev/UI.pdf[here.]
 
 == Contributions to the User Guide
 
