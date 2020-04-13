@@ -165,10 +165,4 @@ public class AddressBookParserTest {
         assertThrows(
                 ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
-
-    @Test
-    public void parseCommand_view_group() throws Exception {
-        assertTrue(parser.parseCommand(ViewGroupCommand.COMMAND_WORD + " places " + PREFIX_GROUP + "1")
-            instanceof ViewGroupCommand);
-    }
 }
