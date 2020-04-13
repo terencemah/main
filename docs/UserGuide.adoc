@@ -284,7 +284,7 @@ Coder Life Insights shows a table of places and the frequency of visits for the 
 // end::view[]
 
 // tag::viewGroup[]
-=== Insights: `view_group`
+=== Insights: `view_group` [Refactored into view command]
 
 Lists insights about the user's interactions with a particular group.
 These include places visited and activities done with that group.
@@ -554,6 +554,17 @@ Example:
 
 * `random` +
 Returns the name of a random person saved in CoderLifeInsights.
+
+=== Deleting an event: `delete_event` `[coming in v2.0]`
+
+Deletes an event from a person or group saved in CoderLifeInsights. +
+Format: `delete_event EVENTID m/INDEX` or `delete_event EVENTID g/INDEX`
+
+=== Editing an event: `edit_event` `[coming in v2.0]`
+
+Edit the information of an event with a person or group saved in CoderLifeInsights. +
+Format: `edit_event EVENTID m/INDEX [activity/ACTIVITY] [place/PLACE] [time/TIME]` or `edit_event EVENTID g/INDEX [activity/ACTIVITY] [place/PLACE] [time/TIME]` +
+Edits the event's respective details to the one specified in the command.
 
 // tag::dataencryption[]
 === Encrypting data files `[coming in v2.0]`
